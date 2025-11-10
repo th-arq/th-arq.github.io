@@ -5,8 +5,8 @@
   --lightgray: #F0EEEB;
 
   /* Font */
-  --font-main: 'Noto Sans JP', sans-serif;
-
+  --font: 'Jost', sans-serif;
+ 
   /* Size / Spacing */
   --max-width: 1200px;
   --header-height: 70px;
@@ -15,13 +15,22 @@
   --transition: 0.3s ease;
 }
 
+
+ .jost {
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+  
+
 /* All */
 html, body {
   margin: 0;
   padding: 0;
   background: var(--lightgray);
   color: var(--black);
-  font-family: var(--font-main);
+  font-family: var(--font);
 }
 
 
