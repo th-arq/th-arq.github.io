@@ -1,11 +1,8 @@
-/* ============================
-   基本設定（変数：色・フォント・余白）
-   ============================ */
+/* Base */
 :root {
-  /* Color */
-  --color-bg: #ffffff;
-  --color-text: #333333;
-  --color-accent: #0070f3;
+  --black: #2D2D2D;
+  --white: #FFFFFF;
+  --lightgray: #F0EEEB;
 
   /* Font */
   --font-main: 'Noto Sans JP', sans-serif;
@@ -18,49 +15,33 @@
   --transition: 0.3s ease;
 }
 
-/* ============================
-   全体基本設定
-   ============================ */
+/* All */
 html, body {
   margin: 0;
   padding: 0;
-  background: var(--color-bg);
-  color: var(--color-text);
+  background: var(--lightgray);
+  color: var(--black);
   font-family: var(--font-main);
 }
 
-/* ============================
-   レイアウト基本
-   ============================ */
-.wrapper {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 20px;
-}
 
-/* ============================
-   見出し
-   ============================ */
+/* Title */
 h1, h2, h3, h4 {
   margin: 0 0 20px;
   font-weight: 700;
 }
 
-/* ============================
-   画像
-   ============================ */
+/* Img */
 img {
   max-width: 100%;
   display: block;
   height: auto;
 }
 
-/* ============================
-   ボタン（例）
-   ============================ */
+/* Button */
 .btn {
   display: inline-block;
   padding: 12px 24px;
   background: var(--color-accent);
   color: #fff;
-  border-rad
+}
