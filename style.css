@@ -46,8 +46,8 @@ table {
   --white: #FFFFFF;
   --lightgray: #F0EEEB;
   --background: #F0EEEB;
-  --title_big :;
-  --title_big :;
+  --section-width: 1280;
+  --section-width-narrow: 1040;
  
   /* Animation */
   --transition: 0.3s ease;
