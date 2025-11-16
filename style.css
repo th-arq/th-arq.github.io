@@ -113,7 +113,7 @@ table {
   color: var(--white);
 }
 
-/* Hamburger */
+/* Hamburger animation */
 .hamburger {
   width: 25px;
   height: 18px;
@@ -130,12 +130,23 @@ table {
   height: 2px;
   background: var(--black); /* 初期は黒 */
   border-radius: 2px;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  transform-origin: center;
 }
 
-/* ハンバーガーが開いた時は白に */
-#menu.open ~ #title_area .hamburger span,
-.hamburger.open span {
+/* ハンバーガー開いたら色を白に & ×アニメーション */
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+  background: var(--white);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  background: var(--white);
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
   background: var(--white);
 }
 
