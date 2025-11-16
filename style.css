@@ -90,9 +90,21 @@ table {
 }
 
 
+
+.TAG_logo path {
+  fill: var(--black);
+  transition: fill 0.3s ease;
+}
+
+#menu.open + .TAG_logo path {
+  fill: var(--white);
+}
+
+
 .TAG_logo {
   padding-left: 30px;
 }
+
 
 
 /* =========================
