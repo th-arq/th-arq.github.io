@@ -157,6 +157,7 @@ footer {
 }
 
 footer .footer_container {
+  padding: 0 3%;
   display: flex;
   justify-content: space-between;
 }
