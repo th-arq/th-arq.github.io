@@ -1,23 +1,4 @@
 /* Base */
-:root {
-  --black: #2D2D2D;
-  --white: #FFFFFF;
-  --lightgray: #F0EEEB;
-  --background: #F0EEEB;
-
-  /* Font */
-  --font: 'Jost', sans-serif;
- 
-  /* Size / Spacing */
-  --max-width: 1200px;
-  --header-height: 70px;
-
-  /* Animation */
-  --transition: 0.3s ease;
-}
-
-
-/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -25,12 +6,11 @@
 }
 
 html, body {
-  height: 100%;
-}
-
-body {
-  line-height: 1.5;
-  font-family: sans-serif; /* 必要なら変更 */
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  color: var(--black);
+  font-family: var(--font);
 }
 
 ul, ol {
@@ -63,21 +43,25 @@ table {
 
 
 
-/* All */
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--background);
-  color: var(--black);
-  font-family: var(--font);
+:root {
+  --black: #2D2D2D;
+  --white: #FFFFFF;
+  --lightgray: #F0EEEB;
+  --background: #F0EEEB;
+  --title_big :;
+  --title_big :;
+
+  /* Font */
+  --font: 'Jost', sans-serif;
+ 
+  /* Size / Spacing */
+  --max-width: 1200px;
+  --header-height: 70px;
+
+  /* Animation */
+  --transition: 0.3s ease;
 }
 
-
-/* Text */
-h1, h2, h3, h4 {
-  margin: 0 0 20px;
-  font-weight: 700;
-}
 
 /* Font */
 .jost {
