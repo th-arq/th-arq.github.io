@@ -133,3 +133,19 @@ img { max-width: 100%; height: auto; display: block; }
 #menu nav ul li {
   font-size: var(--font-medium);
 }
+
+
+/* ========================= 
+   Footer 
+========================= */ 
+footer { 
+  background-color: var(--black); 
+  color: var(--white); 
+  font-size: var(--font-small); 
+
+} footer .footer_container { 
+  padding: 3%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+}
