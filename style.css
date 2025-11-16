@@ -79,7 +79,6 @@ img {
 #title_area {
   display: flex;
   align-items: center; 
-  justify-content: space-between;
   padding: 3%;
   position: relative;
   z-index: 1000;
