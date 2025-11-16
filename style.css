@@ -93,9 +93,6 @@ img {
 }
 
 /* Menu Design */
-/* =========================
-   共通
-========================= */
 #menu {
   position: fixed;
   background: var(--black);
@@ -115,8 +112,8 @@ img {
 .hamburger span {
   display: block;
   width: 100%;
-  height: 0.8px;
-  background: var(--black);s
+  height: 1px;
+  background: var(--black);
 }
 
 
@@ -126,10 +123,10 @@ img {
 ========================= */
 @media screen and (min-width: 1024px) {
   #menu {
-    top: -300px;   /* 上に隠す */
+    top: -300px;
     left: 0;
     width: 100%;
-    height: 300px; /* 好きな高さに */
+    height: 300px;
   }
 
   #menu.open {
