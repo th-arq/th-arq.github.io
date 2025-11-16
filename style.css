@@ -82,6 +82,12 @@ table {
   z-index: 1000;
 }
 
+
+#title_area.open {
+  background: var(--black);
+}
+
+
 .TAG_logo {
   padding-left: 30px;
 }
@@ -156,7 +162,7 @@ table {
 #menu nav ul li a {
   display: block;
   color: var(--white);
-  font-size: var(--font-large)
+  font-size: var(--font-medium)
 }
 
 /* =========================
