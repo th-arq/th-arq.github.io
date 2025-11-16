@@ -1,4 +1,6 @@
-/* Base */
+/* =========================
+   Base
+========================= */
 html, body {
   margin: 0;
   padding: 0;
@@ -33,6 +35,9 @@ table {
   border-spacing: 0;
 }
 
+/* =========================
+   Variables
+========================= */
 :root {
   --black: #2D2D2D;
   --white: #FFFFFF;
@@ -45,18 +50,20 @@ table {
   --font-x-large: 42px;
   --section-width: 1280;
   --section-width-narrow: 1040;
- 
-  /* Animation */
   --transition: 0.3s ease;
 }
 
-/* Font */
+/* =========================
+   Font
+========================= */
 .jost {
   font-family: "Jost", sans-serif;
   font-optical-sizing: auto;
 }
 
-/* Button */
+/* =========================
+   Button
+========================= */
 .btn {
   display: inline-block;
   padding: 12px 24px;
@@ -64,10 +71,13 @@ table {
   color: var(--white);
 }
 
-/* Title Design */
+/* =========================
+   Header & Title Area
+========================= */
 #title_area {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 20px;
   position: relative;
   z-index: 1000;
@@ -77,38 +87,13 @@ table {
   padding-left: 30px;
 }
 
-/* Menu Design */
-#menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  background: var(--black);
-  color: var(--white);
-  font-size: var(--font-large);
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-  z-index: 1000;
+.TAG_logo img {
+  height: 40px;
 }
 
-#menu.open {
-  max-height: 300px;
-}
-
-#menu nav ul {
-  display: flex;
-  flex-direction: column;
-}
-
-#menu nav ul li a {
-  display: block;
-  padding: 15px 20px;
-  border-bottom: 1px solid #333;
-  color: var(--white);
-}
-
-/* Hamburger animation */
+/* =========================
+   Hamburger
+========================= */
 .hamburger {
   width: 25px;
   height: 18px;
@@ -129,7 +114,7 @@ table {
   transform-origin: center;
 }
 
-/* ハンバーガー開いたら色を白に & ×アニメーション */
+/* Hamburger open animation */
 .hamburger.open span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
   background: var(--white);
@@ -146,10 +131,46 @@ table {
 }
 
 /* =========================
-   SP
+   Menu
+========================= */
+#menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: var(--black);
+  color: var(--white);
+  font-size: var(--font-large);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  z-index: 1000;
+}
+
+#menu.open {
+  max-height: 500px; /* メニュー高さに合わせて調整 */
+}
+
+#menu nav ul {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+#menu nav ul li a {
+  display: block;
+  padding: 15px 20px;
+  border-bottom: 1px solid #333;
+  color: var(--white);
+}
+
+/* =========================
+   SP Menu
 ========================= */
 @media screen and (max-width: 1023px) {
   #menu {
+    position: fixed;
     top: 0;
     right: -250px;
     width: 250px;
@@ -163,7 +184,9 @@ table {
   }
 }
 
-/* Footer */
+/* =========================
+   Footer
+========================= */
 footer {
   background-color: var(--black);
   color: var(--white);
