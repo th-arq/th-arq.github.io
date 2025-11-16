@@ -103,10 +103,6 @@ img {
    PC
 ========================= */
 @media screen and (min-width: 1024px) {
-  .hamburger {
-    left: 20px; /* 左上 */
-  }
-
   #menu {
     top: -300px;   /* 上に隠す */
     left: 0;
