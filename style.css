@@ -68,6 +68,7 @@ img { max-width: 100%; height: auto; display: block; }
   display: flex;
   align-items: center;
   height: 24px; /* 必要なら数字変えてOK */
+  padding: 0 0 0 1em;
 }
 
 
