@@ -142,8 +142,8 @@ footer {
   background-color: var(--black); 
   color: var(--white); 
   font-size: var(--font-small); 
-
-} footer .footer_container { 
+}
+footer .footer_container { 
   padding: 3%; 
   display: flex; 
   align-items: center; 
