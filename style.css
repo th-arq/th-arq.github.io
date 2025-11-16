@@ -128,7 +128,7 @@ table {
 }
 
 .hamburger.open span:nth-child(3) {
-  transform: rotate(325deg) translate(5px, -5px);
+  transform: rotate(333deg) translate(5px, -5px);
   background: var(--white);
 }
 
