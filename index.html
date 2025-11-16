@@ -19,7 +19,16 @@
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <!-- Swiper JS -->
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+   <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
+<script defer>
+  const swiper = new Swiper('.top-slider', {
+    loop: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  });
+</script>
 
 </head>
 <body>
@@ -120,16 +129,7 @@
     menu.classList.toggle('open');
     titleArea.classList.toggle('open');
   });
-  </script>
-  <script>
-  const swiper = new Swiper('.top-slider', {
-  loop: true,
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-  },
-  });
-  </script>
+
 
 
 
