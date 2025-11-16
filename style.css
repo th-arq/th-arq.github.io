@@ -84,6 +84,29 @@ img {
   cursor: pointer;
 }
 
+
+.hamburger {
+  width: 32px;
+  height: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+/* 三本線 */
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: #333;
+  border-radius: 2px;
+  transition: all .3s ease;
+}
+
+/* ここは後で必要なら—開閉アニメできる版—追加可能 */
+
 /* =========================
    PC（幅1024px以上）
 ========================= */
