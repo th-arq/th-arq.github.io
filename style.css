@@ -156,7 +156,7 @@ footer {
   color: var(--white);
 }
 
-footer section {
+.footer_container {
   display: flex;
   justify-content: space-between;
 }
