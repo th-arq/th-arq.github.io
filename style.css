@@ -38,7 +38,7 @@ img { max-width: 100%; height: auto; display: block; }
 ========================= */
 #title_area {
   display: flex;
-  justify-content: space-between; /* ← これでバーガー左・ロゴ右 */
+  justify-content: start;
   align-items: center;
   padding: 2% 3%;
   position: fixed;
