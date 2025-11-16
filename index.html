@@ -10,6 +10,19 @@
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 </style>
+
+<script>
+  // ハンバーガーとメニューを取得
+  const burger = document.querySelector('.hamburger');
+  const menu = document.querySelector('#menu');
+
+  // クリックでopenクラスのON/OFF
+  burger.addEventListener('click', () => {
+    menu.classList.toggle('open');
+  });
+</script>
+
+
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
   <!-- AOS CSS -->
@@ -32,7 +45,7 @@
         </div>
         <div class="TAG_logo">
             <a href="https://th-arq.github.io/">
-                <img src="../img/TAG_logo.svg">
+                <img src="../img/TAG_logo.svg" alt="TAG Lnc.">
             </a>
         </div>      
     </div>
@@ -97,7 +110,7 @@
           <section>
             <p>Los Angeles, CA | <a href="/privacy/">Privacy Policy</a></p></section>
         </div>
-        <sediv>
+        <div>
             <p>© 2025 TAG Inc.  Licensed Contractor #123456</p>
         </div>
     </div>
