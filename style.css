@@ -120,7 +120,7 @@ table {
 
 /* Hamburger open animation */
 .hamburger.open span:nth-child(1) {
-  transform: rotate(25deg) translate(5px, 5px);
+  transform: rotate(28deg) translate(5px, 5px);
   background: var(--white);
 }
 
@@ -144,7 +144,7 @@ table {
   left: 0;
   width: 100%;
   background: var(--black);
-  max-height: 0;
+  padding: 3% 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
   z-index: 1000;
