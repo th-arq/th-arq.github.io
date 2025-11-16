@@ -46,6 +46,10 @@ table {
   --white: #FFFFFF;
   --lightgray: #F0EEEB;
   --background: #F0EEEB;
+  --font-small: 13px;
+  --font-medium: 20px;
+  --font-large: 36px;
+  --font-x-large: 42px;
   --section-width: 1280;
   --section-width-narrow: 1040;
  
