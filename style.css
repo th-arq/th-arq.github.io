@@ -45,7 +45,8 @@ table {
   --black: #2D2D2D;
   --white: #FFFFFF;
   --lightgray: #F0EEEB;
-  --background: #F0EEEB;
+  --background: #F0EEEB;  
+  --font-x-small: 9px;
   --font-small: 13px;
   --font-medium: 20px;
   --font-large: 36px;
@@ -164,12 +165,13 @@ img {
 footer {
   background-color: var(--black);
   color: var(--white);
-  font-size: var(--font-small);
+  font-size: var(--font-x-small);
 }
 
 footer .footer_container {
-  padding: 0 3%;
+  padding: 3%;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
