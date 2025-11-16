@@ -10,7 +10,7 @@ html, body {
   padding: 0;
   background: var(--background);
   color: var(--black);
-  font-family: var(--font);
+  font-family: 'Jost', sans-serif;
 }
 
 ul, ol {
@@ -41,8 +41,6 @@ table {
 
 
 
-
-
 :root {
   --black: #2D2D2D;
   --white: #FFFFFF;
@@ -50,18 +48,10 @@ table {
   --background: #F0EEEB;
   --title_big :;
   --title_big :;
-
-  /* Font */
-  --font: 'Jost', sans-serif;
  
-  /* Size / Spacing */
-  --max-width: 1200px;
-  --header-height: 70px;
-
   /* Animation */
   --transition: 0.3s ease;
 }
-
 
 /* Font */
 .jost {
@@ -122,9 +112,8 @@ img {
 .hamburger span {
   display: block;
   width: 100%;
-  height: 3px;
-  background: #333;
-  border-radius: 2px;
+  height: 0.8px;
+  background: var(--black);s
 }
 
 
