@@ -40,7 +40,7 @@ img { max-width: 100%; height: auto; display: block; }
   display: flex;
   justify-content: start;
   align-items: center;
-  padding: 2% 3%;
+  padding: 2% 3% 0 2%;
   position: fixed;
   width: 100%;
   z-index: 1100;
@@ -124,14 +124,14 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 #menu.open {
-  height: 500px;
+  height: 300px;
 }
 
 #menu nav {
-  padding-top: 120px;
+  padding-top: 100px;
 }
 
 #menu nav ul li {
-  margin: 20px 0;
+  margin: 1em 0;
   font-size: var(--font-medium);
 }
