@@ -109,16 +109,18 @@
   <!-- JS -->
   <script src="script.js"></script>
 
-  <!-- ハンバーガーメニューの直書きスクリプト -->
-  <script>
+<script>
+  // ハンバーガーとメニューを取得
   const burger = document.querySelector('.hamburger');
   const menu = document.querySelector('#menu');
 
+  // クリックでメニュー開閉 & ハンバーガーアニメーション
   burger.addEventListener('click', () => {
-  menu.classList.toggle('open');
-  burger.classList.toggle('open');
+    burger.classList.toggle('open'); // バーガーの×アニメ
+    menu.classList.toggle('open');   // メニュー開閉
   });
-  </script>
+</script>
+
 
 
   <!-- AOS JS -->
