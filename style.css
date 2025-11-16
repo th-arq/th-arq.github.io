@@ -68,7 +68,6 @@ table {
 #title_area {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 20px;
   position: relative;
   z-index: 1000;
@@ -76,10 +75,6 @@ table {
 
 .TAG_logo {
   padding-left: 30px;
-}
-
-.TAG_logo img {
-  height: 40px;
 }
 
 /* Menu Design */
