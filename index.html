@@ -106,23 +106,23 @@
   </footer>
 
   <!-- JS -->
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  // Swiper初期化
   const swiper = new Swiper('.top-slider', {
-  loop: true, // ループ
-  speed: 1000, // 切り替わりのアニメーション速度（ms）
-  autoplay: {
-    delay: 3000, // 3秒ごとに自動切り替え
-    disableOnInteraction: false, // ユーザー操作後も自動再開
-  },
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-  },
-});
-  
+    loop: true,
+    speed: 1000,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  });
 
+  // ハンバーガーメニュー
   const burger = document.querySelector('.hamburger');
   const menu = document.querySelector('#menu');
   const titleArea = document.querySelector('#title_area');
@@ -133,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     titleArea.classList.toggle('open');
   });
 
+  // AOS初期化
   AOS.init({
     duration: 1000,
     once: true
