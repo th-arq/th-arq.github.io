@@ -130,6 +130,8 @@ table {
   background: var(--white);
 }
 
+
+
 /* =========================
    Menu
 ========================= */
@@ -159,9 +161,8 @@ table {
 
 #menu nav ul li a {
   display: block;
-  padding: 15px 20px;
-  border-bottom: 1px solid #333;
   color: var(--white);
+  font-size: medium;
 }
 
 /* =========================
