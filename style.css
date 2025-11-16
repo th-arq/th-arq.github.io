@@ -96,8 +96,9 @@ img {
 #menu {
   position: fixed;
   background: var(--black);
+  color: var(--white);
+  transition: all .3s ease;  
   z-index: 9999;
-  transition: all .3s ease;
 }
 
 .hamburger {
