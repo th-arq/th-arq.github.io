@@ -1,148 +1,202 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-	<meta name="format-detection" content="telephone=no">
-	<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-  <title>TAG Inc.</title>
+/* =========================
+   Base
+========================= */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  color: var(--black);
+  font-family: 'Jost', sans-serif;
+}
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <style>
-@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
-</style>
+ul, ol {
+  list-style: none;
+}
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
-  <!-- AOS CSS -->
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <!-- Swiper CSS -->
-   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-   <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
 
-</head>
-<body>
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
 
-  <!-- HEAD -->
-  <header>
-    <div id="title_area">
-      <div class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
 
-        <div class="TAG_logo">
-            <a href="https://th-arq.github.io/">
-                <img src="../img/TAG_logo.svg" alt="TAG Lnc.">
-            </a>
-        </div>      
-    </div>
+/* =========================
+   Variables
+========================= */
+:root {
+  --black: #2D2D2D;
+  --white: #FFFFFF;
+  --lightgray: #F0EEEB;
+  --background: #F0EEEB;  
+  --font-x-small: 9px;
+  --font-small: 13px;
+  --font-medium: 20px;
+  --font-large: 36px;
+  --font-x-large: 42px;
+  --section-width: 1280;
+  --section-width-narrow: 1040;
+  --transition: 0.3s ease;
+}
 
-    <div id="menu">
-        <nav>
-            <ul>
-                <li>
-                    <a href="/about/">About</a>
-                </li>
-                 <li>
-                    <a href="/service/">Service</a>
-                </li>
-                 <li>
-                    <a href="/projects/">Projects</a>
-                </li>
-                <li>
-                    <a href="/contact/">Contact</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    <div>
-      <a href="/contact/">
-        <img src=""></a>
-    </div>
-  </header>
+/* =========================
+   Font
+========================= */
+.jost {
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
+}
 
-    <!-- CONTENTS -->
-  <main>
-    <div id="Mainview">
-      <div class="swiper top-slider">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="img/img1.jpg" alt="">
-          </div>
-          <div class="swiper-slide">
-            <img src="img/img2.jpg" alt="">
-          </div>
-          <div class="swiper-slide">
-            <img src="img/img3.jpg" alt="">
-          </div>
-  </div>
+/* =========================
+   Button
+========================= */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--color-accent);
+  color: var(--white);
+}
 
-  <!-- ドット（ページネーション） -->
-  <div class="swiper-pagination"></div>
-    </div>
-    <section data-aos="fade-up">
-      <p>TEXT</p>
-    </section>
+/* =========================
+   Header & Title Area
+========================= */
+#title_area {
+  display: flex;
+  align-items: center;
+  padding: 2% 3%;
+  position: relative;
+  z-index: 1000;
+  transition: background 0.3s ease;
+}
 
 
-  </main>
-
-    <!-- FOOTER -->
-  <footer>
-    <div class="footer_container">
-        <div class="footer_container_information">
-          <section>
-            <p>INTERIOR & EXTERIOR · Residential · Commercial · Industrial</p>
-          </section>
-          <section>
-            <p>Los Angeles, CA | <a href="/privacy/">Privacy Policy</a></p></section>
-        </div>
-        <div class="footer_container_company">
-            <p>© 2025 TAG Inc.  Licensed Contractor #123456</p>
-        </div>
-    </div>
-  </footer>
-
-  <!-- JS -->
-  <script src="script.js"></script>
-
-<script>
-  // ハンバーガーとメニューを取得
-  const burger = document.querySelector('.hamburger');
-  const menu = document.querySelector('#menu');
-
-  // クリックでメニュー開閉 & ハンバーガーアニメーション
-  burger.addEventListener('click', () => {
-    burger.classList.toggle('open'); // バーガーの×アニメ
-    menu.classList.toggle('open');   // メニュー開閉
-  });
-</script>
-
-<script>
-  const burger = document.querySelector('.hamburger');
-  const menu = document.querySelector('#menu');
-  const titleArea = document.querySelector('#title_area');
-
-  burger.addEventListener('click', () => {
-    burger.classList.toggle('open'); // バーガーの×アニメ
-    menu.classList.toggle('open');   // メニュー開閉
-    titleArea.classList.toggle('open'); // タイトル背景切替
-  });
-</script>
+#title_area.open {
+  background: var(--black);
+}
 
 
-  <!-- AOS JS -->
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
-  </script>
+.TAG_logo {
+  padding-left: 30px;
+}
 
-</body>
-</html>
 
+/* =========================
+   Hamburger
+========================= */
+.hamburger {
+  width: 25px;
+  height: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--black);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+/* Hamburger open animation */
+.hamburger.open span:nth-child(1) {
+  transform: rotate(25deg) translate(5px, 5px);
+  background: var(--white);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  background: var(--white);
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(333deg) translate(5px, -5px);
+  background: var(--white);
+}
+
+
+
+/* =========================
+   Menu
+========================= */
+#menu {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background: var(--black);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  z-index: 1000;
+}
+
+#menu.open {
+  max-height: 500px; /* メニュー高さに合わせて調整 */
+}
+
+#menu nav ul {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 2% 3%;
+}
+
+#menu nav ul li a {
+  display: block;
+  color: var(--white);
+  font-size: var(--font-medium)
+}
+
+/* =========================
+   SP Menu
+========================= */
+@media screen and (max-width: 1023px) {
+  #menu {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100vh;
+    max-height: none;
+    transition: right 0.3s ease;
+  }
+
+  #menu.open {
+    right: 0;
+  }
+}
+
+/* =========================
+   Footer
+========================= */
+footer {
+  background-color: var(--black);
+  color: var(--white);
+  font-size: var(--font-small);
+}
+
+footer .footer_container {
+  padding: 3%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
