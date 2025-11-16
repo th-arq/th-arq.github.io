@@ -21,7 +21,14 @@ img { max-width: 100%; height: auto; display: block; }
   --black: #2D2D2D;
   --white: #FFFFFF;
   --lightgray: #F0EEEB;
-  --background: #F0EEEB;  
+  --background: #F0EEEB;
+  --font-x-small: 9px;
+  --font-small: 13px;
+  --font-medium: 20px;
+  --font-large: 36px;
+  --font-x-large: 42px;
+  --section-width: 1280;
+  --section-width-narrow: 1040;
   --transition: 0.3s ease;
 }
 
@@ -117,15 +124,14 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 #menu.open {
-  height: 100vh;
+  height: 500px;
 }
 
 #menu nav {
   padding-top: 120px;
-  text-align: center;
 }
 
 #menu nav ul li {
   margin: 20px 0;
-  font-size: 22px;
+  font-size: var(--font-medium);
 }
