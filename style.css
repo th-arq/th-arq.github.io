@@ -59,13 +59,13 @@ header {
 /* =========================
    Logo（SVG）
 ========================= */
-.TAG_logo svg path {
-  fill: var(--black);
-  transition: fill 0.3s ease;
+#title_area.open .logo_svg path {
+  fill: var(--white);
 }
 
-#title_area.open .TAG_logo svg path {
-  fill: var(--white);
+.logo_svg path {
+  fill: var(--black);
+  transition: fill 0.3s ease;
 }
 
 .TAG_logo {
