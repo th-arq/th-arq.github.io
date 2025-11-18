@@ -63,10 +63,13 @@ header {
   fill: var(--white);
 }
 
-.logo_svg path {
+.logo_svg {
   fill: var(--black);
   transition: fill 0.3s ease;
+  width: 100px;
 }
+
+
 
 .TAG_logo {
   display: flex;
