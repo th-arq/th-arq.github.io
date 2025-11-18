@@ -44,7 +44,7 @@ header {
   display: flex;
   justify-content: start;
   align-items: center;
-  padding: 2% 3% 0 2%;
+  padding: 2% 10% 0 10%;
   position: fixed;
   width: 100%;
   z-index: 1100;
