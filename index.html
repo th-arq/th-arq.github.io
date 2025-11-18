@@ -159,8 +159,19 @@ document.addEventListener('click', (e) => {
 
 window.addEventListener('load', () => {
   const loading = document.getElementById('loading');
-  loading.style.opacity = '0';
-  setTimeout(() => { loading.style.display = 'none'; }, 500);
+  const minTime = 1500; // 最低1秒表示
+  const startTime = Date.now();
+
+  const hideLoading = () => {
+    const elapsed = Date.now() - startTime;
+    const remaining = minTime - elapsed;
+    setTimeout(() => {
+      loading.style.opacity = '0';
+      setTimeout(() => { loading.style.display = 'none'; }, 500);
+    }, remaining > 0 ? remaining : 0);
+  };
+
+  hideLoading();
 });
 
 
