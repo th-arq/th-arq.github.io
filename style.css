@@ -136,6 +136,7 @@ header {
 
 #menu nav ul li {
   font-size: var(--font-medium);
+  padding: 0;
 }
 
 
