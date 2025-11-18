@@ -52,6 +52,7 @@ img { max-width: 100%; height: auto; display: block; }
   fill: var(--black);
   opacity: 0;
   animation: fadeIn 1s forwards;
+  width: 50px;
 }
 
 @keyframes fadeIn {
