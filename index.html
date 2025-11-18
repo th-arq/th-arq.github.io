@@ -1,174 +1,162 @@
-/* =========================
-   Base Reset
-========================= */
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--background);
-  color: var(--black);
-  font-family: 'Jost', sans-serif;
-}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+  <title>TAG Inc.</title>
 
-ul, ol { list-style: none; }
-a { text-decoration: none; color: inherit; }
-img { max-width: 100%; height: auto; display: block; }
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+</style>
 
 
-/* =========================
-   Variables
-========================= */
-:root {
-  --black: #2D2D2D;
-  --white: #FFFFFF;
-  --lightgray: #F0EEEB;
-  --background: #F0EEEB;
-  --font-x-small: 9px;
-  --font-small: 13px;
-  --font-medium: 20px;
-  --font-large: 36px;
-  --font-x-large: 42px;
-  --section-width: 1280;
-  --section-width-narrow: 1040;
-  --transition: 0.3s ease;
-}
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <!-- Swiper JS を必ず読み込む -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+</head>
+<body>
+
+  <!-- HEAD -->
+  <header>
+    <div id="title_area">
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+      </div>
+
+        <div class="TAG_logo">
+          <a href="https://th-arq.github.io/">
+            <svg class="logo_svg" viewBox="0 0 100 21" xmlns="http://www.w3.org/2000/svg">
+              <path d="M96.68 18.46q0-.68.47-1.15.5-.49 1.18-.49.73 0 1.2.49.47.47.47 1.15 0 .66-.47 1.15-.47.49-1.2.49-.68 0-1.18-.49-.47-.49-.47-1.15M85.43 14.08q0 1.22.53 2.13.52.88 1.41 1.41.91.53 2.02.53.91 0 1.74-.28.49-.25.94-.77v3.29q-.66.66-1.8 1.05-1.13.39-2.49.39-1.96 0-3.54-.83a6.56 6.56 0 0 1-2.46-2.35q-.88-1.52-.88-3.46 0-1.96.88-3.46A6.35 6.35 0 0 1 85.71 8.3q1.58-.86 3.54-.86 1.36 0 2.49.39 1.13.39 1.8 1.05v3.29q-.3-.64-.97-1.11a4.8 4.8 0 0 0-1.47-.77 5.4 5.4 0 0 0-1.72-.28q-1.11 0-2.02.53-.88.53-1.41 1.44-.52.91-.52 2.1M76.55 12.7q0-1.41-.58-2.13-.58-.72-1.8-.72-.83 0-1.46.36a2.36 2.36 0 0 0-.99.99q-.36.64-.36 1.49v7.75h-2.99V7.72h2.99v1.96q.61-1.13 1.55-1.69.97-.56 2.3-.55 2.16 0 3.29 1.33 1.13 1.3 1.13 3.6v8.08h-3.07zM60.42 1.08h3.29v19.37h-3.29zM42.04 13.09V10.32h9.32a12.2 12.2 0 0 1-.55 4.04 10 10 0 0 1-1.83 3.35q-1.22 1.47-3.04 2.32-1.8.83-4.09.83-2.19 0-4.04-.72a9.8 9.8 0 0 1-3.24-2.1 9.5 9.5 0 0 1-2.1-3.21q-.75-1.85-.75-4.07t.75-4.04q.78-1.85 2.13-3.18a9.5 9.5 0 0 1 3.24-2.08q1.88-.72 4.07-.72 1.91 0 3.46.53a8.7 8.7 0 0 1 2.77 1.46 8.6 8.6 0 0 1 2.1 2.3l-2.66 1.77a6 6 0 0 0-2.24-2.21q-1.41-.83-3.43-.83-1.88 0-3.4.88-1.52.86-2.43 2.43-.91 1.55-.91 3.68 0 2.1.88 3.71a6.64 6.64 0 0 0 2.44 2.46q1.52.88 3.43.88 1.3 0 2.32-.36a5.3 5.3 0 0 0 1.77-1.02q.75-.66 1.25-1.52a7.2 7.2 0 0 0 .75-1.83zM31.41 20.45h-3.68l-2.22-4.98h-7.14l-2.21 4.98h-3.68L21.95 0zM19.32 12.7h5.25l-2.62-6.14zM0 4.09V1.08h13.5v3.02H8.38v16.35H5.09V4.09z"/>
+            </svg>
+          </a>
+        </div>      
+    </div>
+
+    <div id="menu">
+        <nav>
+            <ul>
+                <li>
+                    <a href="/about/">About</a>
+                </li>
+                 <li>
+                    <a href="/service/">Service</a>
+                </li>
+                 <li>
+                    <a href="/projects/">Projects</a>
+                </li>
+                <li>
+                    <a href="/contact/">Contact</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div>
+      <a href="/contact/">
+        <img src=""></a>
+    </div>
+  </header>
+
+ <!-- CONTENTS -->
+<main>
+  <div id="Mainview">
+    <div class="swiper top-slider">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="img/img1.jpg" alt="">
+        </div>
+        <div class="swiper-slide">
+          <img src="img/img2.jpg" alt="">
+        </div> 
+        <div class="swiper-slide">
+          <img src="img/img3.jpg" alt="">
+        </div>
+      </div>
+
+      <!-- ドット（ページネーション） -->
+      <div class="swiper-pagination"></div>
+    </div> <!-- swiper top-slider の閉じタグ -->
+  </div> <!-- Mainview の閉じタグ -->
+
+  <section data-aos="fade-up">
+    <p>TEXT</p>
+  </section>
+</main>
 
 
-/* =========================
-   Header / Title Area
-========================= */
-header {
-  height: 80px;
-}
+    <!-- FOOTER -->
+  <footer>
+    <div class="footer_container">
+        <div class="footer_container_information">
+          <section>
+            <p>INTERIOR & EXTERIOR · Residential · Commercial · Industrial</p>
+          </section>
+          <section>
+            <p>Los Angeles, CA | <a href="/privacy/">Privacy Policy</a></p></section>
+        </div>
+        <div class="footer_container_company">
+            <p>© 2025 TAG Inc.  Licensed Contractor #123456</p>
+        </div>
+    </div>
+  </footer>
 
-#title_area {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  padding: 2% 10% 0 10%;
-  position: fixed;
-  width: 100%;
-  z-index: 1100;
-  transition: background 0.3s ease;
-}
+  <!-- JS -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Swiper初期化
+  const swiper = new Swiper('.top-slider', {
+    loop: true,
+    speed: 1000,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  });
 
-#title_area.open {
-  background: var(--black);
-}
+  // ハンバーガーメニュー
+  const burger = document.querySelector('.hamburger');
+  const menu = document.querySelector('#menu');
+  const titleArea = document.querySelector('#title_area');
 
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    menu.classList.toggle('open');
+    titleArea.classList.toggle('open');
+  });
 
-/* =========================
-   Logo（SVG）
-========================= */
-#title_area.open .TAG_logo svg path {
-  fill: var(--white);
-}
+document.addEventListener('click', (e) => {
+  const isMenuOpen = menu.classList.contains('open');
+  const clickedInsideMenu = menu.contains(e.target);
+  const clickedHamburger = burger.contains(e.target);
 
-.TAG_logo {
-  display: flex;
-  align-items: center;
-  padding: 0 0 0 1em;
-}
-
-.logo_svg path {
-  fill: var(--black);
-  transition: fill 0.3s ease;
-}
-
-
-/* =========================
-   Hamburger
-========================= */
-.hamburger {
-  width: 26px;
-  height: 9px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  cursor: pointer;
-  z-index: 1200;
-}
-
-.hamburger span {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: var(--black);
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-/* open時 */
-.hamburger.open span:nth-child(1) {
-  transform: rotate(28deg) translate(5px, 5px);
-  background: var(--white);
-}
-
-.hamburger.open span:nth-child(2) {
-  transform: rotate(-28deg) translate(5px, -5px);
-  background: var(--white);
-}
+  if (isMenuOpen && !clickedInsideMenu && !clickedHamburger) {
+    burger.classList.remove('open');
+    menu.classList.remove('open');
+    titleArea.classList.remove('open');
+  }
+});
 
 
-/* =========================
-   Menu
-========================= */
-#menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 0;
-  overflow: hidden;
-  background: var(--black);
-  color: var(--white);
-  transition: height 0.3s ease;
-  z-index: 1000;
-}
-
-#menu.open {
-  height: 300px;
-}
-
-#menu nav {
-  padding-top: 100px;
-}
-
-#menu nav ul li {
-  padding: 0 10%;
-}
-
-#menu nav ul li {
-  font-size: var(--font-medium);
-}
+  // AOS初期化
+  AOS.init({
+    duration: 1000,
+    once: true
+  });
+});
+</script>
 
 
-/* ========================= 
-   Swiper
-========================= */ 
-.top-slider {
-  width: 80%;
-  height: 600px;
-  margin: auto;
-}
+</body>
+</html>
 
-.top-slider img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-
-/* ========================= 
-   Footer 
-========================= */ 
-footer { 
-  background-color: var(--black); 
-  color: var(--white); 
-  font-size: var(--font-small); 
-}
-footer .footer_container { 
-  padding: 2% 3%; 
-  display: flex; 
-  align-items: center; 
-  justify-content: space-between; 
-}
