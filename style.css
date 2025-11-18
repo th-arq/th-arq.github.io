@@ -53,7 +53,7 @@ img { max-width: 100%; height: auto; display: block; }
   fill: var(--black);
   opacity: 0;
   animation: fadeIn 1s forwards, pulse 2s infinite alternate;
-  width: 100px;
+  width: 90px;
 }
 
 @keyframes pulse {
