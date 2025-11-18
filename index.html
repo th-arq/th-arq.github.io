@@ -160,19 +160,14 @@ document.addEventListener('click', (e) => {
 
 window.addEventListener('load', () => {
   const loading = document.getElementById('loading');
-  const minTime = 1000;
+  const minTime = 2000;
   const startTime = Date.now();
 
-  const hideLoading = () => {
-    const elapsed = Date.now() - startTime;
-    const remaining = minTime - elapsed;
-    setTimeout(() => {
-      loading.style.opacity = '0';
-      setTimeout(() => { loading.style.display = 'none'; }, 500);
-    }, remaining > 0 ? remaining : 0);
-  };
-
-  hideLoading();
+  // ページが完全にロードされた後にフェードアウト
+  setTimeout(() => {
+    loading.style.opacity = '0';
+    setTimeout(() => { loading.style.display = 'none'; }, 2500);
+  }, minTime);
 });
 
 
