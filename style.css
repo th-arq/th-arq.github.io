@@ -34,6 +34,34 @@ img { max-width: 100%; height: auto; display: block; }
 
 
 /* =========================
+   HLoading
+========================= */
+
+#loading {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: white;
+  display: flex; justify-content: center; align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.loading_logo_svg {
+  fill: var(--black);
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+
+
+
+/* =========================
    Header / Title Area
 ========================= */
 header {
