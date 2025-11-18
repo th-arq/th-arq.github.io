@@ -135,8 +135,11 @@ header {
 }
 
 #menu nav ul li {
+  padding: 0 10%;
+}
+
+#menu nav ul li {
   font-size: var(--font-medium);
-  padding: 0;
 }
 
 
@@ -165,7 +168,7 @@ footer {
   font-size: var(--font-small); 
 }
 footer .footer_container { 
-  padding: 3%; 
+  padding: 2% 3%; 
   display: flex; 
   align-items: center; 
   justify-content: space-between; 
