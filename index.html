@@ -135,6 +135,13 @@ document.addEventListener('DOMContentLoaded', () => {
     titleArea.classList.toggle('open');
   });
 
+  burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  menu.classList.toggle('open');
+  titleArea.classList.toggle('open');
+});
+
+
   // AOS初期化
   AOS.init({
     duration: 1000,
