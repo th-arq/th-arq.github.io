@@ -36,6 +36,10 @@ img { max-width: 100%; height: auto; display: block; }
 /* =========================
    Header / Title Area
 ========================= */
+header {
+  height: 80px;
+}
+
 #title_area {
   display: flex;
   justify-content: start;
@@ -139,9 +143,11 @@ img { max-width: 100%; height: auto; display: block; }
    Swiper
 ========================= */ 
 .top-slider {
-  width: 100%;
-  height: 500px; /* 高さを必ず指定 */
+  width: 80%;
+  height: 600px;
+  margin: auto;
 }
+
 .top-slider img {
   width: 100%;
   height: 100%;
