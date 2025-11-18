@@ -71,7 +71,6 @@ header {
 .TAG_logo {
   display: flex;
   align-items: center;
-  height: 24px; /* 必要なら数字変えてOK */
   padding: 0 0 0 1em;
 }
 
