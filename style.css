@@ -179,9 +179,13 @@ header {
 /* ========================= 
    Swiper
 ========================= */ 
+#Mainview {
+  height: calc(100vh - 80px - 100px);
+}
+
 .top-slider {
   width: 80%;
-  height: 600px;
+  height: 100%;
   margin: auto;
 }
 
@@ -201,8 +205,9 @@ footer {
   font-size: var(--font-small); 
 }
 footer .footer_container { 
-  padding: 2% 3%; 
-  display: flex; 
-  align-items: center; 
-  justify-content: space-between; 
+  height: 100px;
+    padding: 1% 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
