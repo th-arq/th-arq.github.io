@@ -113,14 +113,15 @@ header {
    Hamburger
 ========================= */
 .hamburger {
-  width: 26px;
-  height: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 1200;
+    width: 26px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 1200;
 }
 
 .hamburger span {
