@@ -9,7 +9,7 @@ html, body {
   font-family: 'Jost', sans-serif;
 }
 
-ul, ol { list-style: none; padding: 0; }
+ul, ol, p { list-style: none; padding: 0; }
 a { text-decoration: none; color: inherit; }
 img { max-width: 100%; height: auto; display: block; }
 
