@@ -162,16 +162,16 @@ header {
 }
 
 #menu.open {
-  height: 300px;
+  height: 200px;
 }
 
 #menu nav {
-  padding-top: 100px;
+  padding-top: 80px;
 }
 
 #menu nav ul {
   display: flex;
-  flex-direction: column;
+  gap: 3em;
 }
 
 #menu nav ul li {
