@@ -53,7 +53,7 @@ img { max-width: 100%; height: auto; display: block; }
   fill: var(--black);
   opacity: 0;
   animation: fadeIn 2s forwards;
-  width: 90px;
+  width: 120px;
 }
 
 @keyframes fadeIn {
@@ -183,7 +183,7 @@ header {
    Swiper
 ========================= */ 
 #Mainview {
-  height: calc(100vh - 80px - 100px);
+  height: calc(100vh - 80px - 130px);
 }
 
 .top-slider {
@@ -206,6 +206,7 @@ footer {
   background-color: var(--black); 
   color: var(--white); 
   font-size: var(--font-small); 
+  margin: 30px 0 0 0;
 }
 
 footer .footer_container { 
