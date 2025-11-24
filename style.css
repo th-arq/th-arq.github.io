@@ -229,31 +229,40 @@ footer .footer_container {
     height: 100px;
     padding: 0 5%;
   }
+
   #title_area {
+    flex-direction: row-reverse;
     justify-content: space-between;
   }
+
   .TAG_logo {
-    padding-left: 0.5em;
+    padding: 0;
   }
+
   .hamburger {
     width: 30px;
     height: 30px;
     gap: 6px;
   }
+
   #menu nav ul {
     flex-direction: column;
     gap: 1.5em;
     padding-top: 5em;
   }
+
   #menu nav ul li {
     font-size: 16px;
   }
+
   #Mainview {
-    height: calc(100vh - 80px - 100px);
+    height: calc(100vh - 100px - 100px);
   }
+
   .top-slider {
     width: 100%;
   }
+  
   footer {
     padding: 0 5%;
     flex-direction: column;
