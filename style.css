@@ -214,3 +214,109 @@ footer .footer_container {
   align-items: center;
   justify-content: space-between;
 }
+
+
+
+
+
+/* =========================
+   Responsive
+========================= */
+
+/* スマホ：0〜767px */
+@media screen and (max-width: 767px) {
+  header {
+    padding: 0 5%;
+  }
+  #title_area {
+    justify-content: space-between;
+  }
+  .TAG_logo {
+    padding-left: 0.5em;
+  }
+  .hamburger {
+    width: 30px;
+    height: 30px;
+    gap: 6px;
+  }
+  #menu nav ul {
+    flex-direction: column;
+    gap: 1.5em;
+    padding-top: 5em;
+  }
+  #menu nav ul li {
+    font-size: 16px;
+  }
+  #Mainview {
+    height: calc(100vh - 80px - 100px);
+  }
+  .top-slider {
+    width: 100%;
+  }
+  footer {
+    padding: 0 5%;
+    flex-direction: column;
+    height: auto;
+    text-align: center;
+  }
+  footer .footer_container {
+    flex-direction: column;
+    gap: 0.5em;
+    align-items: center;
+  }
+  #menu.open {
+    height: 250px;
+  }
+  #menu {
+    padding: 0 5%;
+  }
+}
+
+/* タブレット：768px〜1024px */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  header {
+    padding: 0 7%;
+  }
+  #title_area {
+    justify-content: space-between;
+  }
+  .TAG_logo {
+    padding-left: 1em;
+  }
+  .hamburger {
+    width: 28px;
+    height: 28px;
+    gap: 5px;
+  }
+  #menu nav ul {
+    flex-direction: row;
+    gap: 2em;
+    padding-top: 6em;
+  }
+  #menu nav ul li {
+    font-size: 18px;
+  }
+  #Mainview {
+    height: calc(100vh - 80px - 110px);
+  }
+  .top-slider {
+    width: 90%;
+  }
+  footer {
+    padding: 0 7%;
+    flex-direction: row;
+    height: 80px;
+    text-align: left;
+  }
+  footer .footer_container {
+    flex-direction: row;
+    gap: 1em;
+    align-items: center;
+  }
+  #menu.open {
+    height: 220px;
+  }
+  #menu {
+    padding: 0 7%;
+  }
+}
