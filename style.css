@@ -226,6 +226,7 @@ footer .footer_container {
 /* スマホ：0〜767px */
 @media screen and (max-width: 767px) {
   header {
+    height: 100px;
     padding: 0 5%;
   }
   #title_area {
