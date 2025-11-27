@@ -257,7 +257,7 @@ footer .footer_container {
   }
 
   #Mainview {
-    height: calc(100vh - 100px - 100px);
+    height: calc(100vh - 120px - 100px);
   }
 
   .top-slider {
