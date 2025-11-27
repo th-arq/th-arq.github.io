@@ -54,7 +54,7 @@ img { max-width: 100%; height: auto; display: block; }
   fill: var(--black);
   opacity: 0;
   animation: fadeIn 2s forwards;
-  width: 120px;
+  width: 150px;
 }
 
 @keyframes fadeIn {
@@ -92,6 +92,7 @@ header {
 }
 
 .logo_svg {
+  display: block;
   fill: var(--black);
   transition: fill 0.3s ease;
   width: 120px;
