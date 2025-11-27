@@ -262,7 +262,7 @@ footer .footer_container {
   .top-slider {
     width: 100%;
   }
-  
+
   footer {
     padding: 0 5%;
     flex-direction: column;
@@ -275,7 +275,8 @@ footer .footer_container {
     align-items: center;
   }
   #menu.open {
-    height: 250px;
+    height: 100%;
+    width: 40%;
   }
   #menu {
     padding: 0 5%;
@@ -285,10 +286,12 @@ footer .footer_container {
 /* タブレット：768px〜1024px */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   header {
+    height: 120px;
     padding: 0 7%;
   }
   #title_area {
     justify-content: space-between;
+    flex-direction: row-reverse;
   }
   .TAG_logo {
     padding-left: 1em;
