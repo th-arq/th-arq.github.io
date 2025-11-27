@@ -273,8 +273,6 @@ footer .footer_container {
   }
   footer .footer_container {
     flex-direction: column;
-    gap: 0.5em;
-    align-items: center;
   }
   #menu.open {
     height: 100%;
