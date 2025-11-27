@@ -232,6 +232,7 @@ footer .footer_container {
   }
 
   #title_area {
+    display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
   }
@@ -241,8 +242,8 @@ footer .footer_container {
   }
 
   .hamburger {
-    width: 30px;
-    height: 30px;
+    width: 60px;
+    height: 60px;
     gap: 6px;
   }
 
