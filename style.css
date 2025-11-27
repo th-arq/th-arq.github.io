@@ -77,6 +77,7 @@ header {
 }
 
 #title_area {
+  display: flex;
   z-index: 1100;
   transition: background 0.3s ease;
 }
@@ -232,7 +233,6 @@ footer .footer_container {
   }
 
   #title_area {
-    display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
   }
