@@ -77,7 +77,6 @@ header {
 }
 
 #title_area {
-  display: flex;
   z-index: 1100;
   transition: background 0.3s ease;
 }
@@ -96,6 +95,7 @@ header {
   fill: var(--black);
   transition: fill 0.3s ease;
   width: 120px;
+  height: 26px;
 }
 
 
