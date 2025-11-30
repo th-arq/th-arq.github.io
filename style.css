@@ -292,7 +292,6 @@ footer .footer_container {
   footer {
     padding: 0 5%;
     flex-direction: column;
-    height: auto;
     text-align: center;
   }
   footer .footer_container {
