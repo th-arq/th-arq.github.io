@@ -256,6 +256,7 @@ footer .footer_container {
     right: -40%;
     width: 40%;
     height: 100%;
+    overflow: hidden;
   }
 
   #menu.open {
