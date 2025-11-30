@@ -241,6 +241,11 @@ footer .footer_container {
     padding: 0;
   }
 
+  .logo_svg {
+  width: 240px;
+  height: 120px;
+}
+
   .hamburger {
     width: 60px;
     height: 60px;
