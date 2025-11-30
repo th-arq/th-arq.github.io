@@ -252,6 +252,18 @@ footer .footer_container {
     gap: 6px;
   }
 
+  #menu {
+    top: 0;
+    right: -40%;
+    width: 40%;
+    height: 100%;
+  }
+  
+  #menu.open {
+    right: 0;
+    height: 100%;
+  }
+
   #menu nav ul {
     flex-direction: column;
     gap: 1.5em;
