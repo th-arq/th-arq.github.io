@@ -247,6 +247,11 @@ footer .footer_container {
 ========================= */
 
 @media screen and (max-width: 767px) {
+  
+  header {
+    padding: 0 5%;
+  }
+
   #title_area {
     flex-direction: row-reverse;
     justify-content: space-between;
