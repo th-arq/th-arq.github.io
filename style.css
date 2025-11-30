@@ -87,10 +87,6 @@ header {
 /* =========================
    Logo（SVG）
 ========================= */
-#title_area.open .logo_svg path {
-  fill: var(--white);
-}
-
 .logo_svg {
   display: block;
   fill: var(--black);
@@ -107,6 +103,10 @@ header {
   padding: 0 0 0 1.5em;
 }
 
+
+#title_area.open .logo_svg path {
+  fill: var(--white);
+}
 
 /* =========================
    Hamburger
@@ -256,6 +256,9 @@ footer .footer_container {
     padding: 0;
   }
 
+  #title_area.open .logo_svg path {
+  fill: var(--black);
+}
 
   .hamburger {
     gap: 6px;
