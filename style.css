@@ -258,7 +258,7 @@ footer .footer_container {
     width: 40%;
     height: 100%;
   }
-  
+
   #menu.open {
     right: 0;
     height: 100%;
@@ -300,53 +300,3 @@ footer .footer_container {
   }
 }
 
-/* タブレット：768px〜1024px */
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-  header {
-    height: 120px;
-    padding: 0 7%;
-  }
-  #title_area {
-    justify-content: space-between;
-    flex-direction: row-reverse;
-  }
-  .TAG_logo {
-    padding-left: 1em;
-  }
-  .hamburger {
-    width: 28px;
-    height: 28px;
-    gap: 5px;
-  }
-  #menu nav ul {
-    flex-direction: row;
-    gap: 2em;
-    padding-top: 6em;
-  }
-  #menu nav ul li {
-    font-size: 18px;
-  }
-  #Mainview {
-    height: calc(100vh - 80px - 110px);
-  }
-  .top-slider {
-    width: 90%;
-  }
-  footer {
-    padding: 0 7%;
-    flex-direction: row;
-    height: 80px;
-    text-align: left;
-  }
-  footer .footer_container {
-    flex-direction: row;
-    gap: 1em;
-    align-items: center;
-  }
-  #menu.open {
-    height: 220px;
-  }
-  #menu {
-    padding: 0 7%;
-  }
-}
