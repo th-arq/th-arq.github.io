@@ -51,6 +51,7 @@
         </div>      
     </div>
 
+    <div id="overlay"></div>
     <div id="menu">
         <nav>
             <ul>
@@ -135,10 +136,13 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   });
 
+  
+
   // ハンバーガーメニュー
   const burger = document.querySelector('.hamburger');
   const menu = document.querySelector('#menu');
   const titleArea = document.querySelector('#title_area');
+  const overlay = document.getElementById('overlay');
 
   burger.addEventListener('click', () => {
     burger.classList.toggle('open');
@@ -156,6 +160,19 @@ document.addEventListener('click', (e) => {
     menu.classList.remove('open');
     titleArea.classList.remove('open');
   }
+});
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  menu.classList.toggle('open');
+  overlay.classList.toggle('active');
+});
+
+// オーバーレイをクリックしたら閉じる
+overlay.addEventListener('click', () => {
+  hamburger.classList.remove('open');
+  menu.classList.remove('open');
+  overlay.classList.remove('active');
 });
 
 
