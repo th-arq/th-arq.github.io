@@ -203,6 +203,9 @@ header {
    Footer 
 ========================= */ 
 footer { 
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   background-color: var(--black); 
   color: var(--white); 
   font-size: var(--font-small); 
