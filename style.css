@@ -280,7 +280,7 @@ footer .footer_container {
   }
 
   #Mainview {
-    height: calc(100vh - 120px - 100px);
+    height: calc(100vh - 120px - 80px);
   }
 
   .top-slider {
@@ -291,6 +291,7 @@ footer .footer_container {
     padding: 2% 5%;
     flex-direction: column;
     text-align: center;
+    height: 80px;
   }
   footer .footer_container {
     flex-direction: column;
