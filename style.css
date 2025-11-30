@@ -290,12 +290,5 @@ footer .footer_container {
   footer .footer_container {
     flex-direction: column;
   }
-  #menu.open {
-    height: 100%;
-    width: 40%;
-  }
-  #menu {
-    padding: 0 5%;
-  }
 }
 
