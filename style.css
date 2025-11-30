@@ -229,11 +229,6 @@ footer .footer_container {
 ========================= */
 
 @media screen and (max-width: 767px) {
-  header {
-    height: 100px;
-    padding: 0 5%;
-  }
-
   #title_area {
     flex-direction: row-reverse;
     justify-content: space-between;
@@ -278,7 +273,7 @@ footer .footer_container {
 
   #Mainview {
     height: calc(100vh - 80px - 80px);
-    margin: 0 0 0 7%;
+    margin: 0 0 0 5%;
   }
 
   .top-slider {
@@ -286,7 +281,7 @@ footer .footer_container {
   }
 
   footer {
-    padding: 2% 5%;
+    padding: 1% 5%;
     flex-direction: column;
     text-align: center;
     height: 80px;
