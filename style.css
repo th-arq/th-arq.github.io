@@ -256,7 +256,7 @@ footer .footer_container {
 
   #menu {
     top: 0;
-    right: -40%;
+    right: -50%;
     left: auto;
     width: 40%;
     height: 100%;
@@ -267,6 +267,7 @@ footer .footer_container {
 
   #menu.open {
     right: 0;
+    height: 100%;
   }
 
   #menu nav ul {
