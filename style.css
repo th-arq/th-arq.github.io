@@ -291,10 +291,6 @@ footer .footer_container {
     padding-top: 5em;
   }
 
-  #menu nav ul li {
-    font-size: 16px;
-  }
-
   #Mainview {
     height: calc(100vh - 80px - 80px);
     margin: 0 0 0 5%;
