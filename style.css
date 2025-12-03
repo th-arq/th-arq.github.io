@@ -292,7 +292,7 @@ footer .footer_container {
   }
 
   #Mainview {
-    height: calc(100vh - 80px - 85px);
+    height: calc(100vh - 80px - 90px);
     margin: 0 0 0 5%;
   }
 
@@ -305,7 +305,7 @@ footer .footer_container {
     flex-direction: column;
     font-size: var(--font-x-small);
     text-align: center;
-    height: 85px;
+    height: 90px;
   }
   footer .footer_container {
     flex-direction: column;
