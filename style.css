@@ -23,8 +23,8 @@ img { max-width: 100%; height: auto; display: block; }
   --white: #FFFFFF;
   --lightgray: #F0EEEB;
   --background: #F0EEEB;
-  --font-x-small: 9px;
-  --font-small: 13px;
+  --font-x-small: 10px;
+  --font-small: 12px;
   --font-medium: 20px;
   --font-large: 36px;
   --font-x-large: 42px;
@@ -303,6 +303,7 @@ footer .footer_container {
   footer {
     padding: 1% 5%;
     flex-direction: column;
+    font-size: var(--font-x-small);
     text-align: center;
     height: 80px;
   }
