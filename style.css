@@ -135,11 +135,13 @@ header {
 }
 
 .hamburger.open span:nth-child(1) {
+  position: fixed;
   transform: translateY(3px) rotate(30deg);
   background: var(--white);
 }
 
 .hamburger.open span:nth-child(2) {
+  position: fixed;
   transform: translateY(-3px) rotate(-30deg);
   background: var(--white);
 }
