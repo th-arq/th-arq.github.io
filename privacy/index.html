@@ -1,87 +1,213 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
   <title>TAG Inc.</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+</style>
+
 
   <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
-
+  <link rel="stylesheet" href="../style.css">
   <!-- AOS CSS -->
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <!-- Swiper JS を必ず読み込む -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </head>
 <body>
+
+
+</div>
+
 
   <!-- HEAD -->
   <header>
     <div id="title_area">
-        <div>
-            <a href="#">
-                <img src="../img/menu_open.svg">
-            </a>
-        </div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+      </div>
+
         <div class="TAG_logo">
-            <a href="#">
-                <img src="../img/TAG_logo.svg">
-            </a>
+          <a href="https://th-arq.github.io/">
+            <svg class="logo_svg" xmlns="http://www.w3.org/2000/svg"><path d="M115.86 22.12q0-.81.56-1.38.6-.6 1.41-.6.89 0 1.44.6.57.56.57 1.38 0 .8-.57 1.38-.55.6-1.44.6-.81 0-1.4-.6-.57-.6-.57-1.38"/><path d="M102.38 16.88q0 1.45.63 2.55.63 1.05 1.69 1.7 1.1.62 2.42.62 1.1 0 2.09-.33a6 6 0 0 0 1.76-.93q.76-.6 1.12-1.33v3.95q-.8.8-2.15 1.26-1.36.46-2.98.46a9 9 0 0 1-4.25-.99 8 8 0 0 1-2.95-2.82 8 8 0 0 1-1.06-4.14q0-2.35 1.06-4.15a7.6 7.6 0 0 1 2.95-2.78 9 9 0 0 1 4.25-1.03q1.62 0 2.98.46t2.15 1.26v3.95q-.36-.75-1.16-1.33-.76-.6-1.75-.93a7 7 0 0 0-2.06-.33q-1.32 0-2.42.63-1.05.63-1.7 1.73a5 5 0 0 0-.62 2.52"/><path d="M91.74 15.22q0-1.7-.7-2.55-.7-.87-2.15-.87-1 0-1.76.43-.75.4-1.2 1.2-.42.75-.42 1.79v9.28h-3.59V9.25h3.59v2.35q.72-1.36 1.85-2.02 1.17-.66 2.75-.66 2.59 0 3.95 1.6 1.36 1.55 1.36 4.3v9.68h-3.68z"/><path d="M72.4 1.3h3.95v23.2H72.4z"/><path d="M50.38 15.68v-3.31h11.18q.06 2.55-.67 4.84a12 12 0 0 1-2.19 4.01 10.4 10.4 0 0 1-3.64 2.79q-2.15.99-4.91.99-2.62 0-4.84-.86a12 12 0 0 1-3.88-2.52 11 11 0 0 1-2.52-3.85q-.9-2.22-.9-4.87t.9-4.84a11.34 11.34 0 0 1 6.43-6.3Q47.6.89 50.22.9q2.28 0 4.14.63 1.86.6 3.32 1.75 1.5 1.13 2.52 2.75L57 8.16a7 7 0 0 0-2.68-2.66q-1.7-1-4.11-1a8 8 0 0 0-7 3.99 8.5 8.5 0 0 0-1.1 4.4q0 2.53 1.07 4.45a8 8 0 0 0 7.03 4.01q1.55 0 2.78-.43a6 6 0 0 0 2.12-1.23 7 7 0 0 0 1.5-1.82q.6-1.02.9-2.19z"/><path d="M37.65 24.5h-4.41l-2.67-5.97h-8.55l-2.64 5.97h-4.41L26.3 0zm-14.5-9.28h6.3L26.3 7.86z"/><path d="M0 4.9V1.3h16.18v3.6h-6.13v19.6H6.1V4.9z"/></svg>
+          </a>
         </div>      
     </div>
+
+
     <div id="menu">
         <nav>
             <ul>
                 <li>
-                    <a href="#">About</a>
+                    <a href="/about/">About</a>
                 </li>
                  <li>
-                    <a href="#">Service</a>
+                    <a href="/service/">Service</a>
                 </li>
                  <li>
-                    <a href="#">Projects</a>
+                    <a href="/projects/">Projects</a>
                 </li>
                 <li>
-                    <a href="#">Contact</a>
+                    <a href="/contact/">Contact</a>
                 </li>
             </ul>
         </nav>
     </div>
+    <div>
+      <a href="/contact/">
+        <img src=""></a>
+    </div>
+        <div id="overlay"></div>
   </header>
 
-    <!-- CONTENTS -->
-  <main>
-    
-Privacy policy
+ <!-- CONTENTS -->
+<main>
 
-  </main>
+  <div>
+    <h1>Privacy Policy</h1>
+    <p>This Privacy Policy explains how we collect, use, and protect your personal information when you visit our website or contact us through our form.</p>
+    <section>
+      <h2>1. Information We Collect</h2>
+      <p>We may collect the following information when you use our contact form:
+Your name
+Email address
+Phone number (optional)
+Message content
+We do not collect any financial or sensitive personal information.</p>
+    </section>
+        <section>
+      <h2>2. How We Use Your Information</h2>
+      <p>We use the information you provide to:
+Respond to your inquiries or requests
+Provide estimates or consultation services
+Improve our website and customer experience
+We do not sell, rent, or share your personal information with third parties for marketing purposes.</p>
+    </section>
+        <section>
+      <h2>3. Data Retention</h2>
+      <p>We keep your information only as long as necessary to respond to your inquiry or provide our services. After that, it may be securely deleted.</p>
+    </section>
+        <section>
+      <h2>4. Third-Party Services</h2>
+      <p>1Our contact form is powered by Formspree, which securely processes and delivers your message to our email. You can review Formspree’s privacy policy here: https://***********</p>
+    </section>
+        <section>
+      <h2>5. Cookies and Analytics</h2>
+      <p>Our website may use cookies or analytics tools (like Google Analytics) to understand traffic and improve user experience. These tools collect anonymous usage data and do not personally identify you.</p>
+    </section>
+        <section>
+      <h2>6. Your Rights</h2>
+      <p>You may contact us anytime to:
+Request access to your personal data
+Ask for correction or deletion of your information
+To make a request, please email us at: andrew@th-arq.com</p>
+    </section>
+        <section>
+      <h2>7. Updates to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. The latest version will always be posted on this page.</p>
+    </section>
+    <section>
+      <p>Contact Information:TAG Inc.708 N. Valley St. #A,  Anaheim, CA 92801andrew@th-arq.com(714) 883-1436
+
+
+Effective Date: 00, 00, 0000</p>
+    </section>
+</main>
+
 
     <!-- FOOTER -->
   <footer>
-    <div>
-        <section>
+    <div class="footer_container">
+        <div class="footer_container_information">
+          <section>
             <p>INTERIOR & EXTERIOR · Residential · Commercial · Industrial</p>
-            <p>Los Angeles, CA | <a href="#">Privacy Policy</a></p>
-        </section>
-        <section>
+          </section>
+          <section>
+            <p>Los Angeles, CA | <a href="/privacy/">Privacy Policy</a></p></section>
+        </div>
+        <div class="footer_container_company">
             <p>© 2025 TAG Inc.  Licensed Contractor #123456</p>
-        </section>
+        </div>
     </div>
   </footer>
 
   <!-- JS -->
-  <script src="script.js"></script>
+   <script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Swiper初期化
+  const swiper = new Swiper('.top-slider', {
+    loop: true,
+    speed: 1000,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  });
 
-  <!-- AOS JS -->
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
-  </script>
+  // ハンバーガーメニューとオーバーレイ
+  const overlay = document.getElementById('overlay');
+  const burger = document.querySelector('.hamburger');
+  const menu = document.getElementById('menu');
+  const titleArea = document.getElementById('title_area');
+
+  // ハンバーガークリックで開閉
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    menu.classList.toggle('open');
+    titleArea.classList.toggle('open');
+    overlay.classList.toggle('active');
+  });
+
+  // メニュー外クリックで閉じる
+  document.addEventListener('click', (e) => {
+    const isMenuOpen = menu.classList.contains('open');
+    const clickedInsideMenu = menu.contains(e.target);
+    const clickedBurger = burger.contains(e.target);
+
+    if (isMenuOpen && !clickedInsideMenu && !clickedBurger) {
+      burger.classList.remove('open');
+      menu.classList.remove('open');
+      titleArea.classList.remove('open');
+      overlay.classList.remove('active');
+    }
+  });
+
+  // オーバーレイクリックで閉じる
+  overlay.addEventListener('click', () => {
+    burger.classList.remove('open');
+    menu.classList.remove('open');
+    titleArea.classList.remove('open');
+    overlay.classList.remove('active');
+  });
+
+
+  // AOS初期化
+  AOS.init({
+    duration: 1000,
+    once: true
+  });
+});
+</script>
+
+<style>
+  main {
+    padding: 0 5%;
+}
+</style>
+
 
 </body>
 </html>
