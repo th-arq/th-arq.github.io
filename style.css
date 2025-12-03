@@ -310,5 +310,9 @@ footer .footer_container {
   footer .footer_container {
     flex-direction: column;
   }
+
+  .footer_container_company {
+    margin: 2% 0 0 0;
+}
 }
 
