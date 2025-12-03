@@ -136,7 +136,7 @@ header {
 
 .hamburger.open span:nth-child(1) {
   position: fixed;
-  transform: translateY(3px) rotate(30deg);
+  transform: translateY(-3px) rotate(30deg);
   background: var(--white);
 }
 
