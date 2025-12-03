@@ -301,11 +301,11 @@ footer .footer_container {
   }
 
   footer {
-    padding: 1% 5%;
+    padding: 0.5% 5%;
     flex-direction: column;
     font-size: var(--font-x-small);
     text-align: center;
-    height: 80px;
+    height: 85px;
   }
   footer .footer_container {
     flex-direction: column;
