@@ -1,25 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Swiper初期化
-  const swiper = new Swiper('.top-slider', {
-    loop: true,
-    speed: 1000,
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-  });
 
-  // ハンバーガーメニューとオーバーレイ
+  // hamberger overlay
   const overlay = document.getElementById('overlay');
   const burger = document.querySelector('.hamburger');
   const menu = document.getElementById('menu');
   const titleArea = document.getElementById('title_area');
 
-  // ハンバーガークリックで開閉
+  // menu - open
   burger.addEventListener('click', () => {
     burger.classList.toggle('open');
     menu.classList.toggle('open');
@@ -27,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.classList.toggle('active');
   });
 
-  // メニュー外クリックで閉じる
+  // menu- close
   document.addEventListener('click', (e) => {
     const isMenuOpen = menu.classList.contains('open');
     const clickedInsideMenu = menu.contains(e.target);
@@ -41,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // オーバーレイクリックで閉じる
+  // overlay - open
   overlay.addEventListener('click', () => {
     burger.classList.remove('open');
     menu.classList.remove('open');
@@ -49,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.classList.remove('active');
   });
 
-  // ローディングフェードアウト
+  // loading animation
   window.addEventListener('load', () => {
     const loading = document.getElementById('loading');
     const minTime = 2000;
@@ -60,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, minTime);
   });
 
-  // AOS初期化
+  // AOS
   AOS.init({
     duration: 1000,
     once: true
