@@ -224,7 +224,7 @@ header {
    Main
 ========================= */ 
 main {
-  padding: 0 5%;
+  padding: 0 10%;
 }
 
 /* ========================= 
@@ -300,11 +300,8 @@ footer .footer_container {
     gap: 1.5em;
     padding-top: 5em;
   }
-
-  /* ========================= 
-   Main
-========================= */ 
-main {
+  
+  main {
   padding: 0 5%;
 }
 
