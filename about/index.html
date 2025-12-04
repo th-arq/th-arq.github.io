@@ -72,17 +72,30 @@
  <!-- CONTENTS -->
 <main>
 
+<div id="title">
+  <h1>About</h1>
+</div>
 
- <section data-aos="fade-up">
-    <p>ABOUT</p>
-  </section>
-
+<div id="contents">
   <div>
-    <h1>About</h1>
-    <p>ANDREW GIM – AIA, LEED GA </p>
-    <p>Project and Design Manager with experience in residential, commercial, and federal projects. Possess a strong background in architecture, engineering, and construction, and an active DC Architect License. Adept in managing all aspects of development, design, and construction, from marketing, real estate, and pro forma analysis to design documentation and construction execution. Capable of handling technical details while also understanding the big picture. Holds a TOP SECRET security clearance. </p>
-    <p>I believe that architecture starts with solving our client’s genuine needs, but also must strive to achieve inspirational results that transcend expectations. A fundamental question that guides my work is offering simple and artful solutions to complex problems that entail technical knowledge and attention to detail. My design approach is methodical and pragmatic yet inventive and innovative.</p>
+    <img src="">
+    <h3>ANDREW GIM – AIA, LEED GA </h3>
+    <p>Professional Affiliations
+American Institute of Architects (AIA) 
+National Council of Architectural Registration Boards (NCARB)
+Urban Land Institute (ULI)</p>
+<p>Registered
+Washington DC   
+Virginia   </p>
   </div>
+  <div>
+    <p>Project and Design Manager with experience in residential, commercial, and federal projects. Possess a strong background in architecture, engineering, and construction, and an active DC Architect License. Adept in managing all aspects of development, design, and construction, from marketing, real estate, and pro forma analysis to design documentation and construction execution. Capable of handling technical details while also understanding the big picture. Holds a TOP SECRET security clearance. </p>
+    <p>I believe that architecture starts with solving our client’s genuine needs, but also must strive to achieve inspirational results that transcend expectations. A fundamental question that guides my work is offering simple and artful solutions to complex problems that entail technical knowledge and attention to detail. My design approach is methodical and pragmatic yet inventive and innovative.</p></div>
+  
+</div>
+    
+    
+
 </main>
 
 
@@ -102,69 +115,7 @@
     </div>
   </footer>
 
-  <!-- JS -->
-   <script>
-document.addEventListener('DOMContentLoaded', () => {
-  // Swiper初期化
-  const swiper = new Swiper('.top-slider', {
-    loop: true,
-    speed: 1000,
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-  });
-
-  // ハンバーガーメニューとオーバーレイ
-  const overlay = document.getElementById('overlay');
-  const burger = document.querySelector('.hamburger');
-  const menu = document.getElementById('menu');
-  const titleArea = document.getElementById('title_area');
-
-  // ハンバーガークリックで開閉
-  burger.addEventListener('click', () => {
-    burger.classList.toggle('open');
-    menu.classList.toggle('open');
-    titleArea.classList.toggle('open');
-    overlay.classList.toggle('active');
-  });
-
-  // メニュー外クリックで閉じる
-  document.addEventListener('click', (e) => {
-    const isMenuOpen = menu.classList.contains('open');
-    const clickedInsideMenu = menu.contains(e.target);
-    const clickedBurger = burger.contains(e.target);
-
-    if (isMenuOpen && !clickedInsideMenu && !clickedBurger) {
-      burger.classList.remove('open');
-      menu.classList.remove('open');
-      titleArea.classList.remove('open');
-      overlay.classList.remove('active');
-    }
-  });
-
-  // オーバーレイクリックで閉じる
-  overlay.addEventListener('click', () => {
-    burger.classList.remove('open');
-    menu.classList.remove('open');
-    titleArea.classList.remove('open');
-    overlay.classList.remove('active');
-  });
-
-
-  // AOS初期化
-  AOS.init({
-    duration: 1000,
-    once: true
-  });
-});
-</script>
-
-
+<script type="text/javascript" src="js.js"></script>
 
 </body>
 </html>
