@@ -107,6 +107,25 @@
     main { padding: 0; }
   </style>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Swiper初期化
+  const swiper = new Swiper('.top-slider', {
+    loop: true,
+    speed: 1000,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  });
+
+  });
+</script>
+
   <!-- Swiper JS -->
    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
    <script src="js.js"></script>
