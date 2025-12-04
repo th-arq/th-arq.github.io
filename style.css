@@ -221,6 +221,13 @@ header {
 
 
 /* ========================= 
+   Main
+========================= */ 
+main {
+  padding: 0 5%;
+}
+
+/* ========================= 
    Footer 
 ========================= */ 
 footer { 
@@ -293,6 +300,13 @@ footer .footer_container {
     gap: 1.5em;
     padding-top: 5em;
   }
+
+  /* ========================= 
+   Main
+========================= */ 
+main {
+  padding: 0 10%;
+}
 
   #Mainview {
     height: calc(100vh - 80px - 90px);
