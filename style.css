@@ -311,7 +311,8 @@ footer .footer_container {
   }
   
   main {
-  padding: 0 5%;
+    display: block;
+    padding: 0 5%;
 }
 
   #Mainview {
