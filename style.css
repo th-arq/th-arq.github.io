@@ -224,10 +224,13 @@ header {
    Main
 ========================= */ 
 main {
+  display: flex;
   padding: 0 10%;
 }
 
-
+#contents_title {
+    width: 45%;
+}
 
 main .profile_pic {
     width: 150px;
