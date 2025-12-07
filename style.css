@@ -241,9 +241,11 @@ main .profile_pic {
 }
 
 .about_head {
-    display: flex;
-    gap: 2em;
-    margin: 0 0 1em 0;
+  display: flex;
+  gap: 2em;
+  margin: 0 0 1em 0;
+  padding: 1em 0;
+  border-bottom: 1px solid #000;
 }
 
 
