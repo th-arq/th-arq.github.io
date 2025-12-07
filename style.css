@@ -229,7 +229,11 @@ main {
 }
 
 #contents_title {
-    width: 45%;
+    width: 40%;
+}
+
+#contents_inner {
+    width: 60%;
 }
 
 main .profile_pic {
