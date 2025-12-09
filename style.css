@@ -259,10 +259,21 @@ main .profile_pic {
   border-bottom: 1px solid #000;
 }
 
-
 .about_head ul {
+  position: relative;
+  padding-left: 1em;
+}
+
+.about_head ul li {
   list-style: disc !important;
   list-style-position: inside;
+}
+
+.about_head ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0.1em;
 }
 
 
