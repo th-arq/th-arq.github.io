@@ -331,6 +331,9 @@ footer .footer_container {
     padding: 0 5%;
 }
 
+#contents_title, #contents_inner {
+  width: 100%;
+}
 .about_head {
   display: block;
 }
