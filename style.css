@@ -86,7 +86,7 @@ a:hover::after {
    Header / Title Area
 ========================= */
 header {
-  height: 80px;
+  height: 120px;
   padding: 0 10%;
   display: flex;
   flex-direction: column;
@@ -235,7 +235,7 @@ header {
    Swiper
 ========================= */ 
 #Mainview {
-  height: calc(100vh - 80px - 110px);
+  height: calc(100vh - 120px - 110px);
 }
 
 .top-slider {
