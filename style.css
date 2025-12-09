@@ -13,8 +13,8 @@ html, body {
 ul, ol, p { list-style: none; padding: 0; padding-inline-start: 0; margin: 0;}
 a { text-decoration: none; color: inherit; }
 img { max-width: 100%; height: auto; display: block; }
-h1 { font-weight: 400; margin: 0; }
-h2, h3,h4 { font-weight: 300; margin: 0; }
+h2 { font-weight: 400; margin: 0; }
+h1, h3,h4 { font-weight: 300; margin: 0; }
 p { line-height: 1.8em; }
 
 
