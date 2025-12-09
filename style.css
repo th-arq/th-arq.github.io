@@ -39,7 +39,7 @@ a:hover::after {
 :root {
   --black: #2D2D2D;
   --white: #FFFFFF;
-  --lightgray: #F0EEEB;
+  --lightgray: #cbcbcb;
   --background: #f8f7f5;
   --font-x-small: 10px;
   --font-small: 12px;
@@ -301,14 +301,14 @@ main .profile_pic {
 
 .about_head ul li::before {
   content: "";
-  width: 8px;
-  height: 8px;
-  background: var(--black);
+  width: 3px;
+  height: 3px;
+  background: var(--lightgray);
   border-radius: 50%;
   position: absolute;
   left: 0;
-  top: 50%;             /* ←縦の真ん中に置く */
-  transform: translateY(-50%);  /* ←中央にピタッと揃える */
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 
