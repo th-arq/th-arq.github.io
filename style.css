@@ -181,7 +181,7 @@ header {
 
 .fade-wrapper {
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transition: opacity 1s ease;
 }
 
 /* 読み込み完了で表示 */
