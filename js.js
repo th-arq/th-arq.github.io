@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const burger = document.querySelector('.hamburger');
   const menu = document.getElementById('menu');
   const titleArea = document.getElementById('title_area');
+  const wrapper = document.querySelector('.fade-wrapper');
+  const menuLinks = menu.querySelectorAll('a');
 
   // menu - open
   burger.addEventListener('click', () => {
@@ -36,15 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.classList.remove('active');
   });
 
-  // ▼ ここから追記：メニューリンク押したとき「閉じて遷移」
-  const menuLinks = menu.querySelectorAll('a');
-
+  // ▼ メニューリンク押したとき「閉じてフェードアウトして遷移」
   menuLinks.forEach(link => {
     link.addEventListener('click', (e) => {
-      const url = link.getAttribute('href');
-
-      // すぐ遷移しないよう止める
       e.preventDefault();
+      const url = link.getAttribute('href');
 
       // メニュー閉じる
       burger.classList.remove('open');
@@ -52,13 +50,22 @@ document.addEventListener('DOMContentLoaded', () => {
       titleArea.classList.remove('open');
       overlay.classList.remove('active');
 
-      // アニメーション終わるのに合わせて遅延
+      // 少し遅らせてフェードアウト開始
+      setTimeout(() => {
+        wrapper.classList.add('fade-out');
+      }, 100);
+
+      // さらに遅らせてページ遷移
       setTimeout(() => {
         window.location.href = url;
-      }, 300); // ← メニュー閉じるアニメの速さに合わせて調整してOK
+      }, 600);
     });
   });
-  // ▲ ここまで追記
+
+  // ▼ ページ読み込み時にフェードイン
+  requestAnimationFrame(() => {
+    wrapper.classList.add('loaded');
+  });
 
   // loading animation
   window.addEventListener('load', () => {
