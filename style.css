@@ -113,15 +113,15 @@ header {
    Hamburger
 ========================= */
 .hamburger {
-    width: 26px;
-    height: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-    z-index: 1200;
+  width: 26px;
+  height: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1200;
 }
 
 .hamburger span {
@@ -158,7 +158,6 @@ header {
   z-index: 900;
 }
 
-/* メニュー開いたときに表示 */
 #overlay.active {
   opacity: 1;
   visibility: visible;
@@ -229,15 +228,23 @@ main {
 }
 
 #contents_title {
-    width: 40%;
+  width: 40%;
 }
 
 #contents_inner {
-    width: 60%;
+  width: 60%;
 }
 
+section {
+  margin: 0 auto 1.5em;
+}
+
+
+/* ========================= 
+   About
+========================= */ 
 main .profile_pic {
-    width: 200px;
+  width: 200px;
 }
 
 .about_head {
@@ -297,8 +304,8 @@ footer .footer_container {
   }
 
   #title_area.open .logo_svg path {
-  fill: var(--black);
-}
+    fill: var(--black);
+  }
 
   .hamburger {
     gap: 6px;
@@ -326,17 +333,6 @@ footer .footer_container {
     padding-top: 5em;
   }
   
-  main {
-    display: block;
-    padding: 0 5%;
-}
-
-#contents_title, #contents_inner {
-  width: 100%;
-}
-.about_head {
-  display: block;
-}
   #Mainview {
     height: calc(100vh - 80px - 90px);
     margin: 0 0 0 5%;
@@ -353,12 +349,29 @@ footer .footer_container {
     text-align: center;
     height: 90px;
   }
+
   footer .footer_container {
     flex-direction: column;
   }
 
   .footer_container_company {
     margin: 2% 0 0 0;
-}
+  }
+
+
+  main {
+    display: block;
+    padding: 0 5%;
+  }
+
+  #contents_title, #contents_inner {
+    width: 100%;
+  }
+
+  .about_head {
+    display: block;
+  }
+
+
 }
 
