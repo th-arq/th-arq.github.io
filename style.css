@@ -12,7 +12,8 @@ html, body {
 
 ul, ol, p { list-style: none; padding: 0; padding-inline-start: 0; margin: 0;}
 img { max-width: 100%; height: auto; display: block; }
-h2, h3 { font-weight: 400; margin: 0; }
+h2 { font-weight: 400; margin: 0; }
+h3 { font-size: 1.5em; font-weight: 400; margin: 0; }
 h1, h4 { font-weight: 300; margin: 0; }
 p { line-height: 1.8em; }
 a { text-decoration: none; color: inherit; position: relative;}
@@ -290,8 +291,7 @@ main .profile_pic {
 }
 
 .about_head h3 {
-    font-size: 1.5em;
-    margin: 0 auto 1em auto;
+  margin: 0 auto 1em auto;
 }
 
 .about_head ul li {
