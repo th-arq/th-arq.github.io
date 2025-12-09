@@ -264,6 +264,11 @@ main .profile_pic {
   padding-left: 1.5em;
 }
 
+.about_head h3 {
+    font-size: 1.5em;
+    margin: 0 auto 1em auto;
+}
+
 .about_head ul li {
   list-style: disc !important;
 }
