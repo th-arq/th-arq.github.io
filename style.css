@@ -269,10 +269,6 @@ main .profile_pic {
     margin: 0 auto 1em auto;
 }
 
-.about_head ul li {
-  list-style: disc !important;
-}
-
 .about_head ul li::before {
   content: "•";
   position: absolute;
