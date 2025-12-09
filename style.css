@@ -310,6 +310,12 @@ main .profile_pic {
   transform: translateY(-50%);
 }
 
+/* ========================= 
+   Contact
+========================= */ 
+.mail_form input, .mail_form textarea {
+    border: none;
+}
 
 /* ========================= 
    Footer 
