@@ -13,7 +13,7 @@ html, body {
 ul, ol, p { list-style: none; padding: 0; padding-inline-start: 0; margin: 0;}
 a { text-decoration: none; color: inherit; }
 img { max-width: 100%; height: auto; display: block; }
-h1, h2, h3,h4 { font-weight: 400; margin: 0; }
+h1, h2, h3,h4 { font-weight: 300; margin: 0; }
 
 
 /* =========================
@@ -23,7 +23,7 @@ h1, h2, h3,h4 { font-weight: 400; margin: 0; }
   --black: #2D2D2D;
   --white: #FFFFFF;
   --lightgray: #F0EEEB;
-  --background: #F0EEEB;
+  --background: #f8f7f5;
   --font-x-small: 10px;
   --font-small: 12px;
   --font-medium: 20px;
