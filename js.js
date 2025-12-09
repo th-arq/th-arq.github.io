@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.classList.toggle('active');
   });
 
-  // menu- close
+  // menu- close (クリック外)
   document.addEventListener('click', (e) => {
     const isMenuOpen = menu.classList.contains('open');
     const clickedInsideMenu = menu.contains(e.target);
@@ -28,13 +28,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // overlay - open
+  // overlay - close
   overlay.addEventListener('click', () => {
     burger.classList.remove('open');
     menu.classList.remove('open');
     titleArea.classList.remove('open');
     overlay.classList.remove('active');
   });
+
+  // ▼ ここから追記：メニューリンク押したとき「閉じて遷移」
+  const menuLinks = menu.querySelectorAll('a');
+
+  menuLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const url = link.getAttribute('href');
+
+      // すぐ遷移しないよう止める
+      e.preventDefault();
+
+      // メニュー閉じる
+      burger.classList.remove('open');
+      menu.classList.remove('open');
+      titleArea.classList.remove('open');
+      overlay.classList.remove('active');
+
+      // アニメーション終わるのに合わせて遅延
+      setTimeout(() => {
+        window.location.href = url;
+      }, 300); // ← メニュー閉じるアニメの速さに合わせて調整してOK
+    });
+  });
+  // ▲ ここまで追記
 
   // loading animation
   window.addEventListener('load', () => {
@@ -47,9 +71,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }, minTime);
   });
 
-  // AOS
-  AOS.init({
-    duration: 1000,
-    once: true
-  });
 });
