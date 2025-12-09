@@ -260,7 +260,7 @@ main .profile_pic {
 }
 
 
-.about_head ul li {
+.about_head ul {
   list-style: disc !important;
   list-style-position: inside;
 }
