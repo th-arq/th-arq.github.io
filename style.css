@@ -256,6 +256,11 @@ main .profile_pic {
 }
 
 
+.about_head ul li {
+  list-style: disc !important;
+}
+
+
 /* ========================= 
    Footer 
 ========================= */ 
