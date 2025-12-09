@@ -295,6 +295,7 @@ main .profile_pic {
 .about_head ul li {
   position: relative;
   padding-left: 1em;
+  line-height: 1.8em;
 }
 
 .about_head ul li::before {
