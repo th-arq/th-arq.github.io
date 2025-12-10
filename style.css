@@ -114,14 +114,11 @@ header {
   height: 26px;
 }
 
-
-
 .TAG_logo {
   display: flex;
   align-items: center;
   padding: 0 0 0 1.5em;
 }
-
 
 #title_area.open .logo_svg path {
   fill: var(--white);
@@ -163,7 +160,6 @@ header {
   transform: translateY(-3px) rotate(-30deg);
   background: var(--white);
 }
-
 
 #overlay {
   position: fixed;
@@ -331,8 +327,6 @@ footer {
   background-color: var(--black); 
   color: var(--white); 
   font-size: var(--font-small); 
-  position: fixed;
-  bottom: 0;
   margin: 30px 0 0 0;
   height: 80px;
   width: 100%;
