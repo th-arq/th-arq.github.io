@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.classList.toggle('active');
   });
 
-  // menu - close (クリック外)
+  // menu - close
   document.addEventListener('click', (e) => {
     const isMenuOpen = menu.classList.contains('open');
     if (!isMenuOpen) return;
@@ -69,22 +69,17 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  /* -------------------------------------------------------------
-     ▼▼▼ ここからスムーススクロール（コンパクト・安全版） ▼▼▼
-     ------------------------------------------------------------- */
-
-  // body全体スムーススクロール（wrapperはJSが勝手に作る）
+  // Smooth Scroll
   const body = document.body;
   const content = document.createElement("div");
   content.id = "smooth-scroll";
 
-  // body直下を全部移動
   while (body.firstChild) content.appendChild(body.firstChild);
   body.appendChild(content);
 
   let current = 0;
   let target = 0;
-  const ease = 0.08; // 重さ調整：0.05〜0.15
+  const ease = 0.08; // Weight：0.05〜0.15
   let maxScroll = 0;
 
   function updateSize() {
