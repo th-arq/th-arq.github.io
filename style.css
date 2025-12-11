@@ -256,11 +256,11 @@ main {
 }
 
 #contents_title {
-  width: 40%;
+  width: 20vw;
 }
 
 #contents_inner {
-  width: 60%;
+  width: 100%;
 }
 
 section {
