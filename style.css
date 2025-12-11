@@ -322,9 +322,29 @@ main .profile_pic {
    Projects
 ========================= */ 
 ul.projects_menu {
-    display: flex;
+  display: flex;
 }
 
+
+.projects_contents ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  position: relative;
+}
+
+.projects_contents li{
+  width: 23vw;
+}
+
+.projects_contents li a {
+  display: block;
+  position: relative;
+}
+
+.projects_contents li a img {
+  width: 100%;
+}
 
 
 /* ========================= 
