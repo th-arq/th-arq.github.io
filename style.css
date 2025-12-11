@@ -350,10 +350,18 @@ ul.projects_menu {
 .projects_contents li a {
   display: block;
   position: relative;
+  overflow: hidden;
 }
 
 .projects_contents li a img {
   width: 100%;
+  transition: clip-path 0.4s ease, transform 0.4s ease;
+  clip-path: inset(0 0 0 0);
+}
+
+.projects_contents li a:hover img {
+  clip-path: inset(15% 0 15% 0);
+  transform: scale(1.05);
 }
 
 
