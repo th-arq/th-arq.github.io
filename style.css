@@ -323,6 +323,8 @@ main .profile_pic {
 ========================= */ 
 ul.projects_menu {
   display: flex;
+  gap: 2em;
+  margin: 0 0 1.5em 0;
 }
 
 
