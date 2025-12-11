@@ -358,12 +358,12 @@ ul.projects_menu a::after {
 
 .projects_contents li a img {
   width: 100%;
-  transition: clip-path 0.4s ease, transform 0.4s ease;
+  transition: clip-path 0.3s ease, transform 0.3s ease;
   clip-path: inset(0 0 0 0);
 }
 
 .projects_contents li a:hover img {
-  clip-path: inset(15% 0 15% 0);
+  clip-path: inset(30% 0 30% 0);
   transform: scale(1.05);
 }
 
