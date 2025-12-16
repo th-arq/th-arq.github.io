@@ -132,6 +132,14 @@ header {
   fill: var(--white);
 }
 
+
+a.button {
+  display: block;
+  border: 1px solid var(--black);
+  padding: 0.05em;
+}
+
+
 /* =========================
    Hamburger
 ========================= */
