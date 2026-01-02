@@ -152,9 +152,10 @@
 
 <script>
   const img = document.querySelector('.project_image');
+  const wrapper = document.querySelector('.fade-wrapper');
 
-  window.addEventListener('scroll', () => {
-    const scroll = window.scrollY;
+  wrapper.addEventListener('scroll', () => {
+    const scroll = wrapper.scrollTop;
     const scale = Math.max(0.6, 1 - scroll / 500);
 
     img.style.transform = `translate(-50%, -50%) scale(${scale})`;
