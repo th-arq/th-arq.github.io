@@ -360,6 +360,11 @@ input.form {
 /* ========================= 
    Projects
 ========================= */ 
+#contents_title {
+  margin: 0 0 1em 0;
+
+}
+
 ul.projects_menu {
   display: flex;
   gap: 2em;
@@ -378,7 +383,7 @@ ul.projects_menu a::after {
 }
 
 .projects_contents li{
-  width: 20vw;
+  width: 18vw;
   margin: 0 0 2em;
 }
 
