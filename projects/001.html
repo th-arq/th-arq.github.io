@@ -79,11 +79,26 @@
       </div>
     </section>
   </div>
+
   <div class="sub_view">
-    <div class="">
+    <div class="full wrapper">
+        <img class="project_image" src="../../img/img1.jpg">
+        <div class="spacer"></div>
+    </div>
+    <div class="half">
+        <img src="">
+    </div>
+    <div class="left">
+        <img src="">
+    </div>
+    <div class="right">
         <img src="">
     </div>
   </div>
+
+    <section class="page_lead">
+    <a href="">Back</a>
+  </section>
 </main>
 
   <!-- FOOTER -->
@@ -106,7 +121,41 @@
 
   <style css="stylesheet">
     main { display: block; }
+
+    .wrapper {
+  height: 100vh;
+  position: relative;
+}
+
+.project_image {
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%) scale(1);
+  width: 80%;
+  max-width: 800px;
+  display: block;
+  margin: auto;
+  transition: transform 0.2s ease-out;
+}
+
+.spacer {
+  height: 200vh;
+}
+
   </style>
+
+  <script>
+  const image = document.querySelector('.project_image');
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const maxScroll = 500; // ここで縮小スピード調整
+    const scale = Math.max(0.6, 1 - scrollY / maxScroll);
+
+    image.style.transform = `translateY(-50%) scale(${scale})`;
+  });
+</script>
+
 
 <script src="../js.js"></script>
 </body>
