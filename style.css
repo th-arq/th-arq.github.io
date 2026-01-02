@@ -137,6 +137,7 @@ a.button {
   display: block;
   border: 1px solid var(--black);
   padding: 0.05em;
+  text-align: center;
 }
 
 
@@ -272,7 +273,7 @@ main {
 }
 
 #contents_title {
-  width: 20vw;
+  width: 45vw;
 }
 
 #contents_inner {
