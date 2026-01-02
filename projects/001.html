@@ -131,17 +131,13 @@
 }
 
 .project_image {
-  position: fixed; /* ← stickyじゃなく fixedで確実に */
+  position: fixed;
   top: 50%;
   left: 50%;
   width: 80%;
   max-width: 900px;
   transform: translate(-50%, -50%) scale(1);
-  transition: transform 0.1s linear;
-}
-
-.spacer {
-  height: 200vh; /* ← これがないとスクロールできない */
+  will-change: transform;
 }
   </style>
 
@@ -151,15 +147,33 @@
 <script src="../js.js"></script>
 
 <script>
-  const img = document.querySelector('.project_image');
-  const wrapper = document.querySelector('.fade-wrapper');
+const img = document.querySelector('.project_image');
+const smooth = document.getElementById('smooth-scroll');
 
-  wrapper.addEventListener('scroll', () => {
-    const scroll = wrapper.scrollTop;
-    const scale = Math.max(0.6, 1 - scroll / 500);
+function getTranslateY(el) {
+  const style = getComputedStyle(el);
+  const matrix = new DOMMatrixReadOnly(style.transform);
+  return Math.abs(matrix.m42); // translateY
+}
 
-    img.style.transform = `translate(-50%, -50%) scale(${scale})`;
-  });
+function raf() {
+  if (img && smooth) {
+    const y = getTranslateY(smooth);
+
+    const start = 0;
+    const end = 600;
+    const progress = Math.min(Math.max((y - start) / (end - start), 0), 1);
+
+    const scale = 1 - progress * 0.4; // 1 → 0.6
+
+    img.style.transform =
+      `translate(-50%, -50%) scale(${scale})`;
+  }
+
+  requestAnimationFrame(raf);
+}
+
+raf();
 </script>
 
 </body>
