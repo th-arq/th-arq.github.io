@@ -413,7 +413,7 @@ ul.projects_menu a::after {
 
 .main_title {
   color: var(--lightgray);
-  font-size: 8.33333vw;
+  font-size: 7em;
   line-height: 1.2;
   mix-blend-mode: difference;
   position: relative;
