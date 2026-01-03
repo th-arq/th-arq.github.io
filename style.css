@@ -412,11 +412,11 @@ ul.projects_menu a::after {
 ========================= */ 
 
 .main_title {
-  position: fixed;          /* ← スクロールしても固定 */
-  top: 120px;               /* ← ページ上から●px */
+  position: fixed;
+  bottom: 120px;
   left: 0;
   width: 100%;
-  pointer-events: none;     /* 下の画像を触れるように */
+  pointer-events: none;
   z-index: 10;
 }
 
@@ -433,9 +433,8 @@ ul.projects_menu a::after {
 
 .track span {
   white-space: nowrap;
-  padding-right: 4rem;      /* 文字間隔 */
-  font-size: 48px;          /* 好きに */
-  font-weight: 600;
+  padding-right: 4rem; 
+  font-size: 8em;
 }
 
 @keyframes marquee {
