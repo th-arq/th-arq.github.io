@@ -413,7 +413,7 @@ ul.projects_menu a::after {
 
 .main_title {
   position: fixed;
-  bottom: 120px;
+  top: 8em;
   left: 0;
   width: 100%;
   pointer-events: none;
@@ -428,7 +428,7 @@ ul.projects_menu a::after {
 .track {
   display: flex;
   width: max-content;
-  animation: marquee 20s linear infinite;
+  animation: marquee 25s linear infinite;
 }
 
 .track span {
