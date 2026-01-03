@@ -436,6 +436,27 @@ linear infinite;
 linear infinite;
 }
 
+@keyframes loop {
+    0% {
+        transform: translateX(100%)
+    }
+
+    to {
+        transform: translateX(-100%)
+    }
+}
+
+@keyframes loop2 {
+    0% {
+        transform: translateX(0)
+    }
+
+    to {
+        transform: translateX(-200%)
+    }
+}
+
+
 section.page_lead {
   padding: var(--padding);
 }
