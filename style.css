@@ -272,6 +272,7 @@ a.button {
 main {
   display: flex;
   padding: var(--padding);
+  margin: 5vw 0 0 0;
 }
 
 #contents_title {
@@ -299,7 +300,7 @@ main .profile_pic {
   display: flex;
   gap: 2em;
   margin: 0 0 2em 0;
-  padding: 1em 0 2em 0;
+  padding: 0 0 2em 0;
   border-bottom: 1px solid var(--black);
 }
 
@@ -370,7 +371,7 @@ input.form {
 ul.projects_menu {
   display: flex;
   gap: 2em;
-  margin: 0 0 1.5em 0;
+  margin: 3em 0;
 }
 
 ul.projects_menu a::after {
