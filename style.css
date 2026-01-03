@@ -421,39 +421,29 @@ ul.projects_menu a::after {
 }
 
 .title_loop {
-  --loop-time: 120;
+  --loop-time: 20;
   display: flex;
   width: 100vw;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-.title_loop span >:nth-child(odd) {
-    animation: loop calc(var(--loop-time) * 1s) calc(var(--loop-time) * -.5s) 
-linear infinite;
+.title_loop span {
+  flex-shrink: 0;
+  padding-right: 2rem;
 }
 
-.title_loop span>:nth-child(2n) {
-    animation: loop2 calc(var(--loop-time) * 1s) 
-linear infinite;
+.title_loop span:nth-child(odd) {
+  animation: loop calc(var(--loop-time) * 1s) linear infinite;
 }
 
 @keyframes loop {
-    0% {
-        transform: translateX(100%)
-    }
-
-    to {
-        transform: translateX(-100%)
-    }
-}
-
-@keyframes loop2 {
-    0% {
-        transform: translateX(0)
-    }
-
-    to {
-        transform: translateX(-200%)
-    }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
 }
 
 
