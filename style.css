@@ -412,39 +412,41 @@ ul.projects_menu a::after {
 ========================= */ 
 
 .main_title {
-  color: var(--lightgray);
-  font-size: 7em;
-  line-height: 1.2;
-  mix-blend-mode: difference;
-  position: relative;
-  z-index: 2;
+  position: fixed;          /* ← スクロールしても固定 */
+  top: 120px;               /* ← ページ上から●px */
+  left: 0;
+  width: 100%;
+  pointer-events: none;     /* 下の画像を触れるように */
+  z-index: 10;
 }
 
 .title_loop {
-  --loop-time: 20;
-  display: flex;
-  width: 100vw;
   overflow: hidden;
+  width: 100vw;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: marquee 20s linear infinite;
+}
+
+.track span {
   white-space: nowrap;
+  padding-right: 4rem;      /* 文字間隔 */
+  font-size: 48px;          /* 好きに */
+  font-weight: 600;
 }
 
-.title_loop span {
-  flex-shrink: 0;
-  padding-right: 2rem;
-}
-
-.title_loop span:nth-child(odd) {
-  animation: loop calc(var(--loop-time) * 1s) linear infinite;
-}
-
-@keyframes loop {
+@keyframes marquee {
   from {
     transform: translateX(0);
   }
   to {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
+
 
 
 section.page_lead {
