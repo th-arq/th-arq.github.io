@@ -82,20 +82,20 @@
 
   <div class="sub_view">
 
-                <div class="spacer"></div>
+
     <div class="full wrapper">
         <img class="project_image" src="../../img/img1.jpg">
     </div>
-            <div class="spacer"></div>
 
     <div class="half">
-        <img src="">
+        <img class="project_image" src="../../img/img1.jpg">
+        <img class="project_image" src="../../img/img1.jpg">
     </div>
     <div class="left">
-        <img src="">
+        <img class="project_image" src="../../img/img1.jpg">
     </div>
     <div class="right">
-        <img src="">
+        <img class="project_image" src="../../img/img1.jpg">
     </div>
   </div>
 
@@ -122,59 +122,12 @@
 
 </div>
 
-  <style css="stylesheet">
-    main { display: block; }
-
-.full.wrapper {
-  height: 100vh;
-  position: relative;
-}
-
-.project_image {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 80%;
-  max-width: 900px;
-  transform: translate(-50%, -50%) scale(1);
-  will-change: transform;
-}
-  </style>
 
 
 
 
 <script src="../js.js"></script>
 
-<script>
-const img = document.querySelector('.project_image');
-const smooth = document.getElementById('smooth-scroll');
-
-function getTranslateY(el) {
-  const style = getComputedStyle(el);
-  const matrix = new DOMMatrixReadOnly(style.transform);
-  return Math.abs(matrix.m42); // translateY
-}
-
-function raf() {
-  if (img && smooth) {
-    const y = getTranslateY(smooth);
-
-    const start = 0;
-    const end = 600;
-    const progress = Math.min(Math.max((y - start) / (end - start), 0), 1);
-
-    const scale = 1 - progress * 0.4; // 1 → 0.6
-
-    img.style.transform =
-      `translate(-50%, -50%) scale(${scale})`;
-  }
-
-  requestAnimationFrame(raf);
-}
-
-raf();
-</script>
 
 </body>
 
