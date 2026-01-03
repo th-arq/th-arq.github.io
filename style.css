@@ -21,7 +21,7 @@ html, body {
 
 ul, ol, p { list-style: none; padding: 0; padding-inline-start: 0; margin: 0;}
 img { max-width: 100%; height: auto; display: block; }
-h1 { font-weight: 100; margin: 0; }
+h1 { font-size: 3em; font-weight: 180; margin: 0; }
 h2 { font-weight: 400; margin: 0; }
 h3 { font-size: 1.5em; font-weight: 400; margin: 0; }
 h4 { font-weight: 300; margin: 0; }
@@ -229,7 +229,7 @@ a.button {
 }
 
 #menu.open {
-  height: 200px;
+  height: 12vw;
 }
 
 #menu nav {
