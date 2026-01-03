@@ -59,6 +59,7 @@ a:hover::after {
   --section-width: 1280;
   --section-width-narrow: 1040;
   --transition: 0.3s ease;
+  --padding: 0 5%;
 }
 
 
@@ -270,7 +271,7 @@ a.button {
 ========================= */ 
 main {
   display: flex;
-  padding: 0 10%;
+  padding: var(--padding);
 }
 
 #contents_title {
@@ -408,6 +409,26 @@ ul.projects_menu a::after {
 /* ========================= 
     Projects - Content
 ========================= */ 
+section.page_lead {
+  padding: var(--padding);
+}
+
+.main_view, .main_view img {
+  width: 100%;
+}
+
+.project_text_container {
+  padding: 5%;
+  display: flex;
+}
+
+.sub_view {
+  margin: auto;
+}
+
+.half {
+  display: flex;
+}
 
 
 /* ========================= 
@@ -429,7 +450,7 @@ footer .footer_container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10%;
+  padding: var(--padding);
 }
 
 
