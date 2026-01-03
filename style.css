@@ -420,6 +420,22 @@ ul.projects_menu a::after {
   z-index: 2;
 }
 
+.title_loop {
+  --loop-time: 120;
+  display: flex;
+  width: 100vw;
+}
+
+.title_loop span >:nth-child(odd) {
+    animation: loop calc(var(--loop-time) * 1s) calc(var(--loop-time) * -.5s) 
+linear infinite;
+}
+
+.title_loop span>:nth-child(2n) {
+    animation: loop2 calc(var(--loop-time) * 1s) 
+linear infinite;
+}
+
 section.page_lead {
   padding: var(--padding);
 }
