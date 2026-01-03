@@ -441,13 +441,15 @@ section.page_lead {
   display: flex;
   padding: var(--padding);
   gap: var(--gap, 24px);
+  overflow: hidden; /* ← これ超重要 */
 }
 
 .half .project_image {
   flex: 1 1 0;
   width: 100%;
-  height: auto;
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain; /* はみ出さない */
+  display: block;
 }
 
 
