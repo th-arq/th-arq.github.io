@@ -161,7 +161,7 @@ a.button {
 .hamburger span {
   display: block;
   width: 26px;
-  height: 2px;
+  height: 1px;
   background: var(--black);
   border-radius: 2px;
   transition: all 0.3s ease;
@@ -229,7 +229,7 @@ a.button {
 }
 
 #menu.open {
-  height: 12vw;
+  height: 15vw;
 }
 
 #menu nav {
@@ -333,7 +333,7 @@ main .profile_pic {
 .service section {
   line-height: 3em;
   letter-spacing: .01em;
-  margin: 0 auto 2em auto;
+  margin: 0 auto 3em auto;
 }
 
 
@@ -503,7 +503,7 @@ footer .footer_container {
   #menu nav ul {
     flex-direction: column;
     gap: 1.5em;
-    padding-top: 5em;
+    padding-top: 8vw;
   }
   
   #Mainview {
