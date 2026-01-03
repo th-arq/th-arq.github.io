@@ -276,7 +276,7 @@ main {
 }
 
 #contents_title {
-  width: 45vw;
+  width: 55vw;
 }
 
 #contents_inner {
@@ -423,12 +423,13 @@ section.page_lead {
   display: flex;
 }
 
-.sub_view {
+.sub_view, .sub_view img {
   margin: auto;
 }
 
 .half {
   display: flex;
+  padding: var(--padding);
 }
 
 
