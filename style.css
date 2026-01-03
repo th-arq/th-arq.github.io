@@ -456,16 +456,13 @@ section.page_lead {
 .half {
   display: flex;
   padding: var(--padding);
-  gap: var(--gap, 24px);
-  overflow: hidden; /* ← これ超重要 */
+  gap: 16px;        /* ← 余白は gap で管理するのがベスト */
 }
 
 .half .project_image {
-  flex: 1 1 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* はみ出さない */
-  display: block;
+  flex: 1;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
 }
 
 
