@@ -477,12 +477,13 @@ section.page_lead {
 .half {
   display: flex;
   padding: var(--padding);
-  gap: 16px;        /* ← 余白は gap で管理するのがベスト */
+  gap: 16px;
 }
 
 .half .project_image {
   flex: 1;
   aspect-ratio: 4 / 3;
+  min-width: 0;
   object-fit: cover;
 }
 
