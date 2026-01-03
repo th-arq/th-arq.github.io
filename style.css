@@ -250,11 +250,11 @@ a.button {
    Swiper
 ========================= */ 
 #Mainview {
-  height: calc(100vh - 120px - 110px);
+  height: calc(100vh - 150px - 110px);
 }
 
 .top-slider {
-  width: 80%;
+  width: 90%;
   height: 100%;
   margin: auto;
 }
