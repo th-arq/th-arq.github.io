@@ -433,6 +433,9 @@ ul.projects_menu a::after {
 
 .track span {
   white-space: nowrap;
+  color: white;
+  mix-blend-mode: difference;
+  background: transparent;
   padding-right: 4rem; 
   font-size: 8em;
 }
