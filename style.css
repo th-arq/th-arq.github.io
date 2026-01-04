@@ -406,8 +406,10 @@ ul.projects_menu a::after {
     Projects - Content
 ========================= */ 
 
+
 .main_view {
   position: relative;
+  isolation: isolate;
 }
 
 .main_title {
@@ -416,28 +418,29 @@ ul.projects_menu a::after {
   left: 0;
   width: 100%;
   transform: translateY(-50%);
-  overflow: hidden;
   z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
 }
 
-.title_loop {
-  overflow: hidden;
-  width: 100vw;
+.project_image_main {
+  position: relative;
+  z-index: 1;
 }
+
+.track span {
+  color: white;
+  mix-blend-mode: difference;
+    font-size: 8em;
+    white-space: nowrap;
+    padding-right: 4rem; 
+}
+
 
 .track {
   display: flex;
   width: max-content;
   animation: marquee 50s linear infinite;
-}
-
-.track span {
-  white-space: nowrap;
-  color: white;
-  mix-blend-mode: difference;
-  background: transparent;
-  padding-right: 4rem; 
-  font-size: 8em;
 }
 
 
