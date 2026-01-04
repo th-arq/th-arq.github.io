@@ -426,7 +426,6 @@ ul.projects_menu a::after {
 
 .project_image_main {
   position: relative;
-  background: var(--background);
   z-index: 0;
 }
 
