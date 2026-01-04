@@ -409,7 +409,6 @@ ul.projects_menu a::after {
 
 .main_view {
   position: relative;
-  isolation: isolate;
 }
 
 .main_title {
