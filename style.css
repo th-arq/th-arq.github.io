@@ -459,9 +459,10 @@ section.page_lead {
 }
 
 
-section.project_information {
-    display: flex;
-    flex-direction: row;
+.project_text_container {
+  padding: 5%;
+  display: flex;
+      flex-direction: row;
 }
 
 .project_location, .project_size {
@@ -476,10 +477,12 @@ section.project_information {
   width: 100%;
 }
 
-.project_text_container {
-  padding: 5%;
-  display: flex;
+
+
+section.project_title {
+    width: 50%;
 }
+
 
 .sub_view, .sub_view img {
   margin: auto;
