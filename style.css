@@ -412,6 +412,7 @@ ul.projects_menu a::after {
   left: 0;
   width: 100%;
   pointer-events: none;
+  overflow: hidden;
   z-index: 50;
 }
 
