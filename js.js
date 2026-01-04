@@ -73,49 +73,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-  updateSize();
-  window.addEventListener('resize', updateSize);
-
-  // wheel
-  window.addEventListener('wheel', (e) => {
-    target += e.deltaY;
-    target = Math.max(0, Math.min(target, maxScroll));
-    e.preventDefault();
-  }, { passive: false });
-
-  // touch
-  let startY = null;
-
-  window.addEventListener('touchstart', e => {
-    startY = e.touches[0].clientY;
-  }, { passive: true });
-
-  window.addEventListener('touchmove', (e) => {
-    if (startY === null) return;
-
-    const y = e.touches[0].clientY;
-    const dy = startY - y;
-    startY = y;
-
-    target += dy;
-    target = Math.max(0, Math.min(target, maxScroll));
-
-    e.preventDefault();
-  }, { passive: false });
-
-  window.addEventListener('touchend', () => {
-    startY = null;
-  });
-
-  // animate
-  function raf() {
-    current += (target - current) * ease;
-    if (Math.abs(target - current) < 0.1) current = target;
-
-    content.style.transform = `translateY(${-current}px)`;
-    requestAnimationFrame(raf);
-  }
-
-  raf();
-
 });
