@@ -71,26 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* =========================
-     Smooth Scroll
-  ========================= */
-  const body = document.body;
-  const content = document.createElement('div');
-  content.id = 'smooth-scroll';
 
-  while (body.firstChild) {
-    content.appendChild(body.firstChild);
-  }
-  body.appendChild(content);
-
-  let current = 0;
-  let target = 0;
-  const ease = 0.08;
-  let maxScroll = 0;
-
-  function updateSize() {
-    maxScroll = Math.max(0, content.clientHeight - window.innerHeight);
-  }
 
   updateSize();
   window.addEventListener('resize', updateSize);
