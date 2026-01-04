@@ -70,7 +70,7 @@
 
   <div class="project_text_container">
     <section class="project_title">
-      <p>CAROLLSBURG CONDOMINIUM</p>
+      <h3>CAROLLSBURG CONDOMINIUM</h3>
     </section>
     <section class="project_information">
       <div class="project_location">
@@ -137,6 +137,15 @@
 
 
 <script src="../js.js"></script>
+<script>
+window.addEventListener('load', () => {
+  const title = document.querySelector('.main_title');
+  if (!title) return;
+
+  // smooth-scroll の外に出す
+  document.body.appendChild(title);
+});
+</script>
 
 
 </body>
