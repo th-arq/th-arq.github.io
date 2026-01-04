@@ -412,13 +412,15 @@ ul.projects_menu a::after {
 ========================= */ 
 
 .main_title {
-  position: fixed;
-  top: 8em;
+  position: absolute;
+  top: 11em;
   left: 0;
   width: 100%;
   pointer-events: none;
-  z-index: 10;
+  z-index: 50;
 }
+
+
 
 .title_loop {
   overflow: hidden;
@@ -428,7 +430,7 @@ ul.projects_menu a::after {
 .track {
   display: flex;
   width: max-content;
-  animation: marquee 25s linear infinite;
+  animation: marquee 50s linear infinite;
 }
 
 .track span {
@@ -440,6 +442,7 @@ ul.projects_menu a::after {
   font-size: 8em;
 }
 
+
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -450,9 +453,22 @@ ul.projects_menu a::after {
 }
 
 
-
 section.page_lead {
   padding: var(--padding);
+}
+
+
+section.project_information {
+    display: flex;
+    flex-direction: row;
+}
+
+.project_location, .project_size {
+    width: 50%;
+}
+
+.project_comment {
+    width: 100%;
 }
 
 .main_view, .main_view img {
