@@ -191,6 +191,8 @@ a.button {
   visibility: visible;
 }
 
+
+
 .fade-wrapper {
   opacity: 0;
   transition: opacity 1s ease;
@@ -437,6 +439,12 @@ ul.projects_menu a::after {
   position: relative;
   z-index: 0;
 }
+
+.project_image_main img {
+  position: relative;
+  z-index: 0;
+}
+
 
 .track span {
   color: white;
