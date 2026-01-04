@@ -458,7 +458,7 @@ ul.projects_menu a::after {
 .track {
   display: flex;
   width: max-content;
-  animation: marquee 50s linear infinite;
+  animation: marquee 120s linear infinite;
 }
 
 
