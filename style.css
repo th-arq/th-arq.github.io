@@ -406,17 +406,18 @@ ul.projects_menu a::after {
     Projects - Content
 ========================= */ 
 
-.main_title {
-  position: absolute;
-  top: 11em;
-  left: 0;
-  width: 100%;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 50;
+.main_view {
+  position: relative;
 }
 
-
+.main_title {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
 
 .title_loop {
   overflow: hidden;
