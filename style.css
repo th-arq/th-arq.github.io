@@ -411,6 +411,15 @@ ul.projects_menu a::after {
 .main_view {
   position: relative;
   background: transparent;
+  isolation: isolate;
+}
+
+.main_view::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #000;
+  z-index: -1;
 }
 
 .main_title {
