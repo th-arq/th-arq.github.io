@@ -155,16 +155,15 @@
   <style css="stylesheet">
     main { display: block; padding: 0; }
     footer { bottom: 0;}
+
+
     .top {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 100%;
-}
+    position: relative;}
 
 .top span {
-    grid-column: 2;
-    grid-row: 1;
-    font-size: 150px;
+    position: absolute;
+    top:40%;
+    left:-10%;
     color: #fff;
     mix-blend-mode: difference;
     align-self: center;
