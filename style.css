@@ -434,15 +434,9 @@ ul.projects_menu a::after {
 figure {
   grid-column: 2;
   grid-row: 1;
+  margin: 0;
   height: 100vh;
 }
-
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 
 
 @keyframes marquee {
@@ -470,8 +464,13 @@ section.page_lead {
     width: 50%;
 }
 
+.project_location h4, .project_size h4 {
+  font-weight: 400;
+}
+
 .project_comment {
-    width: 100%;
+  margin: 1em 0 0 0;
+  width: 100%;
 }
 
 .main_view, .main_view img {
@@ -481,7 +480,7 @@ section.page_lead {
 
 
 section.project_title {
-    width: 50%;
+  width: 50%;
 }
 
 
