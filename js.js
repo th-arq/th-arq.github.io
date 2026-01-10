@@ -3,23 +3,22 @@
 ========================= */
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* =========================
-     Hamburger Menu
-  ========================= */
   const overlay = document.getElementById('overlay');
   const burger = document.querySelector('.hamburger');
   const menu = document.getElementById('menu');
   const titleArea = document.getElementById('title_area');
-  const menuLinks = menu ? menu.querySelectorAll('a') : [];
   const pageFades = document.querySelectorAll('.page-fade');
 
   function closeMenu() {
-    burger.classList.remove('open');
-    menu.classList.remove('open');
-    titleArea.classList.remove('open');
-    overlay.classList.remove('active');
+    burger?.classList.remove('open');
+    menu?.classList.remove('open');
+    titleArea?.classList.remove('open');
+    overlay?.classList.remove('active');
   }
 
+  /* =========================
+     Hamburger Menu
+  ========================= */
   if (burger && menu && overlay && titleArea) {
     burger.addEventListener('click', () => {
       burger.classList.toggle('open');
@@ -35,21 +34,34 @@ document.addEventListener('DOMContentLoaded', () => {
       if (menu.contains(e.target) || burger.contains(e.target)) return;
       closeMenu();
     });
-
-    menuLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const url = link.getAttribute('href');
-
-        closeMenu();
-        pageFades.forEach(el => el.classList.add('fade-out'));
-
-        setTimeout(() => {
-          window.location.href = url;
-        }, 800);
-      });
-    });
   }
+
+  /* =========================
+     Page Transition (ALL LINKS)
+  ========================= */
+  document.querySelectorAll('a[href]').forEach(link => {
+    const url = link.getAttribute('href');
+
+    // 除外条件
+    if (
+      !url ||
+      url.startsWith('#') ||
+      url.startsWith('http') ||
+      link.target === '_blank'
+    ) return;
+
+    link.addEventListener('click', e => {
+      e.preventDefault();
+
+      closeMenu();
+
+      pageFades.forEach(el => el.classList.add('fade-out'));
+
+      setTimeout(() => {
+        window.location.href = url;
+      }, 800);
+    });
+  });
 
   /* =========================
      Normal Page Fade In
@@ -63,14 +75,12 @@ document.addEventListener('DOMContentLoaded', () => {
 ========================= */
 window.addEventListener('load', () => {
   const loading = document.getElementById('loading');
-  if (!loading) return; // ← 他ページはここで終了
+  if (!loading) return;
 
   const pageFades = document.querySelectorAll('.page-fade');
 
-  // 最低表示時間（ms）
   const MIN_LOADING_TIME = 2500;
   const startTime = performance.now();
-
   const elapsed = performance.now() - startTime;
   const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
 
