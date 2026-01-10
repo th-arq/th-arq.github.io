@@ -512,15 +512,14 @@ footer {
   color: var(--white); 
   font-size: var(--font-small); 
   margin: 30px 0 0 0;
-  height: 80px;
+  padding: var(--padding);
+  min-height: 80px;
+  height: auto;
   width: 100%;
 }
 
 footer .footer_container { 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--padding);
+  
 }
 
 
