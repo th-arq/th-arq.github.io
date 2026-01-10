@@ -80,5 +80,5 @@ window.addEventListener('load', () => {
 
   setTimeout(() => {
     loading.style.display = 'none';
-  }, 1500); // CSSのtransition時間と合わせる
+  }, 2500); // CSSのtransition時間と合わせる
 });
