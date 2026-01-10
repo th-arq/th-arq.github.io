@@ -207,22 +207,6 @@ a.button {
 }
 
 
-
-.fade-wrapper {
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-
-.fade-wrapper.loaded {
-  opacity: 1;
-}
-
-.fade-wrapper.fade-out {
-  opacity: 0;
-}
-
-
-
 /* =========================
    Menu
 ========================= */
