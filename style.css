@@ -412,54 +412,37 @@ ul.projects_menu a::after {
 
 .main_view {
   position: relative;
-  background: transparent;
-  isolation: isolate;
-}
-
-.main_view::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: #000;
-  z-index: -1;
-}
-
-.main_title {
-  position: absolute;
-  top: 50%;
-  left: 0;
   width: 100%;
-  transform: translateY(-50%);
-  z-index: 2;
-  overflow: hidden;
-  pointer-events: none;
 }
 
-.project_image_main {
-  position: relative;
-  z-index: 0;
+.main_view span {
+  font-size: 8vw;
+   width: max-content;
 }
 
-.project_image_main img {
-  position: relative;
-  z-index: 0;
-}
-
-
-.track span {
-  color: #000;
+.title_loop {
+  position: absolute;
+  top: 110%;
+  left:30%;
+  color: var(--background);
   mix-blend-mode: difference;
-    font-size: 8em;
-    white-space: nowrap;
-    padding-right: 4rem; 
-}
-
-
-.track {
   display: flex;
   width: max-content;
   animation: marquee 120s linear infinite;
 }
+
+figure {
+  grid-column: 2;
+  grid-row: 1;
+  height: 100vh;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 
 
 @keyframes marquee {
