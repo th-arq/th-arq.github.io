@@ -3,14 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
   
   /* =========================
      Body Fade In（div不要）
-  ========================= 
+  ========================= */
   document.body.style.opacity = '0';
   document.body.style.transition = 'opacity 0.8s ease';
 
   requestAnimationFrame(() => {
     document.body.style.opacity = '1';
   });
-*/
+
 
   /* =========================
      Hamburger Menu
