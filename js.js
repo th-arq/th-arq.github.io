@@ -69,5 +69,5 @@ window.addEventListener('load', () => {
       document.body.style.opacity = '1';
     });
 
-  }, 1500); // loadingのfade時間と合わせる
+  }, 2500); // loadingのfade時間と合わせる
 });
