@@ -80,7 +80,7 @@ window.addEventListener('load', () => {
     setTimeout(() => {
       loading.style.display = 'none';
       pageFades.forEach(el => el.classList.add('loaded'));
-    }, 2500);
+    }, 1500);
 
   }, remaining);
 });
