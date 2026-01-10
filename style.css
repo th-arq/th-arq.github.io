@@ -422,9 +422,9 @@ ul.projects_menu a::after {
 
 .title_loop {
   position: absolute;
-  top: -10%;
-  left:30%;
-  color: var(--background);
+  top: -15%;
+  left: -50%;
+  color: #fff;
   mix-blend-mode: difference;
   display: flex;
   width: max-content;
