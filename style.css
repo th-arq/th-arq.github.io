@@ -428,6 +428,7 @@ ul.projects_menu a::after {
   mix-blend-mode: difference;
   display: flex;
   width: max-content;
+  overflow: hidden;
   animation: marquee 120s linear infinite;
 }
 
