@@ -55,17 +55,13 @@
 <main class="projects_page">
 
   <div class="main_view">
-        <div class="main_title">
-        <div class="title_loop">
-            <div class="track">
-                <span>CAROLLSBURG CONDOMINIUM</span>
-                <span>CAROLLSBURG CONDOMINIUM</span>
-                <span>CAROLLSBURG CONDOMINIUM</span>
-                <span>CAROLLSBURG CONDOMINIUM</span>
-            </div>
-        </div>
+    <div class="title_loop">
+        <span>CAROLLSBURG CONDOMINIUM</span>
+        <span>CAROLLSBURG CONDOMINIUM</span>
+        <span>CAROLLSBURG CONDOMINIUM</span>
+        <span>CAROLLSBURG CONDOMINIUM</span>
     </div>
-    <img class="project_image_main" src="../../img/img1.jpg">
+    <figure><img src="../../img/img1.jpg" alt=""></figure>
   </div>
 
   <div class="project_text_container">
@@ -146,52 +142,6 @@
   <style css="stylesheet">
     main { display: block; padding: 0; }
     footer { bottom: 0;}
-
-
-    .top {
-    position: relative;
-width: 100%;}
-
-.top span {
-    font-size: 8vw;
-    width: max-content;
-}
-
-.title_loop {
-        position: absolute;
-    top:40%;
-    left:25%;
-    color: #fff;
-    mix-blend-mode: difference;
-      display: flex;
-  width: 100%;
-  animation: marquee 120s linear infinite;
-}
-
-figure {
-    grid-column: 2;
-    grid-row: 1;
-    justify-self: end;
-    height: 100vh;
-}
-
-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 
   </style>
 
