@@ -3,20 +3,7 @@
 ========================= */
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* =========================
-     Body Fade In
-  ========================= */
-  document.body.style.opacity = '0';
-  document.body.style.transition = 'opacity 0.8s ease';
-
-  requestAnimationFrame(() => {
-    document.body.style.opacity = '1';
-  });
-
-
-  /* =========================
-     Hamburger Menu
-  ========================= */
+  /* Hamburger Menu（そのまま） */
   const overlay = document.getElementById('overlay');
   const burger = document.querySelector('.hamburger');
   const menu = document.getElementById('menu');
@@ -26,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!burger || !menu || !overlay || !titleArea) return;
 
-  // menu open
   burger.addEventListener('click', () => {
     burger.classList.toggle('open');
     menu.classList.toggle('open');
@@ -34,29 +20,21 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.classList.toggle('active');
   });
 
-  // menu close (outside click)
+  overlay.addEventListener('click', closeMenu);
+
   document.addEventListener('click', (e) => {
     if (!menu.classList.contains('open')) return;
     if (menu.contains(e.target) || burger.contains(e.target)) return;
-
     closeMenu();
   });
 
-  // overlay close
-  overlay.addEventListener('click', closeMenu);
-
-  // menu link click → fade out → jump
   menuLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const url = link.getAttribute('href');
-
       closeMenu();
       if (wrapper) wrapper.classList.add('fade-out');
-
-      setTimeout(() => {
-        window.location.href = url;
-      }, 600);
+      setTimeout(() => window.location.href = url, 600);
     });
   });
 
@@ -70,15 +48,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /* =========================
-   Loading Fade Out
+   Loading → Body Fade In
 ========================= */
 window.addEventListener('load', () => {
   const loading = document.getElementById('loading');
   if (!loading) return;
 
+  // bodyは最初透明
+  document.body.style.opacity = '0';
+  document.body.style.transition = 'opacity 1s ease';
+
+  // loadingを消す
   loading.style.opacity = '0';
 
   setTimeout(() => {
     loading.style.display = 'none';
-  }, 2500); // CSSのtransition時間と合わせる
+
+    // bodyをふわっと表示
+    requestAnimationFrame(() => {
+      document.body.style.opacity = '1';
+    });
+
+  }, 1500); // loadingのfade時間と合わせる
 });
