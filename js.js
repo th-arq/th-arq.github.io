@@ -6,15 +6,21 @@ document.addEventListener('DOMContentLoaded', () => {
   /* =========================
      Hamburger Menu
   ========================= */
-  const overlay   = document.getElementById('overlay');
-  const burger    = document.querySelector('.hamburger');
-  const menu      = document.getElementById('menu');
+  const overlay = document.getElementById('overlay');
+  const burger = document.querySelector('.hamburger');
+  const menu = document.getElementById('menu');
   const titleArea = document.getElementById('title_area');
-  const wrapper   = document.querySelector('.fade-wrapper') || document.body;
   const menuLinks = menu ? menu.querySelectorAll('a') : [];
+  const pageFades = document.querySelectorAll('.page-fade');
+
+  function closeMenu() {
+    burger.classList.remove('open');
+    menu.classList.remove('open');
+    titleArea.classList.remove('open');
+    overlay.classList.remove('active');
+  }
 
   if (burger && menu && overlay && titleArea) {
-
     burger.addEventListener('click', () => {
       burger.classList.toggle('open');
       menu.classList.toggle('open');
@@ -33,54 +39,48 @@ document.addEventListener('DOMContentLoaded', () => {
     menuLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        transitionTo(link.getAttribute('href'));
+        const url = link.getAttribute('href');
+
+        closeMenu();
+        pageFades.forEach(el => el.classList.add('fade-out'));
+
+        setTimeout(() => {
+          window.location.href = url;
+        }, 800);
       });
     });
   }
 
-  function closeMenu() {
-    burger?.classList.remove('open');
-    menu?.classList.remove('open');
-    titleArea?.classList.remove('open');
-    overlay?.classList.remove('active');
-  }
-
   /* =========================
-     Page Transition (common)
+     Normal Page Fade In
   ========================= */
-  function transitionTo(url) {
-    wrapper.classList.add('fade-out');
-    setTimeout(() => {
-      window.location.href = url;
-    }, 600);
-  }
-
-  // 通常リンクも拾う（同一ページ / 外部リンク除外）
-  document.querySelectorAll('a[href]').forEach(link => {
-    if (link.target === '_blank') return;
-    if (link.href === location.href) return;
-
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      transitionTo(link.href);
-    });
-  });
-
+  pageFades.forEach(el => el.classList.add('loaded'));
 });
 
 
 /* =========================
-   Top Page Loading (only)
+   Loading (Top Page Only)
 ========================= */
 window.addEventListener('load', () => {
-
   const loading = document.getElementById('loading');
-  if (!loading) return; // ← トップ以外では何もしない
+  if (!loading) return; // ← 他ページはここで終了
 
-  const MIN_DISPLAY_TIME = 2000; // 最低表示秒数（ms）
+  const pageFades = document.querySelectorAll('.page-fade');
+
+  // 最低表示時間（ms）
+  const MIN_LOADING_TIME = 2500;
   const startTime = performance.now();
 
-  document.body.style.opacity = '0';
-  document.body.style.transition = 'opacity 1s ease';
+  const elapsed = performance.now() - startTime;
+  const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
 
-  const elapsed = perf
+  setTimeout(() => {
+    loading.style.opacity = '0';
+
+    setTimeout(() => {
+      loading.style.display = 'none';
+      pageFades.forEach(el => el.classList.add('loaded'));
+    }, 2500);
+
+  }, remaining);
+});
