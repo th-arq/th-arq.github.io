@@ -415,7 +415,7 @@ ul.projects_menu a::after {
 
 .title_loop {
   position: absolute;
-  top: 0;
+  top: -6%;
   left: 0;
   width: 100vw; 
   overflow-x: hidden; 
@@ -426,12 +426,12 @@ ul.projects_menu a::after {
 
 .title_loop_inner {
   display: flex;
-  gap: 1em;
+  gap: 0.5em;
   white-space: nowrap;
   font-size: 8vw;
   color: #fff;
   mix-blend-mode: difference;
-  animation: marquee 120s linear infinite;
+  animation: marquee 60s linear infinite;
 }
 
 @keyframes marquee {
