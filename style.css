@@ -425,7 +425,7 @@ ul.projects_menu a::after {
 
 .title_loop {
   position: absolute;
-  top: -15%;
+  top: -5%;
   left: -50%;
   color: #fff;
   mix-blend-mode: difference;
