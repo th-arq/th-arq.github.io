@@ -85,22 +85,30 @@ window.addEventListener('load', () => {
   }, remaining);
 });
 
-// 軽量スムーススクロール（ライブラリなし）
-(() => {
-  const ease = 0.03;  // 滑らかさ（0.05〜0.1くらいが自然）
-  let current = window.scrollY;
-  let target = current;
+let current = window.scrollY;
+let target = window.scrollY;
+let velocity = 0; // 速度
 
-  // スクロールイベントでターゲット更新
-  window.addEventListener("scroll", () => {
-    target = window.scrollY;
-  });
+function smoothScroll() {
+  target = window.scrollY;
 
-  const smoothScroll = () => {
-    current += (target - current) * ease;
-    window.scrollTo(0, current);
-    requestAnimationFrame(smoothScroll);
-  };
+  // 差分
+  let diff = target - current;
 
+  // 単純イージング＋加速度っぽく
+  velocity += diff * 0.1;   // 加速
+  velocity *= 0.8;           // 減速で自然に止まる
+
+  current += velocity;
+
+  // 目標に近づいたら直接合わせる
+  if (Math.abs(diff) < 0.5 && Math.abs(velocity) < 0.1) {
+    current = target;
+    velocity = 0;
+  }
+
+  window.scrollTo(0, current);
   requestAnimationFrame(smoothScroll);
-})();
+}
+
+requestAnimationFrame(smoothScroll);
