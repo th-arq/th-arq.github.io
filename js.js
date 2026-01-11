@@ -86,13 +86,4 @@ window.addEventListener('load', () => {
 });
 
 
-/* =========================
-   Smooth scroll
-========================= */
-document.addEventListener("DOMContentLoaded", function() {
-  Scrollbar.init(document.body, {
-    damping: 0.08,  // 滑らかさ（0.1より小さいともっと滑らか）
-    alwaysShowTracks: true  // スクロールバーを常に見せるか
-  });
-});
 
