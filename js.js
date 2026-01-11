@@ -85,5 +85,20 @@ window.addEventListener('load', () => {
   }, remaining);
 });
 
+// 軽量ぬるぬるスクロール
+let current = window.scrollY; // 現在位置
+let target = window.scrollY;  // 目標位置
+let ease = 0.05;               // ぬるぬる感の強さ（小さいほど滑らか）
 
+window.addEventListener("scroll", () => {
+  target = window.scrollY; // スクロールしたら目標を更新
+});
+
+function smoothScroll() {
+  current += (target - current) * ease; // イージング
+  window.scrollTo(0, current);          // 現在位置に移動
+  requestAnimationFrame(smoothScroll);  // 次のフレームへ
+}
+
+requestAnimationFrame(smoothScroll);
 
