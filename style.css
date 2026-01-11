@@ -50,7 +50,7 @@ a:hover::after {
   --font-small: 12px;
   --font-medium: 18px;
   --font-large: 22px;
-  --font-x-large: 42px;
+  --font-x-large: 36px;
   --section-width: 1280;
   --section-width-narrow: 1040;
   --transition: 0.3s ease;
@@ -218,7 +218,7 @@ a.button {
 }
 
 #menu.open {
-  width: 40%;
+  width: 30%;
   transform: translateX(0);
 }
 
@@ -233,7 +233,7 @@ a.button {
 }
 
 #menu nav ul li {
-  font-size: var(--font-large);
+  font-size: var(--font-x-large);
 }
 
 
