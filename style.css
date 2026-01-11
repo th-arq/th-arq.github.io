@@ -256,6 +256,11 @@ a.button {
   object-fit: cover;
 }
 
+.swiper-pagination-bullet-active {
+  background: #fff;
+}
+
+
 
 /* ========================= 
    Main
