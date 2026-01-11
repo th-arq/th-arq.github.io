@@ -411,7 +411,6 @@ ul.projects_menu a::after {
 .main_view {
   position: relative;
   width: 100%;
-  overflow: hidden;
 }
 
 .main_view span {
@@ -428,6 +427,7 @@ ul.projects_menu a::after {
   display: flex;
   gap: 0.5em;
   animation: marquee 120s linear infinite;
+  width: max-content;
 }
 
 figure {
@@ -436,10 +436,9 @@ figure {
 
 
 @keyframes marquee {
-  from { transform: translateX(100%); } 
-  to   { transform: translateX(-100%); }
+  0% { transform: translateX(0); } 
+  100% { transform: translateX(-50%); }
 }
-
 
 section.page_lead {
   padding: var(--padding);
