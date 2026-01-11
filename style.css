@@ -205,22 +205,27 @@ a.button {
   position: fixed;
   top: 0;
   left: 0;
-  width: 0;          
+  width: 30%;          
   height: 100%;
   padding: 0 5%;
   overflow: hidden;
   background: var(--black);
   color: var(--white);
   z-index: 1000;
-  transform: translateX(-100%);
-  transition: transform 0.5s ease;
-  overflow: hidden;
+  margin-left: -30%;
+  transition: margin-left 0.5s ease;
 }
 
 #menu.open {
-  width: 30%;
-  transform: translateX(0);
+  margin-left: 0;
 }
+
+body.menu-open main,
+body.menu-open header {
+  margin-left: 30%;
+  transition: margin-left 0.5s ease;
+}
+
 
 #menu nav {
   padding-top: 10em;
