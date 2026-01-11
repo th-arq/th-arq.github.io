@@ -436,10 +436,7 @@ ul.projects_menu a::after {
 }
 
 figure {
-  grid-column: 2;
-  grid-row: 1;
   margin: 0;
-  height: 100vh;
 }
 
 
@@ -477,8 +474,9 @@ section.page_lead {
   width: 100%;
 }
 
-.main_view, .main_view img {
+.main_view, .main_view img, .sub_view, .sub_view img {
   width: 100%;
+  margin: auto;
 }
 
 
@@ -488,9 +486,6 @@ section.project_title {
 }
 
 
-.sub_view, .sub_view img {
-  margin: auto;
-}
 
 .half {
   display: flex;
