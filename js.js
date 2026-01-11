@@ -87,7 +87,7 @@ window.addEventListener('load', () => {
 
 // 軽量スムーススクロール（ライブラリなし）
 (() => {
-  const ease = 0.08;  // 滑らかさ（0.05〜0.1くらいが自然）
+  const ease = 0.05;  // 滑らかさ（0.05〜0.1くらいが自然）
   let current = window.scrollY;
   let target = current;
 
