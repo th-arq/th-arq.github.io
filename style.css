@@ -407,38 +407,40 @@ ul.projects_menu a::after {
     Projects - Content
 ========================= */ 
 
-
 .main_view {
   position: relative;
   width: 100%;
-}
-
-.main_view span {
-  font-size: 8vw;
-  white-space: nowrap;
+  /* overflow: hidden; は消す */
 }
 
 .title_loop {
   position: absolute;
   top: -5%;
   left: 0;
+  display: flex;
+  gap: 2rem;
+  white-space: nowrap;
+  font-size: 8vw;
   color: #fff;
   mix-blend-mode: difference;
+}
+
+/* 流れる用の内側ラッパー */
+.title_loop_inner {
   display: flex;
-  gap: 0.5em;
+  gap: 2rem;
   animation: marquee 120s linear infinite;
-  width: max-content;
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }                 /* スタート位置 */
+  100% { transform: translateX(-50%); }             /* 半分の幅だけ流す */
 }
 
 figure {
   margin: 0;
 }
 
-
-@keyframes marquee {
-  0%   { transform: translateX(100%); }   /* 右端からスタート */
-  100% { transform: translateX(-100%); }  /* 左端まで流れる */
-}
 
 
 section.page_lead {
