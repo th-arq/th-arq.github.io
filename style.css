@@ -436,9 +436,10 @@ figure {
 
 
 @keyframes marquee {
-  0% { transform: translateX(0); } 
-  100% { transform: translateX(-50%); }
+  0%   { transform: translateX(100%); }   /* 右端からスタート */
+  100% { transform: translateX(-100%); }  /* 左端まで流れる */
 }
+
 
 section.page_lead {
   padding: var(--padding);
