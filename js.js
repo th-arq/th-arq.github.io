@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const burger = document.querySelector('.hamburger');
   const menu = document.getElementById('menu');
   const titleArea = document.getElementById('title_area');
-  const pageFades = document.querySelectorAll('.page-fade');
+  const pageFade = document.body; // ← フェード対象は body のみ
 
   function closeMenu() {
     burger?.classList.remove('open');
@@ -37,12 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================
-     Page Transition (ALL LINKS)
+     Page Transition（遷移時フェードアウト）
   ========================= */
   document.querySelectorAll('a[href]').forEach(link => {
     const url = link.getAttribute('href');
 
-    // 除外条件
+    // 除外（外部・アンカー・別タブ）
     if (
       !url ||
       url.startsWith('#') ||
@@ -54,43 +54,42 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
 
       closeMenu();
-
-      pageFades.forEach(el => el.classList.add('fade-out'));
+      pageFade.classList.add('fade-out');
 
       setTimeout(() => {
         window.location.href = url;
-      }, 800);
+      }, 800); // CSSのtransitionと合わせる
     });
   });
 
   /* =========================
-     Normal Page Fade In
+     通常ページ Fade In
+     （loading がないページ用）
   ========================= */
-  pageFades.forEach(el => el.classList.add('loaded'));
+  if (!document.getElementById('loading')) {
+    pageFade.classList.add('loaded');
+  }
 });
 
 
 /* =========================
-   Loading (Top Page Only)
+   Loading（Top Page Only）
 ========================= */
 window.addEventListener('load', () => {
   const loading = document.getElementById('loading');
-  if (!loading) return;
+  if (!loading) return; // ← 他ページは完全に無関係
 
-  const pageFades = document.querySelectorAll('.page-fade');
+  const pageFade = document.body;
 
   const MIN_LOADING_TIME = 2500;
-  const startTime = performance.now();
-  const elapsed = performance.now() - startTime;
-  const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
 
   setTimeout(() => {
     loading.style.opacity = '0';
 
     setTimeout(() => {
       loading.style.display = 'none';
-      pageFades.forEach(el => el.classList.add('loaded'));
+      pageFade.classList.add('loaded'); // ← ここで初めて表示
     }, 1500);
 
-  }, remaining);
+  }, MIN_LOADING_TIME);
 });
