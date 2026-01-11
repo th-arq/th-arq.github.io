@@ -1,104 +1,540 @@
 /* =========================
-   DOM Ready
+   Base Reset
 ========================= */
-document.addEventListener('DOMContentLoaded', () => {
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  color: var(--black);
+  font-size: var(--font-medium);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  height: auto;
+  scroll-behavior: auto;
+}
 
-  /* =========================
-     Hamburger Menu
-  ========================= */
-  const overlay = document.getElementById('overlay');
-  const burger = document.querySelector('.hamburger');
-  const menu = document.getElementById('menu');
-  const titleArea = document.getElementById('title_area');
-  const menuLinks = menu ? menu.querySelectorAll('a') : [];
-  const pageFades = document.querySelectorAll('.page-fade');
+ul, ol, p { list-style: none; padding: 0; padding-inline-start: 0; margin: 0;}
+img { max-width: 100%; height: auto; display: block; }
+h1 { font-size: 3em; font-weight: 180; margin: 0; }
+h2 { font-weight: 400; margin: 0; }
+h3 { font-size: 1.5em; font-weight: 350; margin: 0; }
+h4 { font-weight: 300; margin: 0; }
+p { line-height: 1.8em; }
+a { text-decoration: none; color: inherit; position: relative;}
 
-  function closeMenu() {
-    burger.classList.remove('open');
-    menu.classList.remove('open');
-    titleArea.classList.remove('open');
-    overlay.classList.remove('active');
-  }
+a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1px;
+  background: var(--background);
+  transition: width 0.3s ease;
+}
 
-  if (burger && menu && overlay && titleArea) {
-    burger.addEventListener('click', () => {
-      burger.classList.toggle('open');
-      menu.classList.toggle('open');
-      titleArea.classList.toggle('open');
-      overlay.classList.toggle('active');
-    });
+a:hover::after {
+  width: 100%;
+}
 
-    overlay.addEventListener('click', closeMenu);
-
-    document.addEventListener('click', (e) => {
-      if (!menu.classList.contains('open')) return;
-      if (menu.contains(e.target) || burger.contains(e.target)) return;
-      closeMenu();
-    });
-
-    menuLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const url = link.getAttribute('href');
-
-        closeMenu();
-        pageFades.forEach(el => el.classList.add('fade-out'));
-
-        setTimeout(() => {
-          window.location.href = url;
-        }, 800);
-      });
-    });
-  }
-
-  /* =========================
-     Normal Page Fade In
-  ========================= */
-  pageFades.forEach(el => el.classList.add('loaded'));
-});
+/* =========================
+   Variables
+========================= */
+:root {
+  --black: #2D2D2D;
+  --white: #FFFFFF;
+  --lightgray: #cbcbcb;
+  --background: #f8f7f5;
+  --font-x-small: 10px;
+  --font-small: 12px;
+  --font-medium: 18px;
+  --font-large: 22px;
+  --font-x-large: 36px;
+  --section-width: 1280;
+  --section-width-narrow: 1040;
+  --transition: 0.3s ease;
+  --padding: 0 5%;
+}
 
 
 /* =========================
-   Loading (Top Page Only)
+   Page Fade (Common)
 ========================= */
-window.addEventListener('load', () => {
-  const loading = document.getElementById('loading');
-  if (!loading) return; // ← 他ページはここで終了
-
-  const pageFades = document.querySelectorAll('.page-fade');
-
-  // 最低表示時間（ms）
-  const MIN_LOADING_TIME = 2500;
-  const startTime = performance.now();
-
-  const elapsed = performance.now() - startTime;
-  const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
-
-  setTimeout(() => {
-    loading.style.opacity = '0';
-
-    setTimeout(() => {
-      loading.style.display = 'none';
-      pageFades.forEach(el => el.classList.add('loaded'));
-    }, 1500);
-
-  }, remaining);
-});
-
-// 軽量ぬるぬるスクロール
-let current = window.scrollY; // 現在位置
-let target = window.scrollY;  // 目標位置
-let ease = 0.05;               // ぬるぬる感の強さ（小さいほど滑らか）
-
-window.addEventListener("scroll", () => {
-  target = window.scrollY; // スクロールしたら目標を更新
-});
-
-function smoothScroll() {
-  current += (target - current) * ease; // イージング
-  window.scrollTo(0, current);          // 現在位置に移動
-  requestAnimationFrame(smoothScroll);  // 次のフレームへ
+body.page-fade {
+  opacity: 0;
+  transition: opacity 1.5s ease;
 }
 
-requestAnimationFrame(smoothScroll);
+body.page-fade.loaded {
+  opacity: 1;
+}
+
+body.page-fade.fade-out {
+  opacity: 0;
+}
+
+
+/* =========================
+   Loading (Top only)
+========================= */
+#loading {
+  position: fixed;
+  inset: 0;
+  background: var(--background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 2.5s ease;
+}
+
+.loading_logo_svg {
+  fill: var(--black);
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+  width: 150px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+
+
+/* =========================
+   Header / Title Area
+========================= */
+header {
+  height: 120px;
+  width: 100%;
+}
+
+#title_area {
+  display: flex;
+  justify-content: space-between;
+  z-index: 1100;
+  padding: 60px 5% 0 5%;
+  transition: background 0.3s ease;
+}
+
+
+/* =========================
+   Logo（SVG）
+========================= */
+.logo_svg {
+  display: block;
+  fill: var(--black);
+  transition: fill 0.3s ease;
+  width: 120px;
+  height: 26px;
+}
+
+#title_area.open .logo_svg path {
+  fill: var(--white);
+}
+
+a.button {
+  display: block;
+  border: 1px solid var(--black);
+  padding: 0.05em;
+  text-align: center;
+}
+
+
+/* =========================
+   Hamburger
+========================= */
+.hamburger {
+  width: 40px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
+  z-index: 1200;
+}
+
+.hamburger span {
+  display: block;
+  width:  40px;
+  height: 1px;
+  background: var(--black);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) {
+  position: fixed;
+  transform: translateY(-3px) rotate(30deg);
+  background: var(--white);
+}
+
+.hamburger.open span:nth-child(2) {
+  position: fixed;
+  transform: translateY(-3px) rotate(-30deg);
+  background: var(--white);
+}
+
+#overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease;
+  z-index: 900;
+}
+
+#overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* =========================
+   Menu
+========================= */
+#menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;          
+  height: 100%;
+  padding: 0 5%;
+  overflow: hidden;
+  background: var(--black);
+  color: var(--white);
+  z-index: 1000;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+  overflow: hidden;
+}
+
+#menu.open {
+  width: 25%;
+  transform: translateX(0);
+}
+
+#menu nav {
+  padding-top: 10em;
+}
+
+#menu nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+
+#menu nav ul li {
+  font-size: var(--font-x-large);
+}
+
+
+/* ========================= 
+   Swiper
+========================= */ 
+#Mainview {
+  height: calc(100vh - 150px - 110px);
+}
+
+.top-slider {
+  width: 90%;
+  height: 100%;
+  margin: auto;
+}
+
+.top-slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* ========================= 
+   Main
+========================= */ 
+main {
+  display: flex;
+  padding: var(--padding);
+  background: transparent;
+}
+
+#contents_title {
+  width: 55vw;
+}
+
+#contents_inner {
+  width: 100%;
+}
+
+section {
+  margin: 0 auto 1.5em;
+  text-align: justify;
+}
+
+
+/* ========================= 
+   About
+========================= */ 
+main .profile_pic {
+  width: 200px;
+}
+
+.about_head {
+  display: flex;
+  gap: 2em;
+  margin: 0 0 2em 0;
+  padding: 0 0 2em 0;
+  border-bottom: 1px solid var(--black);
+}
+
+.about_head h3 {
+  margin: 0 auto 1em auto;
+}
+
+.about_head ul li {
+  position: relative;
+  padding-left: 1em;
+  line-height: 1.8em;
+}
+
+.about_head ul li::before {
+  content: "";
+  width: 3px;
+  height: 3px;
+  background: var(--lightgray);
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+/* ========================= 
+   Service
+========================= */ 
+.service section {
+  line-height: 3em;
+  letter-spacing: .01em;
+  margin: 0 auto 3em auto;
+}
+
+
+
+/* ========================= 
+   Contact
+========================= */ 
+.mail_form input, .mail_form textarea {
+  font-size: 18px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  border: none;
+  padding: 0.5em;
+  margin: 0.1em 0 1em;
+}
+
+input.form {
+  height: 10em;
+}
+
+.office_information {
+  padding: 0 0 2em 0;
+  margin: 0 0 2em 0;
+  border-bottom: 1px solid var(--black);
+}
+
+/* ========================= 
+   Projects
+========================= */ 
+ul.projects_menu {
+  display: flex;
+  gap: 2em;
+  margin: 3em 0;
+  padding: var(--padding);
+}
+
+ul.projects_menu a::after {
+  background: var(--black)
+}
+
+.projects_contents ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  position: relative;
+}
+
+.projects_contents li{
+  width: 19vw;
+  margin: 0 0 2em;
+}
+
+.projects_contents li h4 {
+    padding: 0 0 0 1em;
+}
+
+.projects_contents li a {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.projects_contents li a img {
+  width: 100%;
+  transition: clip-path 0.3s ease, transform 0.3s ease;
+  clip-path: inset(0 0 0 0);
+}
+
+.projects_contents li a:hover img {
+  clip-path: inset(30% 0 30% 0);
+  transform: scale(1.05);
+}
+
+/* ========================= 
+    Projects - Content
+========================= */ 
+
+.main_view {
+  position: relative;
+  width: 100%;
+  overflow: visible; 
+}
+
+.title_loop {
+  position: absolute;
+  top: -6%;
+  left: 0;
+  width: 100vw; 
+  overflow-x: hidden; 
+  overflow-y: visible;
+  pointer-events: none;
+}
+
+
+.title_loop_inner {
+  display: flex;
+  gap: 0.5em;
+  white-space: nowrap;
+  font-size: 8vw;
+  color: #fff;
+  mix-blend-mode: difference;
+  animation: marquee 60s linear infinite;
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }                 /* スタート位置 */
+  100% { transform: translateX(-50%); }             /* 半分の幅だけ流す */
+}
+
+figure {
+  margin: 0;
+}
+
+
+
+section.page_lead {
+  padding: var(--padding);
+}
+
+
+.project_text_container {
+  padding: 10vw 5%;
+  display: flex;
+      flex-direction: row;
+}
+
+.project_location, .project_size {
+    width: 50%;
+}
+
+.project_location h4, .project_size h4 {
+  font-weight: 400;
+}
+
+.project_comment {
+  margin: 1em 0 0 0;
+  width: 100%;
+}
+
+.main_view, .main_view img, .sub_view, .sub_view img {
+  width: 100%;
+  margin: auto;
+}
+
+
+section.project_title {
+  width: 50%;
+}
+
+
+.full.wrapper {
+    padding: var(--padding);
+    margin: 0 auto 10vw auto;
+}
+
+
+.half {
+  display: flex;
+  padding: var(--padding);
+  gap: 5em;
+  margin: 0 auto 10vw auto;
+}
+
+.half .project_image {
+  flex: 1;
+  aspect-ratio: 4 / 3;
+  min-width: 0;
+  object-fit: cover;
+}
+
+.left {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto 10vw 0;
+}
+
+
+.right {
+    width: 50%;
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 0 0 10vw auto;
+}
+
+
+/* ========================= 
+   Footer 
+========================= */ 
+footer { 
+  background-color: var(--black); 
+  color: var(--white); 
+  font-size: var(--font-small); 
+  margin: 10vw 0 0 0;
+  min-height: 80px;
+  display: flex;
+}
+
+footer .footer_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--padding);
+  width: 100%;
+}
+
+.footer_container_information {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
 
