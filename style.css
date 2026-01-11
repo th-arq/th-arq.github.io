@@ -359,6 +359,10 @@ input.form {
 /* ========================= 
    Projects
 ========================= */ 
+#contents_inner h1 {
+  padding: var(--padding);
+}
+
 ul.projects_menu {
   display: flex;
   gap: 2em;
