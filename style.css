@@ -377,17 +377,13 @@ ul.projects_menu a::after {
 .projects_contents ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  gap: 1em;
   position: relative;
 }
 
 .projects_contents li{
-  width: 19vw;
+  flex: 0 0 calc((100% - 4em) / 5);
   margin: 0 0 2em;
-}
-
-.projects_contents li h4 {
-    padding: 0.5em;
 }
 
 .projects_contents li a {
@@ -395,6 +391,10 @@ ul.projects_menu a::after {
   position: relative;
   overflow: hidden;
   height: 15vw;
+}
+
+.projects_contents li h4 {
+  padding: 0.5em;
 }
 
 .projects_contents li a img {
