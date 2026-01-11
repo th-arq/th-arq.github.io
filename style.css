@@ -480,17 +480,22 @@ section.page_lead {
 }
 
 
-
 section.project_title {
   width: 50%;
 }
 
 
+.full.wrapper {
+    padding: var(--padding);
+    margin: 0 auto 5em auto;
+}
+
 
 .half {
   display: flex;
   padding: var(--padding);
-  gap: 16px;
+  gap: 5em;
+  margin: 0 auto 5em auto;
 }
 
 .half .project_image {
@@ -500,6 +505,20 @@ section.project_title {
   object-fit: cover;
 }
 
+.left {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto 5em 0;
+}
+
+
+.right{
+    width: 50%;
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 0 0 5em auto;
+}
 
 
 /* ========================= 
