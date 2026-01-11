@@ -4,10 +4,14 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   const overlay = document.getElementById('overlay');
-  const burger = document.querySelector('.hamburger');
-  const menu = document.getElementById('menu');
-  const titleArea = document.getElementById('title_area');
-  const pageFade = document.body; // ← フェード対象は body のみ
+const burger = document.querySelector('.hamburger');
+const menu = document.getElementById('menu');
+const body = document.body;
+
+burger.addEventListener('click', () => {
+  menu.classList.toggle('open');
+  body.classList.toggle('menu-open');
+});
 
   function closeMenu() {
     burger?.classList.remove('open');
