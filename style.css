@@ -426,7 +426,7 @@ ul.projects_menu a::after {
 
 .title_loop_inner {
   display: flex;
-  gap: 2rem;
+  gap: 1em;
   white-space: nowrap;
   font-size: 8vw;
   color: #fff;
