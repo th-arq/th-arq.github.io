@@ -353,11 +353,6 @@ input.form {
 /* ========================= 
    Projects
 ========================= */ 
-#contents_title {
-  margin: 0 0 1em 0;
-  padding: var(--padding);
-}
-
 ul.projects_menu {
   display: flex;
   gap: 2em;
