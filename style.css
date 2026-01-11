@@ -10,7 +10,7 @@ html, body {
   font-family: 'Jost', sans-serif;
   font-weight: 300;
   height: auto;
-  scroll-behavior: auto;
+  scroll-behavior: smooth;
 }
 
 ul, ol, p { list-style: none; padding: 0; padding-inline-start: 0; margin: 0;}
@@ -187,7 +187,7 @@ a.button {
   background: rgba(0,0,0,0.5);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.5s ease;
   z-index: 900;
 }
 
