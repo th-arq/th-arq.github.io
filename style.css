@@ -257,7 +257,7 @@ a.button {
 }
 
 .swiper-pagination-bullet-active {
-  background: #fff;
+  background: #fff!important;
 }
 
 
