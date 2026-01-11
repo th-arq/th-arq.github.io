@@ -205,18 +205,18 @@ a.button {
   position: fixed;
   top: 0;
   left: 0;
-  width: 0;           /* 初期は幅0 */
+  width: 0;          
   height: 100%;
   padding: 0 5%;
   overflow: hidden;
   background: var(--black);
   color: var(--white);
-  transition: width 0.5s ease; /* 横幅でアニメ */
+  transition: width 0.5s ease;
   z-index: 1000;
 }
 
 #menu.open {
-  width: 250px;       /* 開いた時の幅 */
+  width: 40%;
 }
 
 #menu nav {
