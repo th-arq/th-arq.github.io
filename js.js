@@ -3,92 +3,84 @@
 ========================= */
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* =========================
+     Hamburger Menu
+  ========================= */
   const overlay = document.getElementById('overlay');
   const burger = document.querySelector('.hamburger');
   const menu = document.getElementById('menu');
   const titleArea = document.getElementById('title_area');
-  const body = document.body;
-  const pageFade = document.body;
+  const menuLinks = menu ? menu.querySelectorAll('a') : [];
+  const pageFades = document.querySelectorAll('.page-fade');
 
-  /* =========================
-     メニュー閉じる関数
-  ========================= */
   function closeMenu() {
-    burger?.classList.remove('open');
-    menu?.classList.remove('open');
-    body.classList.remove('menu-open');
-    titleArea?.classList.remove('open');
-    overlay?.classList.remove('active');
+    burger.classList.remove('open');
+    menu.classList.remove('open');
+    titleArea.classList.remove('open');
+    overlay.classList.remove('active');
   }
 
-  /* =========================
-     Hamburger Menu
-  ========================= */
-  if (burger && menu) {
+  if (burger && menu && overlay && titleArea) {
     burger.addEventListener('click', () => {
       burger.classList.toggle('open');
       menu.classList.toggle('open');
-      body.classList.toggle('menu-open');
-      titleArea?.classList.toggle('open');
-      overlay?.classList.toggle('active');
+      titleArea.classList.toggle('open');
+      overlay.classList.toggle('active');
     });
 
-    if (overlay) {
-      overlay.addEventListener('click', closeMenu);
-    }
+    overlay.addEventListener('click', closeMenu);
 
     document.addEventListener('click', (e) => {
       if (!menu.classList.contains('open')) return;
       if (menu.contains(e.target) || burger.contains(e.target)) return;
       closeMenu();
     });
-  }
 
-  /* =========================
-     Page Transition（リンククリック時フェードアウト）
-  ========================= */
-  document.querySelectorAll('a[href]').forEach(link => {
-    const url = link.getAttribute('href');
+    menuLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const url = link.getAttribute('href');
 
-    if (!url || url.startsWith('#') || url.startsWith('http') || link.target === '_blank') return;
+        closeMenu();
+        pageFades.forEach(el => el.classList.add('fade-out'));
 
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      closeMenu();
-      pageFade.classList.add('fade-out');
-      setTimeout(() => {
-        window.location.href = url;
-      }, 800);
+        setTimeout(() => {
+          window.location.href = url;
+        }, 800);
+      });
     });
-  });
-
-  /* =========================
-     通常ページ Fade In
-  ========================= */
-  if (!document.getElementById('loading')) {
-    pageFade.classList.add('loaded');
   }
 
+  /* =========================
+     Normal Page Fade In
+  ========================= */
+  pageFades.forEach(el => el.classList.add('loaded'));
 });
 
 
 /* =========================
-   Loading（Top Page Only）
+   Loading (Top Page Only)
 ========================= */
 window.addEventListener('load', () => {
   const loading = document.getElementById('loading');
-  if (!loading) return;
+  if (!loading) return; // ← 他ページはここで終了
 
-  const pageFade = document.body;
+  const pageFades = document.querySelectorAll('.page-fade');
+
+  // 最低表示時間（ms）
   const MIN_LOADING_TIME = 2500;
+  const startTime = performance.now();
+
+  const elapsed = performance.now() - startTime;
+  const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
 
   setTimeout(() => {
     loading.style.opacity = '0';
 
     setTimeout(() => {
       loading.style.display = 'none';
-      pageFade.classList.add('loaded');
+      pageFades.forEach(el => el.classList.add('loaded'));
     }, 1500);
 
-  }, MIN_LOADING_TIME);
+  }, remaining);
 });
