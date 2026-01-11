@@ -61,16 +61,16 @@ a:hover::after {
 /* =========================
    Page Fade (Common)
 ========================= */
-.page-fade {
+body.page-fade {
   opacity: 0;
   transition: opacity 1.5s ease;
 }
 
-.page-fade.loaded {
+body.page-fade.loaded {
   opacity: 1;
 }
 
-.page-fade.fade-out {
+body.page-fade.fade-out {
   opacity: 0;
 }
 
