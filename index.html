@@ -1,137 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-<title>TAG Inc.</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAG Inc.</title>
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-<!-- CSS -->
-<link rel="stylesheet" href="style.css">
-<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-<style>
-  main { display: block; padding: 0; }
-  header, footer { opacity: 0; transition: opacity 1s ease; }
-  #Mainview { display: block; opacity: 0; width: 100%; height: 100vh; transition: opacity 1s ease; }
-  .top-slider { width: 90%; height: 100%; margin: auto; }
-  .top-slider img { width: 100%; height: 100%; object-fit: cover; }
-  .swiper-pagination-bullet-active { background: #fff!important; }
-</style>
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  
+  <style>
+    /* =========================
+       Page Fade & Mainview
+    ========================= */
+    body.page-fade { opacity: 0; transition: opacity 1.5s ease; }
+    body.page-fade.loaded { opacity: 1; }
+    body.page-fade.fade-out { opacity: 0; }
+
+    #Mainview { display: none; opacity: 0; width: 100%; height: 100vh; transition: opacity 1s ease; }
+    .top-slider { width: 90%; height: 100%; margin: auto; }
+    .top-slider img { width: 100%; height: 100%; object-fit: cover; }
+    .swiper-pagination-bullet-active { background: #fff !important; }
+
+    header, footer { opacity: 0; transition: opacity 1s ease; }
+  </style>
 </head>
 <body class="page-fade">
 
-<!-- Loading -->
-<div id="loading">
-  <svg class="loading_logo_svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 675 676">
-    <!-- SVG path省略 -->
-  </svg>
-</div>
-
-<!-- HEADER -->
-<header>
-  <div id="title_area">
-    <div class="hamburger"><span></span><span></span></div>
-    <div class="TAG_logo">
-      <a href="https://th-arq.github.io/">
-        <svg class="logo_svg"></svg>
-      </a>
-    </div>      
+  <!-- Loading -->
+  <div id="loading">
+    <svg class="loading_logo_svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 675 676">
+      <path fill-rule="evenodd" d="M644.32 337.51c0 163.14-127.22 296.55-287.82 306.37V10.98q13.59.83 26.83 2.82v591.95l19.02-6.17c34.51-11.22 85.26-36.91 127.18-79.3 42.18-42.62 75.77-102.58 73.99-181.42l-.32-14.2H460.45v29.07h113.9c-2.42 62.37-30.22 110.47-65.48 146.1-30.92 31.27-67.35 52.64-96.48 64.95v-525c133.25 33.44 231.93 154.06 231.93 297.73Zm-613.64 0c0-162.94 126.92-296.23 287.26-306.32v634.35a308 308 0 0 1-21.24-2.08V77.2l-16.88 2.76c-41.61 6.83-93.1 34.56-134.22 77.73-41.38 43.45-73.39 103.7-73.87 176.37-.3 44.22 11.1 92.38 38.35 143.37l25.63-13.7c-22.13-41.4-32.52-79.92-34.55-115.03h166.48v287.76C131.84 604.83 30.68 483 30.68 337.51Zm316.32 337c181.73-5.03 327.5-153.98 327.5-337C674.5 154.5 528.73 5.55 347 .51zm-20.12-.03V.55C145.68 6.15.5 154.88.5 337.5c0 182.64 145.18 331.36 326.38 336.97Zm-59.24-354.86H101.37c4.24-57.36 30.78-105.66 65.27-141.87 31.75-33.34 69.45-55.6 101-65.12z" clip-rule="evenodd"/>
+    </svg>
   </div>
-  <div id="menu">
-    <nav>
-      <ul>
-        <li><a href="/about/">About</a></li>
-        <li><a href="/service/">Service</a></li>
-        <li><a href="/projects/">Projects</a></li>
-        <li><a href="/contact/">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-  <div id="overlay"></div>
-</header>
 
-<!-- CONTENT -->
-<main>
-  <div id="Mainview">
-    <div class="swiper top-slider">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="img/img1.jpg" alt=""></div>
-        <div class="swiper-slide"><img src="img/img2.jpg" alt=""></div>
-        <div class="swiper-slide"><img src="img/img3.jpg" alt=""></div>
+  <!-- Header -->
+  <header>
+    <div id="title_area">
+      <div class="hamburger"><span></span><span></span></div>
+      <div class="TAG_logo">
+        <a href="https://th-arq.github.io/">
+          <svg class="logo_svg" xmlns="http://www.w3.org/2000/svg"><!-- 略 --></svg>
+        </a>
       </div>
-      <div class="swiper-pagination"></div>
     </div>
-  </div>
-</main>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer_container">
-    <div class="footer_container_information">
-      <p>INTERIOR & EXTERIOR · Residential · Commercial · Industrial</p>
-      <p>Los Angeles, CA | <a href="/privacy/">Privacy Policy</a></p>
+    <div id="menu">
+      <nav>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/service/">Service</a></li>
+          <li><a href="/projects/">Projects</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
     </div>
-    <div class="footer_container_company">
-      <p>© 2025 TAG Inc.  Licensed Contractor #123456</p>
+    <div id="overlay"></div>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <div id="Mainview">
+      <div class="swiper top-slider">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="img/img1.jpg" alt=""></div>
+          <div class="swiper-slide"><img src="img/img2.jpg" alt=""></div>
+          <div class="swiper-slide"><img src="img/img3.jpg" alt=""></div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
     </div>
-  </div>
-</footer>
+  </main>
 
-<!-- Swiper JS（先に読み込む！） -->
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <!-- Footer -->
+  <footer>
+    <div class="footer_container">
+      <div class="footer_container_information">
+        <div><p>INTERIOR & EXTERIOR · Residential · Commercial · Industrial</p></div>
+        <div><p>Los Angeles, CA | <a href="/privacy/">Privacy Policy</a></p></div>
+      </div>
+      <div class="footer_container_company"><p>© 2025 TAG Inc. Licensed Contractor #123456</p></div>
+    </div>
+  </footer>
 
-<!-- 直書きJS -->
-<script>
-window.addEventListener('load', () => {
-  const loading = document.getElementById('loading');
-  const mainview = document.getElementById('Mainview');
-  const header = document.querySelector('header');
-  const footer = document.querySelector('footer');
-  const pageFades = document.querySelectorAll('.page-fade');
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <!-- Common JS (index以外と共通処理) -->
+  <script src="js/common.js"></script>
 
-  if (!loading || !mainview || !header || !footer) return;
+  <!-- Index直書きJS -->
+  <script>
+  window.addEventListener('load', () => {
+    const loading = document.getElementById('loading');
+    const mainview = document.getElementById('Mainview');
+    const header = document.querySelector('header');
+    const footer = document.querySelector('footer');
+    const pageFades = document.querySelectorAll('.page-fade');
 
-  const MIN_LOADING_TIME = 2500;
-  const startTime = performance.now();
-  const elapsed = performance.now() - startTime;
-  const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
+    if (!loading || !mainview || !header || !footer) return;
 
-  setTimeout(() => {
-    // 1. Loading フェードアウト
-    loading.style.opacity = '0';
+    const MIN_LOADING_TIME = 2500;
+    const startTime = performance.now();
+    const elapsed = performance.now() - startTime;
+    const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
 
     setTimeout(() => {
-      loading.style.display = 'none';
-      mainview.style.display = 'block';
+      // Loading フェードアウト
+      loading.style.opacity = '0';
 
-      // 2. Swiper 初期化
-      const swiper = new Swiper('.top-slider', {
-        loop: true,
-        speed: 1000,
-        autoplay: { delay: 3000, disableOnInteraction: false },
-        pagination: { el: '.swiper-pagination', clickable: true },
-      });
-
-      // 3. Header/Footer フェードイン
-      header.style.opacity = '0';
-      footer.style.opacity = '0';
       setTimeout(() => {
-        header.style.transition = 'opacity 1.2s ease';
-        footer.style.transition = 'opacity 1.2s ease';
-        header.style.opacity = '1';
-        footer.style.opacity = '1';
-      }, 200);
+        loading.style.display = 'none';
+        mainview.style.display = 'block';
 
-      // 4. ページ全体フェードイン
-      pageFades.forEach(el => el.classList.add('loaded'));
-    }, 500); // loading フェード時間
-  }, remaining);
-});
-</script>
+        // Swiper 初期化
+        const swiper = new Swiper('.top-slider', {
+          loop: true,
+          speed: 1000,
+          autoplay: { delay: 3000, disableOnInteraction: false },
+          pagination: { el: '.swiper-pagination', clickable: true },
+        });
 
+        // Header/Footer フェードイン
+        header.style.opacity = '0';
+        footer.style.opacity = '0';
+        setTimeout(() => {
+          header.style.transition = 'opacity 1.2s ease';
+          footer.style.transition = 'opacity 1.2s ease';
+          header.style.opacity = '1';
+          footer.style.opacity = '1';
+        }, 200);
+
+        // ページ全体フェードイン
+        pageFades.forEach(el => el.classList.add('loaded'));
+      }, 500);
+    }, remaining);
+  });
+  </script>
 </body>
 </html>
