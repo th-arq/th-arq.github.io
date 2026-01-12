@@ -1,169 +1,564 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-  <title>TAG Inc.</title>
+/* =========================
+   Base Reset
+========================= */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  color: var(--black);
+  font-size: var(--font-medium);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  height: auto;
+  scroll-behavior: smooth;
+}
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <style>
-  @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
-  </style>
+ul, ol, p { list-style: none; padding: 0; padding-inline-start: 0; margin: 0;}
+img { max-width: 100%; height: auto; display: block; }
+h1 { font-size: 3em; font-weight: 180; margin: 0; }
+h2 { font-weight: 400; margin: 0; }
+h3 { font-size: 1.5em; font-weight: 350; margin: 0; }
+h4 { font-weight: 300; margin: 0; }
+p { line-height: 1.8em; }
+a { text-decoration: none; color: inherit; position: relative;}
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
-  <!-- AOS CSS -->
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-</head>
-<body>
+a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1px;
+  background: var(--background);
+  transition: width 0.3s ease;
+}
 
+a:hover::after {
+  width: 100%;
+}
 
-  <!-- Loading -->
-  <div id="loading">
-    <svg class="loading_logo_svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 675 676">
-      <path fill-rule="evenodd" d="M644.32 337.51c0 163.14-127.22 296.55-287.82 306.37V10.98q13.59.83 26.83 2.82v591.95l19.02-6.17c34.51-11.22 85.26-36.91 127.18-79.3 42.18-42.62 75.77-102.58 73.99-181.42l-.32-14.2H460.45v29.07h113.9c-2.42 62.37-30.22 110.47-65.48 146.1-30.92 31.27-67.35 52.64-96.48 64.95v-525c133.25 33.44 231.93 154.06 231.93 297.73Zm-613.64 0c0-162.94 126.92-296.23 287.26-306.32v634.35a308 308 0 0 1-21.24-2.08V77.2l-16.88 2.76c-41.61 6.83-93.1 34.56-134.22 77.73-41.38 43.45-73.39 103.7-73.87 176.37-.3 44.22 11.1 92.38 38.35 143.37l25.63-13.7c-22.13-41.4-32.52-79.92-34.55-115.03h166.48v287.76C131.84 604.83 30.68 483 30.68 337.51Zm316.32 337c181.73-5.03 327.5-153.98 327.5-337C674.5 154.5 528.73 5.55 347 .51zm-20.12-.03V.55C145.68 6.15.5 154.88.5 337.5c0 182.64 145.18 331.36 326.38 336.97Zm-59.24-354.86H101.37c4.24-57.36 30.78-105.66 65.27-141.87 31.75-33.34 69.45-55.6 101-65.12z" clip-rule="evenodd"/>
-</svg>
-
-  </svg>
-</div>
-
-
-  <!-- HEAD -->
-  <header>
-    <div id="title_area">
-      <div class="hamburger">
-        <span></span>
-        <span></span>
-      </div>
-
-        <div class="TAG_logo">
-          <a href="https://th-arq.github.io/">
-            <svg class="logo_svg" xmlns="http://www.w3.org/2000/svg">
-              <path d="M115.86 22.12q0-.81.56-1.38.6-.6 1.41-.6.89 0 1.44.6.57.56.57 1.38 0 .8-.57 1.38-.55.6-1.44.6-.81 0-1.4-.6-.57-.6-.57-1.38"/><path d="M102.38 16.88q0 1.45.63 2.55.63 1.05 1.69 1.7 1.1.62 2.42.62 1.1 0 2.09-.33a6 6 0 0 0 1.76-.93q.76-.6 1.12-1.33v3.95q-.8.8-2.15 1.26-1.36.46-2.98.46a9 9 0 0 1-4.25-.99 8 8 0 0 1-2.95-2.82 8 8 0 0 1-1.06-4.14q0-2.35 1.06-4.15a7.6 7.6 0 0 1 2.95-2.78 9 9 0 0 1 4.25-1.03q1.62 0 2.98.46t2.15 1.26v3.95q-.36-.75-1.16-1.33-.76-.6-1.75-.93a7 7 0 0 0-2.06-.33q-1.32 0-2.42.63-1.05.63-1.7 1.73a5 5 0 0 0-.62 2.52"/><path d="M91.74 15.22q0-1.7-.7-2.55-.7-.87-2.15-.87-1 0-1.76.43-.75.4-1.2 1.2-.42.75-.42 1.79v9.28h-3.59V9.25h3.59v2.35q.72-1.36 1.85-2.02 1.17-.66 2.75-.66 2.59 0 3.95 1.6 1.36 1.55 1.36 4.3v9.68h-3.68z"/><path d="M72.4 1.3h3.95v23.2H72.4z"/><path d="M50.38 15.68v-3.31h11.18q.06 2.55-.67 4.84a12 12 0 0 1-2.19 4.01 10.4 10.4 0 0 1-3.64 2.79q-2.15.99-4.91.99-2.62 0-4.84-.86a12 12 0 0 1-3.88-2.52 11 11 0 0 1-2.52-3.85q-.9-2.22-.9-4.87t.9-4.84a11.34 11.34 0 0 1 6.43-6.3Q47.6.89 50.22.9q2.28 0 4.14.63 1.86.6 3.32 1.75 1.5 1.13 2.52 2.75L57 8.16a7 7 0 0 0-2.68-2.66q-1.7-1-4.11-1a8 8 0 0 0-7 3.99 8.5 8.5 0 0 0-1.1 4.4q0 2.53 1.07 4.45a8 8 0 0 0 7.03 4.01q1.55 0 2.78-.43a6 6 0 0 0 2.12-1.23 7 7 0 0 0 1.5-1.82q.6-1.02.9-2.19z"/><path d="M37.65 24.5h-4.41l-2.67-5.97h-8.55l-2.64 5.97h-4.41L26.3 0zm-14.5-9.28h6.3L26.3 7.86z"/><path d="M0 4.9V1.3h16.18v3.6h-6.13v19.6H6.1V4.9z"/></svg>
-          </a>
-        </div>      
-    </div>
-
-
-    <div id="menu">
-        <nav>
-            <ul>
-                <li><a href="/about/">About</a></li>
-                <li><a href="/service/">Service</a></li>
-                <li><a href="/projects/">Projects</a></li>
-                <li><a href="/contact/">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div>
-      <a href="/contact/">
-        <img src=""></a>
-    </div>
-        <div id="overlay"></div>
-  </header>
-
- <!-- CONTENTS -->
-<main>
-  <div id="Mainview">
-    <div class="swiper top-slider">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="img/img1.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img src="img/img2.jpg" alt="">
-        </div> 
-        <div class="swiper-slide">
-          <img src="img/img3.jpg" alt="">
-        </div>
-      </div>
-      <div class="swiper-pagination"></div>
-    </div> <!-- swiper top-slider の閉じタグ -->
-  </div> 
-</main>
+/* =========================
+   Variables
+========================= */
+:root {
+  --black: #2D2D2D;
+  --white: #FFFFFF;
+  --lightgray: #cbcbcb;
+  --background: #f8f7f5;
+  --font-x-small: 10px;
+  --font-small: 12px;
+  --font-medium: 18px;
+  --font-large: 22px;
+  --font-x-large: 36px;
+  --section-width: 1280;
+  --section-width-narrow: 1040;
+  --transition: 0.3s ease;
+  --padding: 0 5%;
+}
 
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer_container">
-        <div class="footer_container_information">
-          <div>
-            <p>INTERIOR & EXTERIOR · Residential · Commercial · Industrial</p>
-          </div>
-          <div>
-            <p>Los Angeles, CA | <a href="/privacy/">Privacy Policy</a></p></div>
-        </div>
-        <div class="footer_container_company">
-            <p>© 2025 TAG Inc.  Licensed Contractor #123456</p>
-        </div>
-    </div>
-  </footer>
+/* =========================
+   Page Fade (Common)
+========================= */
+body.page-fade {
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+body.page-fade.loaded {
+  opacity: 1;
+}
+
+body.page-fade.fade-out {
+  opacity: 0;
+}
 
 
-  <style css="stylesheet">
-    main { display: block; padding: 0; }
-    footer { bottom: 0;}
-    header, footer {
-      opacity: 0;
-      transition: opacity 1s ease;
-    }
-  </style>
+/* =========================
+   Loading (Top only)
+========================= */
+#loading {
+  position: fixed;
+  inset: 0;
+  background: var(--background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 2.5s ease;
+}
 
-<script>
-  window.addEventListener('load', () => {
-  const loading = document.getElementById('loading');
-  const mainview = document.getElementById('Mainview');
-  const header = document.querySelector('header');
-  const footer = document.querySelector('footer');
+.loading_logo_svg {
+  fill: var(--black);
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+  width: 150px;
+}
 
-  if (!loading || !mainview || !header || !footer) return;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
 
-  const MIN_LOADING_TIME = 2500;
-  const startTime = performance.now();
-  const elapsed = performance.now() - startTime;
-  const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
 
-  setTimeout(() => {
-    // 1. Loadingフェードアウト
-    loading.style.opacity = '0';
 
-    setTimeout(() => {
-      loading.style.display = 'none';
+/* =========================
+   Header / Title Area
+========================= */
+header {
+  width: 100%;
+}
 
-      // 2. Swiperを表示
-      mainview.style.display = 'block';
+#title_area {
+  display: flex;
+  justify-content: space-between;
+  z-index: 1100;
+  padding: 60px 5%;
+  transition: background 0.3s ease;
+}
 
-      // Swiper初期化（もともとの設定をここでもOK）
-      const swiper = new Swiper('.top-slider', {
-        loop: true,
-        speed: 1000,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false,
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-      });
 
-      // 3. Header/Footerをフェードイン
-      setTimeout(() => {
-        header.style.opacity = '1';
-        footer.style.opacity = '1';
-      }, 500);
+/* =========================
+   Logo（SVG）
+========================= */
+.logo_svg {
+  display: block;
+  fill: var(--black);
+  transition: fill 0.3s ease;
+  width: 120px;
+  height: 26px;
+}
 
-    }, 500); // loadingのフェード時間
-  }, remaining);
-});
-</script>
+#title_area.open .logo_svg path {
+  fill: var(--white);
+}
 
-  <!-- Swiper JS -->
-   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-   <script src="js.js"></script>
-</body>
-</html>
+a.button {
+  display: block;
+  border: 1px solid var(--black);
+  padding: 0.05em;
+  text-align: center;
+}
+
+
+/* =========================
+   Hamburger
+========================= */
+.hamburger {
+  width: 40px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
+  z-index: 1200;
+}
+
+.hamburger span {
+  display: block;
+  width:  40px;
+  height: 1px;
+  background: var(--black);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) {
+  position: fixed;
+  transform: translateY(-3px) rotate(30deg);
+  background: var(--white);
+}
+
+.hamburger.open span:nth-child(2) {
+  position: fixed;
+  transform: translateY(-3px) rotate(-30deg);
+  background: var(--white);
+}
+
+#overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease;
+  z-index: 900;
+}
+
+#overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* =========================
+   Menu
+========================= */
+#menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;          
+  height: 100%;
+  padding: 0 5%;
+  overflow: hidden;
+  background: var(--black);
+  color: var(--white);
+  z-index: 1000;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+  overflow: hidden;
+}
+
+#menu.open {
+  width: 25%;
+  transform: translateX(0);
+}
+
+#menu nav {
+  padding-top: 10em;
+}
+
+#menu nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+
+#menu nav ul li {
+  font-size: var(--font-x-large);
+  font-weight: 200;
+}
+
+
+/* ========================= 
+   Swiper
+========================= */ 
+#Mainview {
+  display: block;
+  opacity: 0;
+  width: 100%;
+  height: 100vh; 
+  transition: opacity 1s ease;
+}
+
+.top-slider {
+  width: 90%;
+  height: 100%;
+  margin: auto;
+}
+
+.top-slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-pagination-bullet-active {
+  background: #fff!important;
+}
+
+
+
+/* ========================= 
+   Main
+========================= */ 
+main {
+  display: flex;
+  padding: var(--padding);
+  background: transparent;
+}
+
+#contents_title {
+  width: 55vw;
+}
+
+#contents_inner {
+  width: 100%;
+}
+
+section {
+  margin: 0 auto 1.5em;
+  text-align: justify;
+}
+
+
+/* ========================= 
+   About
+========================= */ 
+main .profile_pic {
+  width: 200px;
+}
+
+.about_head {
+  display: flex;
+  gap: 2em;
+  margin: 0 0 2em 0;
+  padding: 0 0 2em 0;
+  border-bottom: 1px solid var(--black);
+}
+
+.about_head h3 {
+  margin: 0 auto 1em auto;
+}
+
+.about_head ul li {
+  position: relative;
+  padding-left: 1em;
+  line-height: 1.8em;
+}
+
+.about_head ul li::before {
+  content: "";
+  width: 3px;
+  height: 3px;
+  background: var(--lightgray);
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+/* ========================= 
+   Service
+========================= */ 
+.service section {
+  line-height: 3em;
+  letter-spacing: .01em;
+  margin: 0 auto 3em auto;
+}
+
+
+
+/* ========================= 
+   Contact
+========================= */ 
+.mail_form input, .mail_form textarea {
+  font-size: 18px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  border: none;
+  padding: 0.5em;
+  margin: 0.1em 0 1em;
+}
+
+input.form {
+  height: 10em;
+}
+
+.office_information {
+  padding: 0 0 2em 0;
+  margin: 0 0 2em 0;
+  border-bottom: 1px solid var(--black);
+}
+
+/* ========================= 
+   Projects
+========================= */ 
+#contents_inner h1 {
+  padding: var(--padding);
+}
+
+ul.projects_menu {
+  display: flex;
+  gap: 2em;
+  margin: 3em 0;
+  padding: var(--padding);
+}
+
+ul.projects_menu a::after {
+  background: var(--black)
+}
+
+.projects_contents ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  position: relative;
+}
+
+.projects_contents li{
+  flex: 0 0 calc((100% - 4em) / 5);
+  margin: 0 0 2em;
+}
+
+.projects_contents li a {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  height: 15vw;
+}
+
+.projects_contents li h4 {
+  padding: 0.5em;
+}
+
+.projects_contents li a img {
+  width: 100%;
+  height: 100%;;
+  transition: clip-path 0.3s ease, transform 0.3s ease;
+  clip-path: inset(0 0 0 0);
+  object-position: center;
+  object-fit: cover;
+}
+
+.projects_contents li a:hover img {
+  clip-path: inset(30% 0 30% 0);
+  transform: scale(1.05);
+}
+
+/* ========================= 
+    Projects - Content
+========================= */ 
+
+.main_view {
+  position: relative;
+  width: 100%;
+  overflow: visible; 
+}
+
+.title_loop {
+  position: absolute;
+  top: -6%;
+  left: 0;
+  width: 100vw; 
+  overflow-x: hidden; 
+  overflow-y: visible;
+  pointer-events: none;
+}
+
+
+.title_loop_inner {
+  display: flex;
+  gap: 0.5em;
+  white-space: nowrap;
+  font-size: 8vw;
+  color: #fff;
+  mix-blend-mode: difference;
+  animation: marquee 60s linear infinite;
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }                 /* スタート位置 */
+  100% { transform: translateX(-50%); }             /* 半分の幅だけ流す */
+}
+
+figure {
+  margin: 0;
+}
+
+
+
+section.page_lead {
+  padding: var(--padding);
+}
+
+
+.project_text_container {
+  padding: 10vw 5%;
+  display: flex;
+}
+
+
+section.project_title {
+  width: 50%;
+}
+
+
+ul.project_information {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.project_location, .project_size {
+  width: 50%;
+  flex: 0 0 auto;
+}
+
+.project_location h4, .project_size h4 {
+  font-weight: 400;
+}
+
+.project_comment {
+  margin: 1em 0 0 0;
+  flex: 1 1 100%;
+  width: 100%;
+}
+
+.main_view, .main_view img, .sub_view, .sub_view img {
+  width: 100%;
+  margin: auto;
+}
+
+
+.full.wrapper {
+    padding: var(--padding);
+    margin: 0 auto 10vw auto;
+}
+
+
+.half {
+  display: flex;
+  padding: var(--padding);
+  gap: 5em;
+  margin: 0 auto 10vw auto;
+}
+
+.half .project_image {
+  flex: 1;
+  aspect-ratio: 4 / 3;
+  min-width: 0;
+  object-fit: cover;
+}
+
+.left {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto 10vw 0;
+}
+
+
+.right {
+    width: 50%;
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 0 0 10vw auto;
+}
+
+
+/* ========================= 
+   Footer 
+========================= */ 
+footer { 
+  background-color: var(--black); 
+  color: var(--white); 
+  font-size: var(--font-small); 
+  margin: 10vw 0 0 0;
+  min-height: 80px;
+  display: flex;
+}
+
+footer .footer_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--padding);
+  width: 100%;
+}
+
+.footer_container_information {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
 
