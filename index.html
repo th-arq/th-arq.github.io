@@ -86,51 +86,6 @@
 
 <!-- 直書きJS -->
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const overlay = document.getElementById('overlay');
-  const burger = document.querySelector('.hamburger');
-  const menu = document.getElementById('menu');
-  const titleArea = document.getElementById('title_area');
-  const menuLinks = menu ? menu.querySelectorAll('a') : [];
-  const pageFades = document.querySelectorAll('.page-fade');
-
-  function closeMenu() {
-    burger.classList.remove('open');
-    menu.classList.remove('open');
-    titleArea.classList.remove('open');
-    overlay.classList.remove('active');
-  }
-
-  if (burger && menu && overlay && titleArea) {
-    burger.addEventListener('click', () => {
-      burger.classList.toggle('open');
-      menu.classList.toggle('open');
-      titleArea.classList.toggle('open');
-      overlay.classList.toggle('active');
-    });
-
-    overlay.addEventListener('click', closeMenu);
-
-    document.addEventListener('click', (e) => {
-      if (!menu.classList.contains('open')) return;
-      if (menu.contains(e.target) || burger.contains(e.target)) return;
-      closeMenu();
-    });
-
-    menuLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const url = link.getAttribute('href');
-        closeMenu();
-        pageFades.forEach(el => el.classList.add('fade-out'));
-        setTimeout(() => { window.location.href = url; }, 800);
-      });
-    });
-  }
-
-  pageFades.forEach(el => el.classList.add('loaded'));
-});
-
 window.addEventListener('load', () => {
   const loading = document.getElementById('loading');
   const mainview = document.getElementById('Mainview');
@@ -146,12 +101,14 @@ window.addEventListener('load', () => {
   const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
 
   setTimeout(() => {
+    // 1. Loading フェードアウト
     loading.style.opacity = '0';
+
     setTimeout(() => {
       loading.style.display = 'none';
       mainview.style.display = 'block';
 
-      // Swiper 初期化
+      // 2. Swiper 初期化
       const swiper = new Swiper('.top-slider', {
         loop: true,
         speed: 1000,
@@ -159,7 +116,7 @@ window.addEventListener('load', () => {
         pagination: { el: '.swiper-pagination', clickable: true },
       });
 
-      // Header/Footer フェードイン
+      // 3. Header/Footer フェードイン
       header.style.opacity = '0';
       footer.style.opacity = '0';
       setTimeout(() => {
@@ -169,9 +126,9 @@ window.addEventListener('load', () => {
         footer.style.opacity = '1';
       }, 200);
 
-      // ページ全体フェードイン
+      // 4. ページ全体フェードイン
       pageFades.forEach(el => el.classList.add('loaded'));
-    }, 500);
+    }, 500); // loading フェード時間
   }, remaining);
 });
 </script>
