@@ -1,5 +1,5 @@
 /* =========================
-   DOM Ready - 共通
+   DOM Ready - 共通（index以外）
 ========================= */
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -56,3 +56,4 @@ document.addEventListener('DOMContentLoaded', () => {
   ========================= */
   pageFades.forEach(el => el.classList.add('loaded'));
 });
+
