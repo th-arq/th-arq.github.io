@@ -107,7 +107,6 @@ body.page-fade.fade-out {
    Header / Title Area
 ========================= */
 header {
-  height: 120px;
   width: 100%;
 }
 
@@ -115,7 +114,7 @@ header {
   display: flex;
   justify-content: space-between;
   z-index: 1100;
-  padding: 60px 5% 0 5%;
+  padding: 60px 5%;
   transition: background 0.3s ease;
 }
 
