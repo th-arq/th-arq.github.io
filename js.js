@@ -1,11 +1,4 @@
-/* =========================
-   DOM Ready - 共通（index以外）
-========================= */
 document.addEventListener('DOMContentLoaded', () => {
-
-  /* =========================
-     Hamburger Menu
-  ========================= */
   const overlay = document.getElementById('overlay');
   const burger = document.querySelector('.hamburger');
   const menu = document.getElementById('menu');
@@ -40,20 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const url = link.getAttribute('href');
-
         closeMenu();
         pageFades.forEach(el => el.classList.add('fade-out'));
-
-        setTimeout(() => {
-          window.location.href = url;
-        }, 800);
+        setTimeout(() => { window.location.href = url; }, 800);
       });
     });
   }
 
-  /* =========================
-     ページフェードイン
-  ========================= */
+  // ページ全体フェードイン
   pageFades.forEach(el => el.classList.add('loaded'));
 });
-
