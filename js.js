@@ -1,3 +1,4 @@
+
 /* =========================
    DOM Ready
 ========================= */
@@ -12,6 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const titleArea = document.getElementById('title_area');
   const menuLinks = menu ? menu.querySelectorAll('a') : [];
   const pageFades = document.querySelectorAll('.page-fade');
+  const header = document.querySelector('header');
+  const footer = document.querySelector('footer');
+  const mainview = document.getElementById('Mainview');
 
   function closeMenu() {
     burger.classList.remove('open');
@@ -54,40 +58,65 @@ document.addEventListener('DOMContentLoaded', () => {
   /* =========================
      Normal Page Fade In
   ========================= */
-document.addEventListener('DOMContentLoaded', () => {
-  const pageFades = document.querySelectorAll('.page-fade');
-
-  // ちょっとだけ遅らせてフェードイン
+  // ほんのちょっと遅らせて自然なフェードに
   setTimeout(() => {
     pageFades.forEach(el => el.classList.add('loaded'));
-  }, 100); // 0.1秒遅らせるだけでも自然に
+  }, 100);
+
 });
 
 
 /* =========================
-   Loading (Top Page Only)
+   Loading + Swiper (Top Page Only)
 ========================= */
 window.addEventListener('load', () => {
   const loading = document.getElementById('loading');
-  if (!loading) return; // ← 他ページはここで終了
+  const mainview = document.getElementById('Mainview');
+  const header = document.querySelector('header');
+  const footer = document.querySelector('footer');
 
-  const pageFades = document.querySelectorAll('.page-fade');
+  if (!loading || !mainview || !header || !footer) return;
 
-  // 最低表示時間（ms）
   const MIN_LOADING_TIME = 2500;
   const startTime = performance.now();
-
   const elapsed = performance.now() - startTime;
   const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
 
+  // Loadingフェードアウト開始
   setTimeout(() => {
     loading.style.opacity = '0';
 
     setTimeout(() => {
       loading.style.display = 'none';
-      pageFades.forEach(el => el.classList.add('loaded'));
-    }, 1500);
 
+      // Swiper表示
+      mainview.style.display = 'block';
+
+      // Swiper初期化
+      const swiper = new Swiper('.top-slider', {
+        loop: true,
+        speed: 1000,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+      });
+
+      // Header/Footerをふんわり表示
+      header.style.opacity = '0';
+      footer.style.opacity = '0';
+      setTimeout(() => {
+        header.style.transition = 'opacity 1.2s ease';
+        footer.style.transition = 'opacity 1.2s ease';
+        header.style.opacity = '1';
+        footer.style.opacity = '1';
+      }, 100);
+
+    }, 500); // loadingのフェード時間
   }, remaining);
-});
 
+});
