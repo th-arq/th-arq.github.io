@@ -1,4 +1,11 @@
+/* =========================
+   DOM Ready
+========================= */
 document.addEventListener('DOMContentLoaded', () => {
+
+  /* =========================
+     Hamburger Menu
+  ========================== */
   const overlay = document.getElementById('overlay');
   const burger = document.querySelector('.hamburger');
   const menu = document.getElementById('menu');
@@ -40,6 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ページ全体フェードイン
-  pageFades.forEach(el => el.classList.add('loaded'));
+  /* =========================
+     Page Fade In (other pages)
+  ========================= */
+  const pageFadeElems = document.querySelectorAll('.page-fade');
+  pageFadeElems.forEach(el => el.classList.add('loaded'));
 });
