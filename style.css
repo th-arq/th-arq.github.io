@@ -461,11 +461,12 @@ section.page_lead {
 .project_text_container {
   padding: 10vw 5%;
   display: flex;
-      flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .project_location, .project_size {
-    width: 50%;
+  width: 50%;
+  flex: 0 0 auto;
 }
 
 .project_location h4, .project_size h4 {
@@ -474,6 +475,7 @@ section.page_lead {
 
 .project_comment {
   margin: 1em 0 0 0;
+  flex: 1 1 100%;
   width: 100%;
 }
 
