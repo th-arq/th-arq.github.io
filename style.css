@@ -240,9 +240,11 @@ a.button {
    Swiper
 ========================= */ 
 #Mainview {
-  display: none;
+  display: block;
+  opacity: 0;
   width: 100%;
   height: 100vh; 
+  transition: opacity 1s ease;
 }
 
 .top-slider {
