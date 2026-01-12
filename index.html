@@ -106,25 +106,59 @@
   <style css="stylesheet">
     main { display: block; padding: 0; }
     footer { bottom: 0;}
+    header, footer {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
   </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  // Swiper初期化
-  const swiper = new Swiper('.top-slider', {
-    loop: true,
-    speed: 1000,
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-  });
+  window.addEventListener('load', () => {
+  const loading = document.getElementById('loading');
+  const mainview = document.getElementById('Mainview');
+  const header = document.querySelector('header');
+  const footer = document.querySelector('footer');
 
-  });
+  if (!loading || !mainview || !header || !footer) return;
+
+  const MIN_LOADING_TIME = 2500;
+  const startTime = performance.now();
+  const elapsed = performance.now() - startTime;
+  const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
+
+  setTimeout(() => {
+    // 1. Loadingフェードアウト
+    loading.style.opacity = '0';
+
+    setTimeout(() => {
+      loading.style.display = 'none';
+
+      // 2. Swiperを表示
+      mainview.style.display = 'block';
+
+      // Swiper初期化（もともとの設定をここでもOK）
+      const swiper = new Swiper('.top-slider', {
+        loop: true,
+        speed: 1000,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+      });
+
+      // 3. Header/Footerをフェードイン
+      setTimeout(() => {
+        header.style.opacity = '1';
+        footer.style.opacity = '1';
+      }, 500);
+
+    }, 500); // loadingのフェード時間
+  }, remaining);
+});
 </script>
 
   <!-- Swiper JS -->
