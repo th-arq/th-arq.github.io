@@ -127,49 +127,38 @@ window.addEventListener('load', () => {
   const elapsed = performance.now() - startTime;
   const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
 
-  // 最低表示時間確保
   setTimeout(() => {
-    // 1. Loadingフェードアウト
     loading.style.opacity = '0';
 
     setTimeout(() => {
       loading.style.display = 'none';
-
-      // 2. Swiper表示
       mainview.style.display = 'block';
 
       // Swiper初期化
       const swiper = new Swiper('.top-slider', {
         loop: true,
         speed: 1000,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false,
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
+        autoplay: { delay: 3000, disableOnInteraction: false },
+        pagination: { el: '.swiper-pagination', clickable: true },
       });
 
-      // 3. Header/Footerフェードイン
+      // Header/Footer フェードイン
       header.style.opacity = '0';
       footer.style.opacity = '0';
-
       setTimeout(() => {
         header.style.transition = 'opacity 1.2s ease';
         footer.style.transition = 'opacity 1.2s ease';
         header.style.opacity = '1';
         footer.style.opacity = '1';
-      }, 200); // 少し遅らせて自然に
+      }, 200);
 
-      // 4. ページ全体フェードイン（body）
+      // ページ全体フェードイン
       pageFades.forEach(el => el.classList.add('loaded'));
-
-    }, 500); // loadingフェード時間
+    }, 500);
   }, remaining);
 });
 </script>
+
 
   <!-- Swiper JS -->
    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
