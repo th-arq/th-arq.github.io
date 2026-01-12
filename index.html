@@ -112,55 +112,6 @@
     }
   </style>
 
-<script>
-window.addEventListener('load', () => {
-  const loading = document.getElementById('loading');
-  const mainview = document.getElementById('Mainview');
-  const header = document.querySelector('header');
-  const footer = document.querySelector('footer');
-
-  if (!loading || !mainview || !header || !footer) return;
-
-  const MIN_LOADING_TIME = 2500;
-  const startTime = performance.now();
-  const elapsed = performance.now() - startTime;
-  const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
-
-  setTimeout(() => {
-    // 1. Loadingフェードアウト
-    loading.style.opacity = '0';
-
-    setTimeout(() => {
-      loading.style.display = 'none';
-
-      // 2. Swiperをフェードイン
-      mainview.style.opacity = '1';
-
-      // Swiper初期化
-      const swiper = new Swiper('.top-slider', {
-        loop: true,
-        speed: 1000,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false,
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-      });
-
-      // 3. Header/Footerをフェードイン
-      setTimeout(() => {
-        header.style.opacity = '1';
-        footer.style.opacity = '1';
-      }, 500);
-
-    }, 500); // loadingフェード時間
-  }, remaining);
-});
-</script>
-
   <!-- Swiper JS -->
    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
    <script src="js.js"></script>
