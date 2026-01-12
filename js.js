@@ -54,7 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
   /* =========================
      Normal Page Fade In
   ========================= */
-  pageFades.forEach(el => el.classList.add('loaded'));
+document.addEventListener('DOMContentLoaded', () => {
+  const pageFades = document.querySelectorAll('.page-fade');
+
+  // ちょっとだけ遅らせてフェードイン
+  setTimeout(() => {
+    pageFades.forEach(el => el.classList.add('loaded'));
+  }, 100); // 0.1秒遅らせるだけでも自然に
 });
 
 
