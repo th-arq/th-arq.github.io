@@ -40,6 +40,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ページ全体フェードイン
-  pageFades.forEach(el => el.classList.add('loaded'));
 });
