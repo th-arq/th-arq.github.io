@@ -61,7 +61,7 @@ a:hover::after {
    Page Fade (Common)
 ========================= */
 body.page-fade {
-  opacity: 0;
+  opacity: 1;
   transition: opacity 1.5s ease;
 }
 
@@ -160,6 +160,7 @@ a.button {
   gap: 0.5em;
   cursor: pointer;
   z-index: 1500;
+  position: relative;
 }
 
 .hamburger span {
