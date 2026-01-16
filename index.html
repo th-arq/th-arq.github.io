@@ -15,14 +15,9 @@
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   
   <style>
-    /* =========================
-       Page Fade & Mainview
-    ========================= */
     body.page-fade { opacity: 0; transition: opacity 1.5s ease; }
     body.page-fade.loaded { opacity: 1; }
     body.page-fade.fade-out { opacity: 0; }
-
-    #Mainview { display: none; opacity: 0; width: 100%; height: 100vh; transition: opacity 1s ease; }
     .top-slider { width: 90%; height: 100%; margin: auto; }
     .top-slider img { width: 100%; height: 100%; object-fit: cover; }
     .swiper-pagination-bullet-active { background: #fff !important; }
@@ -93,53 +88,62 @@
   <!-- Common JS (index以外と共通処理) -->
   <script src="js/common.js"></script>
 
-  <!-- Index直書きJS -->
   <script>
-  window.addEventListener('load', () => {
-    const loading = document.getElementById('loading');
-    const mainview = document.getElementById('Mainview');
-    const header = document.querySelector('header');
-    const footer = document.querySelector('footer');
-    const pageFades = document.querySelectorAll('.page-fade');
+window.addEventListener('load', () => {
+  const loading = document.getElementById('loading');
+  const mainview = document.getElementById('Mainview');
+  const header = document.querySelector('header');
+  const footer = document.querySelector('footer');
+  const pageFades = document.querySelectorAll('.page-fade');
 
-    if (!loading || !mainview || !header || !footer) return;
+  if (!loading || !mainview || !header || !footer) return;
 
-    const MIN_LOADING_TIME = 2500;
-    const startTime = performance.now();
-    const elapsed = performance.now() - startTime;
-    const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
+  const MIN_LOADING_TIME = 2500;
+
+  setTimeout(() => {
+
+    // loading フェードアウト
+    loading.style.opacity = '0';
+    loading.style.pointerEvents = 'none';
 
     setTimeout(() => {
-      loading.style.opacity = '0';
-      loading.style.pointerEvents = 'none';
+      loading.style.display = 'none';
+
+      // Mainview 表示
+      mainview.style.opacity = '1';
+
+      // Swiper 初期化（表示後）
+      const swiper = new Swiper('.top-slider', {
+        loop: true,
+        speed: 1000,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        }
+      });
+
+      // Header / Footer フェードイン
+      header.style.opacity = '0';
+      footer.style.opacity = '0';
 
       setTimeout(() => {
-        loading.style.display = 'none';
-        mainview.style.display = 'block';
+        header.style.transition = 'opacity 1.2s ease';
+        footer.style.transition = 'opacity 1.2s ease';
+        header.style.opacity = '1';
+        footer.style.opacity = '1';
+      }, 100);
 
-        // Swiper 初期化
-        const swiper = new Swiper('.top-slider', {
-          loop: true,
-          speed: 1000,
-          autoplay: { delay: 3000, disableOnInteraction: false },
-          pagination: { el: '.swiper-pagination', clickable: true },
-        });
+      // ページフェード
+      pageFades.forEach(el => el.classList.add('loaded'));
 
-        // Header/Footer フェードイン
-        header.style.opacity = '0';
-        footer.style.opacity = '0';
-        setTimeout(() => {
-          header.style.transition = 'opacity 1.2s ease';
-          footer.style.transition = 'opacity 1.2s ease';
-          header.style.opacity = '1';
-          footer.style.opacity = '1';
-        }, 200);
+    }, 400);
 
-        // ページ全体フェードイン
-        pageFades.forEach(el => el.classList.add('loaded'));
-      }, 500);
-    }, remaining);
-  });
-  </script>
+  }, MIN_LOADING_TIME);
+});
+</script>
 </body>
 </html>
