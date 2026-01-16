@@ -77,19 +77,7 @@
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <!-- Common JS (index以外と共通処理) -->
   <script src="js/common.js"></script>
-  <style>
-    header,
-footer {
-  opacity: 0;
-  transition: opacity 1.2s ease;
-}
-
-header.loaded,
-footer.loaded {
-  opacity: 1;
-}
-  </style>
-  <script>
+ <script>
 window.addEventListener('load', () => {
 
   const loading = document.getElementById('loading');
@@ -100,6 +88,11 @@ window.addEventListener('load', () => {
   if (!loading || !mainview || !header || !footer) return;
 
   const MIN_LOADING_TIME = 2500;
+
+  // 初期状態を明示
+  header.style.opacity = '0';
+  footer.style.opacity = '0';
+  mainview.style.opacity = '0';
 
   setTimeout(() => {
 
@@ -115,26 +108,32 @@ window.addEventListener('load', () => {
       // Body フェードイン
       document.body.classList.add('loaded');
 
-      // Header / Footer 表示
-      header.classList.add('loaded');
-      footer.classList.add('loaded');
+      // ===== ② Header / Footer 表示 =====
+      header.style.transition = 'opacity 1s ease';
+      footer.style.transition = 'opacity 1s ease';
 
-      // Mainview 表示
-      mainview.style.opacity = '1';
+      header.style.opacity = '1';
+      footer.style.opacity = '1';
 
-      // Swiper 初期化
-      new Swiper('.top-slider', {
-        loop: true,
-        speed: 1000,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true
-        }
-      });
+      // ===== ③ 少し遅らせて Swiper 表示 =====
+      setTimeout(() => {
+
+        mainview.style.opacity = '1';
+
+        new Swiper('.top-slider', {
+          loop: true,
+          speed: 1000,
+          autoplay: {
+            delay: 3000,
+            disableOnInteraction: false
+          },
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+          }
+        });
+
+      }, 500); // ← Header出てからSwiper
 
     }, 300);
 
