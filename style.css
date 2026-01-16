@@ -61,7 +61,7 @@ a:hover::after {
    Page Fade (Common)
 ========================= */
 body.page-fade {
-  opacity: 1;
+  opacity: 0;
   transition: opacity 1.5s ease;
 }
 
@@ -112,6 +112,7 @@ header {
   top: 0;
   left: 0;
   z-index: 1300;
+  pointer-events: auto;
 }
 
 #title_area {
@@ -121,6 +122,9 @@ header {
   padding: 60px 5%;
   transition: background 0.3s ease;
 }
+
+
+
 
 
 /* =========================
