@@ -64,7 +64,7 @@
   </header>
 
   <!-- Main -->
-  <main>
+  <main style="display: block;">
     <div id="Mainview">
       <div class="swiper top-slider">
         <div class="swiper-wrapper">
@@ -110,8 +110,8 @@
     const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
 
     setTimeout(() => {
-      // Loading フェードアウト
       loading.style.opacity = '0';
+      loading.style.pointerEvents = 'none';
 
       setTimeout(() => {
         loading.style.display = 'none';
