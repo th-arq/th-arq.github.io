@@ -88,7 +88,6 @@ body.page-fade.fade-out {
   z-index: 9999;
   opacity: 1;
   transition: opacity 2.5s ease;
-  pointer-events: none;
 }
 
 .loading_logo_svg {
@@ -160,7 +159,7 @@ a.button {
   align-items: center;
   gap: 0.5em;
   cursor: pointer;
-  z-index: 1200;
+  z-index: 1500;
 }
 
 .hamburger span {
