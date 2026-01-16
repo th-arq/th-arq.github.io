@@ -77,14 +77,25 @@
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <!-- Common JS (index以外と共通処理) -->
   <script src="js/common.js"></script>
+  <style>
+    header,
+footer {
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
 
+header.loaded,
+footer.loaded {
+  opacity: 1;
+}
+  </style>
   <script>
 window.addEventListener('load', () => {
+
   const loading = document.getElementById('loading');
   const mainview = document.getElementById('Mainview');
   const header = document.querySelector('header');
   const footer = document.querySelector('footer');
-  const pageFades = document.querySelectorAll('.page-fade');
 
   if (!loading || !mainview || !header || !footer) return;
 
@@ -92,18 +103,27 @@ window.addEventListener('load', () => {
 
   setTimeout(() => {
 
+    // Loading フェードアウト
     loading.style.opacity = '0';
-    loading.style.pointerEvents = 'none';
-    loading.style.visibility = 'hidden';
 
     setTimeout(() => {
+
+      // Loading 完全削除
       loading.style.display = 'none';
+      loading.style.zIndex = '-1';
+
+      // Body フェードイン
+      document.body.classList.add('loaded');
+
+      // Header / Footer 表示
+      header.classList.add('loaded');
+      footer.classList.add('loaded');
 
       // Mainview 表示
       mainview.style.opacity = '1';
 
-      // Swiper 初期化（表示後）
-      const swiper = new Swiper('.top-slider', {
+      // Swiper 初期化
+      new Swiper('.top-slider', {
         loop: true,
         speed: 1000,
         autoplay: {
@@ -116,23 +136,10 @@ window.addEventListener('load', () => {
         }
       });
 
-      // Header / Footer フェードイン
-      header.style.opacity = '0';
-      footer.style.opacity = '0';
-
-      setTimeout(() => {
-        header.style.transition = 'opacity 1.2s ease';
-        footer.style.transition = 'opacity 1.2s ease';
-        header.style.opacity = '1';
-        footer.style.opacity = '1';
-      }, 100);
-
-      // ページフェード
-      pageFades.forEach(el => el.classList.add('loaded'));
-
-    }, 400);
+    }, 300);
 
   }, MIN_LOADING_TIME);
+
 });
 </script>
 </body>
