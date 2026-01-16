@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!burger || !menu || !overlay || !titleArea) return;
 
-function closeMenu() {
+  function closeMenu() {
     burger.classList.remove('open');
     menu.classList.remove('open');
     titleArea.classList.remove('open');
@@ -25,24 +25,5 @@ function closeMenu() {
   });
 
   overlay.addEventListener('click', closeMenu);
-
-});
-
-  // メニューリンク遷移フェード
-  menuLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      const url = link.getAttribute('href');
-
-      closeMenu();
-
-      pageFades.forEach(el => el.classList.add('fade-out'));
-
-      setTimeout(() => {
-        window.location.href = url;
-      }, 800);
-    });
-  });
 
 });
