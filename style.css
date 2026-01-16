@@ -74,6 +74,7 @@ body.page-fade.fade-out {
 }
 
 
+
 /* =========================
    Loading (Top only)
 ========================= */
@@ -87,6 +88,7 @@ body.page-fade.fade-out {
   z-index: 9999;
   opacity: 1;
   transition: opacity 2.5s ease;
+  pointer-events: none;
 }
 
 .loading_logo_svg {
@@ -108,6 +110,7 @@ body.page-fade.fade-out {
 ========================= */
 header {
   width: 100%;
+  z-index: 1300;
 }
 
 #title_area {
