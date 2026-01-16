@@ -92,9 +92,9 @@ window.addEventListener('load', () => {
 
   setTimeout(() => {
 
-    // loading フェードアウト
     loading.style.opacity = '0';
     loading.style.pointerEvents = 'none';
+    loading.style.visibility = 'hidden';
 
     setTimeout(() => {
       loading.style.display = 'none';
