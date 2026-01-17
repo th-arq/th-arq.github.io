@@ -107,10 +107,11 @@ body.page-fade.fade-out {
    Header / Title Area
 ========================= */
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  position: relative;
-  z-index: 3000;
-  pointer-events: auto;
+  z-index: 5000;
 }
 
 #title_area {
@@ -281,9 +282,8 @@ main {
   padding: var(--padding);
   background: transparent;
   min-height: 100vh;
-    position: relative;
+  position: relative;
   z-index: 1;
-  will-change: transform;
 }
 
 #contents_title {
