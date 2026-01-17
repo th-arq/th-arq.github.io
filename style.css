@@ -92,7 +92,7 @@ body.page-fade.fade-out {
 
 .loading_logo_svg {
   fill: var(--black);
-  opacity: 0;
+  opacity: 1;
   animation: fadeIn 2s forwards;
   width: 150px;
 }
