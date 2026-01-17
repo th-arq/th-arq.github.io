@@ -281,7 +281,6 @@ main {
   background: transparent;
   min-height: 100vh;
   position: relative;
-  pointer-events: none;
   z-index: 1;
 }
 
