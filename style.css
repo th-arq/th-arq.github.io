@@ -9,9 +9,7 @@ html, body {
   font-size: var(--font-medium);
   font-family: 'Jost', sans-serif;
   font-weight: 300;
-  /*height: auto;
-  will-change: transform;
-  scroll-behavior: auto;*/
+  scroll-behavior: smooth;
 }
 
 ul, ol, p { list-style: none; padding: 0; padding-inline-start: 0; margin: 0;}
@@ -280,7 +278,6 @@ main {
   display: flex;
   padding: var(--padding);
   background: transparent;
-  will-change: transform;
   min-height: 100vh;
 }
 
