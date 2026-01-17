@@ -89,7 +89,7 @@ window.addEventListener('load', () => {
 
   if (!loading || !mainview || !header || !footer) return;
 
-  const LOADING_TIME = 5500;
+  const LOADING_TIME = 2000;
 
   // 初期状態
   [header, footer, mainview].forEach(el => el.style.opacity = '0');
@@ -115,7 +115,7 @@ window.addEventListener('load', () => {
           loop: true,
           effect: 'fade',
           fadeEffect: { crossFade: true },
-          speed: 1500,
+          speed: 1000,
           autoplay: {
             delay: 5000,
             disableOnInteraction: false
