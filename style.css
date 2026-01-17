@@ -497,14 +497,14 @@ ul.project_information {
 
 .full.wrapper {
   padding: var(--padding);
-  margin: 0 auto 10vw auto;
+  margin: 0 auto 5vw auto;
 }
 
 .half {
   display: flex;
   padding: var(--padding);
   gap: 5em;
-  margin: 0 auto 10vw auto;
+  margin: 0 auto 5vw auto;
 }
 
 .half .project_image {
@@ -515,18 +515,20 @@ ul.project_information {
 }
 
 .left {
+      padding: var(--padding);
   width: 50%;
   display: flex;
   flex-direction: row;
-  margin: 0 auto 10vw 0;
+  margin: 0 auto 5vw 0;
 }
 
 
 .right {
+      padding: var(--padding);
   width: 50%;
   display: flex;
   flex-direction: row-reverse;
-  margin: 0 0 10vw auto;
+  margin: 0 0 5vw auto;
 }
 
 
