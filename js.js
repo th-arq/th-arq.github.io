@@ -67,7 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let currentScroll = 0;
 let targetScroll = 0;
-const ease = 0.09; // ←ぬるっと感UP
+const ease = 0.06;
+
+const container = document.querySelector('main');
 
 function inertiaScroll() {
   targetScroll = window.scrollY;
@@ -75,12 +77,11 @@ function inertiaScroll() {
   const diff = targetScroll - currentScroll;
   currentScroll += diff * ease;
 
-  // 微振動防止
   if (Math.abs(diff) < 0.1) {
     currentScroll = targetScroll;
   }
 
-  document.body.style.transform = `translateY(${-currentScroll}px)`;
+  container.style.transform = `translateY(${-currentScroll}px)`;
 
   requestAnimationFrame(inertiaScroll);
 }
