@@ -413,7 +413,7 @@ ul.projects_menu a::after {
 .projects_contents li a img {
   width: 100%;
   height: 100%;;
-  transition: clip-path 0.3s ease, transform 0.3s ease;
+  transition: clip-path 0.5s ease, transform 0.5s ease;
   clip-path: inset(0 0 0 0);
   object-position: center;
   object-fit: cover;
@@ -464,18 +464,14 @@ figure {
   margin: 0;
 }
 
-
-
 section.page_lead {
   padding: var(--padding);
 }
-
 
 .project_text_container {
   padding: 10vw 5%;
   display: flex;
 }
-
 
 section.project_title {
   width: 50%;
@@ -483,8 +479,8 @@ section.project_title {
 
 
 ul.project_information {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .project_location, .project_size {
@@ -506,7 +502,6 @@ ul.project_information {
   width: 100%;
   margin: auto;
 }
-
 
 .full.wrapper {
     padding: var(--padding);
