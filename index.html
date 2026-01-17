@@ -90,15 +90,15 @@ window.addEventListener('load', () => {
   if (!loading || !mainview || !header || !footer) return;
 
   /* ===== 時間調整ここだけ触ればOK ===== */
-  const LOADING_TIME   = 2500; // ローディング表示時間
+  const LOADING_TIME   = 2000; // ローディング表示時間
   const HEADER_DELAY   = 600;  // loading消えてからheader出るまで
-  const SWIPER_DELAY   = 800;  // header表示後 swiper出るまで
+  const SWIPER_DELAY   = 1500;  // header表示後 swiper出るまで
   /* ================================== */
 
   // 初期状態
   header.style.opacity = '0';
-  header.style.transform = 'translateY(20px)';
-  header.style.filter = 'blur(6px)';
+  header.style.transform = 'translateY(30px)';
+  header.style.filter = 'blur(10px)';
 
   footer.style.opacity = '0';
 
