@@ -35,7 +35,7 @@ a::after {
 a:hover::after {
   width: 100%;
 }
-
+loadheader
 /* =========================
    Variables
 ========================= */
@@ -108,7 +108,8 @@ body.page-fade.fade-out {
 ========================= */
 header {
   width: 100%;
-  z-index: 1300;
+  position: relative;
+  z-index: 3000;
   pointer-events: auto;
 }
 
@@ -157,7 +158,7 @@ a.button {
   align-items: center;
   gap: 0.5em;
   cursor: pointer;
-  z-index: 1500;
+  z-index: 4000;
   position: relative;
 }
 
@@ -192,13 +193,14 @@ a.button {
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.5s ease;
-  z-index: 900;
+  z-index: 2400;
 }
 
 #overlay.active {
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
+  z-index: 2400;
 }
 
 
@@ -214,7 +216,7 @@ a.button {
   padding: 0 5%;
   background: var(--black);
   color: var(--white);
-  z-index: 1000;
+  z-index: 2500;
   transform: translateX(-100%);
   transition: transform 0.5s ease;
   overflow: hidden;
@@ -247,12 +249,14 @@ a.button {
 #Mainview {
   opacity: 0;
   transition: opacity 1s ease;
+  z-index: 1;
 }
 
 .top-slider {
   width: 100%;
   height: 100%;
   margin: auto;
+  z-index: 1;
 }
 
 .top-slider img {
