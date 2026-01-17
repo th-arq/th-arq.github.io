@@ -280,6 +280,7 @@ main {
   display: flex;
   padding: var(--padding);
   background: transparent;
+  will-change: transform;
 }
 
 #contents_title {
