@@ -89,7 +89,7 @@ window.addEventListener('load', () => {
 
   if (!loading || !mainview || !header || !footer) return;
 
-  const LOADING_TIME = 2000;
+  const LOADING_TIME = 1000;
 
   // 初期状態
   [header, footer, mainview].forEach(el => el.style.opacity = '0');
@@ -103,7 +103,7 @@ window.addEventListener('load', () => {
       loading.remove();
 
       // header / footer 表示
-      header.style.transition = footer.style.transition = 'opacity 3s ease';
+      header.style.transition = footer.style.transition = 'opacity 0.5 ease';
       header.style.opacity = footer.style.opacity = '1';
 
       // swiper 表示
