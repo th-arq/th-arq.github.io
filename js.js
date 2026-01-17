@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-show');
 
-          // 一回だけ発火 → パフォーマンス最適化
           imageObserver.unobserve(entry.target);
         }
       });
@@ -59,29 +58,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-
-  // ======================
-  // Scroll
-  // ======================
-let currentScroll = 0;
-let targetScroll = 0;
-const ease = 0.03; // ぬるっと感の強さ
-
-const container = document.getElementById('scroll-container');
-
-function inertiaScroll() {
-  targetScroll = window.scrollY;
-
-  const diff = targetScroll - currentScroll;
-  currentScroll += diff * ease;
-
-  if (Math.abs(diff) < 0.1) {
-    currentScroll = targetScroll;
-  }
-
-  container.style.transform = `translateY(${-currentScroll}px)`;
-
-  requestAnimationFrame(inertiaScroll);
-}
-
-inertiaScroll();
