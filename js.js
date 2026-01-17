@@ -65,16 +65,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // ======================
 
 
-
 let currentScroll = 0;
 let targetScroll = 0;
-const ease = 0.05; // 小さいほど余韻長い（0.08〜0.15おすすめ）
+const ease = 0.05; // ←ぬるっと感UP
 
 function inertiaScroll() {
   targetScroll = window.scrollY;
-  currentScroll += (targetScroll - currentScroll) * ease;
 
-  document.documentElement.style.scrollBehavior = 'auto';
+  const diff = targetScroll - currentScroll;
+  currentScroll += diff * ease;
+
+  // 微振動防止
+  if (Math.abs(diff) < 0.1) {
+    currentScroll = targetScroll;
+  }
+
+  document.body.style.transform = `translateY(${-currentScroll}px)`;
 
   requestAnimationFrame(inertiaScroll);
 }
