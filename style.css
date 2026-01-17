@@ -253,12 +253,11 @@ a.button {
 #Mainview {
   opacity: 0;
   width: 100%;
-  height: 100vh;
   transition: opacity 1s ease;
 }
 
 .top-slider {
-  width: 90%;
+  width: 100%;
   height: 100%;
   margin: auto;
 }
@@ -543,6 +542,20 @@ ul.project_information {
     margin: 0 0 10vw auto;
 }
 
+
+.project_image {
+  transform: scale(1.08);
+  opacity: 0;
+  transition:
+    transform 1.4s cubic-bezier(.16,1,.3,1),
+    opacity 0.9s ease;
+  will-change: transform;
+}
+
+.project_image.is-show {
+  transform: scale(1);
+  opacity: 1;
+}
 
 /* ========================= 
    Footer 
