@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let currentScroll = 0;
 let targetScroll = 0;
-const ease = 0.05; // ←ぬるっと感UP
+const ease = 0.09; // ←ぬるっと感UP
 
 function inertiaScroll() {
   targetScroll = window.scrollY;
