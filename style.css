@@ -509,7 +509,7 @@ ul.project_information {
 
 .half .project_image {
   flex: 1;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 4;
   min-width: 0;
   object-fit: cover;
 }
