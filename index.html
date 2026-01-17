@@ -49,7 +49,7 @@
   </header>
 
   <!-- Main -->
-  <main style="display: block;">
+  <main style="display: block; position: static; z-index: 1;">
     <div id="Mainview">
       <div class="swiper top-slider">
         <div class="swiper-wrapper">
@@ -103,7 +103,7 @@ window.addEventListener('load', () => {
       loading.remove();
 
       // header / footer 表示
-      header.style.transition = footer.style.transition = 'opacity 5s ease';
+      header.style.transition = footer.style.transition = 'opacity 0.5s ease';
       header.style.opacity = footer.style.opacity = '1';
 
       // swiper 表示
