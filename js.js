@@ -58,3 +58,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
+
+  // ======================
+  // Scroll
+  // ======================
+
+
+
+let currentScroll = 0;
+let targetScroll = 0;
+const ease = 0.10; // 小さいほど余韻長い（0.08〜0.15おすすめ）
+
+function inertiaScroll() {
+  targetScroll = window.scrollY;
+  currentScroll += (targetScroll - currentScroll) * ease;
+
+  document.documentElement.style.scrollBehavior = 'auto';
+
+  requestAnimationFrame(inertiaScroll);
+}
+
+inertiaScroll();
