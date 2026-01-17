@@ -89,50 +89,74 @@ window.addEventListener('load', () => {
 
   if (!loading || !mainview || !header || !footer) return;
 
-  const LOADING_TIME = 2500;
+  /* ===== 時間調整ここだけ触ればOK ===== */
+  const LOADING_TIME   = 2500; // ローディング表示時間
+  const HEADER_DELAY   = 600;  // loading消えてからheader出るまで
+  const SWIPER_DELAY   = 800;  // header表示後 swiper出るまで
+  /* ================================== */
 
   // 初期状態
-  [header, footer, mainview].forEach(el => el.style.opacity = '0');
+  header.style.opacity = '0';
+  header.style.transform = 'translateY(20px)';
+  header.style.filter = 'blur(6px)';
+
+  footer.style.opacity = '0';
+
+  mainview.style.opacity = '0';
+
+  // transition事前セット
+  header.style.transition = 'opacity 1s ease, transform 1s ease, filter 1s ease';
+  footer.style.transition = 'opacity 0.6s ease';
+  mainview.style.transition = 'opacity 1s ease';
 
   setTimeout(() => {
 
-    // loading消す
+    /* loading フェードアウト */
+    loading.style.transition = 'opacity 0.6s ease';
     loading.style.opacity = '0';
 
     setTimeout(() => {
       loading.remove();
 
-      // header / footer 表示
-      header.style.transition = footer.style.transition = 'opacity 0.5s ease';
-      header.style.opacity = footer.style.opacity = '1';
-
-      // swiper 表示
+      /* header 表示 */
       setTimeout(() => {
 
-        mainview.style.opacity = '1';
+        header.style.opacity = '1';
+        header.style.transform = 'translateY(0)';
+        header.style.filter = 'blur(0)';
 
-        new Swiper('.top-slider', {
-          loop: true,
-          effect: 'fade',
-          fadeEffect: { crossFade: true },
-          speed: 1000,
-          autoplay: {
-            delay: 2500,
-            disableOnInteraction: false
-          },
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true
-          }
-        });
+        footer.style.opacity = '1';
 
-      }, 400);
+        /* swiper 表示 */
+        setTimeout(() => {
 
-    }, 300);
+          mainview.style.opacity = '1';
+
+          new Swiper('.top-slider', {
+            loop: true,
+            effect: 'fade',
+            fadeEffect: { crossFade: true },
+            speed: 1000,
+            autoplay: {
+              delay: 2500,
+              disableOnInteraction: false
+            },
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true
+            }
+          });
+
+        }, SWIPER_DELAY);
+
+      }, HEADER_DELAY);
+
+    }, 600);
 
   }, LOADING_TIME);
 
 });
 </script>
+
 </body>
 </html>
