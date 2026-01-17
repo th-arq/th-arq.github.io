@@ -418,7 +418,7 @@ ul.projects_menu a::after {
 }
 
 .projects_contents li a:hover img {
-  clip-path: inset(40% 0 40% 0);
+  clip-path: inset(70% 0 47% 0);
   transform: scale(1.05);
 }
 
