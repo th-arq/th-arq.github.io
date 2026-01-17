@@ -77,52 +77,45 @@
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <!-- Common JS (index以外と共通処理) -->
   <script src="js.js"></script>
- <script>
+
+
+<script>
 window.addEventListener('load', () => {
 
-  const loading = document.getElementById('loading');
+  const loading  = document.getElementById('loading');
   const mainview = document.getElementById('Mainview');
-  const header = document.querySelector('header');
-  const footer = document.querySelector('footer');
+  const header   = document.querySelector('header');
+  const footer   = document.querySelector('footer');
 
   if (!loading || !mainview || !header || !footer) return;
 
-  const MIN_LOADING_TIME = 2500;
+  const LOADING_TIME = 2500;
 
-  // 初期状態を明示
-  header.style.opacity = '0';
-  footer.style.opacity = '0';
-  mainview.style.opacity = '0';
+  // 初期状態
+  [header, footer, mainview].forEach(el => el.style.opacity = '0');
 
   setTimeout(() => {
 
-    // Loading フェードアウト
+    // loading消す
     loading.style.opacity = '0';
 
     setTimeout(() => {
+      loading.remove();
 
-      // Loading 完全削除
-      loading.style.display = 'none';
-      loading.style.zIndex = '-1';
+      // header / footer 表示
+      header.style.transition = footer.style.transition = 'opacity 1s ease';
+      header.style.opacity = footer.style.opacity = '1';
 
-      // Body フェードイン
-      document.body.classList.add('loaded');
-
-      // ===== ② Header / Footer 表示 =====
-      header.style.transition = 'opacity 1s ease';
-      footer.style.transition = 'opacity 1s ease';
-
-      header.style.opacity = '1';
-      footer.style.opacity = '1';
-
-      // ===== ③ 少し遅らせて Swiper 表示 =====
+      // swiper 表示
       setTimeout(() => {
 
         mainview.style.opacity = '1';
 
         new Swiper('.top-slider', {
           loop: true,
-          speed: 1000,
+          effect: 'fade',
+          fadeEffect: { crossFade: true },
+          speed: 1200,
           autoplay: {
             delay: 3000,
             disableOnInteraction: false
@@ -133,11 +126,11 @@ window.addEventListener('load', () => {
           }
         });
 
-      }, 500); // ← Header出てからSwiper
+      }, 400);
 
     }, 300);
 
-  }, MIN_LOADING_TIME);
+  }, LOADING_TIME);
 
 });
 </script>
