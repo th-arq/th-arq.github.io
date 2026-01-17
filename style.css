@@ -281,6 +281,9 @@ main {
   padding: var(--padding);
   background: transparent;
   min-height: 100vh;
+    position: relative;
+  z-index: 1;
+  will-change: transform;
 }
 
 #contents_title {
