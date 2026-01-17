@@ -92,7 +92,7 @@ window.addEventListener('load', () => {
   /* ===== 時間調整ここだけ触ればOK ===== */
   const LOADING_TIME   = 2000; // ローディング表示時間
   const HEADER_DELAY   = 500;  // loading消えてからheader出るまで
-  const SWIPER_DELAY   = 1000;  // header表示後 swiper出るまで
+  const SWIPER_DELAY   = 800;  // header表示後 swiper出るまで
   /* ================================== */
 
   // 初期状態
@@ -112,7 +112,7 @@ window.addEventListener('load', () => {
   setTimeout(() => {
 
     /* loading フェードアウト */
-    loading.style.transition = 'opacity 1s ease';
+    loading.style.transition = 'opacity 0.8s ease';
     loading.style.opacity = '0';
 
     setTimeout(() => {
