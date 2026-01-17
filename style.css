@@ -108,8 +108,6 @@ body.page-fade.fade-out {
 ========================= */
 header {
   width: 100%;
-  top: 0;
-  left: 0;
   z-index: 1300;
   pointer-events: auto;
 }
@@ -214,7 +212,6 @@ a.button {
   width: 0;          
   height: 100%;
   padding: 0 5%;
-  overflow: hidden;
   background: var(--black);
   color: var(--white);
   z-index: 1000;
@@ -249,7 +246,6 @@ a.button {
 ========================= */ 
 #Mainview {
   opacity: 0;
-  width: 100%;
   transition: opacity 1s ease;
 }
 
@@ -540,7 +536,6 @@ ul.project_information {
   transition:
     transform 1.4s cubic-bezier(.15,1,.2,1),
     opacity 1s ease;
-  will-change: transform;
 }
 
 .project_image.is-show {
