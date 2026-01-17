@@ -35,7 +35,7 @@ a::after {
 a:hover::after {
   width: 100%;
 }
-loadheader
+
 /* =========================
    Variables
 ========================= */
@@ -247,12 +247,14 @@ a.button {
    Swiper
 ========================= */ 
 #Mainview {
+  position: relative;
   opacity: 0;
   transition: opacity 1s ease;
   z-index: 1;
 }
 
 .top-slider {
+  position: relative;
   width: 100%;
   height: 100%;
   margin: auto;
