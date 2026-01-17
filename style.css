@@ -10,8 +10,8 @@ html, body {
   font-family: 'Jost', sans-serif;
   font-weight: 300;
   height: auto;
-  scroll-behavior: smooth;
   will-change: transform;
+  scroll-behavior: auto;
 }
 
 ul, ol, p { list-style: none; padding: 0; padding-inline-start: 0; margin: 0;}
