@@ -36,29 +36,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // ======================
   // Gallery Image Zoom
   // ======================
-
 const wrappers = document.querySelectorAll('.wrapper');
 
-if (wrappers.length) {
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
 
-  const imageObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
+      const img = entry.target.querySelector('.project_image');
+      img.classList.add('is-show');
 
-        const img = entry.target.querySelector('.project_image');
-        if (img) {
-          img.classList.add('is-show');
-        }
-
-        imageObserver.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.25
+      observer.unobserve(entry.target);
+    }
   });
+}, {
+  threshold: 0.3
+});
 
-  wrappers.forEach(wrapper => imageObserver.observe(wrapper));
-}
+wrappers.forEach(w => observer.observe(w));
 
 });
 
