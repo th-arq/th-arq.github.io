@@ -37,24 +37,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // Gallery Image Zoom
   // ======================
 
-  const projectImages = document.querySelectorAll('.project_image');
+const wrappers = document.querySelectorAll('.wrapper');
 
-  if (projectImages.length) {
+if (wrappers.length) {
 
-    const imageObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-show');
+  const imageObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
 
-          imageObserver.unobserve(entry.target);
+        const img = entry.target.querySelector('.project_image');
+        if (img) {
+          img.classList.add('is-show');
         }
-      });
-    }, {
-      threshold: 0.25
+
+        imageObserver.unobserve(entry.target);
+      }
     });
+  }, {
+    threshold: 0.25
+  });
 
-    projectImages.forEach(img => imageObserver.observe(img));
-  }
-
-});
-
+  wrappers.forEach(wrapper => imageObserver.observe(wrapper));
+}
