@@ -500,6 +500,29 @@ ul.project_information {
   margin: auto;
 }
 
+
+.wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+
+.project_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project_image {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.9s ease;
+}
+
+.project_image.is-show {
+  clip-path: inset(0 0 0 0);
+}
+
+
 .full.wrapper {
   padding: var(--padding);
   margin: 0 auto 5vw auto;
@@ -537,18 +560,6 @@ ul.project_information {
 }
 
 
-.wrapper {
-  overflow: hidden;
-}
-
-.project_image {
-  transform: translateY(20%);
-  transition: transform 0.9s ease;
-}
-
-.project_image.is-show {
-  transform: translateY(0);
-}
 
 /* ========================= 
    Footer 
