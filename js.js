@@ -59,3 +59,6 @@ if (wrappers.length) {
 
   wrappers.forEach(wrapper => imageObserver.observe(wrapper));
 }
+
+});
+
