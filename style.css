@@ -537,17 +537,17 @@ ul.project_information {
 }
 
 
+.wrapper {
+  overflow: hidden;
+}
+
 .project_image {
-  transform: scale(1.03);
-  opacity: 0;
-  transition:
-    transform 0.8s ease-out,
-    opacity 0.5s ease;
+  transform: translateY(20%);
+  transition: transform 0.9s ease;
 }
 
 .project_image.is-show {
-  transform: scale(1);
-  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ========================= 
