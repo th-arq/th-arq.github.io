@@ -1,126 +1,635 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-  <title>TAG Inc.</title>
+/* =========================
+   Base Reset
+========================= */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  color: var(--black);
+  font-size: var(--font-medium);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  scroll-behavior: smooth;
+}
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <style>
-   @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
-  </style>
+ul, ol, p { list-style: none; padding: 0; padding-inline-start: 0; margin: 0;}
+img { max-width: 100%; height: auto; display: block; }
+h1 { font-size: 3em; font-weight: 180; margin: 0; }
+h2 { font-weight: 400; margin: 0; }
+h3 { font-size: 1.5em; font-weight: 350; margin: 0; }
+h4 { font-weight: 300; margin: 0; }
+p { line-height: 1.8em; }
+a { text-decoration: none; color: inherit; position: relative;}
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="../style.css">
-  <!-- AOS CSS -->
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-</head>
+a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1px;
+  background: var(--background);
+  transition: width 0.3s ease;
+}
 
-<body class="page-fade">
+a:hover::after {
+  width: 100%;
+}
 
-  <!-- HEAD -->
-  <header>
-    <div id="title_area">
-      <div class="hamburger">
-        <span></span>
-        <span></span>
-      </div>
-
-        <div class="TAG_logo">
-          <a href="https://th-arq.github.io/">
-            <svg class="logo_svg" xmlns="http://www.w3.org/2000/svg"><path d="M115.86 22.12q0-.81.56-1.38.6-.6 1.41-.6.89 0 1.44.6.57.56.57 1.38 0 .8-.57 1.38-.55.6-1.44.6-.81 0-1.4-.6-.57-.6-.57-1.38"/><path d="M102.38 16.88q0 1.45.63 2.55.63 1.05 1.69 1.7 1.1.62 2.42.62 1.1 0 2.09-.33a6 6 0 0 0 1.76-.93q.76-.6 1.12-1.33v3.95q-.8.8-2.15 1.26-1.36.46-2.98.46a9 9 0 0 1-4.25-.99 8 8 0 0 1-2.95-2.82 8 8 0 0 1-1.06-4.14q0-2.35 1.06-4.15a7.6 7.6 0 0 1 2.95-2.78 9 9 0 0 1 4.25-1.03q1.62 0 2.98.46t2.15 1.26v3.95q-.36-.75-1.16-1.33-.76-.6-1.75-.93a7 7 0 0 0-2.06-.33q-1.32 0-2.42.63-1.05.63-1.7 1.73a5 5 0 0 0-.62 2.52"/><path d="M91.74 15.22q0-1.7-.7-2.55-.7-.87-2.15-.87-1 0-1.76.43-.75.4-1.2 1.2-.42.75-.42 1.79v9.28h-3.59V9.25h3.59v2.35q.72-1.36 1.85-2.02 1.17-.66 2.75-.66 2.59 0 3.95 1.6 1.36 1.55 1.36 4.3v9.68h-3.68z"/><path d="M72.4 1.3h3.95v23.2H72.4z"/><path d="M50.38 15.68v-3.31h11.18q.06 2.55-.67 4.84a12 12 0 0 1-2.19 4.01 10.4 10.4 0 0 1-3.64 2.79q-2.15.99-4.91.99-2.62 0-4.84-.86a12 12 0 0 1-3.88-2.52 11 11 0 0 1-2.52-3.85q-.9-2.22-.9-4.87t.9-4.84a11.34 11.34 0 0 1 6.43-6.3Q47.6.89 50.22.9q2.28 0 4.14.63 1.86.6 3.32 1.75 1.5 1.13 2.52 2.75L57 8.16a7 7 0 0 0-2.68-2.66q-1.7-1-4.11-1a8 8 0 0 0-7 3.99 8.5 8.5 0 0 0-1.1 4.4q0 2.53 1.07 4.45a8 8 0 0 0 7.03 4.01q1.55 0 2.78-.43a6 6 0 0 0 2.12-1.23 7 7 0 0 0 1.5-1.82q.6-1.02.9-2.19z"/><path d="M37.65 24.5h-4.41l-2.67-5.97h-8.55l-2.64 5.97h-4.41L26.3 0zm-14.5-9.28h6.3L26.3 7.86z"/><path d="M0 4.9V1.3h16.18v3.6h-6.13v19.6H6.1V4.9z"/></svg>
-          </a>
-        </div>      
-    </div>
-
-    <div id="menu">
-        <nav>
-            <ul>
-                <li><a href="/about/">About</a></li>
-                <li><a href="/service/">Service</a></li>
-                <li><a href="/projects/">Projects</a></li>
-                <li><a href="/contact/">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div>
-      <a href="/contact/"><img src=""></a>
-    </div>
-      <div id="overlay"></div>
-  </header>
-
-
- <!-- CONTENTS -->
-<main>
-  <div id="contents_title">
-    <h1>About</h1>
-  </div>
-  <div id="contents_inner">
-    <div class="mv">
-      <div class="mv_container">
-        <img src="../img/mv.jpg">
-      </div>
-    </div>
-    <div class="about_head">
-      <div class="about_head_left">
-        <img class="profile_pic" src="../img/profile.jpg">
-      </div>
-
-      <div class="about_head_right">
-        <h3><span style="font-weight: 450;">ANDREW GIM</span> – AIA, LEED GA</h3>
-      
-        <section>
-          <h4 style="font-weight: 450;">Professional Affiliations</h4>
-            <ul>
-              <li>American Institute of Architects (AIA)</li>
-              <li>National Council of Architectural Registration Boards (NCARB)</li>
-              <li>Urban Land Institute (ULI)</li>
-          </ul>
-        </section>
-
-        <section>
-          <h4 style="font-weight: 450;">Registered</h4>
-          <ul>
-            <li>Washington DC</li>
-            <li>Virginia</li>
-          </ul>
-        </section>
-      </div>
-    </div>
-      <section>
-        <p>Project and Design Manager with experience in residential, commercial, and federal projects. Possess a strong background in architecture, engineering, and construction, and an active DC Architect License. Adept in managing all aspects of development, design, and construction, from marketing, real estate, and pro forma analysis to design documentation and construction execution. Capable of handling technical details while also understanding the big picture. Holds a TOP SECRET security clearance. </p>
-      </section>
-
-      <section>
-        <p>I believe that architecture starts with solving our client’s genuine needs, but also must strive to achieve inspirational results that transcend expectations. A fundamental question that guides my work is offering simple and artful solutions to complex problems that entail technical knowledge and attention to detail. My design approach is methodical and pragmatic yet inventive and innovative.</p>
-      </section>
-      
-      <section>
-        <a href=""><img src="../img/linkedin.png"></a>
-      </section>
-  </div>
-    
-</main>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer_container">
-        <div class="footer_container_information">
-          <div>
-            <p>INTERIOR & EXTERIOR · Residential · Commercial · Industrial</p>
-          </div>
-          <div>
-            <p>Los Angeles, CA | <a href="/privacy/">Privacy Policy</a></p></div>
-        </div>
-        <div class="footer_container_company">
-            <p>© 2025 TAG Inc.  Licensed Contractor #123456</p>
-        </div>
-    </div>
-  </footer>
+/* =========================
+   Variables
+========================= */
+:root {
+  --black: #2D2D2D;
+  --white: #FFFFFF;
+  --lightgray: #cbcbcb;
+  --background: #f8f7f5;
+  --font-x-small: 10px;
+  --font-small: 12px;
+  --font-medium: 18px;
+  --font-large: 22px;
+  --font-x-large: 36px;
+  --section-width: 1280;
+  --section-width-narrow: 1040;
+  --transition: 0.3s ease;
+  --padding: 0 5%;
+}
 
 
-<script src="../js.js"></script>
-</body>
-</html>
+/* =========================
+   Page Fade (Common)
+========================= */
+body.page-fade {
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+body.page-fade.loaded {
+  opacity: 1;
+}
+
+body.page-fade.fade-out {
+  opacity: 0;
+}
+
+
+
+/* =========================
+   Loading (Top only)
+========================= */
+#loading {
+  position: fixed;
+  inset: 0;
+  background: var(--background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 2.5s ease;
+}
+
+.loading_logo_svg {
+  fill: var(--black);
+  opacity: 1;
+  animation: fadeIn 2s forwards;
+  width: 150px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+
+
+/* =========================
+   Header / Title Area
+========================= */
+header {
+  width: 100%;
+  z-index: 5000;
+}
+
+#title_area {
+  display: flex;
+  justify-content: space-between;
+  z-index: 1100;
+  padding: 60px 5%;
+  transition: background 0.3s ease;
+}
+
+
+
+/* =========================
+   Logo（SVG）
+========================= */
+.logo_svg {
+  display: block;
+  fill: var(--black);
+  transition: fill 0.3s ease;
+  width: 120px;
+  height: 26px;
+}
+
+#title_area.open .logo_svg path {
+  fill: var(--white);
+}
+
+a.button {
+  display: block;
+  border: 1px solid var(--black);
+  padding: 0.05em;
+  text-align: center;
+}
+
+
+/* =========================
+   Hamburger
+========================= */
+.hamburger {
+  width: 40px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
+  z-index: 4000;
+  position: relative;
+}
+
+.hamburger span {
+  display: block;
+  width:  40px;
+  height: 1px;
+  background: var(--black);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) {
+  position: relative;
+  transform: translateY(3px) rotate(30deg);
+  background: var(--white);
+}
+
+.hamburger.open span:nth-child(2) {
+  position: relative;
+  transform: translateY(-5px) rotate(-30deg);
+  background: var(--white);
+}
+
+#overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  z-index: 2400;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  z-index: 2400;
+}
+
+
+/* =========================
+   Menu
+========================= */
+#menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;          
+  height: 100%;
+  padding: 0 5%;
+  background: var(--black);
+  color: var(--white);
+  z-index: 2500;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+  overflow: hidden;
+}
+
+#menu.open {
+  width: 25%;
+  transform: translateX(0);
+}
+
+#menu nav {
+  padding-top: 10em;
+}
+
+#menu nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+
+#menu nav ul li {
+  font-size: var(--font-x-large);
+  font-weight: 200;
+}
+
+
+/* ========================= 
+   Swiper
+========================= */ 
+#Mainview {
+  position: relative;
+  opacity: 0;
+  transition: opacity 1s ease;
+  height: 100vh;
+  z-index: 1;
+}
+
+.top-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  z-index: 1;
+}
+
+.top-slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-pagination-bullet-active {
+  background: #fff!important;
+}
+
+
+/* ========================= 
+   Index
+========================= */ 
+.index_wrapper {
+    display: flex;
+    align-self: auto;
+    flex-basis: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+    gap: 30px;
+    height: fit-content;
+}
+
+
+.index_left, .index_right {
+    width: 50%;
+}
+
+.index_left {
+    display: flex;
+    flex-wrap: wrap;
+    align-self: end;
+    height: fit-content;
+}
+
+.index_left_inner {
+      display: flex;
+    gap: 30px;
+    height: fit-content;
+    align-self: end;
+}
+
+
+/* ========================= 
+   Main
+========================= */ 
+main {
+  display: flex;
+  padding: var(--padding);
+  background: transparent;
+  min-height: 100vh;
+}
+
+#contents_title {
+  width: 55vw;
+}
+
+#contents_inner {
+  width: 100%;
+}
+
+section {
+  margin: 0 auto 1.5em;
+  text-align: justify;
+}
+
+
+.mv_container {
+    width: 100%;
+    height: calc(100vh - 50px);
+}
+
+.mv_container img {
+    object-fit: cover;
+    object-position: top center;
+}
+
+
+
+/* ========================= 
+   About
+========================= */ 
+main .profile_pic {
+  width: 200px;
+}
+
+.about_head {
+  display: flex;
+  gap: 2em;
+  margin: 0 0 2em 0;
+  padding: 0 0 2em 0;
+  border-bottom: 1px solid var(--black);
+}
+
+.about_head h3 {
+  margin: 0 auto 1em auto;
+}
+
+.about_head ul li {
+  position: relative;
+  padding-left: 1em;
+  line-height: 1.8em;
+}
+
+.about_head ul li::before {
+  content: "";
+  width: 3px;
+  height: 3px;
+  background: var(--lightgray);
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+/* ========================= 
+   Service
+========================= */ 
+.service section {
+  line-height: 3em;
+  letter-spacing: .01em;
+  margin: 0 auto 3em auto;
+}
+
+
+
+/* ========================= 
+   Contact
+========================= */ 
+.mail_form input, .mail_form textarea {
+  font-size: 18px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  border: none;
+  padding: 0.5em;
+  margin: 0.1em 0 1em;
+}
+
+input.form {
+  height: 10em;
+}
+
+.office_information {
+  padding: 0 0 2em 0;
+  margin: 0 0 2em 0;
+  border-bottom: 1px solid var(--black);
+}
+
+/* ========================= 
+   Projects
+========================= */ 
+#contents_inner h1 {
+  padding: var(--padding);
+}
+
+ul.projects_menu {
+  display: flex;
+  gap: 2em;
+  margin: 3em 0;
+  padding: var(--padding);
+}
+
+ul.projects_menu a::after {
+  background: var(--black)
+}
+
+.projects_contents ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  position: relative;
+}
+
+.projects_contents li{
+  flex: 0 0 calc((100% - 4em) / 5);
+  margin: 0 0 2em;
+}
+
+.projects_contents li a {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  height: 15vw;
+}
+
+.projects_contents li h4 {
+  padding: 0.5em;
+}
+
+.projects_contents li a img {
+  width: 100%;
+  height: 100%;;
+  transition: clip-path 0.8s ease, transform 0.8s ease;
+  clip-path: inset(0 0 0 0);
+  object-position: center;
+  object-fit: cover;
+}
+
+.projects_contents li a:hover img {
+  clip-path: inset(20% 0 20% 0);
+  transform: scale(1.05);
+}
+
+/* ========================= 
+    Projects - Content
+========================= */ 
+
+.main_view {
+  position: relative;
+  width: 100%;
+  overflow: visible; 
+}
+
+.title_loop {
+  position: absolute;
+  top: -6%;
+  left: 0;
+  width: 100vw; 
+  overflow-x: hidden; 
+  overflow-y: visible;
+  pointer-events: none;
+}
+
+
+.title_loop_inner {
+  display: flex;
+  gap: 0.5em;
+  white-space: nowrap;
+  font-size: 8vw;
+  color: #fff;
+  mix-blend-mode: difference;
+  animation: marquee 60s linear infinite;
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); } 
+  100% { transform: translateX(-50%); }  
+}
+
+figure {
+  margin: 0;
+}
+
+section.page_lead {
+  padding: var(--padding);
+}
+
+.project_text_container {
+  padding: 10vw 5%;
+  display: flex;
+}
+
+section.project_title {
+  width: 50%;
+}
+
+ul.project_information {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.project_location, .project_size {
+  width: 50%;
+  flex: 0 0 auto;
+}
+
+.project_location h4, .project_size h4 {
+  font-weight: 400;
+}
+
+.project_comment {
+  margin: 1em 0 0 0;
+  flex: 1 1 100%;
+  width: 100%;
+}
+
+.main_view, .main_view img, .sub_view, .sub_view img {
+  width: 100%;
+  margin: auto;
+}
+
+
+.wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+
+.project_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project_image {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.9s ease;
+}
+
+.project_image.is-show {
+  clip-path: inset(0 0 0 0);
+}
+
+
+.full.wrapper {
+  padding: var(--padding);
+  margin: 0 auto 5vw auto;
+}
+
+.half {
+  display: flex;
+  padding: var(--padding);
+  gap: 5em;
+  margin: 0 auto 5vw auto;
+}
+
+.half .project_image {
+  flex: 1;
+  aspect-ratio: 3 / 4;
+  min-width: 0;
+  object-fit: cover;
+}
+
+.left {
+  padding: var(--padding);
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto 5vw 0;
+}
+
+
+.right {
+      padding: var(--padding);
+  width: 50%;
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 0 0 5vw auto;
+}
+
+
+
+/* ========================= 
+   Footer 
+========================= */ 
+footer { 
+  background-color: var(--black); 
+  color: var(--white); 
+  font-size: var(--font-small); 
+  margin: 10vw 0 0 0;
+  min-height: 80px;
+  display: flex;
+}
+
+footer .footer_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--padding);
+  width: 100%;
+}
+
+.footer_container_information {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
 
