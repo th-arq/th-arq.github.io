@@ -35,7 +35,6 @@ header {
 
 .TAG_logo img {
   height: 24px;
-  width: auto;
   display: block;
 }
 
@@ -50,9 +49,9 @@ header {
 }
 
 #menu ul {
-  list-style: none;
   display: flex;
   gap: 40px;
+  list-style: none;
   padding: 0;
   margin: 0;
 }
@@ -60,16 +59,16 @@ header {
 #menu a {
   font-size: 13px;
   letter-spacing: 0.08em;
-  text-decoration: none;
   color: #111;
+  text-decoration: none;
   position: relative;
 }
 
 #menu a::after {
   content: "";
   position: absolute;
-  left: 0;
   bottom: -6px;
+  left: 0;
   width: 100%;
   height: 1px;
   background: currentColor;
@@ -83,7 +82,7 @@ header {
 }
 
 /* =========================
-   RIGHT : CONTACT BUTTON (PC)
+   RIGHT : CONTACT
 ========================= */
 header > div:nth-of-type(3) {
   position: absolute;
@@ -93,37 +92,12 @@ header > div:nth-of-type(3) {
 }
 
 header > div:nth-of-type(3) a {
-  font-size: 12px;
-  letter-spacing: 0.1em;
   padding: 10px 18px;
   background: #111;
   color: #fff;
+  font-size: 12px;
+  letter-spacing: 0.1em;
   text-decoration: none;
-  transition: background .3s ease;
-}
-
-header > div:nth-of-type(3) a:hover {
-  background: #333;
-}
-
-/* =========================
-   HAMBURGER (SP ONLY)
-========================= */
-.hamburger {
-  position: absolute;
-  right: 40px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 22px;
-  cursor: pointer;
-  display: none;
-}
-
-.hamburger span {
-  display: block;
-  height: 1px;
-  background: #111;
-  margin-bottom: 6px;
 }
 
 /* =========================
@@ -131,45 +105,38 @@ header > div:nth-of-type(3) a:hover {
 ========================= */
 .index-images {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  grid-template-rows: auto auto;
+  grid-template-columns: 0.9fr 1.1fr;
+  grid-template-rows: 1fr 1fr;
   gap: clamp(20px, 4vw, 48px);
-  padding: clamp(120px, 18vh, 200px) clamp(24px, 6vw, 96px);
+
+  height: min(80vh, 720px);
+  padding: clamp(120px, 16vh, 180px)
+           clamp(24px, 6vw, 96px);
 }
 
-/* 左下2枚 */
-.img-1 {
-  grid-column: 1 / 2;
-  grid-row: 2 / 3;
-}
-
-.img-2 {
-  grid-column: 1 / 2;
-  grid-row: 2 / 3;
-  justify-self: end;
-}
-
-/* 右：縦長メイン */
+/* 左：縦長 */
 .img-3 {
-  grid-column: 2 / 3;
+  grid-column: 1 / 2;
   grid-row: 1 / 3;
 }
 
+/* 右上・右下 */
+.img-1 {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.img-2 {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
 /* =========================
-   IMAGE SIZE CONTROL
+   IMAGE FRAME
 ========================= */
 .img {
   overflow: hidden;
-}
-
-.img-1,
-.img-2 {
-  width: 48%;
-  aspect-ratio: 4 / 3;
-}
-
-.img-3 {
-  aspect-ratio: 3 / 4;
+  height: 100%;
 }
 
 /* =========================
@@ -217,16 +184,18 @@ header > div:nth-of-type(3) a:hover {
 
   .index-images {
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    height: auto;
     padding-top: 120px;
   }
 
   .img-1,
   .img-2,
   .img-3 {
-    width: 100%;
-    aspect-ratio: 4 / 3;
     grid-column: auto;
     grid-row: auto;
+    height: auto;
+    aspect-ratio: 4 / 3;
   }
 
   #menu,
@@ -236,17 +205,5 @@ header > div:nth-of-type(3) a:hover {
 
   .hamburger {
     display: block;
-  }
-
-  header {
-    padding: 0 24px;
-  }
-
-  .TAG_logo {
-    left: 24px;
-  }
-
-  .hamburger {
-    right: 24px;
   }
 }
