@@ -1,0 +1,110 @@
+/* ===== base ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #fafafa;
+  color: #111;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===== header ===== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 32px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 14px;
+  letter-spacing: 0.1em;
+}
+
+.menu {
+  width: 24px;
+}
+
+.menu span {
+  display: block;
+  height: 1px;
+  background: #000;
+  margin-bottom: 6px;
+}
+
+/* fade in header items */
+.fade-item {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+.fade-item.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== layout ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 180px 40px 120px;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(32px, 6vw, 80px);
+}
+
+/* image sizes */
+.img {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+/* center bottom image */
+.img-3 {
+  grid-column: 1 / -1;
+  max-width: 60%;
+  margin: 0 auto;
+}
+
+/* ===== reveal animation ===== */
+.reveal {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1s ease;
+}
+
+.reveal.show {
+  clip-path: inset(0 0 0 0);
+}
+
+/* ===== responsive ===== */
+@media (max-width: 768px) {
+  .intro-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .img-3 {
+    max-width: 100%;
+  }
+
+  .site-header {
+    padding: 24px;
+  }
+}
