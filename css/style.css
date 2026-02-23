@@ -1,110 +1,162 @@
-/* ===== base ===== */
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: sans-serif;
-  background: #fafafa;
-  color: #111;
-}
-
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* ===== header ===== */
-.site-header {
+/* =========================
+   HEADER BASE
+========================= */
+header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 32px 48px;
+  height: 80px;
+  padding: 0 40px;
+  background: transparent;
+  z-index: 100;
+}
+
+/* =========================
+   LEFT : LOGO
+========================= */
+.TAG_logo {
+  position: absolute;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.TAG_logo img {
+  height: 24px;
+  width: auto;
+  display: block;
+}
+
+/* =========================
+   CENTER : MENU (PC)
+========================= */
+#menu {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#menu ul {
+  list-style: none;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 10;
+  gap: 40px;
+  padding: 0;
+  margin: 0;
 }
 
-.logo {
-  font-size: 14px;
+#menu a {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  color: #111;
+  position: relative;
+}
+
+/* underline hover */
+#menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s ease;
+}
+
+#menu a:hover::after {
+  transform: scaleX(1);
+}
+
+/* =========================
+   RIGHT : CONTACT BUTTON (PC)
+========================= */
+header > div:nth-of-type(3) {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+header > div:nth-of-type(3) a {
+  font-size: 12px;
   letter-spacing: 0.1em;
+  padding: 10px 18px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  transition: background .3s ease;
 }
 
-.menu {
-  width: 24px;
+header > div:nth-of-type(3) a:hover {
+  background: #333;
 }
 
-.menu span {
+/* =========================
+   HAMBURGER (SP ONLY)
+========================= */
+.hamburger {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  cursor: pointer;
+  display: none;
+}
+
+.hamburger span {
   display: block;
   height: 1px;
-  background: #000;
+  background: #111;
   margin-bottom: 6px;
 }
 
-/* fade in header items */
-.fade-item {
+/* =========================
+   FADE ANIMATION
+========================= */
+.fade-logo,
+.fade-menu {
   opacity: 0;
   transform: translateY(8px);
   transition: opacity .6s ease, transform .6s ease;
 }
 
-.fade-item.show {
+.fade-logo.show,
+.fade-menu.show {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* ===== layout ===== */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 180px 40px 120px;
-}
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 900px) {
 
-.intro-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(32px, 6vw, 80px);
-}
-
-/* image sizes */
-.img {
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-}
-
-/* center bottom image */
-.img-3 {
-  grid-column: 1 / -1;
-  max-width: 60%;
-  margin: 0 auto;
-}
-
-/* ===== reveal animation ===== */
-.reveal {
-  clip-path: inset(0 0 100% 0);
-  transition: clip-path 1s ease;
-}
-
-.reveal.show {
-  clip-path: inset(0 0 0 0);
-}
-
-/* ===== responsive ===== */
-@media (max-width: 768px) {
-  .intro-grid {
-    grid-template-columns: 1fr;
+  /* PCメニュー・Contactは隠す */
+  #menu,
+  header > div:nth-of-type(3) {
+    display: none;
   }
 
-  .img-3 {
-    max-width: 100%;
+  /* バーガー表示 */
+  .hamburger {
+    display: block;
   }
 
-  .site-header {
-    padding: 24px;
+  header {
+    padding: 0 24px;
+  }
+
+  .TAG_logo {
+    left: 24px;
+  }
+
+  .hamburger {
+    right: 24px;
   }
 }
