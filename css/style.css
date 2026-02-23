@@ -101,26 +101,32 @@ header > div:nth-of-type(3) a {
 }
 
 /* =========================
-   INDEX IMAGE LAYOUT
+   INDEX IMAGE LAYOUT（FIX版）
 ========================= */
 .index-images {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: clamp(20px, 4vw, 48px);
 
-  height: min(80vh, 720px);
-  padding: clamp(120px, 16vh, 180px)
-           clamp(24px, 6vw, 96px);
+  /* ここが超重要 */
+  min-height: calc(100vh - 80px); /* header分引く */
+  padding: clamp(120px, 16vh, 160px)
+           clamp(24px, 6vw, 96px)
+           clamp(40px, 8vh, 80px);
 }
 
-/* 左：縦長 */
+/* =========================
+   IMAGE POSITION
+========================= */
+
+/* 左：縦長（2row貫通） */
 .img-3 {
   grid-column: 1 / 2;
   grid-row: 1 / 3;
 }
 
-/* 右上・右下 */
+/* 右：上下2枚 */
 .img-1 {
   grid-column: 2 / 3;
   grid-row: 1 / 2;
@@ -135,8 +141,9 @@ header > div:nth-of-type(3) a {
    IMAGE FRAME
 ========================= */
 .img {
-  overflow: hidden;
+  width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 /* =========================
@@ -147,63 +154,4 @@ header > div:nth-of-type(3) a {
   height: 100%;
   object-fit: cover;
   display: block;
-}
-
-/* =========================
-   CLIP-PATH REVEAL
-========================= */
-.reveal {
-  clip-path: inset(100% 0 0 0);
-  transition: clip-path 1.2s ease;
-}
-
-.reveal.show {
-  clip-path: inset(0 0 0 0);
-}
-
-/* =========================
-   FADE ANIMATION
-========================= */
-.fade-logo,
-.fade-menu {
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity .6s ease, transform .6s ease;
-}
-
-.fade-logo.show,
-.fade-menu.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-@media (max-width: 900px) {
-
-  .index-images {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    height: auto;
-    padding-top: 120px;
-  }
-
-  .img-1,
-  .img-2,
-  .img-3 {
-    grid-column: auto;
-    grid-row: auto;
-    height: auto;
-    aspect-ratio: 4 / 3;
-  }
-
-  #menu,
-  header > div:nth-of-type(3) {
-    display: none;
-  }
-
-  .hamburger {
-    display: block;
-  }
 }
