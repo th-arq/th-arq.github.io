@@ -1,4 +1,15 @@
 /* =========================
+   RESET / BASE
+========================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+/* =========================
    HEADER BASE
 ========================= */
 header {
@@ -117,6 +128,38 @@ header > div:nth-of-type(3) a:hover {
 }
 
 /* =========================
+   IMAGE LAYOUT (INDEX)
+========================= */
+.index-images {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 4vw, 40px);
+  padding: clamp(80px, 15vh, 160px) clamp(20px, 6vw, 80px);
+}
+
+.img {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+}
+
+/* =========================
+   CLIP-PATH REVEAL
+========================= */
+.reveal {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1.2s ease;
+}
+
+.reveal.show {
+  clip-path: inset(0 0 0 0);
+}
+
+/* =========================
    FADE ANIMATION
 ========================= */
 .fade-logo,
@@ -136,6 +179,12 @@ header > div:nth-of-type(3) a:hover {
    RESPONSIVE
 ========================= */
 @media (max-width: 900px) {
+
+  /* 画像は1カラム */
+  .index-images {
+    grid-template-columns: 1fr;
+    padding-top: 120px;
+  }
 
   /* PCメニュー・Contactは隠す */
   #menu,
