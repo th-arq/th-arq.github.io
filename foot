@@ -1,0 +1,18 @@
+
+ <!-- FOOTER -->
+  <footer>
+    <div class="footer_container">
+        <div class="footer_container_information">
+          <div>
+            <p>INTERIOR & EXTERIOR · Residential · Commercial · Industrial</p>
+          </div>
+          <div>
+            <p>Los Angeles, CA | <a href="/privacy/">Privacy Policy</a></p></div>
+        </div>
+        <div class="footer_container_company">
+            <p>© 2025 TAG Inc.  Licensed Contractor #123456</p>
+        </div>
+    </div>
+  </footer>
+
+
