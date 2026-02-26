@@ -19,7 +19,7 @@ body.is-lock {
 }
 
 /* =========================
-   HEADER BASE
+  HEADER BASE
 ========================= */
 header {
   position: fixed;
@@ -28,12 +28,15 @@ header {
   width: 100%;
   height: var(--header-height);
   padding: 0 var(--side-padding);
-  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   z-index: 100;
+  background: transparent;
 }
 
 /* =========================
-   LOGO
+  LEFT : LOGO
 ========================= */
 .TAG_logo img {
   height: 24px;
@@ -41,18 +44,25 @@ header {
 }
 
 /* =========================
-   RIGHT MENU (PC)
+  RIGHT AREA
 ========================= */
-#menu nav ul {
+.header-right {
   display: flex;
   align-items: center;
-  gap: 32px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  gap: 40px;
 }
 
-/* normal links */
+/* =========================
+  MENU (PC)
+========================= */
+#menu ul {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 #menu a {
   font-size: 13px;
   letter-spacing: 0.08em;
@@ -61,7 +71,6 @@ header {
   position: relative;
 }
 
-/* underline hover */
 #menu a::after {
   content: "";
   position: absolute;
@@ -80,67 +89,25 @@ header {
 }
 
 /* =========================
-   CONTACT BUTTON
+  CONTACT BUTTON
 ========================= */
-header > div:nth-of-type(3) a {
+.contact-btn {
   font-size: 12px;
   letter-spacing: 0.1em;
   padding: 10px 18px;
   background: #111;
   color: #fff;
   text-decoration: none;
-  display: inline-block;
-  transition: background .3s ease;
-}
-
-header > div:nth-of-type(3) a:hover {
-  background: #333;
+  white-space: nowrap;
 }
 
 /* =========================
-   RIGHT SIDE WRAP
-========================= */
-#menu,
-header > div:nth-of-type(3) {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-/* =========================
-   HAMBURGER (SP)
-========================= */
-.hamburger {
-  display: none;
-  width: 22px;
-  cursor: pointer;
-}
-
-.hamburger span {
-  display: block;
-  height: 1px;
-  background: #111;
-  margin-bottom: 6px;
-}
-
-/* =========================
-   RESPONSIVE
+  RESPONSIVE
 ========================= */
 @media (max-width: 900px) {
-
-  /* PC menu hide */
   #menu,
-  header > div:nth-of-type(3) {
+  .contact-btn {
     display: none;
-  }
-
-  /* burger show */
-  .hamburger {
-    display: block;
-  }
-
-  header {
-    padding: 0 24px;
   }
 }
 
