@@ -13,6 +13,11 @@ body.is-lock {
   overflow: hidden;
 }
 
+:root {
+  --side-padding: clamp(24px, 6vw, 80px);
+  --header-height: 80px;
+}
+
 /* =========================
    HEADER BASE
 ========================= */
@@ -21,12 +26,10 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  height: 80px;
-  padding: 0 40px;
+  height: var(--header-height);
+  padding: 0 var(--side-padding);
+  background: transparent;
   z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 /* =========================
@@ -144,13 +147,15 @@ header > div:nth-of-type(3) {
 /* =========================
   LAYOUT
 ========================= */
+main {
+  padding-top: var(--header-height);
+}
+
 .intro-flex {
   display: flex;
   gap: clamp(16px, 3vw, 40px);
-  max-width: 1200px;
-  margin: 0 auto;
-  height: calc(111vh - 100px);
-  padding: clamp(16px, 10vh, 90px) 0;
+  padding: clamp(24px, 5vw, 80px) var(--side-padding);
+  height: calc(100vh - var(--header-height));
   align-items: stretch;
 }
 
@@ -186,14 +191,38 @@ header > div:nth-of-type(3) {
 }
 
 /* =========================
-  CLIP PATH ANIMATION
+  CLIP PATH REVEAL
 ========================= */
 .reveal {
-  clip-path: inset(0 0 100% 0); /* 上だけ見えてる */
+  clip-path: inset(0 0 100% 0); /* 上から下に開く */
   transition: clip-path 1.2s ease;
   will-change: clip-path;
 }
 
 .reveal.show {
   clip-path: inset(0 0 0 0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 900px) {
+  :root {
+    --side-padding: 24px;
+  }
+
+  .intro-flex {
+    flex-direction: column;
+    height: auto;
+  }
 }
