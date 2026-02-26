@@ -9,6 +9,10 @@ body {
   margin: 0;
 }
 
+body.is-lock {
+  overflow: hidden;
+}
+
 /* =========================
    HEADER BASE
 ========================= */
@@ -129,7 +133,7 @@ header {
   CLIP PATH ANIMATION
 ========================= */
 .reveal {
-  clip-path: inset(100% 0 0 0);
+  clip-path: inset(0 0 100% 0); /* 上だけ見えてる */
   transition: clip-path 1.2s ease;
   will-change: clip-path;
 }
