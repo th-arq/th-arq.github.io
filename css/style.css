@@ -23,43 +23,33 @@ header {
   width: 100%;
   height: 80px;
   padding: 0 40px;
-  background: transparent;
   z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* =========================
-   LEFT : LOGO
+   LOGO
 ========================= */
-.TAG_logo {
-  position: absolute;
-  left: 40px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
 .TAG_logo img {
   height: 24px;
   display: block;
 }
 
 /* =========================
-   CENTER : MENU (PC)
+   RIGHT MENU (PC)
 ========================= */
-#menu {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-#menu ul {
+#menu nav ul {
   display: flex;
-  gap: 40px;
+  align-items: center;
+  gap: 32px;
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
+/* normal links */
 #menu a {
   font-size: 13px;
   letter-spacing: 0.08em;
@@ -68,11 +58,12 @@ header {
   position: relative;
 }
 
+/* underline hover */
 #menu a::after {
   content: "";
   position: absolute;
-  bottom: -6px;
   left: 0;
+  bottom: -6px;
   width: 100%;
   height: 1px;
   background: currentColor;
@@ -83,6 +74,71 @@ header {
 
 #menu a:hover::after {
   transform: scaleX(1);
+}
+
+/* =========================
+   CONTACT BUTTON
+========================= */
+header > div:nth-of-type(3) a {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  padding: 10px 18px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
+  transition: background .3s ease;
+}
+
+header > div:nth-of-type(3) a:hover {
+  background: #333;
+}
+
+/* =========================
+   RIGHT SIDE WRAP
+========================= */
+#menu,
+header > div:nth-of-type(3) {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* =========================
+   HAMBURGER (SP)
+========================= */
+.hamburger {
+  display: none;
+  width: 22px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  height: 1px;
+  background: #111;
+  margin-bottom: 6px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 900px) {
+
+  /* PC menu hide */
+  #menu,
+  header > div:nth-of-type(3) {
+    display: none;
+  }
+
+  /* burger show */
+  .hamburger {
+    display: block;
+  }
+
+  header {
+    padding: 0 24px;
+  }
 }
 
 /* =========================
