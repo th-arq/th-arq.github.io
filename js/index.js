@@ -1,15 +1,21 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // ファーストビュー固定
-  document.body.classList.add("is-lock");
+window.addEventListener("load", () => {
+  // ファーストビューはスクロール禁止
+  document.body.style.overflow = "hidden";
 
   const reveals = document.querySelectorAll(".reveal");
-  const logo = document.querySelector(".fade-logo");
-  const menu = document.querySelector(".fade-menu");
 
-  // ① 画像3枚 同時に reveal
-  reveals.forEach(el => {
-    el.classList.add("show");
-  });
+  // 少し待ってから一斉に表示
+  setTimeout(() => {
+    reveals.forEach(el => {
+      el.classList.add("show");
+    });
+
+    // アニメーション終わったらスクロール解放
+    setTimeout(() => {
+      document.body.style.overflow = "";
+    }, 1300);
+
+  }, 300);
 
   // ② ロゴ
   if (logo) {
