@@ -235,29 +235,30 @@ main {
 
 .about-layout .title-rail {
   width: 40%;
-  height: 100vh; /* 画面いっぱいに固定 */
+  height: 100vh;
   position: sticky;
   top: 0;
-  overflow: hidden; /* はみ出た文字を隠す */
+  overflow: hidden;
+  /* ↓ ここで箱の中身を上下中央に寄せる */
   display: flex;
-  align-items: center; /* 上下中央に配置 */
+  align-items: center;
 }
 
 .about-layout .title-track {
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.1s linear; /* 動きを滑らかに */
+  display: block;
+  width: 100%;
+  transition: transform 0.15s ease-out; /* 少し余韻をもたせるとバトン感が出るよ */
   will-change: transform;
 }
 
 .about-layout .title-item {
   height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: center; /* これで文字が100vhの中央にくる */
   padding-left: 6vw;
-  font-size: clamp(48px, 6vw, 96px);
+  font-size: clamp(40px, 5vw, 80px); /* 少しサイズ調整 */
   font-weight: 500;
-  flex-shrink: 0;
+  color: #111;
 }
 
 .about-layout .content-rail {
