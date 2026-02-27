@@ -11,7 +11,7 @@ fetch('../foot.html')
   });
 
 
-  const panels = document.querySelectorAll('.panel');
+const panels = document.querySelectorAll('.panel');
 const title = document.querySelector('.title-text');
 
 const observer = new IntersectionObserver(
