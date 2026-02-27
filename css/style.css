@@ -7,6 +7,7 @@
 
 body {
   margin: 0;
+  font-family: 'Jost', sans-serif;
 }
 
 body.is-lock {
@@ -17,6 +18,9 @@ body.is-lock {
   --side-padding: clamp(24px, 6vw, 80px);
   --header-height: 80px;
 }
+
+
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* =========================
   HEADER BASE
