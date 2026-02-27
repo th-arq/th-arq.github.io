@@ -1,25 +1,24 @@
-const panels = document.querySelectorAll('.panel');
-const title = document.querySelector('.title-text');
+window.addEventListener("load", () => {
 
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const text = entry.target.dataset.title;
+  // header
+  fetch('/head.html')
+    .then(res => res.text())
+    .then(html => {
+      const header = document.getElementById('header');
+      if (header) {
+        header.innerHTML = html;
 
-        // 一旦消す → 入れ替え → 下から表示
-        title.classList.remove('show');
-
-        setTimeout(() => {
-          title.textContent = text;
-          title.classList.add('show');
-        }, 200);
+        // header 読み込み完了を通知
+        document.dispatchEvent(new Event('headerLoaded'));
       }
     });
-  },
-  {
-    threshold: 0.6
-  }
-);
 
+  // footer
+  fetch('/foot.html')
+    .then(res => res.text())
+    .then(html => {
+      const footer = document.getElementById('footer');
+      if (footer) footer.innerHTML = html;
+    });
 
+});
