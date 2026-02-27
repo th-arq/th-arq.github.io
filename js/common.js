@@ -23,28 +23,28 @@ window.addEventListener("load", () => {
 
 });
 
-
 const panels = document.querySelectorAll('.panel');
 const titles = document.querySelectorAll('.title-item');
 
 const observer = new IntersectionObserver(
-  entries => {
+  (entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const current = entry.target.dataset.title;
 
         titles.forEach(title => {
-          if (title.dataset.title === current) {
-            title.classList.add('is-active');
-          } else {
-            title.classList.remove('is-active');
-          }
+          title.classList.toggle(
+            'is-active',
+            title.dataset.title === current
+          );
         });
       }
     });
   },
   {
-    threshold: 0.5
+    root: null,
+    rootMargin: '-40% 0px -40% 0px',
+    threshold: 0
   }
 );
 
