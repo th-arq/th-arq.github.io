@@ -232,31 +232,33 @@ main {
 }
 
 .panel {
-  min-height: 100vh; /* 最低でも画面1枚分 */
+  min-height: 100vh;
   display: flex;
   position: relative;
+  /* stickyを確実に効かせるために overflow: visible (デフォルトだけど念のため) */
+  overflow: visible; 
 }
 
-/* 左側：バトンタッチする文字 */
 .title-item {
   width: 40%;
-  height: 100vh; /* 常に画面1枚分の高さで固定 */
+  height: 100vh;
   position: sticky;
-  top: 0; /* 画面の上端に来たら張り付く */
+  top: 0; /* これで画面のトップに固定される */
   
   display: flex;
-  align-items: center; /* これで文字が常に「画面の真ん中」にいる */
+  align-items: center; /* これで文字が「画面の垂直中央」にくる */
   padding-left: 6vw;
   font-size: clamp(40px, 6vw, 96px);
   font-weight: 600;
   color: #111;
-  background-color: #fff; /* 背景色をつけておくと重なった時に綺麗だよ */
+  background-color: #fff;
+  z-index: 10; /* 文字がコンテンツの下に潜り込まないように */
 }
 
-/* 右側：スクロールするコンテンツ */
 .content {
   width: 60%;
-  padding: 20vh 8vw; /* 上下に余白を持たせて、スクロールを長く感じさせる */
+  /* 最初の1行目が文字と同じ高さから始まるように、paddingを調整 */
+  padding: 40vh 8vw; 
   line-height: 2;
   font-size: 16px;
 }
