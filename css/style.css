@@ -443,27 +443,26 @@ main {
   width: 40%;
   height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  overflow: hidden;
   padding-left: 6vw;
   pointer-events: none;
 }
 
+.title-track {
+  display: flex;
+  flex-direction: column;
+}
+
 .title-item {
+  height: 100vh;
+  display: flex;
+  align-items: center;
   font-size: clamp(48px, 6vw, 96px);
   font-weight: 500;
   line-height: 1;
-  opacity: 0;
-  transform: translateY(60px);
-  transition: opacity .6s ease, transform .6s ease;
-  position: absolute;
 }
 
-/* 表示中 */
-.title-item.is-active {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 /* =========================
   RIGHT : CONTENT
