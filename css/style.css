@@ -43,8 +43,8 @@ header {
 .fade-logo,
 .fade-menu {
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity .6s ease, transform .6s ease;
+  transform: translateY(5px);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 .fade-logo.show,
