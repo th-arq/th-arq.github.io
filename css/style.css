@@ -228,41 +228,47 @@ main {
 ========================= */
 
 .about-layout {
-  position: relative;
-  background-color: #fff; /* 全体の背景はここで指定 */
+  display: block;
 }
 
 .panel {
-  display: flex;
   min-height: 100vh;
+  display: flex;
   position: relative;
-  /* ↓ これを入れると、次のパネルが来た時に前のパネルが「終わる」のが明確になる */
-  border-top: 1px solid transparent; 
+  /* セクション同士の境界を分かりやすくするために少し余白 */
+  margin-bottom: 0; 
 }
 
-/* 左側：バトンタッチする文字 */
+/* 左側：バトンタッチする文字の「動く範囲」 */
 .title-item {
   width: 40%;
+  /* ↓ ここが超重要！高さを 100vh に固定して sticky にする */
   height: 100vh;
   position: sticky;
-  top: 0;
+  top: 0; 
   
   display: flex;
-  align-items: center;
+  align-items: center; /* これで文字が「画面の中央」で待機する */
   padding-left: 6vw;
   font-size: clamp(40px, 6vw, 96px);
   font-weight: 600;
   color: #111;
-  /* background-color は消して！透明に！ */
-  pointer-events: none; /* クリックの邪魔をしないように */
   z-index: 2;
+  pointer-events: none;
 }
 
 /* 右側：コンテンツ */
 .content {
   width: 60%;
-  padding: 30vh 8vw; /* 上下にたっぷり余白を */
+  /* ↓ ここも重要！上下にたっぷり余白を作ることで、
+     文字が中央で止まっている間にコンテンツが流れる「時間」を作る */
+  padding: 50vh 8vw; 
   z-index: 1;
+}
+
+/* 最後のセクションだけ、少し下に余裕を持たせる */
+.panel:last-child {
+  margin-bottom: 50vh;
 }
 
 .content h2 {
