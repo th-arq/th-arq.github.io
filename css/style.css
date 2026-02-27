@@ -228,54 +228,46 @@ main {
 ========================= */
 
 .about-layout {
-  display: block;
-}
-
-.panel {
-  min-height: 100vh;
   display: flex;
   position: relative;
-  /* セクション同士の境界を分かりやすくするために少し余白 */
-  margin-bottom: 0; 
 }
 
-/* 左側：バトンタッチする文字の「動く範囲」 */
-.title-item {
+/* 左側の固定枠 */
+.title-rail {
   width: 40%;
-  /* ↓ ここが超重要！高さを 100vh に固定して sticky にする */
   height: 100vh;
   position: sticky;
-  top: 0; 
-  
+  top: 0;
+  overflow: hidden; /* はみ出た文字を隠す */
+}
+
+/* 縦に並んだ文字の塊 */
+.title-track {
   display: flex;
-  align-items: center; /* これで文字が「画面の中央」で待機する */
+  flex-direction: column;
+  will-change: transform;
+}
+
+.title-item {
+  height: 100vh;
+  display: flex;
+  align-items: center;
   padding-left: 6vw;
   font-size: clamp(40px, 6vw, 96px);
   font-weight: 600;
   color: #111;
-  z-index: 2;
-  pointer-events: none;
 }
 
-/* 右側：コンテンツ */
-.content {
+/* 右側のコンテンツ */
+.content-rail {
   width: 60%;
-  /* ↓ ここも重要！上下にたっぷり余白を作ることで、
-     文字が中央で止まっている間にコンテンツが流れる「時間」を作る */
-  padding: 50vh 8vw; 
-  z-index: 1;
 }
 
-/* 最後のセクションだけ、少し下に余裕を持たせる */
-.panel:last-child {
-  margin-bottom: 50vh;
+.panel {
+  min-height: 120vh; /* 少し長めにすると、バトンタッチがゆっくり見えるよ */
+  padding: 20vh 8vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.content h2 {
-  font-size: 32px;
-  margin-bottom: 2rem;
-}
-
-.content p {
-  margin-bottom: 1.5rem;
-}
