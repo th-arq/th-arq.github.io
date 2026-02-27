@@ -1,50 +1,46 @@
 window.addEventListener("load", () => {
-  // ファーストビューはスクロール禁止
+  // スクロール禁止
   document.body.style.overflow = "hidden";
 
-  const reveals = document.querySelectorAll(".reveal");
+  // header 読み込み
+  fetch('head.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('header').innerHTML = html;
 
-  // 少し待ってから一斉に表示
-  setTimeout(() => {
-    reveals.forEach(el => {
-      el.classList.add("show");
+      // header が入ってから要素取得
+      const reveals = document.querySelectorAll(".reveal");
+      const logo = document.querySelector(".fade-logo");
+      const menu = document.querySelector(".fade-menu");
+
+      /* ① 画像（同時・上から下） */
+      setTimeout(() => {
+        reveals.forEach(el => {
+          el.classList.add("show");
+        });
+      }, 300);
+
+      /* ② ロゴ */
+      setTimeout(() => {
+        if (logo) logo.classList.add("show");
+      }, 900);
+
+      /* ③ メニュー */
+      setTimeout(() => {
+        if (menu) menu.classList.add("show");
+      }, 1200);
+
+      /* ④ スクロール解放 */
+      setTimeout(() => {
+        document.body.style.overflow = "";
+      }, 1500);
     });
 
-    // アニメーション終わったらスクロール解放
-    setTimeout(() => {
-      document.body.style.overflow = "";
-    }, 1300);
-
-  }, 300);
-
-  // ② ロゴ
-  if (logo) {
-    setTimeout(() => {
-      logo.classList.add("show");
-    }, 800);
-  }
-
-  // ③ メニュー
-  if (menu) {
-    setTimeout(() => {
-      menu.classList.add("show");
-    }, 1100);
-  }
-
-  // ④ スクロール解除
-  setTimeout(() => {
-    document.body.classList.remove("is-lock");
-  }, 1600);
+  // footer
+  fetch('foot.html')
+    .then(res => res.text())
+    .then(html => {
+      const footer = document.getElementById('footer');
+      if (footer) footer.innerHTML = html;
+    });
 });
-
-fetch('head.html')
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById('header').innerHTML = html;
-  });
-
-fetch('foot.html')
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById('footer').innerHTML = html;
-  });
