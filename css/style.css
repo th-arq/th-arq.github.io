@@ -239,14 +239,12 @@ main {
   position: sticky;
   top: 0;
   overflow: hidden;
-  display: flex;       /* 追加 */
-  align-items: center; /* これで中の track が上下中央に固定される */
 }
 
 .about-layout .title-track {
   display: block;
   width: 100%;
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
+  transform: translateY(0);
   will-change: transform;
 }
 
