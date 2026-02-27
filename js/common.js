@@ -1,40 +1,38 @@
 window.addEventListener("load", () => {
-  
-  // header/footer (変更なし)
-  const loadParts = (id, path) => {
-    fetch(path).then(res => res.text()).then(html => {
-      const el = document.getElementById(id);
-      if (el) el.innerHTML = html;
-    });
-  };
-  loadParts('header', '/head.html');
-  loadParts('footer', '/foot.html');
+  // (header/footerの読み込みはそのまま)
 
   const track = document.querySelector(".title-track");
-  const contentRail = document.querySelector(".content-rail");
   const panels = document.querySelectorAll(".panel");
+  const contentRail = document.querySelector(".content-rail");
 
   const handleScroll = () => {
-    if (!track || !contentRail || panels.length === 0) return;
+    if (!track || panels.length === 0) return;
 
-    // contentRailが画面の上端からどれくらい離れているか
-    const railRect = contentRail.getBoundingClientRect();
+    // 画面の中央線の位置（ピクセル）
+    const viewCenter = window.innerHeight / 2;
+
+    // 1枚目のパネルの中心と、最後のパネルの中心の距離を計算する
+    const firstRect = panels[0].getBoundingClientRect();
+    const lastRect = panels[panels.length - 1].getBoundingClientRect();
+
+    // パネルの中心点を基準にする
+    const firstCenter = firstRect.top + (firstRect.height / 2);
+    const lastCenter = lastRect.top + (lastRect.height / 2);
+
+    // 全体の移動距離（1枚目から最後までの中心間距離）
+    const totalDist = lastCenter - firstCenter;
     
-    // 開始位置：contentRailのトップが画面のトップに重なった時
-    // 終了位置：最後のパネルが表示しきった時
-    const scrollDistance = -railRect.top;
-    const totalHeight = contentRail.offsetHeight - window.innerHeight;
+    // 現在、どれくらい進んでいるか（1枚目が中央に来た時が0）
+    const currentPos = viewCenter - firstCenter;
 
-    // 進捗率 0〜1
-    let progress = scrollDistance / totalHeight;
+    let progress = currentPos / totalDist;
     progress = Math.max(0, Math.min(1, progress));
 
-    // 移動量 (パネル1枚分は 100vh)
+    // パネル1枚分(100vh)ずつ動かす
     const moveAmount = progress * (panels.length - 1) * 100;
-
     track.style.transform = `translateY(-${moveAmount}vh)`;
   };
 
   window.addEventListener("scroll", handleScroll);
-  handleScroll(); // 読み込み時にも実行
+  handleScroll();
 });
