@@ -214,6 +214,7 @@ main {
 
 .about-layout {
   display: flex;
+  min-height: 300vh; /* ← これ！！！！ */
 }
 
 /* =========================
@@ -439,9 +440,8 @@ main {
 ========================= */
 .title-rail {
   position: sticky;
-  top: 0;
-  width: 40%;
-  height: 100vh;
+  top: var(--header-height); /* ← ヘッダー分ずらす */
+  height: calc(100vh - var(--header-height));
   overflow: hidden;
 }
 
