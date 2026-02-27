@@ -429,22 +429,16 @@ main {
 }
 
 
-/* =========================
-  LEFT : TITLE
-========================= */
-.title-rail {
+.about-layout .title-rail {
   width: 40%;
 }
 
-.title-track {
+.about-layout .title-track {
   display: flex;
   flex-direction: column;
 }
 
-.title-item {
-  position: sticky;
-  top: calc(var(--header-height) + 50%);
-  transform: translateY(-50%);
+.about-layout .title-item {
   height: 100vh;
   display: flex;
   align-items: center;
@@ -452,21 +446,19 @@ main {
   font-size: clamp(48px, 6vw, 96px);
   font-weight: 500;
   line-height: 1;
-  
+  position: sticky;
+  top: var(--header-height);
 }
 
-/* =========================
-  RIGHT : CONTENT
-========================= */
-.content-rail {
+.about-layout .content-rail {
   width: 60%;
 }
 
-.panel {
+.about-layout .panel {
   min-height: 100vh;
   padding: 15vh 8vw;
 }
 
-.content {
+.about-layout .content {
   max-width: 600px;
 }
