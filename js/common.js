@@ -10,33 +10,30 @@ window.addEventListener("load", () => {
   loadParts('footer', '/foot.html');
 
   const track = document.querySelector(".title-track");
-  const layout = document.querySelector(".about-layout");
   const panels = document.querySelectorAll(".panel");
 
   const handleScroll = () => {
-    if (!track || !layout || panels.length === 0) return;
+    if (!track || panels.length === 0) return;
 
-    const rect = layout.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
+    // 現在、どのパネルが「画面の中央」にかかっているかを探す
+    let activeIndex = 0;
+    const viewCenter = window.innerHeight / 2;
 
-    // セクション全体の高さから、最後のパネルが画面に収まるまでの距離を計算
-    const totalScrollRange = layout.offsetHeight - windowHeight;
-    
-    // 今のスクロール量（セクションのトップからの距離）
-    const currentScroll = -rect.top;
+    panels.forEach((panel, index) => {
+      const rect = panel.getBoundingClientRect();
+      // パネルの上が画面中央より上で、パネルの下が画面中央より下にある場合
+      if (rect.top <= viewCenter && rect.bottom >= viewCenter) {
+        activeIndex = index;
+      }
+    });
 
-    // 進捗率 0〜1 
-    // rect.top が 0 の時（セクションが画面上端に来た時）に progress が 0 になる
-    let progress = currentScroll / totalScrollRange;
-    progress = Math.max(0, Math.min(1, progress));
-
-    // 移動量計算（1枚 100vh）
-    const moveAmount = progress * (panels.length - 1) * 100;
-
-    // 文字を上にスライド
+    // 見つかったインデックス（0:ABOUT, 1:SERVICE...）に合わせて
+    // 100vh単位でガツンと移動させる
+    // transitionをCSSでつけておけば、ここを書き換えるだけで滑らかに動くよ！
+    const moveAmount = activeIndex * 100;
     track.style.transform = `translateY(-${moveAmount}vh)`;
   };
 
   window.addEventListener("scroll", handleScroll);
-  handleScroll();
+  handleScroll(); // 初期表示用
 });
