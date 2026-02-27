@@ -10,6 +10,12 @@ body {
   font-family: 'Jost', sans-serif;
 }
 
+body:not(.is-index) .fade-logo,
+body:not(.is-index) .fade-menu {
+  opacity: 1;
+  transform: none;
+}
+
 body.is-lock {
   overflow: hidden;
 }
@@ -43,8 +49,8 @@ header {
 .fade-logo,
 .fade-menu {
   opacity: 0;
-  transform: translateY(5px);
-  transition: opacity 1s ease, transform 1s ease;
+  transform: translateY(8px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .fade-logo.show,
