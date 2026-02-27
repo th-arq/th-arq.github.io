@@ -1,482 +1,55 @@
-/* =========================
-   RESET / BASE
-========================= */
-* {
-  box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ABOUT</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div id="header"></div>
+
+<main class="about-layout">
+
+  <!-- 左：タイトルレーン -->
+  <div class="title-rail">
+    <div class="title-item" data-title="ABOUT">ABOUT</div>
+    <div class="title-item" data-title="SERVICE">SERVICE</div>
+    <div class="title-item" data-title="COMPANY">COMPANY</div>
+  </div>
+
+  <!-- 右：コンテンツ -->
+  <div class="content-rail">
+
+    <section class="panel" data-title="ABOUT">
+      <div class="content">
+        <h2>About</h2>
+        <p>Aboutの内容が続く…</p>
+      </div>
+    </section>
+
+    <section class="panel" data-title="SERVICE">
+      <div class="content">
+        <h2>Service</h2>
+        <p>Serviceの内容が続く…</p>
+      </div>
+    </section>
+
+    <section class="panel" data-title="COMPANY">
+      <div class="content">
+        <h2>Company</h2>
+        <p>Companyの内容が続く…</p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+  <div id="footer"></div>
+
+
+  <script src="../js/common.js" defer></script>
+</body>
+</html>
 
-body {
-  margin: 0;
-  font-family: 'Jost', sans-serif;
-}
-
-body:not(.is-index) .fade-logo,
-body:not(.is-index) .fade-menu {
-  opacity: 1;
-  transform: none;
-}
-
-body.is-lock {
-  overflow: hidden;
-}
-
-:root {
-  --side-padding: clamp(24px, 6vw, 80px);
-  --header-height: 80px;
-}
-
-
-@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
-
-/* =========================
-  HEADER BASE
-========================= */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--header-height);
-  padding: 0 var(--side-padding);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 100;
-  background: transparent;
-}
-
-
-.fade-logo,
-.fade-menu {
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.fade-logo.show,
-.fade-menu.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-/* =========================
-  LEFT : LOGO
-========================= */
-.TAG_logo img {
-  height: 24px;
-  display: block;
-}
-
-/* =========================
-  RIGHT AREA
-========================= */
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-}
-
-/* =========================
-  MENU (PC)
-========================= */
-#menu ul {
-  display: flex;
-  gap: 40px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#menu a {
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  color: #111;
-  text-decoration: none;
-  position: relative;
-}
-
-#menu a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .3s ease;
-}
-
-#menu a:hover::after {
-  transform: scaleX(1);
-}
-
-/* =========================
-  CONTACT BUTTON
-========================= */
-.contact-btn {
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  padding: 10px 18px;
-  background: #111;
-  color: #fff;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-/* =========================
-  RESPONSIVE
-========================= */
-@media (max-width: 900px) {
-  #menu,
-  .contact-btn {
-    display: none;
-  }
-}
-
-/* =========================
-  LAYOUT
-========================= */
-main {
-  padding-top: var(--header-height);
-}
-
-.intro-flex {
-  display: flex;
-  gap: clamp(16px, 3vw, 40px);
-  padding: clamp(24px, 5vw, 80px) var(--side-padding);
-  height: calc(100vh - var(--header-height));
-  align-items: stretch;
-}
-
-/* 左：縦長 */
-.left {
-  flex: 1;
-  overflow: hidden;
-}
-
-/* 右：上下 */
-.right {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(16px, 5vh, 40px);
-  height: 100%;
-}
-
-/* 右の上下画像 */
-.right > div {
-  flex: 1;
-  overflow: hidden;
-}
-
-/* =========================
-  IMAGE
-========================= */
-.intro-flex img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* =========================
-  CLIP PATH REVEAL
-========================= */
-.reveal {
-  clip-path: inset(0 0 100% 0); /* 上から下に開く */
-  transition: clip-path 1.2s ease;
-  will-change: clip-path;
-}
-
-.reveal.show {
-  clip-path: inset(0 0 0 0);
-}
-
-
-@media (max-width: 900px) {
-  :root {
-    --side-padding: 24px;
-  }
-
-  .intro-flex {
-    flex-direction: column;
-    height: auto;
-  }
-}
-
-
-/* =========================
-  ABOUT
-========================= */
-
-.about-layout {
-  display: flex;
-}
-
-/* =========================
-   RESET / BASE
-========================= */
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: 'Jost', sans-serif;
-}
-
-body:not(.is-index) .fade-logo,
-body:not(.is-index) .fade-menu {
-  opacity: 1;
-  transform: none;
-}
-
-body.is-lock {
-  overflow: hidden;
-}
-
-:root {
-  --side-padding: clamp(24px, 6vw, 80px);
-  --header-height: 80px;
-}
-
-
-@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
-
-/* =========================
-  HEADER BASE
-========================= */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--header-height);
-  padding: 0 var(--side-padding);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 100;
-  background: transparent;
-}
-
-
-.fade-logo,
-.fade-menu {
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.fade-logo.show,
-.fade-menu.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-/* =========================
-  LEFT : LOGO
-========================= */
-.TAG_logo img {
-  height: 24px;
-  display: block;
-}
-
-/* =========================
-  RIGHT AREA
-========================= */
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-}
-
-/* =========================
-  MENU (PC)
-========================= */
-#menu ul {
-  display: flex;
-  gap: 40px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#menu a {
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  color: #111;
-  text-decoration: none;
-  position: relative;
-}
-
-#menu a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .3s ease;
-}
-
-#menu a:hover::after {
-  transform: scaleX(1);
-}
-
-/* =========================
-  CONTACT BUTTON
-========================= */
-.contact-btn {
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  padding: 10px 18px;
-  background: #111;
-  color: #fff;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-/* =========================
-  RESPONSIVE
-========================= */
-@media (max-width: 900px) {
-  #menu,
-  .contact-btn {
-    display: none;
-  }
-}
-
-/* =========================
-  LAYOUT
-========================= */
-main {
-  padding-top: var(--header-height);
-}
-
-.intro-flex {
-  display: flex;
-  gap: clamp(16px, 3vw, 40px);
-  padding: clamp(24px, 5vw, 80px) var(--side-padding);
-  height: calc(100vh - var(--header-height));
-  align-items: stretch;
-}
-
-/* 左：縦長 */
-.left {
-  flex: 1;
-  overflow: hidden;
-}
-
-/* 右：上下 */
-.right {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(16px, 5vh, 40px);
-  height: 100%;
-}
-
-/* 右の上下画像 */
-.right > div {
-  flex: 1;
-  overflow: hidden;
-}
-
-/* =========================
-  IMAGE
-========================= */
-.intro-flex img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* =========================
-  CLIP PATH REVEAL
-========================= */
-.reveal {
-  clip-path: inset(0 0 100% 0); /* 上から下に開く */
-  transition: clip-path 1.2s ease;
-  will-change: clip-path;
-}
-
-.reveal.show {
-  clip-path: inset(0 0 0 0);
-}
-
-
-@media (max-width: 900px) {
-  :root {
-    --side-padding: 24px;
-  }
-
-  .intro-flex {
-    flex-direction: column;
-    height: auto;
-  }
-}
-
-
-/* =========================
-  ABOUT
-========================= */
-
-.about-layout {
-  display: flex;
-}
-
-/* =========================
-  LEFT : TITLE
-========================= */
-.title-rail {
-  position: sticky;
-  top: 0;
-  width: 40%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 6vw;
-  pointer-events: none;
-}
-
-.title-item {
-  font-size: clamp(48px, 6vw, 96px);
-  font-weight: 500;
-  line-height: 1;
-  opacity: 0;
-  transform: translateY(60px);
-  transition: opacity .6s ease, transform .6s ease;
-  position: absolute;
-}
-
-/* 表示中 */
-.title-item.is-active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* =========================
-  RIGHT : CONTENT
-========================= */
-.content-rail {
-  width: 60%;
-}
-
-.panel {
-  min-height: 100vh;
-  padding: 15vh 8vw;
-}
-
-.content {
-  max-width: 600px;
-}
