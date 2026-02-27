@@ -223,16 +223,18 @@ main {
 .panel {
   min-height: 100vh;
   display: flex;
+  justify-content: flex-start;
 }
 
 /* 右コンテンツ */
 .content {
   margin-left: 50%;
+  width: 50%;
   padding: 15vh 8vw;
 }
 
 /* =========================
-  左固定タイトル
+  LEFT FIXED TITLE
 ========================= */
 .fixed-title {
   position: fixed;
