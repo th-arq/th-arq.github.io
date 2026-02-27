@@ -25,31 +25,27 @@ window.addEventListener("load", () => {
 
 
 const panels = document.querySelectorAll('.panel');
-const title = document.querySelector('.title-text');
+const titles = document.querySelectorAll('.title-item');
 
-if (panels.length && title) {
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const text = entry.target.dataset.title;
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const current = entry.target.dataset.title;
 
-          // 一度消す
-          title.classList.remove('show');
+        titles.forEach(title => {
+          if (title.dataset.title === current) {
+            title.classList.add('is-active');
+          } else {
+            title.classList.remove('is-active');
+          }
+        });
+      }
+    });
+  },
+  {
+    threshold: 0.5
+  }
+);
 
-          // 下→上で入れ替え
-          setTimeout(() => {
-            title.textContent = text;
-            title.classList.add('show');
-          }, 200);
-        }
-      });
-    },
-    {
-      threshold: 0.6
-    }
-  );
-
-  panels.forEach(panel => observer.observe(panel));
-}
-
+panels.forEach(panel => observer.observe(panel));
