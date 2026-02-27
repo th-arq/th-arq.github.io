@@ -228,39 +228,41 @@ main {
 ========================= */
 
 .about-layout {
-  display: block;
+  position: relative;
+  background-color: #fff; /* 全体の背景はここで指定 */
 }
 
 .panel {
-  min-height: 100vh;
   display: flex;
+  min-height: 100vh;
   position: relative;
-  /* stickyを確実に効かせるために overflow: visible (デフォルトだけど念のため) */
-  overflow: visible; 
+  /* ↓ これを入れると、次のパネルが来た時に前のパネルが「終わる」のが明確になる */
+  border-top: 1px solid transparent; 
 }
 
+/* 左側：バトンタッチする文字 */
 .title-item {
   width: 40%;
   height: 100vh;
   position: sticky;
-  top: 0; /* これで画面のトップに固定される */
+  top: 0;
   
   display: flex;
-  align-items: center; /* これで文字が「画面の垂直中央」にくる */
+  align-items: center;
   padding-left: 6vw;
   font-size: clamp(40px, 6vw, 96px);
   font-weight: 600;
   color: #111;
-  background-color: #fff;
-  z-index: 10; /* 文字がコンテンツの下に潜り込まないように */
+  /* background-color は消して！透明に！ */
+  pointer-events: none; /* クリックの邪魔をしないように */
+  z-index: 2;
 }
 
+/* 右側：コンテンツ */
 .content {
   width: 60%;
-  /* 最初の1行目が文字と同じ高さから始まるように、paddingを調整 */
-  padding: 40vh 8vw; 
-  line-height: 2;
-  font-size: 16px;
+  padding: 30vh 8vw; /* 上下にたっぷり余白を */
+  z-index: 1;
 }
 
 .content h2 {
