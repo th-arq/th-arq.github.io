@@ -22,15 +22,17 @@ window.addEventListener("load", () => {
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const index = [...panels].indexOf(entry.target);
-          track.style.transform = `translateY(-${index * 100}vh)`;
-        }
+        if (!entry.isIntersecting) return;
+
+        const index = [...panels].indexOf(entry.target);
+
+        // 👇 少しだけ下から押し上げる余白
+        const offset = 0.15; // ← ここがバトンタッチ感の肝
+        track.style.transform = `translateY(-${(index - offset) * 100}vh)`;
       });
     },
     {
-      root: null,
-      threshold: 0.5
+      threshold: 0.4
     }
   );
 
