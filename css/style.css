@@ -208,14 +208,7 @@ main {
 }
 
 
-/* =========================
-  ABOUT
-========================= */
 
-.about-layout {
-  display: flex;
-  min-height: 300vh; /* ← これ！！！！ */
-}
 
 /* =========================
    RESET / BASE
@@ -433,7 +426,9 @@ main {
 
 .about-layout {
   display: flex;
+  min-height: 300vh; /* ← これ！！！！ */
 }
+
 
 /* =========================
   LEFT : TITLE
