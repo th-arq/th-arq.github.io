@@ -10,21 +10,6 @@ body {
   font-family: 'Jost', sans-serif;
 }
 
-body:not(.is-index) .fade-logo,
-body:not(.is-index) .fade-menu {
-  opacity: 1;
-  transform: none;
-}
-
-body.is-lock {
-  overflow: hidden;
-}
-
-:root {
-  --side-padding: clamp(24px, 6vw, 80px);
-  --header-height: 80px;
-}
-
 
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -136,91 +121,13 @@ header {
   }
 }
 
-/* =========================
-  LAYOUT
-========================= */
-main {
-  padding-top: var(--header-height);
-}
-
-.intro-flex {
-  display: flex;
-  gap: clamp(16px, 3vw, 40px);
-  padding: clamp(24px, 5vw, 80px) var(--side-padding);
-  height: calc(100vh - var(--header-height));
-  align-items: stretch;
-}
-
-/* 左：縦長 */
-.left {
-  flex: 1;
-  overflow: hidden;
-}
-
-/* 右：上下 */
-.right {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(16px, 5vh, 40px);
-  height: 100%;
-}
-
-/* 右の上下画像 */
-.right > div {
-  flex: 1;
-  overflow: hidden;
-}
-
-/* =========================
-  IMAGE
-========================= */
-.intro-flex img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* =========================
-  CLIP PATH REVEAL
-========================= */
-.reveal {
-  clip-path: inset(0 0 100% 0); /* 上から下に開く */
-  transition: clip-path 1.2s ease;
-  will-change: clip-path;
-}
-
-.reveal.show {
-  clip-path: inset(0 0 0 0);
-}
-
-
-@media (max-width: 900px) {
-  :root {
-    --side-padding: 24px;
-  }
-
-  .intro-flex {
-    flex-direction: column;
-    height: auto;
-  }
-}
-
 
 
 
 /* =========================
-   RESET / BASE
+   INDEX
 ========================= */
-* {
-  box-sizing: border-box;
-}
 
-body {
-  margin: 0;
-  font-family: 'Jost', sans-serif;
-}
 
 body:not(.is-index) .fade-logo,
 body:not(.is-index) .fade-menu {
@@ -241,116 +148,9 @@ body.is-lock {
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* =========================
-  HEADER BASE
-========================= */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--header-height);
-  padding: 0 var(--side-padding);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 100;
-  background: transparent;
-}
-
-
-.fade-logo,
-.fade-menu {
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.fade-logo.show,
-.fade-menu.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-/* =========================
-  LEFT : LOGO
-========================= */
-.TAG_logo img {
-  height: 24px;
-  display: block;
-}
-
-/* =========================
-  RIGHT AREA
-========================= */
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-}
-
-/* =========================
-  MENU (PC)
-========================= */
-#menu ul {
-  display: flex;
-  gap: 40px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#menu a {
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  color: #111;
-  text-decoration: none;
-  position: relative;
-}
-
-#menu a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .3s ease;
-}
-
-#menu a:hover::after {
-  transform: scaleX(1);
-}
-
-/* =========================
-  CONTACT BUTTON
-========================= */
-.contact-btn {
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  padding: 10px 18px;
-  background: #111;
-  color: #fff;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-/* =========================
-  RESPONSIVE
-========================= */
-@media (max-width: 900px) {
-  #menu,
-  .contact-btn {
-    display: none;
-  }
-}
-
-/* =========================
   LAYOUT
 ========================= */
+
 main {
   padding-top: var(--header-height);
 }
@@ -384,15 +184,6 @@ main {
   overflow: hidden;
 }
 
-/* =========================
-  IMAGE
-========================= */
-.intro-flex img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
 
 /* =========================
   CLIP PATH REVEAL
@@ -417,6 +208,18 @@ main {
     flex-direction: column;
     height: auto;
   }
+}
+
+
+
+/* =========================
+  IMAGE
+========================= */
+.intro-flex img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 
@@ -426,6 +229,7 @@ main {
 
 .about-layout {
   display: flex;
+  align-items: flex-start;
 }
 
 
@@ -447,12 +251,13 @@ main {
 }
 
 .about-layout .title-item {
-  height: 100vh; /* 1つの単語につき1画面分の高さ */
+  height: 100vh;
   display: flex;
   align-items: center;
   padding-left: 6vw;
   font-size: clamp(48px, 6vw, 96px);
   font-weight: 500;
+  flex-shrink: 0;
 }
 
 .about-layout .content-rail {
@@ -462,6 +267,9 @@ main {
 .about-layout .panel {
   min-height: 100vh;
   padding: 15vh 8vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .about-layout .content {
