@@ -1,41 +1,41 @@
 window.addEventListener("load", () => {
-
-  // ===== header の読み込み =====
-  fetch('/head.html')
-    .then(res => res.text())
-    .then(html => {
-      const header = document.getElementById('header');
-      if (header) header.innerHTML = html;
+  // header / footer 読み込み (既存のコード)
+  const loadParts = (id, path) => {
+    fetch(path).then(res => res.text()).then(html => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = html;
     });
+  };
+  loadParts('header', '/head.html');
+  loadParts('footer', '/foot.html');
 
-  // ===== footer の読み込み =====
-  fetch('/foot.html')
-    .then(res => res.text())
-    .then(html => {
-      const footer = document.getElementById('footer');
-      if (footer) footer.innerHTML = html;
-    });
-
-  // ※ スクロール連動の長いコードは全部消してスッキリさせてOK！
-});
-
-window.addEventListener("scroll", () => {
+  // --- ここからバトンタッチの処理 ---
   const track = document.querySelector(".title-track");
-  const panels = document.querySelectorAll(".panel");
   const layout = document.querySelector(".about-layout");
+  const panels = document.querySelectorAll(".panel");
 
-  if (!track || panels.length === 0) return;
+  const handleScroll = () => {
+    if (!track || !layout || panels.length === 0) return;
 
-  const rect = layout.getBoundingClientRect();
-  const windowHeight = window.innerHeight;
+    const rect = layout.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
 
-  // ABOUTの開始地点から、全体の終わりまでの距離
-  const totalHeight = layout.offsetHeight - windowHeight;
-  // 現在どれくらい進んだか (0 〜 1)
-  let progress = -rect.top / totalHeight;
-  progress = Math.max(0, Math.min(1, progress));
+    // Aboutエリア全体の高さから、画面で見えている分を引いた「スクロールできる全距離」
+    const totalScrollRange = layout.offsetHeight - windowHeight;
+    
+    // 現在、Aboutエリアのトップからどれくらいスクロールしたか
+    const currentScroll = -rect.top;
 
-  // 文字を「100vh × (パネル数-1)」分だけ、進捗に合わせて上にずらす
-  const moveAmount = progress * (panels.length - 1) * 100;
-  track.style.transform = `translateY(-${moveAmount}vh)`;
+    // 進捗率 (0:最初 〜 1:最後までスクロールした)
+    let progress = currentScroll / totalScrollRange;
+    progress = Math.max(0, Math.min(1, progress));
+
+    // 文字の塊を上にずらす量（100vh × 文字の数）
+    // progressが1に近づくほど、最後の文字が真ん中に来るよ
+    const moveAmount = progress * (panels.length - 1) * 100;
+    track.style.transform = `translateY(-${moveAmount}vh)`;
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  handleScroll(); // 初期表示用
 });
