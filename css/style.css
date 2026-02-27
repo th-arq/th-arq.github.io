@@ -226,28 +226,25 @@ main {
 /* =========================
   ABOUT
 ========================= */
-/* ABOUTレイアウト全体の横並び設定 */
 .about-layout {
-  display: flex; /* これで左文字、右コンテンツに分ける */
+  display: flex; /* 左右を分ける */
   align-items: flex-start;
   position: relative;
 }
 
-/* 左側の固定エリア */
+/* 左側：固定 */
 .title-rail {
   width: 40%;
   height: 100vh;
   position: sticky;
   top: 0;
-  overflow: hidden; /* はみ出た文字(SERVICE, COMPANY)を隠す */
-  background-color: #fff; /* 背景を白にしてコンテンツと分ける */
+  overflow: hidden;
+  background-color: #fff;
 }
 
-/* 文字を縦に並べるトラック */
 .title-track {
   display: flex;
   flex-direction: column;
-  transition: transform 0.1s linear; /* 動きを滑らかにする */
 }
 
 .title-item {
@@ -261,11 +258,14 @@ main {
   flex-shrink: 0;
 }
 
-/* 右側のスクロールエリア */
-.panel {
+/* 右側：縦に並ぶレール */
+.content-rail {
   width: 60%;
-  min-height: 100vh;
-  padding: 20vh 8vw; /* 上下に余白をたっぷり取ってスクロールさせる */
+}
+
+.panel {
+  min-height: 100vh; /* 各セクションは画面1枚分以上の高さに */
+  padding: 20vh 8vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
