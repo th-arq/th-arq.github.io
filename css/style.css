@@ -10,10 +10,6 @@ body {
   font-family: 'Jost', sans-serif;
 }
 
-:root {
-  --side-padding: clamp(24px, 6vw, 80px);
-  --header-height: 80px;
-}
 
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -51,6 +47,19 @@ body.is-lock {
 :root {
   --side-padding: clamp(24px, 6vw, 80px);
   --header-height: 80px;
+}
+
+.fade-logo,
+.fade-menu {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-logo.show,
+.fade-menu.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 
