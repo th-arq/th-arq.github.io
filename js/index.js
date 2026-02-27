@@ -34,5 +34,3 @@ const observer = new IntersectionObserver(
     threshold: 0.6
   }
 );
-
-panels.forEach(panel => observer.observe(panel));
