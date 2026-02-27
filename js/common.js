@@ -22,3 +22,34 @@ window.addEventListener("load", () => {
     });
 
 });
+
+
+const panels = document.querySelectorAll('.panel');
+const title = document.querySelector('.title-text');
+
+if (panels.length && title) {
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const text = entry.target.dataset.title;
+
+          // 一度消す
+          title.classList.remove('show');
+
+          // 下→上で入れ替え
+          setTimeout(() => {
+            title.textContent = text;
+            title.classList.add('show');
+          }, 200);
+        }
+      });
+    },
+    {
+      threshold: 0.6
+    }
+  );
+
+  panels.forEach(panel => observer.observe(panel));
+}
+
