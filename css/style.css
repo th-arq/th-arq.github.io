@@ -435,8 +435,9 @@ main {
 ========================= */
 .title-rail {
   position: sticky;
-  top: var(--header-height); /* ← ヘッダー分ずらす */
+  top: var(--header-height);
   height: calc(100vh - var(--header-height));
+  width: 40%;          /* ← これ必須！！ */
   overflow: hidden;
 }
 
