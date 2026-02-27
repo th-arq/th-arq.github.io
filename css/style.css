@@ -247,7 +247,7 @@ main {
 .about-layout .title-track {
   display: block;
   width: 100%;
-  transition: transform 0.15s ease-out; /* 少し余韻をもたせるとバトン感が出るよ */
+  transform: translateY(0); /* 最初はABOUTを表示！ */
   will-change: transform;
 }
 
