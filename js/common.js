@@ -1,57 +1,46 @@
 window.addEventListener("load", () => {
 
-  // ===== 1. header の読み込み =====
-  fetch('/head.html')
-    .then(res => res.text())
-    .then(html => {
-      const header = document.getElementById('header');
-      if (header) header.innerHTML = html;
+  // ===== 1. header/footer 読み込み (そのまま) =====
+  const loadParts = (id, path) => {
+    fetch(path).then(res => res.text()).then(html => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = html;
     });
+  };
+  loadParts('header', '/head.html');
+  loadParts('footer', '/foot.html');
 
-  // ===== 2. footer の読み込み =====
-  fetch('/foot.html')
-    .then(res => res.text())
-    .then(html => {
-      const footer = document.getElementById('footer');
-      if (footer) footer.innerHTML = html;
-    });
-
-  // ===== 3. スクロール連動（バトンタッチ・アニメーション） =====
+  // ===== 2. スクロール連動（バトンタッチ）の修正版 =====
   const track = document.querySelector(".title-track");
   const contentRail = document.querySelector(".content-rail");
   const panels = document.querySelectorAll(".panel");
 
-  // スクロール時に実行する関数
   const handleScroll = () => {
     if (!track || !contentRail || panels.length === 0) return;
 
-    // content-rail（右側のコンテンツ全体）の座標を取得
-    const rect = contentRail.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-
-    // 開始位置：最初のパネルのトップが画面中央あたりに来た時
-    // 終了位置：最後のパネルが画面中央あたりに来た時
-    // これを計算するために全体の高さを取得
-    const totalScrollRange = contentRail.offsetHeight - windowHeight;
+    // contentRail（右側のエリア）が画面全体に対してどこにいるか
+    const railRect = contentRail.getBoundingClientRect();
     
-    // 現在のスクロール進捗（0 〜 1）を計算
-    // rect.top がマイナスになるほど下にスクロールしている
-    let progress = -rect.top / totalScrollRange;
+    // 【重要】最初のパネルの「中心」から最後のパネルの「中心」までの距離で計算する
+    const firstPanel = panels[0].getBoundingClientRect();
+    const lastPanel = panels[panels.length - 1].getBoundingClientRect();
 
-    // 範囲を 0 (最初) から 1 (最後) の間に固定
+    // 全体の動くべき距離を計算
+    // 最初のパネルが画面中央に来た時を 0 、最後が中央に来た時を 1 にする
+    const startPoint = window.innerHeight / 2;
+    const totalDistance = lastPanel.top - firstPanel.top;
+    const currentPos = startPoint - firstPanel.top;
+
+    let progress = currentPos / totalDistance;
+
+    // 0〜1の間に固定
     progress = Math.max(0, Math.min(1, progress));
 
-    // 移動量を計算（パネルの数 - 1）分だけ 100vh ずつ動かす
+    // 移動量を計算
     const moveAmount = progress * (panels.length - 1) * 100;
-
-    // transform で上に引き上げる
     track.style.transform = `translateY(-${moveAmount}vh)`;
   };
 
-  // スクロールイベントを登録
   window.addEventListener("scroll", handleScroll);
-  
-  // 初回読み込み時にも一度計算しておく
-  handleScroll();
-
+  handleScroll(); // 初期位置調整
 });
