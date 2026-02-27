@@ -1,36 +1,46 @@
-fetch('../head.html')
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById('header').innerHTML = html;
-  });
+window.addEventListener("load", () => {
+  // スクロール禁止
+  document.body.style.overflow = "hidden";
 
-fetch('../foot.html')
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById('footer').innerHTML = html;
-  });
+  // header 読み込み
+  fetch('head.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('header').innerHTML = html;
 
+      // header が入ってから要素取得
+      const reveals = document.querySelectorAll(".reveal");
+      const logo = document.querySelector(".fade-logo");
+      const menu = document.querySelector(".fade-menu");
 
-  const panels = document.querySelectorAll('.panel');
-const title = document.querySelector('.title-text');
+      /* ① 画像（同時・上から下） */
+      setTimeout(() => {
+        reveals.forEach(el => {
+          el.classList.add("show");
+        });
+      }, 300);
 
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const text = entry.target.dataset.title;
+      /* ② ロゴ */
+      setTimeout(() => {
+        if (logo) logo.classList.add("show");
+      }, 900);
 
-        // 一旦消す → 入れ替え → 下から表示
-        title.classList.remove('show');
+      /* ③ メニュー */
+      setTimeout(() => {
+        if (menu) menu.classList.add("show");
+      }, 1200);
 
-        setTimeout(() => {
-          title.textContent = text;
-          title.classList.add('show');
-        }, 200);
-      }
+      /* ④ スクロール解放 */
+      setTimeout(() => {
+        document.body.style.overflow = "";
+      }, 1500);
     });
-  },
-  {
-    threshold: 0.6
-  }
-);
+
+  // footer
+  fetch('foot.html')
+    .then(res => res.text())
+    .then(html => {
+      const footer = document.getElementById('footer');
+      if (footer) footer.innerHTML = html;
+    });
+});
