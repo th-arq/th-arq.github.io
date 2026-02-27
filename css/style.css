@@ -234,31 +234,26 @@ main {
 
 
 .about-layout .title-rail {
-  width: 40%;
+width: 40%;
   height: 100vh;
   position: sticky;
   top: 0;
   overflow: hidden;
-  /* ↓ ここで箱の中身を上下中央に寄せる */
-  display: flex;
-  align-items: center;
 }
-
 .about-layout .title-track {
   display: block;
   width: 100%;
-  transform: translateY(0); /* 最初はABOUTを表示！ */
+  transform: translateY(0); 
   will-change: transform;
 }
 
 .about-layout .title-item {
   height: 100vh;
   display: flex;
-  align-items: center; /* これで文字が100vhの中央にくる */
+  align-items: center;
   padding-left: 6vw;
-  font-size: clamp(40px, 5vw, 80px); /* 少しサイズ調整 */
+  font-size: clamp(40px, 5vw, 80px);
   font-weight: 500;
-  color: #111;
 }
 
 .about-layout .content-rail {
