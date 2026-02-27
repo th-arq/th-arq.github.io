@@ -437,8 +437,8 @@ main {
   position: sticky;
   top: var(--header-height);
   height: calc(100vh - var(--header-height));
-  width: 40%;          /* ← これ必須！！ */
   overflow: hidden;
+  width: 40%;
 }
 
 .title-track {
@@ -447,13 +447,12 @@ main {
 }
 
 .title-item {
-  height: 100vh;              /* ← これが命 */
+  height: 100vh;
   display: flex;
-  align-items: center;        /* 縦中央 */
+  align-items: center;
   padding-left: 6vw;
   font-size: clamp(48px, 6vw, 96px);
   font-weight: 500;
-  line-height: 1;
 }
 
 /* =========================
