@@ -1,5 +1,5 @@
 window.addEventListener("load", () => {
-  // --- 1. Header / Footer 読み込み ---
+  // --- 1. Header / Footer 読み込み (絶対に消さないよ！) ---
   const loadParts = (id, path) => {
     fetch(path).then(res => res.text()).then(html => {
       const el = document.getElementById(id);
@@ -9,43 +9,30 @@ window.addEventListener("load", () => {
   loadParts('header', '/head.html');
   loadParts('footer', '/foot.html');
 
-  // --- 2. ズレないバトンタッチ ---
+  // --- 2. 理想のドッキング・スクロール ---
   const track = document.querySelector(".title-track");
   const panels = document.querySelectorAll(".panel");
   const layout = document.querySelector(".about-layout");
 
   const handleScroll = () => {
-    if (!track || !layout || panels.length === 0) return;
+    if (!track || panels.length === 0) return;
 
     const layoutRect = layout.getBoundingClientRect();
-    // ヘッダーの高さを考慮せず、レイアウト要素のトップからの距離を純粋に取る
-    const scrollTop = -layoutRect.top; 
+    const scrollTop = -layoutRect.top;
     const panelHeight = panels[0].offsetHeight;
 
-    // 現在のセクション番号
     const index = Math.floor(scrollTop / panelHeight);
     const offsetInPanel = scrollTop % panelHeight;
 
-    // 動き出すタイミング（90%までは絶対動かない）
-    const startMoving = panelHeight * 0.9;
-    const itemHeightVh = 100;
+    // --- 設定値 ---
+    const startCatchUp = panelHeight * 0.5; // 半分くらいからSERVICEがコッソリ登り始める
+    const dockingPoint = panelHeight * 0.9; // 90%地点でABOUTの真下にピタッと付く
+    const itemHeightVh = 25; // 文字の間隔（CSSと合わせてね）
 
-    let moveAmount = index * itemHeightVh;
+    let moveY = index * itemHeightVh;
 
-    // 0以下のときはABOUT（index 0）で固定
-    if (scrollTop < 0) {
-      moveAmount = 0;
-    } else if (offsetInPanel > startMoving) {
-      // 90%を超えたら、次の文字をスクロールに合わせて引っ張り上げる
-      const progress = (offsetInPanel - startMoving) / (panelHeight - startMoving);
-      moveAmount += progress * itemHeightVh;
-    }
-
-    track.style.transition = "none";
-    // translateYだけで制御。-50%とかを使わないシンプルな計算にしたよ！
-    track.style.transform = `translateY(-${moveAmount}vh)`;
-  };
-
-  window.addEventListener("scroll", handleScroll);
-  handleScroll();
-});
+    if (offsetInPanel > startCatchUp && offsetInPanel <= dockingPoint) {
+      // 【フェーズ1】ABOUTは中央で不動！SERVICEだけが下から距離を詰める
+      // 0から100%（itemHeightVh分）をここで動かす
+      const catchUpProgress = (offsetInPanel - startCatchUp) / (dockingPoint - startCatchUp);
+      moveY += catchUpProgress * itemHeight
