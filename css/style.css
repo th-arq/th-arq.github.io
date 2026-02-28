@@ -265,11 +265,11 @@ main {
 }
 
 .panel {
-  min-height: 120vh; /* 画面1枚より少し長くする */
-  padding: 50vh 8vw; /* 上下に大きな余白を作る */
+  min-height: 120vh; /* すべてのパネルで高さを統一するのがコツ */
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 0 8vw;
 }
 
 .content h2 {
