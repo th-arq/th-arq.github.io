@@ -227,9 +227,10 @@ main {
   ABOUT
 ========================= */
 .about-layout {
-  display: flex; /* 左右を分ける */
-  align-items: flex-start;
+  display: flex;
+  align-items: flex-start; /* これが大事！ */
   position: relative;
+  width: 100%;
 }
 
 /* 左側：固定 */
