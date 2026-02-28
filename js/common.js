@@ -10,28 +10,31 @@ window.addEventListener("load", () => {
   loadParts('footer', '/foot.html');
 
   // --- 2. 右のパネルと完全に同期するロジック ---
+    // --- 2. 左タイトルを右スクロールと完全同期 ---
   const track = document.querySelector(".title-track");
   const panels = document.querySelectorAll(".panel");
   const layout = document.querySelector(".about-layout");
 
   const handleScroll = () => {
-    if (!track || panels.length === 0) return;
+    if (!track || panels.length === 0 || !layout) return;
 
-    const rect = layout.getBoundingClientRect();
-    // 全体のスクロール量（layoutのトップからの距離）
-    const scrollTop = -rect.top; 
-    // パネル1枚分の高さ
+    const layoutTop = layout.offsetTop;
+    const scrollY = window.scrollY;
+
+    // about-layout に入ってからのスクロール量
+    const relativeScroll = scrollY - layoutTop;
+    if (relativeScroll < 0) return;
+
     const panelHeight = panels[0].offsetHeight;
 
-    // 現在の進捗（0枚目なら0〜1、1枚目なら1〜2...と増えていく）
-    const progress = scrollTop / panelHeight;
+    // 最大スクロール（最後のタイトルで止める）
+    const maxScroll =
+      panelHeight * panels.length - window.innerHeight;
 
-    // 左側の文字1つ分の高さは 100vh 分（JSでは1枚分として計算）
-    const moveAmount = progress * 100;
+    const clampedScroll = Math.min(relativeScroll, maxScroll);
 
-    track.style.transition = "none";
-    // 進捗に合わせて、文字を上にスライドさせる
-    track.style.transform = `translateY(${-moveAmount}vh)`;
+    // 右と完全同期（px）
+    track.style.transform = `translateY(${-clampedScroll}px)`;
   };
 
   window.addEventListener("scroll", handleScroll);
