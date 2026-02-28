@@ -245,24 +245,24 @@ main {
 
 .title-track {
   position: absolute;
-  top: 0;
+  top: 50%; /* 親要素(title-rail)の真ん中を基準にする */
   left: 0;
   width: 100%;
-  /* ABOUTを中央に配置する基準 */
-  transform: translateY(37.5vh); 
+  /* 最初の文字(25vh)の半分だけ上にずらして、一文字目をど真ん中に固定 */
+  transform: translateY(-12.5vh); 
   display: flex;
   flex-direction: column;
   will-change: transform;
 }
 
 .title-item {
-  height: 25vh; 
+  height: 25vh; /* 文字の間隔をギュッと詰める */
   display: flex;
   align-items: center;
   padding-left: 6vw;
   font-size: clamp(40px, 8vw, 120px);
   font-weight: 700;
-  background-color: #fff;
+  background-color: #fff; /* 下の文字を隠すカーテン */
 }
 
 /* 【ここが修正ポイント！】 */
