@@ -9,40 +9,39 @@ window.addEventListener("load", () => {
   loadParts('header', '/head.html');
   loadParts('footer', '/foot.html');
 
-  // --- 2. スクロール連動バトンタッチ ---
+  // --- 2. 追い上げバトンタッチ ---
   const track = document.querySelector(".title-track");
   const panels = document.querySelectorAll(".panel");
   const layout = document.querySelector(".about-layout");
 
   const handleScroll = () => {
-    // 要素がない場合はエラーにならないよう抜ける
-    if (!track || !layout || panels.length === 0) return;
+    if (!track || panels.length === 0) return;
 
     const layoutRect = layout.getBoundingClientRect();
-    const scrollTop = -layoutRect.top; // Aboutエリア内でのスクロール量
-    const panelHeight = panels[0].offsetHeight; // 各セクションの高さ
+    const scrollTop = -layoutRect.top;
+    const panelHeight = panels[0].offsetHeight;
 
-    // 今何番目のセクションか
     const index = Math.floor(scrollTop / panelHeight);
     const offsetInPanel = scrollTop % panelHeight;
 
-    // --- 動きの調整（ここがゆうきのこだわりポイント！） ---
-    const startMoving = panelHeight * 0.8; // 8割読んだら次の文字が動き出す
-    const itemHeightVh = 25; // CSSの .title-item の height (25vh) と合わせる
+    // --- 動きのロジック ---
+    // 60%地点から、下のSERVICEが画面外から中央に向かって「追い上げ」を開始
+    const startClimbing = panelHeight * 0.6; 
+    const itemHeightVh = 60; // CSSの .title-item の高さと合わせる
 
-    let moveAmount = index * itemHeightVh;
+    let moveY = index * itemHeightVh;
 
-    if (offsetInPanel > startMoving) {
-      // 8割を超えたら、残りの距離(2割分)で文字をスススッと動かす
-      const progress = (offsetInPanel - startMoving) / (panelHeight - startMoving);
-      moveAmount += progress * itemHeightVh;
+    if (offsetInPanel > startClimbing) {
+      // 60%を過ぎたら、スクロールに合わせてSERVICEを中央へ引き寄せる
+      const progress = (offsetInPanel - startClimbing) / (panelHeight - startClimbing);
+      moveY += progress * itemHeightVh;
     }
 
-    // transformを直接操作して、スクロール速度と100%同期
     track.style.transition = "none";
-    track.style.transform = `translateY(calc(-50% - ${moveAmount}vh))`;
+    // calc(-50% ...) で常に現在の文字を画面中央に保ちつつ、moveYでずらす
+    track.style.transform = `translateY(calc(-50% - ${moveY}vh))`;
   };
 
   window.addEventListener("scroll", handleScroll);
-  handleScroll(); // 読み込み時にも一度計算
+  handleScroll();
 });
