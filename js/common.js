@@ -1,5 +1,5 @@
 window.addEventListener("load", () => {
-  // --- 1. Header / Footer 読み込み ---
+  // --- 1. Header / Footer 読み込み (そのまま) ---
   const loadParts = (id, path) => {
     fetch(path).then(res => res.text()).then(html => {
       const el = document.getElementById(id);
@@ -9,7 +9,7 @@ window.addEventListener("load", () => {
   loadParts('header', '/head.html');
   loadParts('footer', '/foot.html');
 
-  // --- 2. 追い上げバトンタッチ ---
+  // --- 2. ズレ解消版バトンタッチ ---
   const track = document.querySelector(".title-track");
   const panels = document.querySelectorAll(".panel");
   const layout = document.querySelector(".about-layout");
@@ -18,30 +18,30 @@ window.addEventListener("load", () => {
     if (!track || panels.length === 0) return;
 
     const layoutRect = layout.getBoundingClientRect();
-    const scrollTop = -layoutRect.top;
+    // レイアウトのトップからのスクロール距離。少しの誤差も出ないようMath.maxで調整
+    const scrollTop = Math.max(0, -layoutRect.top);
     const panelHeight = panels[0].offsetHeight;
 
+    // 今「完全に」表示されているセクションの番号
     const index = Math.floor(scrollTop / panelHeight);
     const offsetInPanel = scrollTop % panelHeight;
 
-    // --- 動きのロジック ---
-    // 60%地点から、下のSERVICEが画面外から中央に向かって「追い上げ」を開始
-    const startClimbing = panelHeight * 0.6; 
-    const itemHeightVh = 60; // CSSの .title-item の高さと合わせる
+    // --- 設定値（ここをいじるとタイミングが変わるよ） ---
+    const startMoving = panelHeight * 0.8; // 80%まで読んだら動き出す
+    const itemHeightVh = 60; // CSSの .title-item の height と合わせる
 
-    let moveY = index * itemHeightVh;
+    // 基本は、今のインデックスの位置で「固定」
+    let moveAmount = index * itemHeightVh;
 
-    if (offsetInPanel > startClimbing) {
-      // 60%を過ぎたら、スクロールに合わせてSERVICEを中央へ引き寄せる
-      const progress = (offsetInPanel - startClimbing) / (panelHeight - startClimbing);
-      moveY += progress * itemHeightVh;
+    // 80%を過ぎたときだけ、次の文字を呼び寄せる
+    if (offsetInPanel > startMoving && index < panels.length - 1) {
+      const progress = (offsetInPanel - startMoving) / (panelHeight - startMoving);
+      moveAmount += progress * itemHeightVh;
     }
 
     track.style.transition = "none";
-    // calc(-50% ...) で常に現在の文字を画面中央に保ちつつ、moveYでずらす
-    track.style.transform = `translateY(calc(-50% - ${moveY}vh))`;
+    // -50% は最初のABOUTを中央に置くためのオフセット
+    track.style.transform = `translateY(calc(-50% - ${moveAmount}vh))`;
   };
 
   window.addEventListener("scroll", handleScroll);
-  handleScroll();
-});
