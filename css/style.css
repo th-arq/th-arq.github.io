@@ -244,24 +244,14 @@ main {
 }
 
 .title-track {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  /* 50%ではなく、0から始めてJSで制御する方がズレにくいよ */
-  top: 0;
-  left: 0;
-  width: 100%;
-  will-change: transform;
+  top: 50vh;
+  /* 最初のABOUTを中央に置くための初期位置 */
+  transform: translateY(-12.5vh); 
 }
 
 .title-item {
-  height: 100vh; /* ここを100vhに固定 */
-  display: flex;
-  align-items: center; /* これで文字が垂直方向の中央に来る */
-  padding-left: 6vw;
-  font-size: clamp(40px, 8vw, 120px);
-  font-weight: 700;
-  background-color: #fff;
+  height: 25vh;
+  background-color: #fff; /* 下から来る文字を隠し、重なっても綺麗に見せる */
 }
 
 /* 右側：縦に並ぶレール */
