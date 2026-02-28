@@ -253,10 +253,9 @@ main {
   display: flex;
   align-items: center;
   padding-left: 6vw;
-  font-size: clamp(40px, 6vw, 96px);
-  font-weight: 600;
-  color: #111;
-  background-color: #fff; /* 下の文字を隠すために必須 */
+  font-size: clamp(40px, 8vw, 120px); /* 画像に合わせて少し大きくしたよ */
+  font-weight: 700;
+  background-color: #fff; /* 重なった時に後ろを隠す */
 }
 
 /* 右側：縦に並ぶレール */
