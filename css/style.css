@@ -245,23 +245,20 @@ main {
   background-color: #fff;
 }
 
-/* 文字を乗せた動くトラック */
 .title-track {
   display: flex;
   flex-direction: column;
   width: 100%;
+  transform: translateY(0); /* ← これ必須 */
   will-change: transform;
 }
 
-/* 各タイトル文字の箱 */
 .title-item {
-  height: 100vh; /* ★ここがポイント！1文字を画面いっぱいの高さにする */
+  height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   padding-left: 6vw;
-  font-size: clamp(40px, 8vw, 120px);
-  font-weight: 700;
-  background-color: #fff;
 }
 
 
@@ -271,11 +268,7 @@ main {
 }
 
 .panel {
-  min-height: 120vh; /* すべてのパネルで高さを統一するのがコツ */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 8vw;
+  min-height: 120vh;
 }
 
 .content h2 {
