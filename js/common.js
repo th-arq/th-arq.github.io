@@ -9,31 +9,34 @@ window.addEventListener("load", () => {
   loadParts('header', '/head.html');
   loadParts('footer', '/foot.html');
 
-  // --- 2. 右のパネルと完全に同期するロジック ---
-    // --- 2. 左タイトルを右スクロールと完全同期 ---
+  // --- 2. 左タイトル同期 ---
   const track = document.querySelector(".title-track");
   const panels = document.querySelectorAll(".panel");
   const layout = document.querySelector(".about-layout");
 
+  if (!track || panels.length === 0 || !layout) return;
+
+  // 正しい開始位置
+  const layoutStart =
+    layout.getBoundingClientRect().top + window.scrollY;
+
+  const panelHeight = panels[0].offsetHeight;
+
   const handleScroll = () => {
-    if (!track || panels.length === 0 || !layout) return;
-
-    const layoutTop = layout.offsetTop;
     const scrollY = window.scrollY;
+    const relativeScroll = scrollY - layoutStart;
 
-    // about-layout に入ってからのスクロール量
-    const relativeScroll = scrollY - layoutTop;
-    if (relativeScroll < 0) return;
+    if (relativeScroll < 0) {
+      // 最初はABOUTを中央固定
+      track.style.transform = `translateY(0px)`;
+      return;
+    }
 
-    const panelHeight = panels[0].offsetHeight;
-
-    // 最大スクロール（最後のタイトルで止める）
     const maxScroll =
       panelHeight * panels.length - window.innerHeight;
 
     const clampedScroll = Math.min(relativeScroll, maxScroll);
 
-    // 右と完全同期（px）
     track.style.transform = `translateY(${-clampedScroll}px)`;
   };
 
