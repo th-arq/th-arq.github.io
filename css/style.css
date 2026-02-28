@@ -224,16 +224,16 @@ main {
 
 
 /* =========================
-  ABOUT
+   ABOUT
 ========================= */
 .about-layout {
   display: flex;
-  align-items: flex-start; /* これが大事！ */
+  align-items: flex-start;
   position: relative;
   width: 100%;
 }
 
-/* 左側：固定 */
+/* 左側：固定レール */
 .title-rail {
   width: 40%;
   height: 100vh;
@@ -243,15 +243,28 @@ main {
   background-color: #fff;
 }
 
+/* 文字を乗せた動くトラック */
 .title-track {
-  top: 50vh;
+  position: absolute; /* ← これを忘れないで！ */
+  top: 50vh; 
+  left: 0;
+  width: 100%;
   /* 最初のABOUTを中央に置くための初期位置 */
   transform: translateY(-12.5vh); 
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
 }
 
+/* 各タイトル文字の箱 */
 .title-item {
-  height: 25vh;
-  background-color: #fff; /* 下から来る文字を隠し、重なっても綺麗に見せる */
+  height: 25vh; /* 詰まった配置 */
+  display: flex;     /* 文字を中央に置くために追加 */
+  align-items: center;
+  padding-left: 6vw;
+  font-size: clamp(40px, 8vw, 120px);
+  font-weight: 700;
+  background-color: #fff; /* 下の文字を隠すカーテン */
 }
 
 /* 右側：縦に並ぶレール */
