@@ -9,7 +9,7 @@ window.addEventListener("load", () => {
   loadParts('header', '/head.html');
   loadParts('footer', '/foot.html');
 
-  // --- 2. 追い上げ＆ドッキング・ロジック ---
+  // --- 2. 合流 ＆ セットで押し出しロジック ---
   const track = document.querySelector(".title-track");
   const panels = document.querySelectorAll(".panel");
   const layout = document.querySelector(".about-layout");
@@ -24,26 +24,28 @@ window.addEventListener("load", () => {
     const index = Math.floor(scrollTop / panelHeight);
     const offsetInPanel = scrollTop % panelHeight;
 
-    // 追い上げ開始: 50%地点から / 合流完了: 90%地点
-    const startCatchUp = panelHeight * 0.5; 
-    const dockingPoint = panelHeight * 0.9;
-    const itemHeightVh = 25; 
+    // --- 動きのタイミング ---
+    const startCatchUp = panelHeight * 0.4; // 40%からSERVICEが登り始める
+    const dockingPoint = panelHeight * 0.8; // 80%でABOUTのすぐ下に到着（ドッキング）
+    const itemHeightVh = 25; // CSSの高さ
 
-    // 基本の移動量（現在の文字のインデックス分）
     let moveY = index * itemHeightVh;
 
-    if (offsetInPanel > startCatchUp) {
-      // 50%を超えたら、次の文字をABOUTに近づけるための計算
-      // 90%に達するまでの間に、徐々に移動量を増やしていく
-      const progress = Math.min(1, (offsetInPanel - startCatchUp) / (dockingPoint - startCatchUp));
-      
-      // 90%になるまでは、ABOUTを固定したままSERVICEを引き寄せる魔法の計算
+    if (offsetInPanel > startCatchUp && offsetInPanel <= dockingPoint) {
+      // 【フェーズ1】ABOUTは固定、SERVICEだけが近づく
+      const progress = (offsetInPanel - startCatchUp) / (dockingPoint - startCatchUp);
       moveY += progress * itemHeightVh;
+    } 
+    else if (offsetInPanel > dockingPoint) {
+      // 【フェーズ2】★ここが重要！ドッキング完了後、二人一緒にスライドアップ
+      const pushProgress = (offsetInPanel - dockingPoint) / (panelHeight - dockingPoint);
+      // ドッキングした状態（+itemHeightVh）から、さらにスクロール分だけ上に逃がす
+      moveY = (index * itemHeightVh) + itemHeightVh + (pushProgress * (100 - itemHeightVh));
+      // ※100vh分動かすことで、次のセクションへ完全にバトンタッチさせるよ
     }
 
     track.style.transition = "none";
-    // translateYの中で、ABOUTが動かないように補正をかけつつSERVICEを引き寄せる
-    // 初期値の -12.5vh を起点にするよ
+    // 最初のABOUTを中央に置く基準位置「-12.5vh」から動かす
     track.style.transform = `translateY(calc(-12.5vh - ${moveY}vh))`;
   };
 
