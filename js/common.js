@@ -12,24 +12,27 @@ window.addEventListener("scroll", () => {
   const index = Math.floor(scrollTop / panelHeight);
   const offsetInPanel = scrollTop % panelHeight;
 
-  // --- 設定値 ---
-  const startMeeting = panelHeight * 0.7; // 次の文字が下から見え始めるタイミング
-  const dockingPoint = panelHeight * 0.9; // ABOUTのすぐ下まで登りきるタイミング
+  // --- 動きのタイミング設定 ---
+  // 70%地点から SERVICE が下から登り始める
+  // 95%地点で ABOUT のすぐ下にドッキング完了
+  const startClimbing = panelHeight * 0.7; 
+  const dockingComplete = panelHeight * 0.95; 
 
   let moveAmount = index * 100;
 
-  if (offsetInPanel > startMeeting && offsetInPanel <= dockingPoint) {
-    // 【フェーズ1】ABOUTは固定。SERVICEだけが下からスルスル登ってきて近づく
-    const meetingProgress = (offsetInPanel - startMeeting) / (dockingPoint - startMeeting);
-    // 100vh離れていたのを、一気に近づける
-    moveAmount += meetingProgress * 90; // 100じゃなくて90にすることで、少し隙間を残してドッキング
+  if (offsetInPanel > startClimbing && offsetInPanel <= dockingComplete) {
+    // 【フェーズ1】ABOUT は中央で固定。SERVICE だけが距離を猛烈に詰める
+    const climbProgress = (offsetInPanel - startClimbing) / (dockingComplete - startClimbing);
+    // 次の文字（100vh下）を、ほぼ 0vh の位置（ABOUTのすぐ下）まで引き上げる
+    moveAmount += climbProgress * 95; 
   } 
-  else if (offsetInPanel > dockingPoint) {
-    // 【フェーズ2】ABOUTのすぐ下にSERVICEが到着。ここからはスクロールと1:1で一緒に上へ
-    const pushProgress = (offsetInPanel - dockingPoint) / (panelHeight - dockingPoint);
-    moveAmount = (index * 100) + 90 + (pushProgress * 10); // 100%まで残り10をスクロールと同期
+  else if (offsetInPanel > dockingComplete) {
+    // 【フェーズ2】ドッキング完了！ここからはマウスの回転と1:1で一緒に上へ
+    const pushProgress = (offsetInPanel - dockingComplete) / (panelHeight - dockingComplete);
+    // 95vhまで引き上げた状態から、残りの 5vh をスクロールに合わせて動かす
+    moveAmount = (index * 100) + 95 + (pushProgress * 5);
   }
 
-  track.style.transition = "none"; // 指の動きに100%合わせる
+  track.style.transition = "none"; // マウスに1:1で吸い付かせる
   track.style.transform = `translateY(-${moveAmount}vh)`;
 });
