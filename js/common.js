@@ -45,3 +45,5 @@ window.addEventListener("load", () => {
   };
 
   window.addEventListener("scroll", handleScroll);
+  handleScroll();
+});
