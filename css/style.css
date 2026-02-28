@@ -265,8 +265,8 @@ main {
 }
 
 .panel {
-  min-height: 100vh; /* 各セクションは画面1枚分以上の高さに */
-  padding: 20vh 8vw;
+  min-height: 120vh; /* 画面1枚より少し長くする */
+  padding: 50vh 8vw; /* 上下に大きな余白を作る */
   display: flex;
   flex-direction: column;
   justify-content: center;
