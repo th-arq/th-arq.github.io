@@ -239,31 +239,29 @@ main {
   height: 100vh;
   position: sticky;
   top: 0;
+  display: flex;
+  align-items: center; /* これで子要素(track)を縦中央に配置 */
   overflow: hidden;
   background-color: #fff;
 }
 
+/* 文字を乗せた動くトラック */
 .title-track {
-  position: absolute;
-  top: 50%; /* 親要素(title-rail)の真ん中を基準にする */
-  left: 0;
-  width: 100%;
-  /* 最初の文字(25vh)の半分だけ上にずらして、一文字目をど真ん中に固定 */
-  transform: translateY(-12.5vh); 
   display: flex;
   flex-direction: column;
+  width: 100%;
   will-change: transform;
 }
 
+/* 各タイトル文字の箱 */
 .title-item {
-  height: 25vh;
+  height: 100vh; /* ★ここがポイント！1文字を画面いっぱいの高さにする */
   display: flex;
   align-items: center;
   padding-left: 6vw;
   font-size: clamp(40px, 8vw, 120px);
   font-weight: 700;
-  background-color: #fff; /* これが重要！後ろの文字を隠す「消しゴム」の役割 */
-  position: relative;
+  background-color: #fff;
 }
 
 .title-item:not(:first-child) {
