@@ -264,9 +264,6 @@ main {
   background-color: #fff;
 }
 
-.title-item:not(:first-child) {
-  margin-top: 100vh; /* JSが動くまでの初期値 */
-}
 
 /* 右側：縦に並ぶレール */
 .content-rail {
