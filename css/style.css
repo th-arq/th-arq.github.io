@@ -256,7 +256,7 @@ main {
   font-size: clamp(40px, 6vw, 96px);
   font-weight: 600;
   color: #111;
-  flex-shrink: 0;
+  background-color: #fff; /* 下の文字を隠すために必須 */
 }
 
 /* 右側：縦に並ぶレール */
