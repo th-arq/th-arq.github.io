@@ -267,8 +267,7 @@ main {
 }
 
 .title-item:not(:first-child) {
-  margin-top: 100vh; /* 最初は見えない場所に置いておく */
-  transition: none;  /* JSの動きとケンカしないように transition は消す！ */
+  margin-top: 100vh; /* JSが動くまでの初期値 */
 }
 
 /* 右側：縦に並ぶレール */
