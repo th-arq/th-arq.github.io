@@ -268,7 +268,11 @@ main {
 }
 
 .panel {
-  min-height: 120vh;
+  height: 120vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 8vw;
 }
 
 .content h2 {
