@@ -9,31 +9,32 @@ window.addEventListener("load", () => {
   loadParts('header', '/head.html');
   loadParts('footer', '/foot.html');
 
-  // --- 改良版：ステップ式バトンタッチ ---
+  // --- 連動型バトンタッチ ---
   const track = document.querySelector(".title-track");
   const panels = document.querySelectorAll(".panel");
+  const layout = document.querySelector(".about-layout");
 
   const handleScroll = () => {
     if (!track || panels.length === 0) return;
 
-    let currentIndex = 0;
     const windowHeight = window.innerHeight;
-    const centerLine = windowHeight / 2; // 画面の真ん中の線
+    const layoutRect = layout.getBoundingClientRect();
+    
+    // 全体のスクロール量
+    const totalScroll = layout.offsetHeight - windowHeight;
+    const currentScroll = -layoutRect.top;
+    
+    // 進捗を 0 〜 1 に変換
+    let progress = currentScroll / totalScroll;
+    progress = Math.max(0, Math.min(1, progress));
 
-    // 今、画面の中央線を越えているのは何番目のセクションか探す
-    panels.forEach((panel, index) => {
-      const rect = panel.getBoundingClientRect();
-      if (rect.top <= centerLine) {
-        currentIndex = index;
-      }
-    });
-
-    // 文字の塊を「今の番号 × 100vh」分だけ一気に引き上げる
-    // transitionのおかげで、切り替わりはヌルッと動くよ
-    track.style.transition = "transform 0.8s cubic-bezier(0.65, 0, 0.35, 1)";
-    track.style.transform = `translateY(-${currentIndex * 100}vh)`;
+    // 【ここがポイント】
+    // transitionを "none" にすることで、指の動きにピタッと吸い付くようになるよ
+    track.style.transition = "none"; 
+    const moveAmount = progress * (panels.length - 1) * 100;
+    track.style.transform = `translateY(-${moveAmount}vh)`;
   };
 
   window.addEventListener("scroll", handleScroll);
-  handleScroll(); // 初期状態の計算
+  handleScroll();
 });
