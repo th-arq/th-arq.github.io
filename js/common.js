@@ -1,38 +1,47 @@
-window.addEventListener("scroll", () => {
+window.addEventListener("load", () => {
+  // --- 1. Header / Footer 読み込み (消さずに残したよ！) ---
+  const loadParts = (id, path) => {
+    fetch(path).then(res => res.text()).then(html => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = html;
+    });
+  };
+  loadParts('header', '/head.html');
+  loadParts('footer', '/foot.html');
+
+  // --- 2. スクロール連動バトンタッチ ---
   const track = document.querySelector(".title-track");
-  const layout = document.querySelector(".about-layout");
   const panels = document.querySelectorAll(".panel");
+  const layout = document.querySelector(".about-layout");
 
-  if (!track || !layout || panels.length === 0) return;
+  const handleScroll = () => {
+    if (!track || panels.length === 0) return;
 
-  const rect = layout.getBoundingClientRect();
-  const scrollTop = -rect.top;
-  const panelHeight = panels[0].offsetHeight;
+    const layoutRect = layout.getBoundingClientRect();
+    const scrollTop = -layoutRect.top;
+    const panelHeight = panels[0].offsetHeight;
 
-  const index = Math.floor(scrollTop / panelHeight);
-  const offsetInPanel = scrollTop % panelHeight;
+    const index = Math.floor(scrollTop / panelHeight);
+    const offsetInPanel = scrollTop % panelHeight;
 
-  // --- 動きのタイミング設定 ---
-  // 70%地点から SERVICE が下から登り始める
-  // 95%地点で ABOUT のすぐ下にドッキング完了
-  const startClimbing = panelHeight * 0.7; 
-  const dockingComplete = panelHeight * 0.95; 
+    // --- 動きの微調整 ---
+    const startMoving = panelHeight * 0.8; // 80%まで来たら動き出す
+    const itemHeightVh = 25; // CSSの .title-item の height と合わせる
 
-  let moveAmount = index * 100;
+    // 基本は現在のインデックスの位置
+    let moveAmount = index * itemHeightVh;
 
-  if (offsetInPanel > startClimbing && offsetInPanel <= dockingComplete) {
-    // 【フェーズ1】ABOUT は中央で固定。SERVICE だけが距離を猛烈に詰める
-    const climbProgress = (offsetInPanel - startClimbing) / (dockingComplete - startClimbing);
-    // 次の文字（100vh下）を、ほぼ 0vh の位置（ABOUTのすぐ下）まで引き上げる
-    moveAmount += climbProgress * 95; 
-  } 
-  else if (offsetInPanel > dockingComplete) {
-    // 【フェーズ2】ドッキング完了！ここからはマウスの回転と1:1で一緒に上へ
-    const pushProgress = (offsetInPanel - dockingComplete) / (panelHeight - dockingComplete);
-    // 95vhまで引き上げた状態から、残りの 5vh をスクロールに合わせて動かす
-    moveAmount = (index * 100) + 95 + (pushProgress * 5);
-  }
+    if (offsetInPanel > startMoving) {
+      // 境界線を越えたら、スクロールの進捗に合わせて文字を動かす
+      const progress = (offsetInPanel - startMoving) / (panelHeight - startMoving);
+      moveAmount += progress * itemHeightVh;
+    }
 
-  track.style.transition = "none"; // マウスに1:1で吸い付かせる
-  track.style.transform = `translateY(-${moveAmount}vh)`;
+    track.style.transition = "none"; // マウスに100%同期
+    // 最初の -50% は、常に「今の文字」を中央に置くための魔法
+    track.style.transform = `translateY(calc(-50% - ${moveAmount}vh))`;
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  handleScroll();
 });
