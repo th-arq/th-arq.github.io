@@ -1,5 +1,5 @@
 window.addEventListener("load", () => {
-  // --- 1. Header / Footer 読み込み (消さずに残したよ！) ---
+  // --- 1. Header / Footer 読み込み ---
   const loadParts = (id, path) => {
     fetch(path).then(res => res.text()).then(html => {
       const el = document.getElementById(id);
@@ -15,33 +15,34 @@ window.addEventListener("load", () => {
   const layout = document.querySelector(".about-layout");
 
   const handleScroll = () => {
-    if (!track || panels.length === 0) return;
+    // 要素がない場合はエラーにならないよう抜ける
+    if (!track || !layout || panels.length === 0) return;
 
     const layoutRect = layout.getBoundingClientRect();
-    const scrollTop = -layoutRect.top;
-    const panelHeight = panels[0].offsetHeight;
+    const scrollTop = -layoutRect.top; // Aboutエリア内でのスクロール量
+    const panelHeight = panels[0].offsetHeight; // 各セクションの高さ
 
+    // 今何番目のセクションか
     const index = Math.floor(scrollTop / panelHeight);
     const offsetInPanel = scrollTop % panelHeight;
 
-    // --- 動きの微調整 ---
-    const startMoving = panelHeight * 0.8; // 80%まで来たら動き出す
-    const itemHeightVh = 25; // CSSの .title-item の height と合わせる
+    // --- 動きの調整（ここがゆうきのこだわりポイント！） ---
+    const startMoving = panelHeight * 0.8; // 8割読んだら次の文字が動き出す
+    const itemHeightVh = 25; // CSSの .title-item の height (25vh) と合わせる
 
-    // 基本は現在のインデックスの位置
     let moveAmount = index * itemHeightVh;
 
     if (offsetInPanel > startMoving) {
-      // 境界線を越えたら、スクロールの進捗に合わせて文字を動かす
+      // 8割を超えたら、残りの距離(2割分)で文字をスススッと動かす
       const progress = (offsetInPanel - startMoving) / (panelHeight - startMoving);
       moveAmount += progress * itemHeightVh;
     }
 
-    track.style.transition = "none"; // マウスに100%同期
-    // 最初の -50% は、常に「今の文字」を中央に置くための魔法
+    // transformを直接操作して、スクロール速度と100%同期
+    track.style.transition = "none";
     track.style.transform = `translateY(calc(-50% - ${moveAmount}vh))`;
   };
 
   window.addEventListener("scroll", handleScroll);
-  handleScroll();
+  handleScroll(); // 読み込み時にも一度計算
 });
