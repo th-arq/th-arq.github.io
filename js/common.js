@@ -1,5 +1,5 @@
 window.addEventListener("load", () => {
-  // --- 1. Header / Footer 読み込み (絶対に消してないよ！安心してね) ---
+  // --- 1. Header / Footer 読み込み (絶対消してないよ！) ---
   const loadParts = (id, path) => {
     fetch(path).then(res => res.text()).then(html => {
       const el = document.getElementById(id);
@@ -9,14 +9,13 @@ window.addEventListener("load", () => {
   loadParts('header', '/head.html');
   loadParts('footer', '/foot.html');
 
-  // --- 2. 呼び寄せバトンタッチ・ロジック ---
+  // --- 2. 追い上げ＆ドッキング・ロジック ---
   const track = document.querySelector(".title-track");
-  const items = document.querySelectorAll(".title-item");
   const panels = document.querySelectorAll(".panel");
   const layout = document.querySelector(".about-layout");
 
   const handleScroll = () => {
-    if (!track || items.length < 2 || panels.length === 0) return;
+    if (!track || panels.length === 0) return;
 
     const layoutRect = layout.getBoundingClientRect();
     const scrollTop = Math.max(0, -layoutRect.top);
@@ -25,42 +24,27 @@ window.addEventListener("load", () => {
     const index = Math.floor(scrollTop / panelHeight);
     const offsetInPanel = scrollTop % panelHeight;
 
-    // --- 動きの数値設定 ---
-    const startAction = panelHeight * 0.8; // 80%まで読んだら次の文字を呼び出す
-    const itemHeightVh = 25; // CSSの .title-item の高さ
+    // 追い上げ開始: 50%地点から / 合流完了: 90%地点
+    const startCatchUp = panelHeight * 0.5; 
+    const dockingPoint = panelHeight * 0.9;
+    const itemHeightVh = 25; 
 
+    // 基本の移動量（現在の文字のインデックス分）
     let moveY = index * itemHeightVh;
-    
-    // 次の文字（SERVICEなど）を取得
-    const nextItem = items[index + 1];
-    
-    // 他のすべての文字を一旦リセット（基本は画面外へ）
-    items.forEach((item, i) => {
-      if (i > index) {
-        item.style.marginTop = "100vh"; // 画面1枚分下に隠す
-        item.style.opacity = "0";      // 念のため透明にしておく
-      } else {
-        item.style.marginTop = "0";
-        item.style.opacity = "1";
-      }
-    });
 
-    if (offsetInPanel > startAction) {
-      const progress = (offsetInPanel - startAction) / (panelHeight - startAction);
+    if (offsetInPanel > startCatchUp) {
+      // 50%を超えたら、次の文字をABOUTに近づけるための計算
+      // 90%に達するまでの間に、徐々に移動量を増やしていく
+      const progress = Math.min(1, (offsetInPanel - startCatchUp) / (dockingPoint - startCatchUp));
       
-      // 次の文字を「100vh下」から「0（ABOUTのすぐ下）」までシュッと引き寄せる
-      if (nextItem) {
-        nextItem.style.marginTop = `${100 * (1 - progress)}vh`;
-        nextItem.style.opacity = "1";
-      }
-      
-      // 引き寄せに合わせて、全体を少しずつ上にスライド（バトンタッチ）
+      // 90%になるまでは、ABOUTを固定したままSERVICEを引き寄せる魔法の計算
       moveY += progress * itemHeightVh;
     }
 
     track.style.transition = "none";
-    // 37.5vh（中央位置）を基準に、計算した分だけ動かす
-    track.style.transform = `translateY(calc(37.5vh - ${moveY}vh))`;
+    // translateYの中で、ABOUTが動かないように補正をかけつつSERVICEを引き寄せる
+    // 初期値の -12.5vh を起点にするよ
+    track.style.transform = `translateY(calc(-12.5vh - ${moveY}vh))`;
   };
 
   window.addEventListener("scroll", handleScroll);
