@@ -266,10 +266,9 @@ main {
   position: relative;
 }
 
-/* 【ここが修正ポイント！】 */
-/* 2番目以降の文字は、最初はドーンと下に下げておいて、見えないようにする */
 .title-item:not(:first-child) {
-  margin-top: 100vh; 
+  margin-top: 100vh; /* 最初は見えない場所に置いておく */
+  transition: none;  /* JSの動きとケンカしないように transition は消す！ */
 }
 
 /* 右側：縦に並ぶレール */
