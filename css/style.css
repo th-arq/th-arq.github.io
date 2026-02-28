@@ -247,12 +247,15 @@ main {
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 50%; /* 最初の文字を画面中央に置くための基準 */
-  transform: translateY(-50%); /* 自分の高さの半分戻して真ん中に */
+  top: 50%; /* 最初の文字を画面中央に */
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%); /* 自分の中心を画面中央に合わせる */
+  will-change: transform;
 }
 
 .title-item {
-  height: 200px; /* 例えばこれくらい。文字が次々とすぐ下に来るようにする */
+  height: 25vh; /* 100vhから25vhに。これで文字同士が近くなる！ */
   display: flex;
   align-items: center;
   padding-left: 6vw;
