@@ -1,53 +1,35 @@
-window.addEventListener("load", () => {
-  // --- Header / Footer 読み込み (省略せずそのまま) ---
-  const loadParts = (id, path) => {
-    fetch(path).then(res => res.text()).then(html => {
-      const el = document.getElementById(id);
-      if (el) el.innerHTML = html;
-    });
-  };
-  loadParts('header', '/head.html');
-  loadParts('footer', '/foot.html');
-
-  // --- ドッキング＆押し出しバトンタッチ ---
+window.addEventListener("scroll", () => {
   const track = document.querySelector(".title-track");
-  const panels = document.querySelectorAll(".panel");
   const layout = document.querySelector(".about-layout");
+  const panels = document.querySelectorAll(".panel");
 
-  const handleScroll = () => {
-    if (!track || panels.length === 0) return;
+  if (!track || !layout || panels.length === 0) return;
 
-    const layoutRect = layout.getBoundingClientRect();
-    const scrollTop = -layoutRect.top;
-    const panelHeight = panels[0].offsetHeight;
+  const rect = layout.getBoundingClientRect();
+  const scrollTop = -rect.top;
+  const panelHeight = panels[0].offsetHeight;
 
-    const index = Math.floor(scrollTop / panelHeight);
-    const offsetInPanel = scrollTop % panelHeight;
-    
-    // 60%地点からSERVICEが下から「追いつき」を開始
-    // 85%地点でABOUTの真下まで「ドッキング」完了
-    // 100%まで残り15%で、2つ並んで「押し出し」
-    const startCatchUp = panelHeight * 0.6; 
-    const startPushOut = panelHeight * 0.85;
+  const index = Math.floor(scrollTop / panelHeight);
+  const offsetInPanel = scrollTop % panelHeight;
 
-    let moveY = index * 100;
+  // --- 設定値 ---
+  const startMeeting = panelHeight * 0.7; // 次の文字が下から見え始めるタイミング
+  const dockingPoint = panelHeight * 0.9; // ABOUTのすぐ下まで登りきるタイミング
 
-    if (offsetInPanel > startCatchUp && offsetInPanel <= startPushOut) {
-      // 1. 追い上げフェーズ：ABOUTは固定、SERVICEだけが下からスススッと近づく
-      const catchUpProgress = (offsetInPanel - startCatchUp) / (startPushOut - startCatchUp);
-      // track全体を動かすのではなく、見かけ上の距離を詰める計算
-      moveY += catchUpProgress * 80; // 80vh分だけグイッと近づける
-    } 
-    else if (offsetInPanel > startPushOut) {
-      // 2. 押し出しフェーズ：ドッキングした状態で、スクロールに合わせて2つ一緒に上がる
-      const pushOutProgress = (offsetInPanel - startPushOut) / (panelHeight - startPushOut);
-      moveY = (index * 100) + 80 + (pushOutProgress * 20); 
-    }
+  let moveAmount = index * 100;
 
-    track.style.transition = "none";
-    track.style.transform = `translateY(-${moveY}vh)`;
-  };
+  if (offsetInPanel > startMeeting && offsetInPanel <= dockingPoint) {
+    // 【フェーズ1】ABOUTは固定。SERVICEだけが下からスルスル登ってきて近づく
+    const meetingProgress = (offsetInPanel - startMeeting) / (dockingPoint - startMeeting);
+    // 100vh離れていたのを、一気に近づける
+    moveAmount += meetingProgress * 90; // 100じゃなくて90にすることで、少し隙間を残してドッキング
+  } 
+  else if (offsetInPanel > dockingPoint) {
+    // 【フェーズ2】ABOUTのすぐ下にSERVICEが到着。ここからはスクロールと1:1で一緒に上へ
+    const pushProgress = (offsetInPanel - dockingPoint) / (panelHeight - dockingPoint);
+    moveAmount = (index * 100) + 90 + (pushProgress * 10); // 100%まで残り10をスクロールと同期
+  }
 
-  window.addEventListener("scroll", handleScroll);
-  handleScroll();
+  track.style.transition = "none"; // 指の動きに100%合わせる
+  track.style.transform = `translateY(-${moveAmount}vh)`;
 });
