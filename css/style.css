@@ -233,14 +233,13 @@ main {
   width: 100%;
 }
 
-/* 左側：固定レール */
 .title-rail {
   width: 40%;
   height: 100vh;
   position: sticky;
   top: 0;
   display: flex;
-  align-items: center; /* これで子要素(track)を縦中央に配置 */
+  align-items: flex-start; /* ← center をやめる */
   overflow: hidden;
   background-color: #fff;
 }
@@ -249,7 +248,7 @@ main {
   display: flex;
   flex-direction: column;
   width: 100%;
-  transform: translateY(0); /* ← これ必須 */
+  transform: translateY(50vh); /* ← 初期位置を中央に */
   will-change: transform;
 }
 
