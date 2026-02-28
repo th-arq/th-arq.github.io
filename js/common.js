@@ -35,4 +35,25 @@ window.addEventListener("load", () => {
       // 【フェーズ1】ABOUTは中央で不動！SERVICEだけが下から距離を詰める
       // 0から100%（itemHeightVh分）をここで動かす
       const catchUpProgress = (offsetInPanel - startCatchUp) / (dockingPoint - startCatchUp);
-      moveY += catchUpProgress * itemHeight
+      moveY += catchUpProgress * itemHeightVh;
+      
+      // ABOUTを固定し続けるための補正：track全体の動きを打ち消す
+      track.style.transform = `translateY(calc(-12.5vh - ${index * itemHeightVh}vh + ${catchUpProgress * itemHeightVh}vh))`;
+      // ※ちょっと複雑に見えるけど、「track全体は下がるけど、SERVICEだけがそれ以上に上がる」動きにしてるよ
+    } 
+    else if (offsetInPanel > dockingPoint) {
+      // 【フェーズ2】合流完了！ここからはマウスの動き1:1で一緒に上に去る
+      const pushProgress = (offsetInPanel - dockingPoint) / (panelHeight - dockingPoint);
+      moveY = (index * itemHeightVh) + (pushProgress * itemHeightVh);
+      track.style.transform = `translateY(calc(-12.5vh - ${moveY}vh))`;
+    } else {
+      // 通常時（固定中）
+      track.style.transform = `translateY(calc(-12.5vh - ${moveY}vh))`;
+    }
+
+    track.style.transition = "none";
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  handleScroll();
+});
