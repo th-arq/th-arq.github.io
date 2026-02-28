@@ -247,15 +247,13 @@ main {
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 50%; /* 最初の文字を画面中央に */
-  left: 0;
-  width: 100%;
-  transform: translateY(-50%); /* 自分の中心を画面中央に合わせる */
+  top: 50%; /* 最初の文字を中央に */
+  transform: translateY(-50%);
   will-change: transform;
 }
 
 .title-item {
-  height: 25vh; /* 100vhから25vhに。これで文字同士が近くなる！ */
+  height: 60vh; /* 100vhより短くすることで、ABOUTが消える前にSERVICEが画面内に入れる！ */
   display: flex;
   align-items: center;
   padding-left: 6vw;
