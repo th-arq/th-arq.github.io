@@ -1,4 +1,17 @@
-window.addEventListener("scroll", () => {
+window.addEventListener("load", () => {
+  // header / footer 読み込み (既存のコード)
+  const loadParts = (id, path) => {
+    fetch(path).then(res => res.text()).then(html => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = html;
+    });
+  };
+  loadParts('header', '/head.html');
+  loadParts('footer', '/foot.html');
+});
+
+  // --- ここからバトンタッチの処理 ---
+  cwindow.addEventListener("scroll", () => {
   const track = document.querySelector(".title-track");
   const layout = document.querySelector(".about-layout");
   const panels = document.querySelectorAll(".panel");
