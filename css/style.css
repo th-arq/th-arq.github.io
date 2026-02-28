@@ -256,13 +256,14 @@ main {
 }
 
 .title-item {
-  height: 25vh; /* 文字の間隔をギュッと詰める */
+  height: 25vh;
   display: flex;
   align-items: center;
   padding-left: 6vw;
   font-size: clamp(40px, 8vw, 120px);
   font-weight: 700;
-  background-color: #fff; /* 下の文字を隠すカーテン */
+  background-color: #fff; /* これが重要！後ろの文字を隠す「消しゴム」の役割 */
+  position: relative;
 }
 
 /* 【ここが修正ポイント！】 */
