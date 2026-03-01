@@ -6,8 +6,10 @@
 }
 
 body {
-  margin: 0;
   font-family: 'Jost', sans-serif;
+  margin: auto;
+  width: 100%;
+  max-width: 1700px;
 }
 
 
@@ -118,6 +120,15 @@ header {
   CONTACT BUTTON
 ========================= */
 .contact-btn {
+  letter-spacing: 0.1em;
+  padding: 10px 18px;
+  background: var(--black);
+  color: var(--white);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.contact-btn a {
   letter-spacing: 0.1em;
   padding: 10px 18px;
   background: var(--black);
@@ -246,7 +257,6 @@ main {
     font-size: 2.5rem;
     font-weight: bold;
     margin: 0;
-    text-align: center;
     display: block;
     line-height: 1;
     padding: 0;
@@ -254,7 +264,7 @@ main {
 
 .about-page .content-box {
     flex: 1;
-    padding: 40px 10% 20vh 5%; 
+    padding: 5vw 0; 
 }
 
 .about-page .text {
