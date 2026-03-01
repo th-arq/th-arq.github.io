@@ -216,22 +216,17 @@ main {
 .about-page .about-section {
     display: flex;
     position: relative;
-    /* セクション全体の高さをしっかり出す（スクロールの遊びを作る） */
     min-height: 120vh; 
-    border-bottom: 1px solid #eee;
 }
 
 .about-page .sticky-box {
     flex: 1;
-    position: relative; /* 子要素の基準にする */
+    position: relative;
 }
 
 .about-page .title {
     position: -webkit-sticky;
     position: sticky;
-    
-    /* 画面の中央（50%）に固定 */
-    /* 文字の高さ分（約1.5rem）を引くと、より正確に「中心」に見えるよ */
     top: calc(50% - 1.25rem); 
     
     font-size: 2.5rem;
@@ -239,20 +234,16 @@ main {
     margin: 0;
     text-align: center;
     display: block;
-    
-    /* 余白を消して、次のタイトルがピタッとくっつくようにする */
     line-height: 1;
     padding: 0;
 }
 
 .about-page .content-box {
     flex: 1;
-    /* 開始位置を上（ヘッダー下）に揃える */
     padding: 40px 10% 20vh 5%; 
 }
 
 .about-page .text {
     font-size: 1.1rem;
     line-height: 2.5;
-    /* ここでも高さを出すことで、左側が止まる時間を調整できるよ */
 }
