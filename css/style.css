@@ -548,7 +548,7 @@ main.appeared {
 }
 
 .form-group label {
-  font-size: var(--font-xs);
+  font-size: var(--font-m);
   margin-bottom: 10px;
   letter-spacing: 0.05em;
   font-weight: 400;
@@ -558,7 +558,7 @@ main.appeared {
 .form-group textarea,
 .form-group select {
   width: 100%;
-  padding: 12px 0;
+  padding: 0.5vw;
   border: none;
   background: var(--lightgray);
   font-family: inherit;
