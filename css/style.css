@@ -683,8 +683,9 @@ a.projects-item {
 /* 個別ページの画像を表示させるための設定 */
 .image-wrapper.reveal {
   clip-path: inset(0 0 100% 0);
-  opacity: 0;
-  transition: clip-path 1.2s ease, opacity 1.2s ease;
+  transition: clip-path 1.2s cubic-bezier(0.25, 1, 0.5, 1); /* 少し滑らかな動きに */
+  will-change: clip-path;
+  overflow: hidden;
 }
 
 /* showクラスがついたら表示 */
@@ -697,6 +698,17 @@ a.projects-item {
 main.appeared {
   opacity: 1 !important;
   transform: translateY(0) !important;
+}
+
+.reveal img {
+  transform: scale(1.1);
+  transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+/* 表示された時：1.1倍から1倍（等倍）に戻る＝引きになる */
+.reveal.show img {
+  transform: scale(1);
 }
 
 /* モバイル対応 */
