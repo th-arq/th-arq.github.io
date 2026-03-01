@@ -734,3 +734,56 @@ textarea::-webkit-input-placeholder {
     display: inline-block;
     padding: 15px 40px; /* ホームに戻るボタンは少しゆったりめに */
 }
+
+
+/* =========================
+   FAQ SECTION (Accordion)
+========================= */
+.faq-list {
+    border-top: 1px solid var(--black); /* リストの最上部に線 */
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--lightgray);
+    padding: 20px 0;
+}
+
+.faq-question {
+    list-style: none; /* デフォルトの三角形を消す */
+    cursor: pointer;
+    font-size: var(--font-m);
+    font-weight: var(--bold);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+/* 質問の横に + アイコンを表示 */
+.faq-question::after {
+    content: '+';
+    font-size: 24px;
+    font-weight: 300;
+    transition: transform 0.4s ease;
+}
+
+/* 開いた時に + を × (45度回転) に変える */
+.faq-item[open] .faq-question::after {
+    transform: rotate(45deg);
+}
+
+/* デフォルトの三角形を消す（Safari用） */
+.faq-question::-webkit-details-marker {
+    display: none;
+}
+
+.faq-answer {
+    padding-top: 20px;
+    color: var(--darkgray);
+    font-size: var(--font-s);
+    line-height: 1.8;
+}
+
+.faq-answer p {
+    margin: 0;
+}
