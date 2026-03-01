@@ -695,3 +695,42 @@ textarea::-webkit-input-placeholder {
 .form-group-row .form-group {
   flex: 1;
 }
+
+
+/* =========================
+   THANKS PAGE
+========================= */
+.thanks-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh; /* ヘッダー・フッターを除いた中央に配置 */
+    text-align: center;
+    padding: 0 var(--side-padding);
+}
+
+.thanks-container {
+    max-width: 600px;
+}
+
+.thanks-title {
+    font-size: var(--font-xl);
+    letter-spacing: 0.2em; /* コンタクトボタンと合わせて広めに */
+    margin: 0;
+}
+
+.thanks-message {
+    margin: 40px 0;
+    font-size: var(--font-s);
+    line-height: 2;
+    color: var(--darkgray);
+}
+
+.thanks-action {
+    margin-top: 50px;
+}
+
+.thanks-action .contact-btn {
+    display: inline-block;
+    padding: 15px 40px; /* ホームに戻るボタンは少しゆったりめに */
+}
