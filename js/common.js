@@ -8,11 +8,9 @@ window.addEventListener("load", () => {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
-
     if (document.body.classList.contains('is-index')) {
       lenis.stop();
     }
-
     function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -32,18 +30,32 @@ window.addEventListener("load", () => {
     });
   }, {
     rootMargin: '-45% 0px -45% 0px',
-    threshold: 0 // 少しでも範囲に入ったら即座に反応させる
+    threshold: 0 
   });
 
   document.querySelectorAll('.split-layout .title').forEach(title => {
     observer.observe(title);
   });
 
-  // --- 3. Header / Footer の読み込み ---
+  // --- 3. Header / Footer の読み込み ＋ ヘッダー監視 ---
   const loadParts = (id, path) => {
     fetch(path).then(res => res.text()).then(html => {
       const el = document.getElementById(id);
       if (el) el.innerHTML = html;
+
+      // ★ここがポイント！ヘッダーが読み込まれた直後に監視を開始する
+      if (id === 'header') {
+        const headerTag = el.querySelector('header');
+        if (headerTag) {
+          window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+              headerTag.classList.add('is-scrolled');
+            } else {
+              headerTag.classList.remove('is-scrolled');
+            }
+          });
+        }
+      }
     });
   };
   loadParts('header', '/head.html');
