@@ -170,46 +170,52 @@ header {
 
 
 /* =========================
-  FOOTER BASE
+   FOOTER
 ========================= */
 footer {
-  position: relative;
     width: 100%;
     margin-top: var(--gap); 
-    padding: 40px var(--side-padding);
-    z-index: 100;
+    padding: 60px var(--side-padding); /* 少し余白を広げるとより建築サイトっぽくなるよ */
 }
 
 .footer_container {
-  color: var(--darkgray);
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+    color: var(--darkgray);
+    font-size: var(--font-xs); /* フッターは少し小さめが上品 */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end; /* 下揃えにすることで洗練された印象に */
 }
 
-/* 左側の情報エリア */
-.footer_container_information p {
+.footer_info p {
     margin: 5px 0;
 }
 
-/* 右側の会社名エリア */
-.footer_container_company {
-    text-align: right;
+.footer_info a {
+    color: inherit;
+    text-decoration: none;
 }
 
-/* モバイル対応：スマホでは縦に並べる */
+.footer_info a:hover {
+    text-decoration: underline;
+}
+
+/* 右側のコピーライト */
+.footer_copy {
+    text-align: right;
+    margin: 0;
+}
+
+/* モバイル対応：スマホでは左寄せで縦に並べる */
 @media (max-width: 900px) {
     .footer_container {
         flex-direction: column;
         align-items: flex-start;
-        gap: 20px;
+        gap: 30px;
     }
-    .footer_container_company {
+    .footer_copy {
         text-align: left;
     }
 }
-
 
 /* =========================
    Main fade
