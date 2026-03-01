@@ -215,6 +215,7 @@ main {
 
 .about-page .about-section {
     display: flex;
+    align-items: flex-start;
     position: relative;
     min-height: 100vh;
 }
