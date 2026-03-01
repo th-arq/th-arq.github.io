@@ -3,7 +3,6 @@ window.addEventListener("load", () => {
   const script = document.createElement('script');
   script.src = "https://unpkg.com/lenis@1.1.13/dist/lenis.min.js";
   script.onload = () => {
-    // ライブラリが読み終わったら初期化する
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -22,26 +21,25 @@ window.addEventListener("load", () => {
   };
   document.head.appendChild(script);
 
+  // --- 2. スクロール監視（タイトルの色変化） ---
   const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    // 画面の40%〜60%の位置にタイトルが入ったら active にする
-    if (entry.isIntersecting) {
-      entry.target.classList.add('is-active');
-    } else {
-      entry.target.classList.remove('is-active');
-    }
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-active');
+      } else {
+        entry.target.classList.remove('is-active');
+      }
+    });
+  }, {
+    rootMargin: '-45% 0px -45% 0px',
+    threshold: 0 // 少しでも範囲に入ったら即座に反応させる
   });
-}, {
-  // 判定基準の調整（画面中央付近をターゲットにする）
-  rootMargin: '-45% 0px -45% 0px' 
-});
 
-// 全ての .title を監視対象にする
-document.querySelectorAll('.split-layout .title').forEach(title => {
-  observer.observe(title);
-});
+  document.querySelectorAll('.split-layout .title').forEach(title => {
+    observer.observe(title);
+  });
 
-  // --- 2. Header / Footer の読み込み (既存のコード) ---
+  // --- 3. Header / Footer の読み込み ---
   const loadParts = (id, path) => {
     fetch(path).then(res => res.text()).then(html => {
       const el = document.getElementById(id);
@@ -51,11 +49,11 @@ document.querySelectorAll('.split-layout .title').forEach(title => {
   loadParts('header', '/head.html');
   loadParts('footer', '/foot.html');
 
+  // --- 4. メインコンテンツの表示 ---
   setTimeout(() => {
     const mainEl = document.querySelector('main');
     if (mainEl) {
       mainEl.classList.add('appeared');
     }
   }, 100);
-  
 });
