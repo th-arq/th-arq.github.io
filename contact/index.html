@@ -11,61 +11,67 @@
   <div id="header"></div>
 
     <main class="about-page contact">
-<section class="contact-section">
-  <h2 class="title">CONTACT</h2>
-  
-  <form action="https://formspree.io/f/xlgwkneb" method="POST" class="contact-form">
+      <section class="contact-section">
+        <h2 class="title">CONTACT</h2>
+        <form action="https://formspree.io/f/xlgwkneb" method="POST" class="contact-form">
     
     <input type="text" name="_gotcha" style="display:none">
+    <input type="hidden" name="_next" value="https://yourwebsite.com/thanks.html">
 
-    <div class="form-group">
-      <label for="name">Name / お名前</label>
-      <input type="text" id="name" name="name" required placeholder="Your full name">
-    </div>
-
-    <div class="form-group">
-      <label for="tel">Phone / 電話番号</label>
-      <input type="tel" id="tel" name="tel" placeholder="000-0000-0000">
-    </div>
-
-    <div class="form-group">
-      <label for="email">Email / メールアドレス</label>
-      <input type="email" id="email" name="email" required placeholder="email@example.com">
-    </div>
-
-    <div class="form-group">
-      <label for="address">Address / 住所</label>
-      <input type="text" id="address" name="address" placeholder="Project location / city">
-    </div>
-
-    <div class="form-group">
-      <label for="inquiry">Inquiry Type / 依頼内容</label>
-      <select id="inquiry" name="inquiry_type">
-        <option value="" disabled selected>Please select / 選択してください</option>
-        <option value="Condo Renovation">Condo Renovation / コンドミニアム・マンションリノベ</option>
-        <option value="Kitchen & Bath">Kitchen & Bath / 水回りリフォーム</option>
-        <option value="Interior Design & FFE">Interior Design & FFE / インテリア・家具提案</option>
-        <option value="Full House Renovation">Full House Renovation / 戸建てフルリノベーション</option>
-        <option value="Commercial / Office">Commercial / Office / 店舗・オフィス設計</option>
-        <option value="Others">Others / その他</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>Preferred Contact / 希望の連絡方法</label>
-      <div class="radio-group">
-        <label class="radio-label"><input type="radio" name="preferred_contact" value="Email" checked> Email</label>
-        <label class="radio-label"><input type="radio" name="preferred_contact" value="Phone"> Phone / 電話</label>
-        <label class="radio-label"><input type="radio" name="preferred_contact" value="Either"> Either / どちらでも</label>
+    <div class="form-group-row">
+      <div class="form-group">
+        <label for="first-name">First Name</label>
+        <input type="text" id="first-name" name="first_name" required placeholder="Jane">
+      </div>
+      <div class="form-group">
+        <label for="last-name">Last Name</label>
+        <input type="text" id="last-name" name="last_name" required placeholder="Doe">
       </div>
     </div>
 
     <div class="form-group">
-      <label for="message">Message / お問い合わせ詳細</label>
-      <textarea id="message" name="message" rows="5" required placeholder="Please describe your project."></textarea>
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required placeholder="email@example.com">
     </div>
 
-    <button type="submit" class="submit-btn">SEND MESSAGE</button>
+    <div class="form-group">
+      <label for="tel">Phone Number</label>
+      <input type="tel" id="tel" name="tel" placeholder="(000) 000-0000">
+    </div>
+
+    <div class="form-group">
+      <label for="address">Project Location (City, State)</label>
+      <input type="text" id="address" name="location" placeholder="e.g. Washington, DC">
+    </div>
+
+    <div class="form-group">
+      <label for="inquiry">Inquiry Type</label>
+      <select id="inquiry" name="inquiry_type">
+        <option value="" disabled selected>Select an option</option>
+        <option value="Condo Renovation">Condo Renovation</option>
+        <option value="Kitchen & Bath Remodeling">Kitchen & Bath Remodeling</option>
+        <option value="Interior Design & FFE">Interior Design & FFE</option>
+        <option value="Full House Renovation">Full House Renovation</option>
+        <option value="Commercial Design">Commercial Design</option>
+        <option value="Consultation">Consultation</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Preferred Method of Contact</label>
+      <div class="radio-group">
+        <label class="radio-label"><input type="radio" name="contact_method" value="Email" checked> Email</label>
+        <label class="radio-label"><input type="radio" name="contact_method" value="Phone"> Phone</label>
+        <label class="radio-label"><input type="radio" name="contact_method" value="Text"> Text Message</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="message">Project Details</label>
+      <textarea id="message" name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">SEND INQUIRY</button>
 
   </form>
 </section>
