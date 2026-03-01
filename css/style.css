@@ -326,8 +326,7 @@ body:not(.is-index) .fade-menu {
 
 
 /* =========================
-   共通：スプリット・レイアウト
-   (About, Contact, Project Detailなどで使い回す)
+  Split layout
 ========================= */
 .split-layout {
     overflow: visible !important;
@@ -337,7 +336,7 @@ body:not(.is-index) .fade-menu {
 .split-section {
     display: flex;
     position: relative;
-    min-height: 100vh; /* About以外でも使いやすいよう100に変更 */
+    min-height: 100vh;
 }
 
 /* 左側の固定ボックス */
@@ -565,7 +564,7 @@ main.appeared {
    CONTACT FORM SECTION
 ========================= */
 .contact-intro {
-  margin-bottom: 50px;
+  margin-bottom: var(--gap);
 }
 
 .contact-intro .intro-text {
@@ -575,7 +574,7 @@ main.appeared {
 }
 
 .contact-intro .faq-link {
-  font-size: var(--font-s);
+  font-size: var(--font-m);
   color: var(--darkgray);
 }
 
@@ -595,8 +594,7 @@ main.appeared {
 }
 
 .form-group label {
-  font-size: var(--font-xs);
-  margin-bottom: 12px;
+  font-size: var(--font-m);
   letter-spacing: 0.1em;
   font-weight: var(--bold);
   text-transform: uppercase;
@@ -606,10 +604,9 @@ main.appeared {
 .form-group textarea,
 .form-group select {
   width: 100%;
-  padding: 12px 0;
+  padding: 0.5vw;
   border: none;
-  border-bottom: 1px solid var(--black);
-  background: transparent;
+  background: var(--lightgray);
   font-family: inherit;
   font-size: var(--font-m);
   outline: none;
@@ -633,7 +630,7 @@ main.appeared {
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  font-size: var(--font-s);
+  font-size: var(--font-m);
 }
 
 /* Submit Button */
@@ -645,7 +642,7 @@ main.appeared {
   color: var(--white);
   border: 1px solid var(--black);
   cursor: pointer;
-  font-size: var(--font-s);
+  font-size: var(--font-m);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   transition: all 0.4s ease;
