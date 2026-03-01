@@ -324,3 +324,51 @@ body:not(.is-index) .fade-menu {
     font-size: var(--font-s);
     line-height: 2.5;
 }
+
+
+
+/* =========================
+  PROJECTS
+========================= */
+
+/* フィルターボタンのスタイル */
+.filter-nav {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.filter-btn {
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.filter-btn.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* グリッドレイアウト */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* 各アイテムの挙動 */
+.projects-item {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.projects-item.is-hidden {
+  display: none; /* 完全に消す場合 */
+}
+
+.projects-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
