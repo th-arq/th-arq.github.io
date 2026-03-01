@@ -525,3 +525,71 @@ main.appeared {
     position: static;
   }
 }
+
+
+
+/* =========================
+  CONTACT
+========================= */
+/* お問い合わせフォーム専用のスタイル */
+.contact-form {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 35px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: var(--font-xs);
+  margin-bottom: 10px;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+}
+
+.form-group input, 
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 1px solid var(--black);
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--font-s);
+  outline: none;
+  border-radius: 0; /* iOS対策 */
+}
+
+/* ラジオボタンのレイアウト */
+.radio-group {
+  display: flex;
+  gap: 30px;
+  padding-top: 10px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: var(--font-s) !important;
+}
+
+.radio-label input {
+  width: auto;
+  margin: 0;
+}
+
+/* プルダウンの見た目 */
+select {
+  cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%);
+  background-position: calc(100% - 15px) 50%, calc(100% - 10px) 50%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  appearance: none;
+}
