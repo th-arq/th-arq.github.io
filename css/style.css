@@ -496,6 +496,26 @@ a.projects-item {
   display: block;
 }
 
+
+/* 個別ページの画像を表示させるための設定 */
+.image-wrapper.reveal {
+  clip-path: inset(0 0 100% 0);
+  opacity: 0;
+  transition: clip-path 1.2s ease, opacity 1.2s ease;
+}
+
+/* showクラスがついたら表示 */
+.image-wrapper.reveal.show {
+  clip-path: inset(0 0 0 0) !important;
+  opacity: 1 !important;
+}
+
+/* ページ全体のフェードインを確実にする */
+main.appeared {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
 /* モバイル対応 */
 @media (max-width: 900px) {
   .project-detail .container {
