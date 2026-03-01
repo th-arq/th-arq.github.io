@@ -1,605 +1,91 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ABOUT</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div id="header"></div>
+
+    <main class="about-page contact">
+
+      <div class="sticky-box">
+        <h2 class="title">CONTACT</h2>
+      </div>
+
+      <div class="content-box contact-section">
+
+        <form action="https://formspree.io/f/xlgwkneb" method="POST" class="contact-form">
+    
+    <input type="text" name="_gotcha" style="display:none">
+    <input type="hidden" name="_next" value="https://yourwebsite.com/thanks.html">
+
+    <div class="form-group-row">
+      <div class="form-group">
+        <label for="first-name">First Name</label>
+        <input type="text" id="first-name" name="first_name" required placeholder="Jane">
+      </div>
+      <div class="form-group">
+        <label for="last-name">Last Name</label>
+        <input type="text" id="last-name" name="last_name" required placeholder="Doe">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required placeholder="email@example.com">
+    </div>
+
+    <div class="form-group">
+      <label for="tel">Phone Number</label>
+      <input type="tel" id="tel" name="tel" placeholder="(000) 000-0000">
+    </div>
+
+    <div class="form-group">
+      <label for="address">Project Location (City, State)</label>
+      <input type="text" id="address" name="location" placeholder="e.g. Washington, DC">
+    </div>
+
+    <div class="form-group">
+      <label for="inquiry">Inquiry Type</label>
+      <select id="inquiry" name="inquiry_type">
+        <option value="" disabled selected>Select an option</option>
+        <option value="Condo Renovation">Condo Renovation</option>
+        <option value="Kitchen & Bath Remodeling">Kitchen & Bath Remodeling</option>
+        <option value="Interior Design & FFE">Interior Design & FFE</option>
+        <option value="Full House Renovation">Full House Renovation</option>
+        <option value="Commercial Design">Commercial Design</option>
+        <option value="Consultation">Consultation</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Preferred Method of Contact</label>
+      <div class="radio-group">
+        <label class="radio-label"><input type="radio" name="contact_method" value="Email" checked> Email</label>
+        <label class="radio-label"><input type="radio" name="contact_method" value="Phone"> Phone</label>
+        <label class="radio-label"><input type="radio" name="contact_method" value="Text"> Text Message</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="message">Project Details</label>
+      <textarea id="message" name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">SEND INQUIRY</button>
+
+  </form>
+</div>
+    </main>
+
+  <div id="footer"></div>
+
+
+  <script src="../js/common.js" defer></script>
+</body>
+</html>
 
-html {
-  scrollbar-gutter: stable;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  margin: auto;
-  width: 100%;
-}
-
-
-:root {
-  --side-padding: clamp(24px, 6vw, 80px);
-  --header-height: 80px;
-  --font-xl: 60px;
-  --font-l: 40px;
-  --font-m: 20px;
-  --font-s: 18px;
-  --font-xs: 16px;
-  --bold: 400;
-  --normal: 350;
-  --black: #101010;
-  --white: #ffffff;
-  --gray: #a5a4a2;
-  --darkgray: #6d6c6b;
-  --lightgray: #ebe9e8;
-  --red: #a7240d;
-}
-
-p { font-size: var(--font-m); }
-h1 { font-size: var(--font-xl); }
-h2 { font-size: var(--font-l); font-weight: var(--bold);}
-h3 { font-size: var(--font-l); font-weight: var(--normal);}
-
-
-main {
-  padding-top: var(--header-height);
-}
-
-
-
-/* =========================
-  HEADER BASE
-========================= */
-#header, #footer {
-    width: 100%;
-    max-width: 1700px;
-}
-
-header {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  width: 100%;
-  transform: translateX(-50%);
-  height: var(--header-height);
-  padding: 0 var(--side-padding);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 100;
-  background: transparent;
-}
-
-.fade-logo,
-.fade-menu {
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.fade-logo.show,
-.fade-menu.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-/* =========================
-  LEFT : LOGO
-========================= */
-.TAG_logo img {
-  height: 24px;
-  display: block;
-}
-
-/* =========================
-  RIGHT AREA
-========================= */
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-}
-
-/* =========================
-  MENU (PC)
-========================= */
-#menu ul {
-  display: flex;
-  gap: 40px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  
-}
-
-#menu a {
-  font-size: var(--font-s);
-  letter-spacing: 0.08em;
-  color: var(--black);
-  text-decoration: none;
-  position: relative;
-}
-
-#menu a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .3s ease;
-}
-
-#menu a:hover::after {
-  transform: scaleX(1);
-}
-
-/* =========================
-  CONTACT BUTTON
-========================= */
-.contact-btn {
-  letter-spacing: 0.1em;
-  padding: 10px 18px;
-  background: var(--black);
-  color: var(--white);
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.contact-btn a {
-  letter-spacing: 0.1em;
-  padding: 10px 18px;
-  background: var(--black);
-  color: var(--white);
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-/* =========================
-  RESPONSIVE
-========================= */
-@media (max-width: 900px) {
-  #menu,
-  .contact-btn {
-    display: none;
-  }
-}
-
-
-/* =========================
-  FOOTER BASE
-========================= */
-footer {
-  width: 100%;
-  padding: 0 var(--side-padding);
-}
-
-.footer_container {
-    font-size: var(--font-s);
-    display: flex;
-    justify-content: space-between;
-}
-
-
-/* =========================
-   Main fade
-========================= */
-main {
-  opacity: 0; 
-  transform: translateY(8px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-  will-change: opacity, transform;
-}
-
-main.appeared {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-/* =========================
-   INDEX
-========================= */
-body.is-index {
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-body:not(.is-index) .fade-logo,
-body:not(.is-index) .fade-menu {
-  opacity: 1;
-  transform: none;
-}
-
-.is-index main {
-  flex: 1;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    padding-top: var(--header-height);
-    justify-content: center;
-}
-
-.index-page .intro-flex {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  max-height: calc(100vh - var(--header-height));
-  --v-pad: clamp(24px, 5vh, 60px);
-  padding: var(--v-pad) var(--side-padding);
-  gap: var(--side-padding);
-  align-items: stretch;
-}
-
-/* 左：縦長 */
-.index-page .left {
-  flex: 1.5;
-  overflow: hidden;
-}
-
-/* 右：上下 */
-.index-page .right {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: var(--side-padding); 
-  height: 100%;
-}
-
-/* 右の上下画像 */
-.index-page .right > div {
-  flex: 1;
-  overflow: hidden;
-}
-
-.index-page img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-
-/* =========================
-  CLIP PATH REVEAL
-========================= */
-.reveal {
-  clip-path: inset(0 0 100% 0);
-  transition: clip-path 1.2s ease;
-  will-change: clip-path;
-}
-
-.reveal.show {
-  clip-path: inset(0 0 0 0);
-}
-
-
-@media (max-width: 900px) {
-  :root {
-    --side-padding: 24px;
-  }
-
-  .intro-flex {
-    flex-direction: column;
-    height: auto;
-  }
-}
-
-.index-page .intro-flex img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-
-/* =========================
-   ABOUT
-========================= */
-.about-page {
-    overflow: visible !important;
-    padding: var(--header-height) var(--side-padding);
-}
-
-.about-page .about-section {
-    display: flex;
-    position: relative;
-    min-height: 120vh; 
-}
-
-.about-page .sticky-box {
-    flex: 1;
-    position: relative;
-}
-
-.about-page .title {
-    position: -webkit-sticky;
-    position: sticky;
-    top: calc(50% - 1.25rem);     
-    font-size: var(--font-xl);
-    font-weight: var(--bold);
-    margin: 0;
-    display: block;
-    line-height: 1;
-    padding: 0;
-}
-
-.about-page .content-box {
-    flex: 1;
-    padding: 5vw 0; 
-}
-
-.about-page .text {
-    font-size: var(--font-s);
-    line-height: 2.5;
-}
-
-
-
-/* =========================
-  PROJECTS
-========================= */
-a.projects-item {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  overflow: hidden;
-}
-
-.filter-nav {
-  margin-bottom: 40px;
-}
-
-.filter-btn {
-  background: none;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: color 0.3s;
-}
-
-.filter-btn.active {
-  font-weight: bold;
-  text-decoration: underline;
-}
-
-.projects-item.reveal {
-  clip-path: inset(0 0 100% 0); /* 最初は下から閉じてる */
-  transition: clip-path 1.2s ease, opacity 0.4s ease, transform 0.4s ease;
-  will-change: clip-path, transform, opacity;
-  opacity: 0; /* JSで.is-hiddenを外す時、ふわっと出すため */
-}
-
-/* ① クリップパスが開く時 */
-.projects-item.reveal.show {
-  clip-path: inset(0 0 0 0);
-  opacity: 1;
-}
-
-/* 既存の非表示クラス（干渉しないように念のため残す） */
-.projects-item.is-hidden {
-  display: none;
-}
-
-/* ③ ホバー時の画像拡大の設定 */
-.projects-item .thumbnail {
-  overflow: hidden; /* 画像が枠からはみ出さないように */
-}
-
-.projects-item .thumbnail img {
-  width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 0.6s ease; /* 拡大の動きを滑らかに */
-}
-
-/* ③ ホバー時に中のimgを拡大 */
-.projects-item:hover .thumbnail img {
-  transform: scale(1.05); /* 1.05倍に拡大（やりすぎないのがコツ） */
-}
-
-.projects-item .info h3 {
-  margin-top: 15px;
-  font-size: var(--font-m); /* 少し小さく調整 */
-}
-.projects-item .info p {
-  font-size: var(--font-xs);
-  color: var(--darkgray);
-}
-
-/* グリッドレイアウト */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 30px;
-}
-
-/* 各アイテムの挙動 */
-.projects-item {
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.projects-item.is-hidden {
-  display: none; /* 完全に消す場合 */
-}
-
-.projects-item img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-
-
-/* =========================
-  PROJECTS DETAIL
-========================= */
-.project-detail .container {
-  display: flex;
-  gap: 60px;
-  padding: 40px var(--side-padding);
-}
-
-/* 左側の固定エリア */
-.project-info {
-  flex: 1;
-}
-
-.sticky-content {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 120px; /* ヘッダーの高さ＋余白 */
-}
-
-.project-title {
-  font-size: var(--font-l);
-  line-height: 1.2;
-  margin-bottom: 30px;
-  text-transform: uppercase;
-}
-
-.meta-data p {
-  font-size: var(--font-xs);
-  margin-bottom: 5px;
-  color: var(--darkgray);
-}
-
-.description {
-  margin-top: 40px;
-  line-height: 1.8;
-  font-size: var(--font-s);
-}
-
-/* 右側のギャラリーエリア */
-.project-gallery {
-  flex: 1.5;
-}
-
-.image-wrapper {
-  margin-bottom: 60px;
-  overflow: hidden;
-}
-
-.image-wrapper img {
-  width: 100%; /* 親要素の幅に合わせる（元サイズが小さければmax-widthで調整） */
-  height: auto;
-  display: block;
-}
-
-
-/* 個別ページの画像を表示させるための設定 */
-.image-wrapper.reveal {
-  clip-path: inset(0 0 100% 0);
-  opacity: 0;
-  transition: clip-path 1.2s ease, opacity 1.2s ease;
-}
-
-/* showクラスがついたら表示 */
-.image-wrapper.reveal.show {
-  clip-path: inset(0 0 0 0) !important;
-  opacity: 1 !important;
-}
-
-/* ページ全体のフェードインを確実にする */
-main.appeared {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
-
-/* モバイル対応 */
-@media (max-width: 900px) {
-  .project-detail .container {
-    flex-direction: column;
-  }
-  .sticky-content {
-    position: static;
-  }
-}
-
-
-
-/* =========================
-  CONTACT
-========================= */
-/* お問い合わせフォーム専用のスタイル */
-.contact-form {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.form-group {
-  margin-bottom: 35px;
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group label {
-  font-size: var(--font-xs);
-  margin-bottom: 10px;
-  letter-spacing: 0.05em;
-  font-weight: 400;
-}
-
-.form-group input, 
-.form-group textarea,
-.form-group select {
-  width: 100%;
-  padding: 12px 0;
-  border: none;
-  background: var(--lightgray);
-  font-family: inherit;
-  font-size: var(--font-m);
-  outline: none;
-  border-radius: 0;
-}
-
-/* ラジオボタンのレイアウト */
-.radio-group {
-  display: flex;
-  gap: 30px;
-  padding-top: 10px;
-}
-
-.radio-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  font-size: var(--font-s) !important;
-}
-
-.radio-label input {
-  width: auto;
-  margin: 0;
-}
-
-/* プルダウンの見た目 */
-select {
-  cursor: pointer;
-  background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%);
-  background-position: calc(100% - 15px) 50%, calc(100% - 10px) 50%;
-  background-size: 5px 5px, 5px 5px;
-  background-repeat: no-repeat;
-  appearance: none;
-}
-
-.form-group-row {
-  display: flex;
-  gap: 20px;
-}
-.form-group-row .form-group {
-  flex: 1;
-}
-
-@media (max-width: 600px) {
-  .form-group-row {
-    flex-direction: column;
-    gap: 0;
-  }
-}
