@@ -396,7 +396,7 @@ body:not(.is-index) .fade-menu {
     display: flex;
     align-items: flex-start;
     gap: clamp(20px, 4vw, 40px);
-    margin-bottom: var(--gap);
+    margin-bottom: 2.5vw;
 }
 
 .profile-image-container {
@@ -418,6 +418,30 @@ body:not(.is-index) .fade-menu {
     line-height: 1.1;
 }
 
+.registration li {
+    padding: 15px 0;
+    border-bottom: 1px solid var(--lightgray);
+    color: var(--black);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 項目にマウスを乗せると少し色が動く遊び心 */
+.affiliations li:hover, 
+.registration li:hover {
+    padding-left: 10px;
+    transition: all 0.3s ease;
+}
+
+/* セクションの見出し（h3）の余白調整 */
+.content-box h3 {
+    margin-top: 80px;
+    margin-bottom: 10px;
+    font-size: var(--font-m);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
 
 /* モバイル対応：スマホでは縦に並べて少し余白を調整 */
 @media (max-width: 900px) {
