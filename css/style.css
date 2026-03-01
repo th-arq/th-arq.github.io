@@ -139,10 +139,6 @@ body:not(.is-index) .fade-menu {
 }
 
 
-/* =========================
-  LAYOUT
-========================= */
-
 main {
   padding-top: var(--header-height);
 }
@@ -202,11 +198,6 @@ main {
   }
 }
 
-
-
-/* =========================
-  IMAGE
-========================= */
 .index-page .intro-flex img {
   width: 100%;
   height: 100%;
@@ -218,6 +209,10 @@ main {
 /* =========================
    ABOUT
 ========================= */
+.about-page {
+    overflow: visible !important;
+}
+
 .about-page .about-section {
     display: flex;
     position: relative;
@@ -241,10 +236,6 @@ main {
     font-size: 2.5rem;
     font-weight: bold;
     margin: 0;
-}
-
-.about-page .left {
-  overflow: visible;
 }
 
 /* 右側のスクロールするテキストエリア */
