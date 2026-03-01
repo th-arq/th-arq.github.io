@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const filterButtons = document.querySelectorAll('.filter-btn');
-  const projectItems = document.querySelectorAll('.projects-item');
+  const projectItems = document.querySelectorAll('.projects-item, .image-wrapper');
 
   // --- ① 初期表示のアニメーション (1回だけ実行) ---
   // 画面内にあるものだけを対象に、少しずつずらして表示
