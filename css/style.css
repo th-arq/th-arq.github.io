@@ -637,11 +637,25 @@ main.appeared {
   border-bottom: 1px solid var(--gray);
 }
 
+::placeholder {
+    color: var(--gray);
+    opacity: 0.6;
+    font-weight: 300;
+    font-family: 'Jost', sans-serif;
+}
+
+/* ブラウザごとの微調整（念のため） */
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+    color: var(--gray);
+    font-weight: 300;
+}
+
+
 /* Radio Buttons */
 .radio-group {
   display: flex;
-  gap: 30px;
-  padding-top: 10px;
+  gap: 2.5vw;
 }
 
 .radio-label {
@@ -674,7 +688,7 @@ main.appeared {
 
 .form-group-row {
   display: flex;
-  gap: 30px;
+  gap: 2.5vw;
 }
 
 .form-group-row .form-group {
