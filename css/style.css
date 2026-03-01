@@ -19,12 +19,12 @@ body {
   --font-m: 20px;
   --font-s: 18px;
   --font-xs: 16px;
-  --black: #000;
-  --white: #000;
-  --gray: #000;
-  --darkgray: #000;
-  --lightgray: #000;
-  --red: #000;
+  --black: #101010;
+  --white: #ffffff;
+  --gray: #a5a4a2;
+  --darkgray: #6d6c6b;
+  --lightgray: #ebe9e8;
+  --red: #a7240d;
 }
 
 
