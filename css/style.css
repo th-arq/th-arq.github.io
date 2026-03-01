@@ -269,6 +269,7 @@ main {
 ========================= */
 .about-page {
     overflow: visible !important;
+    padding: var(--header-height) var(--side-padding);
 }
 
 .about-page .about-section {
