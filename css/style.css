@@ -35,7 +35,6 @@ body {
   --gap: 5vw;
 }
 
-p { font-size: var(--font-m); }
 h1 { font-size: var(--font-xl); }
 h2 { font-size: var(--font-l); font-weight: var(--bold);}
 h3 { font-size: var(--font-l); font-weight: var(--normal);}
@@ -341,8 +340,9 @@ body:not(.is-index) .fade-menu {
   Split layout
 ========================= */
 .split-layout {
-    overflow: visible !important;
-    padding: var(--header-height) var(--side-padding);
+  overflow: visible !important;
+  padding: var(--header-height) var(--side-padding);
+  font-size: var(--font-m);
 }
 
 .split-section {
