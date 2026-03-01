@@ -229,8 +229,7 @@ main {
 .about-page .about-section {
     display: flex;
     position: relative;
-    min-height: 100vh; /* 1セクションに最低限1画面分の高さを持たせる */
-    border-bottom: 1px solid #eee;
+    min-height: 100vh;
 }
 
 /* 左側の固定エリア */
@@ -239,10 +238,8 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    /* スクロールに合わせて固定する設定 */
     height: 100vh;
-    position: -webkit-sticky; /* Safari対応 */
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
 }
@@ -261,7 +258,7 @@ main {
 /* 右側のスクロールするテキストエリア */
 .about-page .content-box {
     flex: 1;
-    padding: 15vh 10% 15vh 5%; /* 上下にゆとりを持たせてスクロール感を出す */
+    padding: 15vh 10% 15vh 5%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -270,7 +267,5 @@ main {
 .about-page .text {
     font-size: 1.1rem;
     line-height: 2.5;
-    color: #333;
-    /* テキストが短い場合でもスクロールさせるために高さを少し持たせると綺麗 */
     min-height: 60vh; 
 }
