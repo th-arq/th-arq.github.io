@@ -7,6 +7,7 @@
 
 body {
   font-family: 'Jost', sans-serif;
+  font-weight: 300;
   margin: auto;
   width: 100%;
   max-width: 1700px;
@@ -17,7 +18,7 @@ body {
   --side-padding: clamp(24px, 6vw, 80px);
   --header-height: 80px;
   --font-xl: 60px;
-  --font-x: 40px;
+  --font-l: 40px;
   --font-m: 20px;
   --font-s: 18px;
   --font-xs: 16px;
@@ -255,7 +256,7 @@ main {
     position: sticky;
     top: calc(50% - 1.25rem);     
     font-size: var(--font-l);
-    font-weight: bold;
+    font-weight: 400;
     margin: 0;
     display: block;
     line-height: 1;
