@@ -22,6 +22,25 @@ window.addEventListener("load", () => {
   };
   document.head.appendChild(script);
 
+  const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    // 画面の40%〜60%の位置にタイトルが入ったら active にする
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-active');
+    } else {
+      entry.target.classList.remove('is-active');
+    }
+  });
+}, {
+  // 判定基準の調整（画面中央付近をターゲットにする）
+  rootMargin: '-45% 0px -45% 0px' 
+});
+
+// 全ての .title を監視対象にする
+document.querySelectorAll('.split-layout .title').forEach(title => {
+  observer.observe(title);
+});
+
   // --- 2. Header / Footer の読み込み (既存のコード) ---
   const loadParts = (id, path) => {
     fetch(path).then(res => res.text()).then(html => {
