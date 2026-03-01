@@ -54,7 +54,7 @@ main {
     max-width: 1700px;
 }
 
-header, footer {
+header {
   position: fixed;
   top: 0;
   left: 50%;
@@ -173,8 +173,18 @@ header, footer {
   FOOTER BASE
 ========================= */
 footer {
-    display: flex;
-    bottom: 0 !important;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+  height: var(--header-height);
+  padding: 0 var(--side-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+  background: transparent;
 }
 
 
@@ -341,13 +351,12 @@ body:not(.is-index) .fade-menu {
 a.projects-item {
   text-decoration: none;
   color: inherit;
-  display: block; /* 領域全体をクリック可能に */
-  overflow: hidden; /* ③ ホバー拡大ではみ出た分を隠す */
+  display: block;
+  overflow: hidden;
 }
 
 .filter-nav {
   margin-bottom: 40px;
-  text-align: center;
 }
 
 .filter-btn {
