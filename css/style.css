@@ -62,6 +62,7 @@ header {
   width: 100%;
   transform: translateX(-50%);
   height: var(--header-height);
+  background: linear-gradient(0deg, transparent, var(--white));
   padding: 0 var(--side-padding);
   display: flex;
   align-items: center;
