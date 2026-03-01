@@ -590,7 +590,7 @@ a.projects-item {
 
 
 .projects-item:hover .thumbnail img {
-  transform: scale(1.5);
+  transform: scale(1.1);
 }
 
 .projects-item .info h3 {
