@@ -92,7 +92,7 @@ header {
 }
 
 
-.TAG_logo img :hover {
+.TAG_logo img:hover {
   opacity: .4;
   transition: transform .3s ease;
   transform: scaleX(1);
