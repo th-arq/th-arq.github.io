@@ -77,7 +77,7 @@ header.is-scrolled {
 
 header.is-scrolled:hover {
   opacity: 1;
-  background-color: var(--white);
+  background-color: linear-gradient(0deg, transparent, var(--white));
 }
 
 .fade-logo,
@@ -122,30 +122,31 @@ header.is-scrolled:hover {
   margin: 0;
 }
 
-#menu a {
-  font-size: var(--font-s);
-  letter-spacing: 0.08em;
-  color: var(--black);
-  text-decoration: none;
+
+/* --- 共通のラインホバー設定 --- */
+.line-hover {
+  text-decoration: none !important; /* デフォルトの下線を消す */
   position: relative;
+  display: inline-block; /* 線を文字の幅に合わせるために必要 */
 }
 
-#menu a::after {
+.line-hover::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -6px;
+  bottom: -4px;      /* 線の位置（文字との距離） */
   width: 100%;
-  height: 1px;
-  background: currentColor;
+  height: 1px;       /* 線の太さ */
+  background: currentColor; /* 文字の色と同じ色にする */
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform .3s ease;
+  transition: transform 0.3s ease;
 }
 
-#menu a:hover::after {
+.line-hover:hover::after {
   transform: scaleX(1);
 }
+
 
 /* =========================
   CONTACT BUTTON
@@ -210,15 +211,6 @@ footer {
 
 .footer_info p {
     margin: 5px 0;
-}
-
-.footer_info a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.footer_info a:hover {
-    text-decoration: underline;
 }
 
 /* 右側のコピーライト */
