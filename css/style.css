@@ -216,40 +216,43 @@ main {
 .about-page .about-section {
     display: flex;
     position: relative;
-    /* align-items: stretch (デフォルト) だと固定されないので flex-start に */
-    align-items: flex-start; 
-    min-height: 100vh;
+    /* セクション全体の高さをしっかり出す（スクロールの遊びを作る） */
+    min-height: 120vh; 
+    border-bottom: 1px solid #eee;
 }
 
 .about-page .sticky-box {
     flex: 1;
-    display: flex;
-    justify-content: center;
-    /* 文字を箱の「下側」に配置することで、スクロール時に中央で止まるようにする */
-    align-items: flex-end; 
-  
-    height: 50vh; 
-    
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0; 
+    position: relative; /* 子要素の基準にする */
 }
 
 .about-page .title {
+    position: -webkit-sticky;
+    position: sticky;
+    
+    /* 画面の中央（50%）に固定 */
+    /* 文字の高さ分（約1.5rem）を引くと、より正確に「中心」に見えるよ */
+    top: calc(50% - 1.25rem); 
+    
     font-size: 2.5rem;
     font-weight: bold;
     margin: 0;
-    /* 箱の底に張り付いているので、ちょうど画面中央に位置するよ */
+    text-align: center;
+    display: block;
+    
+    /* 余白を消して、次のタイトルがピタッとくっつくようにする */
     line-height: 1;
+    padding: 0;
 }
 
 .about-page .content-box {
     flex: 1;
-    padding: 50vh 10% 50vh 5%; 
+    /* 開始位置を上（ヘッダー下）に揃える */
+    padding: 40px 10% 20vh 5%; 
 }
 
 .about-page .text {
     font-size: 1.1rem;
     line-height: 2.5;
-    min-height: 60vh; 
+    /* ここでも高さを出すことで、左側が止まる時間を調整できるよ */
 }
