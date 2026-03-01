@@ -10,20 +10,33 @@
 
   <div id="header"></div>
 
-<main class="about-layout">
-  <div class="title-rail">
-    <div class="title-track">
-      <div class="title-item">ABOUT</div>
-      <div class="title-item">SERVICE</div>
-      <div class="title-item">COMPANY</div>
-    </div>
-  </div>
+ゆうき、了解！
+aboutページ専用のスタイルにするために、一番外側のタグ（main）に固有のクラス名を付けて、CSSをその中だけに効くように書き換えるね。
 
-  <div class="content-rail"> 
+これで、他のページのスタイルと喧嘩することなく、このページ独自の「パララックス風の動き」が作れるよ。
 
-    <section class="panel">
-      <div class="content">
-        <h2>Lead Architect</h2>
+1. HTML (about.html)
+mainタグを使いつつ、about-pageというクラスを振ったよ。
+
+HTML
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="about-page">
+        
+        <section class="about-section">
+            <div class="sticky-box">
+                <h2 class="title">title</h2>
+            </div>
+            <div class="content-box">
+                <h2>Lead Architect</h2>
         <p>Yuki Architecture Studio is led by our principal architect, who brings over 15 years of experience in residential and commercial design. Having studied architecture in both Tokyo and New York, our approach blends Japanese minimalism with modern functionalism.</p>
       <p>We believe that a building is not just a structure, but a living space that should evolve with its inhabitants. Every project begins with a deep conversation to understand the client's lifestyle, values, and dreams for their future home.</p>
       <p>Our philosophy is rooted in "Honest Materials" and "Timeless Design." We prioritize natural light, sustainable timber, and stone to create spaces that feel grounded and serene. From the initial sketch to the final brick, we are dedicated to excellence and precision in every detail.</p>
@@ -31,24 +44,29 @@
       <p>Our philosophy is rooted in "Honest Materials" and "Timeless Design." We prioritize natural light, sustainable timber, and stone to create spaces that feel grounded and serene. From the initial sketch to the final brick, we are dedicated to excellence and precision in every detail.</p>
       <p>Through our work, we aim to redefine the relationship between nature and urban living, creating sanctuaries that provide peace in a busy world.</p>
       <p>Through our work, we aim to redefine the relationship between nature and urban living, creating sanctuaries that provide peace in a busy world.</p>
-    </div>
 
-    </section>
+            </div>
+        </section>
 
-    <section class="panel">
-      <div class="content">
-        <h2>Renovation & Design</h2>
+        <section class="about-section">
+            <div class="sticky-box">
+                <h2 class="title">title</h2>
+            </div>
+            <div class="content-box">
+                <h2>Renovation & Design</h2>
         <p>We specialize in high-end residential renovations that transform outdated houses into modern masterpieces. Our team understands that renovating a home is a deeply personal journey, and we are here to guide you through every step.</p>
       <p>Our renovation services include full-scale interior remodeling, structural improvements, and bespoke kitchen and bath design. We focus on maximizing space and improving the flow of your home while preserving its original character where it matters most.</p>
       <p>Whether it's a traditional Japanese house needing a modern touch or a contemporary apartment requiring more soul, we provide tailored solutions that fit your needs. We manage everything from planning and permitting to construction oversight.</p>
       <p>Let us help you breathe new life into your existing space. We combine traditional craftsmanship with innovative technology to deliver results that exceed expectations.</p>
-    </div>
+            </div>
+        </section>
 
-    </section>
-
-    <section class="panel">
-      <div class="content">
-        <h2>Company Profile</h2>
+        <section class="about-section">
+            <div class="sticky-box">
+                <h2 class="title">title</h2>
+            </div>
+            <div class="content-box">
+                <h2>Company Profile</h2>
         <p>Address: 1-2-3 Suginami-ku, Tokyo, Japan<br>
          Phone: +81 (0)3-1234-5678<br>
          Email: info@yuki-arch.com</p>
@@ -59,12 +77,9 @@
       </div>
       <p>Office Hours: Monday - Friday, 10:00 AM - 6:00 PM. We are closed on weekends and public holidays. Consultations are available by appointment to ensure we give your project the dedicated time it deserves.</p>
       <p>We look forward to welcoming you to our studio and discussing how we can work together to build something extraordinary.</p>
-    </div>
+        </section>
 
-    </section>
-
-  </div>
-</main>
+    </main>
 
   <div id="footer"></div>
 
