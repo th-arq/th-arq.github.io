@@ -215,9 +215,11 @@ main {
 
 .about-page .about-section {
     display: flex;
-    align-items: flex-start;
     position: relative;
+    /* align-items: stretch (デフォルト) だと固定されないので flex-start に */
+    align-items: flex-start; 
     min-height: 100vh;
+    border-bottom: 1px solid #eee;
 }
 
 /* 左側の固定エリア */
@@ -226,10 +228,11 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
+    
+    /* ここがキモ！ */
+    height: 100vh;      /* 画面いっぱいの高さを確保 */
+    position: sticky;   /* 粘着 */
+    top: 0;             /* 画面の一番上で止まる */
 }
 
 /* タイトルのデザイン */
@@ -242,10 +245,9 @@ main {
 /* 右側のスクロールするテキストエリア */
 .about-page .content-box {
     flex: 1;
-    padding: 15vh 10% 15vh 5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    /* 右側にある程度のパディング（高さ）を持たせることで、
+       その間中、左側が固定されて見えるようになるよ */
+    padding: 20vh 10% 20vh 5%; 
 }
 
 .about-page .text {
