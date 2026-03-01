@@ -370,61 +370,63 @@ a.projects-item {
 }
 
 .filter-nav {
-  margin-bottom: 40px;
+  margin: 5vw 0 2.5vw;
 }
 
 .filter-btn {
+  color: var(--gray);
+  font-family: 'Jost';
+  font-size: var(--font-m);
   background: none;
   border: none;
-  padding: 10px 20px;
+  padding: 0 2.5vw 0 0;
   cursor: pointer;
-  font-size: 1rem;
   transition: color 0.3s;
 }
 
 .filter-btn.active {
-  font-weight: bold;
-  text-decoration: underline;
+  color: var(--black);
+  font-weight: var(--bold);
 }
 
 .projects-item.reveal {
-  clip-path: inset(0 0 100% 0); /* 最初は下から閉じてる */
+  clip-path: inset(0 0 100% 0);
   transition: clip-path 1.2s ease, opacity 0.4s ease, transform 0.4s ease;
   will-change: clip-path, transform, opacity;
-  opacity: 0; /* JSで.is-hiddenを外す時、ふわっと出すため */
+  opacity: 0;
 }
 
-/* ① クリップパスが開く時 */
+
 .projects-item.reveal.show {
   clip-path: inset(0 0 0 0);
   opacity: 1;
 }
 
-/* 既存の非表示クラス（干渉しないように念のため残す） */
+
 .projects-item.is-hidden {
   display: none;
 }
 
-/* ③ ホバー時の画像拡大の設定 */
+
 .projects-item .thumbnail {
-  overflow: hidden; /* 画像が枠からはみ出さないように */
+  overflow: hidden;
 }
 
 .projects-item .thumbnail img {
   width: 100%;
   height: auto;
   display: block;
-  transition: transform 0.6s ease; /* 拡大の動きを滑らかに */
+  transition: transform 0.6s ease;
 }
 
-/* ③ ホバー時に中のimgを拡大 */
+
 .projects-item:hover .thumbnail img {
-  transform: scale(1.05); /* 1.05倍に拡大（やりすぎないのがコツ） */
+  transform: scale(1.05);
 }
 
 .projects-item .info h3 {
   margin-top: 15px;
-  font-size: var(--font-m); /* 少し小さく調整 */
+  font-size: var(--font-m);
 }
 .projects-item .info p {
   font-size: var(--font-xs);
@@ -444,7 +446,7 @@ a.projects-item {
 }
 
 .projects-item.is-hidden {
-  display: none; /* 完全に消す場合 */
+  display: none;
 }
 
 .projects-item img {
