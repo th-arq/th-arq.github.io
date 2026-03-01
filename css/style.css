@@ -408,11 +408,6 @@ body:not(.is-index) .fade-menu {
     line-height: 1.1;
 }
 
-.profile-text .credentials {
-    margin: 5px 0 0 0;
-    font-size: var(--font-s);
-    color: var(--darkgray);
-}
 
 /* モバイル対応：スマホでは縦に並べて少し余白を調整 */
 @media (max-width: 900px) {
