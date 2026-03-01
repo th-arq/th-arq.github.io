@@ -422,10 +422,8 @@ body:not(.is-index) .fade-menu {
 
 .affiliations ul, 
 .registration ul {
-    list-style: none;      /* デフォルトの「・」を消す */
+    list-style: none;
     padding: 0;
-    margin: 30px 0 60px;   /* 上下の余白 */
-    border-top: 1px solid var(--black); /* 上に一本線を引く */
 }
 
 .affiliations li, 
@@ -447,11 +445,8 @@ body:not(.is-index) .fade-menu {
 
 /* セクションの見出し（h3）の余白調整 */
 .content-box h3 {
-    margin-top: 80px;
-    margin-bottom: 10px;
-    font-size: var(--font-m);
+    margin-top: var(--gap);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
 }
 
 /* モバイル対応：スマホでは縦に並べて少し余白を調整 */
