@@ -330,8 +330,13 @@ body:not(.is-index) .fade-menu {
 /* =========================
   PROJECTS
 ========================= */
+a.projects-item {
+  text-decoration: none;
+  color: inherit;
+  display: block; /* 領域全体をクリック可能に */
+  overflow: hidden; /* ③ ホバー拡大ではみ出た分を隠す */
+}
 
-/* フィルターボタンのスタイル */
 .filter-nav {
   margin-bottom: 40px;
   text-align: center;
@@ -349,6 +354,50 @@ body:not(.is-index) .fade-menu {
 .filter-btn.active {
   font-weight: bold;
   text-decoration: underline;
+}
+
+.projects-item.reveal {
+  clip-path: inset(0 0 100% 0); /* 最初は下から閉じてる */
+  transition: clip-path 1.2s ease, opacity 0.4s ease, transform 0.4s ease;
+  will-change: clip-path, transform, opacity;
+  opacity: 0; /* JSで.is-hiddenを外す時、ふわっと出すため */
+}
+
+/* ① クリップパスが開く時 */
+.projects-item.reveal.show {
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+}
+
+/* 既存の非表示クラス（干渉しないように念のため残す） */
+.projects-item.is-hidden {
+  display: none;
+}
+
+/* ③ ホバー時の画像拡大の設定 */
+.projects-item .thumbnail {
+  overflow: hidden; /* 画像が枠からはみ出さないように */
+}
+
+.projects-item .thumbnail img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.6s ease; /* 拡大の動きを滑らかに */
+}
+
+/* ③ ホバー時に中のimgを拡大 */
+.projects-item:hover .thumbnail img {
+  transform: scale(1.05); /* 1.05倍に拡大（やりすぎないのがコツ） */
+}
+
+.projects-item .info h3 {
+  margin-top: 15px;
+  font-size: var(--font-m); /* 少し小さく調整 */
+}
+.projects-item .info p {
+  font-size: var(--font-xs);
+  color: var(--darkgray);
 }
 
 /* グリッドレイアウト */
