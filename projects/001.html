@@ -1,45 +1,936 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Projects | TAG Inc.</title>
-  <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
-  <div id="header"></div>
+html {
+  scrollbar-gutter: stable;
+}
 
-<main class="split-layout project-detail">
-<div class="container">
-    
-    <aside class="project-info">
-      <div class="sticky-content">
-        <h1 class="project-title">CAROLLSBURG CONDOMINIUM</h1>
-        <div class="meta-data">
-          <p class="location">Location: Washington, DC (SW)</p>
-          <p class="size">Size: 950 SF</p>
-        </div>
-        <div class="description">
-          <p>Full condo renovation: bathroom, kitchen, bedroom and living room.<br>
-            Including FFE (Furniture Fixtures & Equipment)</p>
-        </div>
-      </div>
-    </aside>
+* {
+  box-sizing: border-box;
+}
 
-    <section class="project-gallery">
-      <div class="image-wrapper reveal"><img src="./img/001/img1.jpg" alt="Living Room"></div>
-      <div class="image-wrapper reveal"><img src="./img/001/img1.jpg" alt="Kitchen"></div>
-      <div class="image-wrapper reveal"><img src="./img/001/img1.jpg" alt="Bathroom"></div>
-      </section>
+body {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  margin: auto;
+  width: 100%;
+}
 
-  </div>
-</main>
 
-  <div id="footer"></div>
+:root {
+  --side-padding: clamp(24px, 6vw, 80px);
+  --header-height: 80px;
+  --font-xl: 60px;
+  --font-l: 40px;
+  --font-m: 20px;
+  --font-s: 18px;
+  --font-xs: 16px;
+  --bold: 400;
+  --normal: 300;
+  --black: #101010;
+  --white: #ffffff;
+  --gray: #a5a4a2;
+  --darkgray: #6d6c6b;
+  --lightgray: #f6f6f6;
+  --red: #a7240d;
+  --gap: 5vw;
+}
 
-  <script src="../js/projects.js" defer></script>
-  <script src="../js/common.js" defer></script>
-</body>
-</html>
+h1 { font-size: var(--font-xl); }
+h2 { font-size: var(--font-l); font-weight: var(--bold);}
+h3 { font-size: var(--font-l); font-weight: var(--normal);}
 
+
+main {
+  padding-top: var(--header-height);
+}
+
+
+
+/* =========================
+  HEADER BASE
+========================= */
+#header {
+    width: 100%;
+    max-width: 1700px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+  height: var(--header-height);
+  background: linear-gradient(0deg, transparent, var(--white));
+  padding: 0 var(--side-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+  transition: opacity 0.4s ease, background-color 0.4s ease;
+  opacity: 1;
+}
+
+header.is-scrolled {
+  opacity: 0.4;
+}
+
+header.is-scrolled:hover {
+  opacity: 1;
+  background-color: linear-gradient(0deg, transparent, var(--white));
+}
+
+.fade-logo,
+.fade-menu {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-logo.show,
+.fade-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================
+  LEFT : LOGO
+========================= */
+.TAG_logo img {
+  height: 24px;
+  display: block;
+}
+
+/* =========================
+  RIGHT AREA
+========================= */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/* =========================
+  MENU (PC)
+========================= */
+#menu ul {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#menu a {
+  font-size: var(--font-s);
+  letter-spacing: 0.08em;
+  color: var(--black);
+  text-decoration: none;
+  position: relative;
+}
+
+#menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s ease;
+}
+
+#menu a:hover::after {
+  transform: scaleX(1);
+}
+
+/* =========================
+  CONTACT BUTTON
+========================= */
+.contact-btn {
+  letter-spacing: 0.1em;
+  padding: 10px 18px;
+  background: var(--black);
+  color: var(--white);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.contact-btn a {
+  letter-spacing: 0.1em;
+  padding: 10px 18px;
+  background: var(--black);
+  border: 1px solid var(--black);
+  color: var(--white);
+  text-decoration: none;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.contact-btn:hover {
+  background: transparent;
+  color: var(--black);
+  border: 1px solid var(--black);
+  border-radius: 50px;
+  background: var(--white);
+  transition: all .5s ease;
+}
+
+
+/* =========================
+  RESPONSIVE
+========================= */
+@media (max-width: 900px) {
+  #menu,
+  .contact-btn {
+    display: none;
+  }
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+    width: 100%;
+    margin-top: var(--gap); 
+    padding: var(--gap) var(--side-padding);
+}
+
+.footer_container {
+    color: var(--darkgray);
+    font-size: var(--font-xs)!important;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.footer_info p {
+    margin: 5px 0;
+}
+
+.footer_info a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.footer_info a:hover {
+    text-decoration: underline;
+}
+
+/* 右側のコピーライト */
+.footer_copy {
+    text-align: right;
+    margin: 0;
+}
+
+/* モバイル対応：スマホでは左寄せで縦に並べる */
+@media (max-width: 900px) {
+    .footer_container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+    }
+    .footer_copy {
+        text-align: left;
+    }
+}
+
+/* =========================
+   Main fade
+========================= */
+main {
+  opacity: 0; 
+  transform: translateY(8px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  will-change: opacity, transform;
+}
+
+main.appeared {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================
+   LOADING SCREEN
+========================= */
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--white);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+/* 読み込み完了後に消すためのクラス */
+#loading.loaded {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loading_inner {
+  text-align: center;
+}
+
+.logo_wrapper {
+  width: 80px; /* ロゴの大きさ */
+  height: 80px;
+  margin: 0 auto 20px;
+}
+
+.loading_logo_svg {
+  width: 100%;
+  height: 100%;
+  color: var(--black);
+  /* じわじわ点滅させるアニメーション */
+  animation: pulse 2s infinite ease-in-out;
+}
+
+#loading_percent {
+  font-family: 'Jost', sans-serif;
+  font-size: var(--font-xs);
+  letter-spacing: 0.2em;
+  color: var(--darkgray);
+}
+
+@keyframes pulse {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+
+/* =========================
+   INDEX
+========================= */
+
+body.is-index {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+body:not(.is-index) .fade-logo,
+body:not(.is-index) .fade-menu {
+  opacity: 1;
+  transform: none;
+}
+
+.is-index main {
+  flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: var(--header-height);
+    justify-content: center;
+}
+
+.index-page .intro-flex {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-height: calc(100vh - var(--header-height));
+  --v-pad: clamp(24px, 5vh, 60px);
+  padding: var(--v-pad) var(--side-padding);
+  gap: var(--side-padding);
+  align-items: stretch;
+}
+
+/* 左：縦長 */
+.index-page .left {
+  flex: 1.5;
+  overflow: hidden;
+}
+
+/* 右：上下 */
+.index-page .right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--side-padding); 
+  height: 100%;
+}
+
+/* 右の上下画像 */
+.index-page .right > div {
+  flex: 1;
+  overflow: hidden;
+}
+
+.index-page img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* =========================
+  CLIP PATH REVEAL
+========================= */
+.reveal {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.2s ease;
+  will-change: clip-path;
+}
+
+.reveal.show {
+  clip-path: inset(0 0 0 0);
+}
+
+
+@media (max-width: 900px) {
+  :root {
+    --side-padding: 24px;
+  }
+
+  .intro-flex {
+    flex-direction: column;
+    height: auto;
+  }
+}
+
+.index-page .intro-flex img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* =========================
+  Split layout
+========================= */
+.split-layout {
+  overflow: visible !important;
+  padding: var(--header-height) var(--side-padding);
+  font-size: var(--font-m);
+}
+
+.split-section {
+    display: flex;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* 左側の固定ボックス */
+.split-layout .sticky-box {
+    flex: 0.8;
+    position: relative;
+}
+
+.split-layout .title {
+    position: -webkit-sticky;
+    position: sticky;
+    top: calc(50% - 1.25rem);    
+    font-size: var(--font-xl);
+    font-weight: var(--bold);
+    margin: 0;
+    line-height: 1;
+    color: var(--lightgray); 
+    transition: color 0.6s ease;
+}
+
+.split-layout .title.is-active {
+    color: var(--black);
+}
+
+/* 右側のコンテンツボックス */
+.split-layout .content-box {
+    flex: 1.3;
+    border-bottom: 1px solid var(--lightgray);
+    padding: var(--gap) 0; 
+}
+
+/* モバイル対応 */
+@media (max-width: 900px) {
+    .split-section {
+        flex-direction: column;
+    }
+    .split-layout .sticky-box {
+        position: static;
+        margin-bottom: 40px;
+    }
+    .split-layout .title {
+        position: static;
+        font-size: var(--font-l); /* スマホでは少し小さく */
+    }
+}
+
+/* =========================
+  About
+========================= */
+
+.split-profile {
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(20px, 4vw, 40px);
+    margin-bottom: 2.5vw;
+}
+
+.profile-image-container {
+    flex: 0 0 180px;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+}
+
+.profile-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.profile-text .name {
+    margin: 0;
+    line-height: 1.5;
+}
+
+
+/* セクションの見出し（h3）の余白調整 */
+.content-box h3 {
+    margin-top: var(--gap);
+    text-transform: uppercase;
+}
+
+/* モバイル対応：スマホでは縦に並べて少し余白を調整 */
+@media (max-width: 900px) {
+    .split-profile {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    .profile-image-container {
+        flex: 0 0 140px;
+    }
+}
+
+
+
+/* =========================
+  PROJECTS
+========================= */
+a.projects-item {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  overflow: hidden;
+}
+
+.filter-nav {
+  margin: var(--gap) 0 2.5vw;
+}
+
+.filter-btn {
+  color: var(--gray);
+  font-family: 'Jost';
+  font-size: var(--font-l);
+  font-weight: var(--normal);
+  background: none;
+  border: none;
+  padding: 0 2.5vw 0 0;
+  cursor: pointer;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.filter-btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s ease;
+}
+
+.filter-btn:hover::after {
+  transform: scaleX(1);
+}
+
+
+.filter-btn.active {
+  color: var(--black);
+  font-weight: var(--bold);
+}
+
+.projects-item.reveal {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.2s ease, opacity 0.4s ease, transform 0.4s ease;
+  will-change: clip-path, transform, opacity;
+  opacity: 0;
+}
+
+
+.projects-item.reveal.show {
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+}
+
+
+.projects-item.is-hidden {
+  display: none;
+}
+
+
+.projects-item .thumbnail {
+  overflow: hidden;
+}
+
+.projects-item .thumbnail img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+
+.projects-item:hover .thumbnail img {
+  transform: scale(1.1);
+}
+
+.projects-item .info h3 {
+  margin-top: 15px;
+  font-size: var(--font-m);
+}
+.projects-item .info p {
+  font-size: var(--font-xs);
+  color: var(--darkgray);
+}
+
+/* グリッドレイアウト */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* 各アイテムの挙動 */
+.projects-item {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.projects-item.is-hidden {
+  display: none;
+}
+
+.projects-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+
+/* =========================
+  PROJECTS DETAIL
+========================= */
+.project-detail .container {
+  display: flex;
+  gap: var(--gap);
+  padding: var(--gap) 0;
+}
+
+/* 左側の固定エリア */
+.project-info {
+  flex: 1;
+}
+
+.sticky-content {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 120px; /* ヘッダーの高さ＋余白 */
+}
+
+.project-title {
+  font-size: var(--font-xl);
+  font-weight: var(--bold);
+  margin: 0 0 2.5vw 0;
+  text-transform: uppercase;
+}
+
+.meta-data p {
+  font-size: var(--font-m);
+  color: var(--darkgray);
+}
+
+.description {
+  margin-top: var(--gap);
+  font-size: var(--font-m);
+}
+
+/* 右側のギャラリーエリア */
+.project-gallery {
+  flex: 1.5;
+}
+
+.image-wrapper {
+  margin-bottom: 60px;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+/* 個別ページの画像を表示させるための設定 */
+.image-wrapper.reveal {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.2s cubic-bezier(0.25, 1, 0.5, 1); /* 少し滑らかな動きに */
+  will-change: clip-path;
+  overflow: hidden;
+}
+
+/* showクラスがついたら表示 */
+.image-wrapper.reveal.show {
+  clip-path: inset(0 0 0 0) !important;
+  opacity: 1 !important;
+}
+
+/* ページ全体のフェードインを確実にする */
+main.appeared {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.reveal img {
+  transform: scale(1.1);
+  transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+/* 表示された時：1.1倍から1倍（等倍）に戻る＝引きになる */
+.reveal.show img {
+  transform: scale(1);
+}
+
+/* モバイル対応 */
+@media (max-width: 900px) {
+  .project-detail .container {
+    flex-direction: column;
+  }
+  .sticky-content {
+    position: static;
+  }
+}
+
+
+
+/* =========================
+   CONTACT FORM SECTION
+========================= */
+.contact-intro {
+  margin-bottom: var(--gap);
+}
+
+.contact-intro .intro-text {
+  font-size: var(--font-m);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.contact-intro .faq-link {
+  font-size: var(--font-m);
+  color: var(--darkgray);
+}
+
+.contact-intro .faq-link a {
+  color: var(--black);
+  text-decoration: underline;
+}
+
+.contact-form {
+  max-width: 100%;
+}
+
+.form-group {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.form-group input, 
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.5vw;
+  border: none;
+  background: var(--lightgray);
+  font-family: inherit;
+  font-size: var(--font-m);
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+  border-bottom: 1px solid var(--gray);
+}
+
+::placeholder {
+    color: var(--gray);
+    opacity: 0.6;
+    font-weight: var(--normal);
+    font-family: 'Jost', sans-serif;
+}
+
+/* ブラウザごとの微調整（念のため） */
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: var(--gray);
+  font-weight: 300;
+}
+
+
+/* Radio Buttons */
+.radio-group {
+  display: flex;
+  gap: 2.5vw;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: var(--font-m);
+}
+
+/* Submit Button */
+.submit-btn {
+  margin-top: 40px;
+  width: 100%;
+  padding: 25px;
+  background: var(--black);
+  color: var(--white);
+  border: 1px solid var(--black);
+  cursor: pointer;
+  font-size: var(--font-m);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+}
+
+.submit-btn:hover {
+  background: transparent;
+  color: var(--black);
+}
+
+.form-group-row {
+  display: flex;
+  gap: 2.5vw;
+}
+
+.form-group-row .form-group {
+  flex: 1;
+}
+
+
+/* =========================
+   THANKS PAGE
+========================= */
+.thanks-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh; /* ヘッダー・フッターを除いた中央に配置 */
+    text-align: center;
+    padding: 0 var(--side-padding);
+}
+
+.thanks-container {
+    max-width: 600px;
+}
+
+.thanks-title {
+    font-size: var(--font-xl);
+    letter-spacing: 0.2em; /* コンタクトボタンと合わせて広めに */
+    margin: 0;
+}
+
+.thanks-message {
+    margin: 40px 0;
+    font-size: var(--font-s);
+    line-height: 2;
+    color: var(--darkgray);
+}
+
+.thanks-action {
+    margin-top: 50px;
+}
+
+.thanks-action .contact-btn {
+    display: inline-block;
+    padding: 15px 40px; /* ホームに戻るボタンは少しゆったりめに */
+}
+
+
+/* =========================
+   FAQ SECTION (Accordion)
+========================= */
+.faq-item {
+    border-bottom: 1px solid var(--lightgray);
+    padding: 2.5vw 0;
+}
+
+.faq-question {
+    list-style: none; /* デフォルトの三角形を消す */
+    cursor: pointer;
+    font-size: var(--font-m);
+    font-weight: var(--bold);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+/* 質問の横に + アイコンを表示 */
+.faq-question::after {
+    content: '+';
+    font-size: var(--font-l);
+    font-weight: 300;
+    transition: transform 0.4s ease;
+}
+
+/* 開いた時に + を × (45度回転) に変える */
+.faq-item[open] .faq-question::after {
+    transform: rotate(45deg);
+}
+
+/* デフォルトの三角形を消す（Safari用） */
+.faq-question::-webkit-details-marker {
+    display: none;
+}
+
+.faq-answer {
+    padding-top: 2.5vw;
+    color: var(--darkgray);
+    line-height: 1.8;
+}
+
+.faq-answer p {
+    margin: 0;
+}
