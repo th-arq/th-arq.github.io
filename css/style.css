@@ -418,9 +418,18 @@ body:not(.is-index) .fade-menu {
     line-height: 1.1;
 }
 
+.affiliations ul, 
+.registration ul {
+    list-style: none;      /* デフォルトの「・」を消す */
+    padding: 0;
+    margin: 30px 0 60px;   /* 上下の余白 */
+    border-top: 1px solid var(--black); /* 上に一本線を引く */
+}
+
+.affiliations li, 
 .registration li {
     padding: 15px 0;
-    border-bottom: 1px solid var(--lightgray);
+    border-bottom: 1px solid var(--lightgray); /* 項目間に薄い線を引く */
     color: var(--black);
     display: flex;
     justify-content: space-between;
