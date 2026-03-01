@@ -123,29 +123,21 @@ header {
 
 
 
-
 /* =========================
    INDEX
 ========================= */
-
-
 body:not(.is-index) .fade-logo,
 body:not(.is-index) .fade-menu {
   opacity: 1;
   transform: none;
 }
 
-body.is-lock {
-  overflow: hidden;
-}
 
 :root {
   --side-padding: clamp(24px, 6vw, 80px);
   --header-height: 80px;
 }
 
-
-@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* =========================
   LAYOUT
