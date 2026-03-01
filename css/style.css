@@ -30,7 +30,7 @@ body {
   --white: #ffffff;
   --gray: #a5a4a2;
   --darkgray: #6d6c6b;
-  --lightgray: #ebe9e8;
+  --lightgray: #f6f6f6;
   --red: #a7240d;
   --gap: 5vw;
 }
@@ -640,15 +640,15 @@ main.appeared {
 ::placeholder {
     color: var(--gray);
     opacity: 0.6;
-    font-weight: 300;
+    font-weight: var(--normal);
     font-family: 'Jost', sans-serif;
 }
 
 /* ブラウザごとの微調整（念のため） */
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
-    color: var(--gray);
-    font-weight: 300;
+  color: var(--gray);
+  font-weight: 300;
 }
 
 
