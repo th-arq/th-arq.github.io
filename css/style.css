@@ -169,6 +169,23 @@ header {
   }
 }
 
+
+/* =========================
+   Main fade
+========================= */
+main {
+  opacity: 0; 
+  transform: translateY(20px); 
+  transition: opacity 1.2s ease, transform 1.2s ease; 
+  will-change: opacity, transform;
+}
+
+main.appeared {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
 /* =========================
    INDEX
 ========================= */
