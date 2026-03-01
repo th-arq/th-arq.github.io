@@ -67,6 +67,17 @@ header {
   align-items: center;
   justify-content: space-between;
   z-index: 100;
+  transition: opacity 0.4s ease, background-color 0.4s ease;
+  opacity: 1;
+}
+
+header.is-scrolled {
+  opacity: 0.4;
+}
+
+header.is-scrolled:hover {
+  opacity: 1;
+  background-color: var(--white);
 }
 
 .fade-logo,
@@ -765,9 +776,7 @@ main.appeared {
 }
 
 .form-group label {
-  font-size: var(--font-m);
   letter-spacing: 0.1em;
-  font-weight: var(--bold);
   text-transform: uppercase;
 }
 
