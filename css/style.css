@@ -175,15 +175,15 @@ header {
 footer {
     width: 100%;
     margin-top: var(--gap); 
-    padding: 60px var(--side-padding); /* 少し余白を広げるとより建築サイトっぽくなるよ */
+    padding: var(--gap) var(--side-padding);
 }
 
 .footer_container {
     color: var(--darkgray);
-    font-size: var(--font-xs); /* フッターは少し小さめが上品 */
+    font-size: var(--font-xs)!important;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end; /* 下揃えにすることで洗練された印象に */
+    align-items: flex-end;
 }
 
 .footer_info p {
