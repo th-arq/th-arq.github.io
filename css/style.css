@@ -22,6 +22,7 @@ body {
   --font-m: 20px;
   --font-s: 18px;
   --font-xs: 16px;
+  --bold: 400;
   --black: #101010;
   --white: #ffffff;
   --gray: #a5a4a2;
@@ -256,7 +257,7 @@ main {
     position: sticky;
     top: calc(50% - 1.25rem);     
     font-size: var(--font-l);
-    font-weight: 400;
+    font-weight: var(--bold);
     margin: 0;
     display: block;
     line-height: 1;
