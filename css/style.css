@@ -254,6 +254,10 @@ main {
     margin: 0;
 }
 
+.about-page .left {
+  overflow: visible;
+}
+
 /* 右側のスクロールするテキストエリア */
 .about-page .content-box {
     flex: 1;
