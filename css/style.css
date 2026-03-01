@@ -177,6 +177,12 @@ footer {
   padding: 0 var(--side-padding);
 }
 
+.footer_container {
+    font-size: var(--font-s);
+    display: flex;
+    justify-content: space-between;
+}
+
 
 /* =========================
    Main fade
@@ -263,7 +269,7 @@ body:not(.is-index) .fade-menu {
   CLIP PATH REVEAL
 ========================= */
 .reveal {
-  clip-path: inset(0 0 100% 0); /* 上から下に開く */
+  clip-path: inset(0 0 100% 0);
   transition: clip-path 1.2s ease;
   will-change: clip-path;
 }
@@ -546,12 +552,11 @@ main.appeared {
   width: 100%;
   padding: 12px 0;
   border: none;
-  border-bottom: 1px solid var(--black);
-  background: transparent;
+  background: var(--lightgray);
   font-family: inherit;
-  font-size: var(--font-s);
+  font-size: var(--font-m);
   outline: none;
-  border-radius: 0; /* iOS対策 */
+  border-radius: 0;
 }
 
 /* ラジオボタンのレイアウト */
