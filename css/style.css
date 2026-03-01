@@ -158,6 +158,12 @@ header {
   white-space: nowrap;
 }
 
+.contact-btn:hover {
+  background: transparent;
+  color: var(--black);
+}
+
+
 /* =========================
   RESPONSIVE
 ========================= */
