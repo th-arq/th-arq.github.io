@@ -156,12 +156,13 @@ header {
   text-decoration: none;
   white-space: nowrap;
   text-transform: uppercase;
-  transition: all 0.4s ease;
 }
 
 .contact-btn:hover {
   background: transparent;
   color: var(--black);
+  border: 1px solid var(--black);
+  transition: all 0.4s ease;
 }
 
 
