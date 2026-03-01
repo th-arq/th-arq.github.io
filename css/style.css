@@ -789,13 +789,9 @@ textarea::-webkit-input-placeholder {
 /* =========================
    FAQ SECTION (Accordion)
 ========================= */
-.faq-list {
-    border-top: 1px solid var(--black); /* リストの最上部に線 */
-}
-
 .faq-item {
     border-bottom: 1px solid var(--lightgray);
-    padding: 20px 0;
+    padding: 2.5vw 0;
 }
 
 .faq-question {
@@ -812,7 +808,7 @@ textarea::-webkit-input-placeholder {
 /* 質問の横に + アイコンを表示 */
 .faq-question::after {
     content: '+';
-    font-size: 24px;
+    font-size: var(--font-l);
     font-weight: 300;
     transition: transform 0.4s ease;
 }
@@ -828,9 +824,8 @@ textarea::-webkit-input-placeholder {
 }
 
 .faq-answer {
-    padding-top: 20px;
+    padding-top: 2.5vw;
     color: var(--darkgray);
-    font-size: var(--font-s);
     line-height: 1.8;
 }
 
