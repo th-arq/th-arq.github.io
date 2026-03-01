@@ -49,12 +49,12 @@ main {
 /* =========================
   HEADER BASE
 ========================= */
-#header {
+#header, #footer {
     width: 100%;
     max-width: 1700px;
 }
 
-header {
+header, footer {
   position: fixed;
   top: 0;
   left: 50%;
@@ -68,7 +68,6 @@ header {
   z-index: 100;
   background: transparent;
 }
-
 
 .fade-logo,
 .fade-menu {
@@ -167,6 +166,14 @@ header {
   .contact-btn {
     display: none;
   }
+}
+
+
+/* =========================
+  FOOTER BASE
+========================= */
+footer {
+    display: flex;
 }
 
 
