@@ -225,31 +225,27 @@ main {
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: center; 
-    
-    /* 画面の高さからヘッダー分を引いた高さにする */
-    height: calc(100vh - var(--header-height)); 
+    /* 文字を箱の「下側」に配置することで、スクロール時に中央で止まるようにする */
+    align-items: flex-end; 
+  
+    height: 50vh; 
     
     position: -webkit-sticky;
     position: sticky;
-    
-    /* 固定する位置をヘッダーのすぐ下に合わせる */
-    top: var(--header-height); 
+    top: 0; 
 }
 
-/* タイトルのデザイン */
 .about-page .title {
     font-size: 2.5rem;
     font-weight: bold;
     margin: 0;
+    /* 箱の底に張り付いているので、ちょうど画面中央に位置するよ */
+    line-height: 1;
 }
 
-/* 右側のスクロールするテキストエリア */
 .about-page .content-box {
     flex: 1;
-    /* 右側にある程度のパディング（高さ）を持たせることで、
-       その間中、左側が固定されて見えるようになるよ */
-    padding: 20vh 10% 20vh 5%; 
+    padding: 50vh 10% 50vh 5%; 
 }
 
 .about-page .text {
