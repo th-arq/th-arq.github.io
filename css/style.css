@@ -226,60 +226,47 @@ main {
 /* =========================
    ABOUT
 ========================= */
-.about-layout {
-  display: flex;
-  align-items: flex-start;
-  position: relative;
-  width: 100%;
+.about-page .about-section {
+    display: flex;
+    position: relative;
+    min-height: 100vh; /* 1セクションに最低限1画面分の高さを持たせる */
+    border-bottom: 1px solid #eee;
 }
 
-.title-rail {
-  width: 40%;
-  height: 100vh;
-  position: sticky;
-  top: 0;
-  display: flex;
-  align-items: flex-start; /* ← center をやめる */
-  overflow: hidden;
-  background-color: #fff;
+/* 左側の固定エリア */
+.about-page .sticky-box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* スクロールに合わせて固定する設定 */
+    height: 100vh;
+    position: -webkit-sticky; /* Safari対応 */
+    position: sticky;
+    top: 0;
 }
 
-.title-track {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  transform: translateY(50vh); /* ← 初期位置を中央に */
-  will-change: transform;
+/* タイトルのデザイン */
+.about-page .title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
 }
 
-.title-item {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding-left: 6vw;
+/* 右側のスクロールするテキストエリア */
+.about-page .content-box {
+    flex: 1;
+    padding: 15vh 10% 15vh 5%; /* 上下にゆとりを持たせてスクロール感を出す */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-
-/* 右側：縦に並ぶレール */
-.content-rail {
-  width: 60%;
-}
-
-.panel {
-  height: 120vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 8vw;
-}
-
-.content h2 {
-  font-size: 32px;
-  margin-bottom: 2rem;
-}
-
-.content p {
-  margin-bottom: 1.5rem;
-  line-height: 2;
+.about-page .text {
+    font-size: 1.1rem;
+    line-height: 2.5;
+    color: #333;
+    /* テキストが短い場合でもスクロールさせるために高さを少し持たせると綺麗 */
+    min-height: 60vh; 
 }
