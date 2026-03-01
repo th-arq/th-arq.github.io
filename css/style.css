@@ -394,7 +394,8 @@ a.projects-item {
 .filter-btn {
   color: var(--gray);
   font-family: 'Jost';
-  font-size: var(--font-m);
+  font-size: var(--font-l);
+  font-weight: var(--normal);
   background: none;
   border: none;
   padding: 0 2.5vw 0 0;
