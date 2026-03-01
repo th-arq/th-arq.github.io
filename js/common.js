@@ -31,4 +31,7 @@ window.addEventListener("load", () => {
   };
   loadParts('header', '/head.html');
   loadParts('footer', '/foot.html');
+
+  document.querySelector('main').classList.add('appeared');
+  
 });
