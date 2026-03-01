@@ -43,14 +43,19 @@ h3 { font-size: var(--font-l); font-weight: var(--normal);}
 /* =========================
   HEADER BASE
 ========================= */
+#header {
+    width: 100%;
+    max-width: 1700px;
+}
+
 header {
   position: fixed;
   top: 0;
   left: 50%;
   width: 100%;
-  max-width: 1700px;
   transform: translateX(-50%);
   height: var(--header-height);
+  padding: 0 var(--side-padding);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -158,8 +163,6 @@ header {
   }
 }
 
-
-
 /* =========================
    INDEX
 ========================= */
@@ -194,7 +197,7 @@ main {
   max-width: 1700px;
   height: 100%;
   --v-pad: clamp(24px, 5vh, 60px); 
-  padding: var(--v-pad) 0;
+  padding: var(--v-pad) var(--side-padding);
   gap: var(--side-padding); 
   align-items: stretch;
 }
