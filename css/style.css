@@ -221,17 +221,20 @@ main {
     min-height: 100vh;
 }
 
-/* 左側の固定エリア */
 .about-page .sticky-box {
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
     
-    /* ここがキモ！ */
-    height: 100vh;      /* 画面いっぱいの高さを確保 */
-    position: sticky;   /* 粘着 */
-    top: 0;             /* 画面の一番上で止まる */
+    /* 画面の高さからヘッダー分を引いた高さにする */
+    height: calc(100vh - var(--header-height)); 
+    
+    position: -webkit-sticky;
+    position: sticky;
+    
+    /* 固定する位置をヘッダーのすぐ下に合わせる */
+    top: var(--header-height); 
 }
 
 /* タイトルのデザイン */
