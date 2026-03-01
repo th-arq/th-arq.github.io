@@ -503,6 +503,7 @@ a.projects-item {
 .project-title {
   font-size: var(--font-xl);
   font-weight: var(--bold);
+  margin: 0 0 2.5vw 0;
   text-transform: uppercase;
 }
 
