@@ -175,8 +175,8 @@ header {
 ========================= */
 main {
   opacity: 0; 
-  transform: translateY(20px); 
-  transition: opacity 1.2s ease, transform 1.2s ease; 
+  transform: translateY(8px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
   will-change: opacity, transform;
 }
 
