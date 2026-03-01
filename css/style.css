@@ -11,6 +11,23 @@ body {
 }
 
 
+:root {
+  --side-padding: clamp(24px, 6vw, 80px);
+  --header-height: 80px;
+  --font-xl: 60px;
+  --font-x: 40px;
+  --font-m: 20px;
+  --font-s: 18px;
+  --font-xs: 16px;
+  --black: #000;
+  --white: #000;
+  --gray: #000;
+  --darkgray: #000;
+  --lightgray: #000;
+  --red: #000;
+}
+
+
 /* =========================
   HEADER BASE
 ========================= */
@@ -69,12 +86,13 @@ header {
   list-style: none;
   padding: 0;
   margin: 0;
+  
 }
 
 #menu a {
-  font-size: 13px;
+  font-size: var(--font-s);
   letter-spacing: 0.08em;
-  color: #111;
+  color: var(--black);
   text-decoration: none;
   position: relative;
 }
@@ -100,11 +118,10 @@ header {
   CONTACT BUTTON
 ========================= */
 .contact-btn {
-  font-size: 12px;
   letter-spacing: 0.1em;
   padding: 10px 18px;
-  background: #111;
-  color: #fff;
+  background: var(--black);
+  color: var(--white);
   text-decoration: none;
   white-space: nowrap;
 }
