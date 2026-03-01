@@ -102,14 +102,6 @@ header.is-scrolled:hover {
   display: block;
 }
 
-
-.TAG_logo img:hover {
-  opacity: .2;
-  transition: all 1s ease;
-  transform: scaleX(1);
-}
-
-
 /* =========================
   RIGHT AREA
 ========================= */
