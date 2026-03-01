@@ -434,6 +434,12 @@ body:not(.is-index) .fade-menu {
     font-weight: var(--bold);
     margin: 0;
     line-height: 1;
+    color: var(--gray); 
+    transition: color 0.6s ease;
+}
+
+.split-layout .title.is-active {
+    color: var(--black);
 }
 
 /* 右側のコンテンツボックス */
