@@ -254,7 +254,7 @@ main {
     position: -webkit-sticky;
     position: sticky;
     top: calc(50% - 1.25rem);     
-    font-size: 2.5rem;
+    font-size: var(--font-l);
     font-weight: bold;
     margin: 0;
     display: block;
@@ -268,6 +268,6 @@ main {
 }
 
 .about-page .text {
-    font-size: 1.1rem;
+    font-size: var(--font-s);
     line-height: 2.5;
 }
