@@ -32,6 +32,11 @@ window.addEventListener("load", () => {
   loadParts('header', '/head.html');
   loadParts('footer', '/foot.html');
 
-  document.querySelector('main').classList.add('appeared');
+  setTimeout(() => {
+    const mainEl = document.querySelector('main');
+    if (mainEl) {
+      mainEl.classList.add('appeared');
+    }
+  }, 100);
   
 });
