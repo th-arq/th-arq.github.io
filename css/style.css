@@ -194,7 +194,6 @@ main {
 .index-page .intro-flex {
   display: flex;
   width: 100%;
-  max-width: 1700px;
   height: 100%;
   --v-pad: clamp(24px, 5vh, 60px); 
   padding: var(--v-pad) var(--side-padding);
