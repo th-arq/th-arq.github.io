@@ -181,20 +181,16 @@ footer {
 }
 
 .footer_container {
-    width: 100%;
-    max-width: 1700px;
-    margin: 0 auto;
-    font-size: var(--font-xs);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+  color: var(--darkgray);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 /* 左側の情報エリア */
 .footer_container_information p {
     margin: 5px 0;
-    font-size: var(--font-xs);
-    color: var(--darkgray);
 }
 
 /* 右側の会社名エリア */
@@ -566,35 +562,66 @@ main.appeared {
 
 
 /* =========================
-  CONTACT
+   CONTACT FORM SECTION
 ========================= */
+.contact-intro {
+  margin-bottom: 50px;
+}
+
+.contact-intro .intro-text {
+  font-size: var(--font-m);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.contact-intro .faq-link {
+  font-size: var(--font-s);
+  color: var(--darkgray);
+}
+
+.contact-intro .faq-link a {
+  color: var(--black);
+  text-decoration: underline;
+}
+
+.contact-form {
+  max-width: 100%;
+}
+
 .form-group {
-  margin-bottom: 35px;
+  margin-bottom: 40px;
   display: flex;
   flex-direction: column;
 }
 
 .form-group label {
-  font-size: var(--font-m);
-  margin-bottom: 10px;
-  letter-spacing: 0.05em;
-  font-weight: 400;
+  font-size: var(--font-xs);
+  margin-bottom: 12px;
+  letter-spacing: 0.1em;
+  font-weight: var(--bold);
+  text-transform: uppercase;
 }
 
 .form-group input, 
 .form-group textarea,
 .form-group select {
   width: 100%;
-  padding: 0.5vw;
+  padding: 12px 0;
   border: none;
-  background: var(--lightgray);
+  border-bottom: 1px solid var(--black);
+  background: transparent;
   font-family: inherit;
   font-size: var(--font-m);
   outline: none;
-  border-radius: 0;
+  transition: border-color 0.3s ease;
 }
 
-/* ラジオボタンのレイアウト */
+.form-group input:focus, 
+.form-group textarea:focus {
+  border-bottom: 1px solid var(--gray);
+}
+
+/* Radio Buttons */
 .radio-group {
   display: flex;
   gap: 30px;
@@ -606,35 +633,34 @@ main.appeared {
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  font-size: var(--font-s) !important;
+  font-size: var(--font-s);
 }
 
-.radio-label input {
-  width: auto;
-  margin: 0;
-}
-
-/* プルダウンの見た目 */
-select {
+/* Submit Button */
+.submit-btn {
+  margin-top: 40px;
+  width: 100%;
+  padding: 25px;
+  background: var(--black);
+  color: var(--white);
+  border: 1px solid var(--black);
   cursor: pointer;
-  background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%);
-  background-position: calc(100% - 15px) 50%, calc(100% - 10px) 50%;
-  background-size: 5px 5px, 5px 5px;
-  background-repeat: no-repeat;
-  appearance: none;
+  font-size: var(--font-s);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+}
+
+.submit-btn:hover {
+  background: transparent;
+  color: var(--black);
 }
 
 .form-group-row {
   display: flex;
-  gap: 20px;
-}
-.form-group-row .form-group {
-  flex: 1;
+  gap: 30px;
 }
 
-@media (max-width: 600px) {
-  .form-group-row {
-    flex-direction: column;
-    gap: 0;
-  }
+.form-group-row .form-group {
+  flex: 1;
 }
