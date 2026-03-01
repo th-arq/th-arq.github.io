@@ -40,6 +40,12 @@ h2 { font-size: var(--font-l); font-weight: var(--bold);}
 h3 { font-size: var(--font-l); font-weight: var(--normal);}
 
 
+main {
+  padding-top: var(--header-height);
+}
+
+
+
 /* =========================
   HEADER BASE
 ========================= */
@@ -179,24 +185,24 @@ body:not(.is-index) .fade-menu {
   transform: none;
 }
 
-main {
-  padding-top: var(--header-height);
-}
-
-.index-page main {
+.is-index main {
   flex: 1;
-  display: flex;
-  justify-content: center;
   width: 100%;
-  padding-top: var(--header-height);
+  padding-top: 0;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
 }
 
 .index-page .intro-flex {
   display: flex;
   width: 100%;
-  height: 100%;
+  max-width: 1700px;
+  height: 100%; 
+  max-height: 100%; 
   --v-pad: clamp(24px, 5vh, 60px); 
   padding: var(--v-pad) var(--side-padding);
+  
   gap: var(--side-padding); 
   align-items: stretch;
 }
