@@ -421,28 +421,6 @@ body:not(.is-index) .fade-menu {
     line-height: 1.1;
 }
 
-.affiliations ul, 
-.registration ul {
-    list-style: none;
-    padding: 0;
-}
-
-.affiliations li, 
-.registration li {
-    padding: 15px 0;
-    border-bottom: 1px solid var(--lightgray); /* 項目間に薄い線を引く */
-    color: var(--black);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* 項目にマウスを乗せると少し色が動く遊び心 */
-.affiliations li:hover, 
-.registration li:hover {
-    padding-left: 10px;
-    transition: all 0.3s ease;
-}
 
 /* セクションの見出し（h3）の余白調整 */
 .content-box h3 {
