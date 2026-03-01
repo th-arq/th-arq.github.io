@@ -219,7 +219,6 @@ main {
     /* align-items: stretch (デフォルト) だと固定されないので flex-start に */
     align-items: flex-start; 
     min-height: 100vh;
-    border-bottom: 1px solid #eee;
 }
 
 /* 左側の固定エリア */
