@@ -166,13 +166,13 @@ header.is-scrolled:hover {
 
   /* ① バーガーボタン：display: block を追加して強制表示 */
   .burger-btn {
-    display: block !important; /* ← ここがポイント！ */
+    display: block !important;
     width: 30px;
     height: 20px;
     position: relative;
     background: none;
     border: none;
-    z-index: 10;
+    z-index: 101; /* ロゴと同じ高さに */
     cursor: pointer;
     padding: 0;
   }
@@ -224,9 +224,9 @@ header.is-scrolled:hover {
     left: 0;
     width: 100%;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(2px);
-    z-index: -1;
+    background: rgba(0, 0, 0, 0.7); /* 少し濃くして見やすく */
+    backdrop-filter: blur(4px);
+    z-index: -1; /* header(100)の中の最背面 */
     animation: fadeIn 0.4s ease forwards;
   }
 
@@ -250,6 +250,14 @@ header.is-scrolled:hover {
     from { opacity: 0; }
     to { opacity: 1; }
   }
+
+  .fade-logo {
+    opacity: 1 !important;
+    transform: none !important;
+    position: relative;
+    z-index: 101;
+  }
+
 }
 
 /* =========================
@@ -743,15 +751,13 @@ a.projects-item {
 }
 
 .project-title {
-  font-size: var(--font-xl);
   font-weight: var(--bold);
   margin: 0 0 2.5vw 0;
-  text-transform: uppercase;
 }
 
 .meta-data p {
-  font-size: var(--font-m);
   color: var(--darkgray);
+  margin: 0;
 }
 
 .description {
