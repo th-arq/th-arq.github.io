@@ -151,7 +151,7 @@ header.is-scrolled:hover {
   MENU (SP)
 ========================= */
 @media (max-width: 900px) {
-  /* ボタンの見た目 */
+  /* ①・② ボタンの形とアニメーション */
   .burger-btn {
     display: block;
     width: 30px;
@@ -169,64 +169,90 @@ header.is-scrolled:hover {
     width: 100%;
     height: 1px;
     background: var(--black);
-    transition: transform 0.3s ease, top 0.3s ease;
+    /* ② ゆっくり動くように transition を 0.5s に調整 */
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), top 0.5s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.5s ease;
   }
 
-  .burger-btn span:first-child { top: 0; }
-  .burger-btn span:last-child { top: 10px; } /* 二本線でおしゃれに */
+  /* 二本線の初期位置 */
+  .burger-btn span:first-child { top: 4px; }
+  .burger-btn span:last-child { top: 14px; }
 
-  /* ボタンが押された時の形（×になる） */
+  /* ① ボタンが押された時（きれいな×印に） */
   header.nav-open .burger-btn span:first-child {
-    transform: translateY(5px) rotate(45deg);
+    top: 9px;
+    transform: rotate(45deg);
   }
   header.nav-open .burger-btn span:last-child {
-    transform: translateY(-5px) rotate(-45deg);
+    top: 9px;
+    transform: rotate(-45deg);
   }
 
-  /* スマホメニューの背景 */
+  /* ④・⑤ メニューの背景と配置 */
   .sp-nav {
     position: fixed;
     top: 0;
-    right: -100%; /* 最初は隠しておく */
+    left: 0;
     width: 100%;
-    height: 100vh;
+    /* ④ 全面じゃなく上面（高さ半分など）にするならここを調整。
+       ここでは建築サイトでよくある「上からスッと降りてくる」スタイルにするね */
+    height: auto; 
+    padding: calc(var(--header-height) + 20px) var(--side-padding) 60px;
     background: var(--white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: right 0.5s ease;
+    
+    /* 初期状態：上に隠しておく */
+    transform: translateY(-100%);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     z-index: 999;
   }
 
-  header.nav-open .sp-nav {
-    right: 0;
+  /* ⑤ 背景の黒透過（擬似要素で作成） */
+  header.nav-open::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6); /* ⑤ 黒の透過背景 */
+    backdrop-filter: blur(2px);   /* 少しぼかすとおしゃれ */
+    z-index: 998;
+    animation: fadeIn 0.4s ease forwards;
   }
 
+  header.nav-open .sp-nav {
+    transform: translateY(0);
+  }
+
+  /* ③ メニュー文字を右寄せ */
   .sp-nav ul {
     list-style: none;
     padding: 0;
-    text-align: center;
+    margin: 0;
+    text-align: right; /* ③ 右寄せ */
   }
 
   .sp-nav ul li {
-    margin: 30px 0;
+    margin: 25px 0;
   }
 
   .sp-nav ul a {
-    font-size: var(--font-l);
+    font-size: 24px; /* 少し控えめな大人サイズ */
     color: var(--black);
     text-decoration: none;
     letter-spacing: 0.1em;
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 }
 
-/* PCではボタンを隠す */
-@media (min-width: 901px) {
-  .burger-btn, .sp-nav { display: none; }
-}
 
-
-/* --- 共通のラインホバー設定 --- */
+/* =========================
+  A TAG HOVER
+========================= */
 .line-hover {
   text-decoration: none !important; /* デフォルトの下線を消す */
   position: relative;
