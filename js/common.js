@@ -37,16 +37,17 @@ window.addEventListener("load", () => {
     observer.observe(title);
   });
 
-  // --- 3. Header / Footer の読み込み ＋ ヘッダー監視 ---
+  // --- 3. Header / Footer の読み込み ＋ ヘッダー監視 ＋ バーガーメニュー ---
   const loadParts = (id, path) => {
     fetch(path).then(res => res.text()).then(html => {
       const el = document.getElementById(id);
       if (el) el.innerHTML = html;
 
-      // ★ここがポイント！ヘッダーが読み込まれた直後に監視を開始する
       if (id === 'header') {
         const headerTag = el.querySelector('header');
+        
         if (headerTag) {
+          // A: スクロール監視
           window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
               headerTag.classList.add('is-scrolled');
@@ -54,6 +55,24 @@ window.addEventListener("load", () => {
               headerTag.classList.remove('is-scrolled');
             }
           });
+
+          // B: バーガーボタンのクリック処理 (追加！)
+          const burgerBtn = headerTag.querySelector('.burger-btn');
+          if (burgerBtn) {
+            burgerBtn.addEventListener('click', () => {
+              headerTag.classList.toggle('nav-open');
+              
+              // メニューが開いているときは背景をスクロールさせない
+              if (headerTag.classList.contains('nav-open')) {
+                document.body.style.overflow = 'hidden';
+              } else {
+                // indexページ以外ならスクロールを戻す
+                if (!document.body.classList.contains('is-index')) {
+                  document.body.style.overflow = '';
+                }
+              }
+            });
+          }
         }
       }
     });
