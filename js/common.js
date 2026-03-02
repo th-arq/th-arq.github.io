@@ -101,6 +101,12 @@ window.addEventListener("load", () => {
     setTimeout(() => {
       const mainEl = document.querySelector('main');
       if (mainEl) mainEl.classList.add('appeared');
+
+      // Aboutページなどでもロゴとメニューを表示させる
+      const logo = document.querySelector(".fade-logo");
+      const menu = document.querySelector(".fade-menu");
+      if (logo) logo.classList.add("show");
+      if (menu) menu.classList.add("show");
     }, 100);
   }
 });
