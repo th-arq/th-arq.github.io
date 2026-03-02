@@ -156,7 +156,7 @@ header.is-scrolled:hover {
 
 
 /* =========================
-  MENU (SP) 修正版
+  MENU (SP)
 ========================= */
 @media (max-width: 900px) {
   /* 900px以下のときは強制的に出す */
@@ -172,25 +172,48 @@ header.is-scrolled:hover {
     position: relative;
     background: none;
     border: none;
-    z-index: 101; /* ロゴと同じ高さに */
+    z-index: 1000; /* ロゴ(101)よりさらに上に */
     cursor: pointer;
     padding: 0;
   }
 
-  /* （中略：spanの設定はそのまま） */
+  /* 三本線の共通設定 */
   .burger-btn span {
     display: block;
     position: absolute;
+    left: 0;
     width: 100%;
-    height: 1px;
-    background: var(--black);
-    transition: transform 0.5s ease, top 0.5s ease;
+    height: 1px; /* 線の太さ */
+    background: var(--black) !important; /* 強制的に黒にする */
+    transition: transform 0.5s ease, top 0.5s ease, opacity 0.5s ease;
   }
-  .burger-btn span:first-child { top: 4px; }
-  .burger-btn span:last-child { top: 14px; }
 
-  header.nav-open .burger-btn span:first-child { top: 10px; transform: rotate(45deg); }
-  header.nav-open .burger-btn span:last-child { top: 10px; transform: rotate(-45deg); }
+  /* 通常時の位置（3本ある想定なら3つ書くのが確実だよ） */
+  .burger-btn span:nth-child(1) { top: 4px; }
+  .burger-btn span:nth-child(2) { top: 10px; } /* 真ん中の線 */
+  .burger-btn span:nth-child(3) { top: 16px; }
+
+  /* =========================
+     メニューが開いた時（×印に変身）
+  ========================= */
+  
+  /* 1. 真ん中の線を消す */
+  header.nav-open .burger-btn span:nth-child(2) {
+    opacity: 0;
+  }
+
+  /* 2. 上下の線を回転させて×にする */
+  header.nav-open .burger-btn span:nth-child(1) {
+    top: 10px;
+    transform: rotate(45deg);
+    background: var(--black) !important;
+  }
+
+  header.nav-open .burger-btn span:nth-child(3) {
+    top: 10px;
+    transform: rotate(-45deg);
+    background: var(--black) !important;
+  }
 
   /* ② 白いメニュー本体：ここも表示設定を上書き */
   .sp-nav {
