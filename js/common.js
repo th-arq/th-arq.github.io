@@ -50,7 +50,7 @@ window.addEventListener("load", () => {
           const headerTag = el.querySelector('header');
           if (!headerTag) return;
 
-          // A: スクロール監視（ヘッダーを半透明にする等）
+          // A: スクロール監視
           window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
               headerTag.classList.add('is-scrolled');
@@ -61,37 +61,46 @@ window.addEventListener("load", () => {
 
           // B: バーガーボタンのクリック処理
           const burgerBtn = el.querySelector('.burger-btn');
+          const closeMenu = () => {
+            headerTag.classList.remove('nav-open');
+            if (!document.body.classList.contains('is-index')) {
+              document.body.style.overflow = '';
+            }
+          };
+
           if (burgerBtn) {
             burgerBtn.addEventListener('click', (e) => {
               e.preventDefault();
+              e.stopPropagation(); // headerへのイベント伝播を止める
               headerTag.classList.toggle('nav-open');
               
-              // メニューが開いているときは背景をスクロールさせない
               if (headerTag.classList.contains('nav-open')) {
                 document.body.style.overflow = 'hidden';
               } else {
-                // indexページ以外ならスクロールを戻す
-                if (!document.body.classList.contains('is-index')) {
-                  document.body.style.overflow = '';
-                }
+                closeMenu();
               }
             });
           }
+
+          // C: 背景（headerの余白）をクリックして閉じる
+          headerTag.addEventListener('click', (e) => {
+            // nav-open かつ クリックされたのが header 自身（背景）の場合のみ閉じる
+            if (headerTag.classList.contains('nav-open') && e.target === headerTag) {
+              closeMenu();
+            }
+          });
         }
       });
   };
 
-  // 全ページ共通でヘッダーとフッターを読み込む
   loadParts('header', '/head.html');
   loadParts('footer', '/foot.html');
 
-  // --- 4. メインコンテンツの表示 (index以外のページ用) ---
+  // --- 4. メインコンテンツの表示 ---
   if (!document.body.classList.contains('is-index')) {
     setTimeout(() => {
       const mainEl = document.querySelector('main');
-      if (mainEl) {
-        mainEl.classList.add('appeared');
-      }
+      if (mainEl) mainEl.classList.add('appeared');
     }, 100);
   }
 });
