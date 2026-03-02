@@ -556,7 +556,6 @@ body:not(.is-index) .fade-menu {
     position: -webkit-sticky;
     position: sticky;
     top: calc(50% - 1.25rem);    
-    font-size: var(--font-xl);
     font-weight: var(--bold);
     margin: 0;
     line-height: 1;
@@ -821,7 +820,7 @@ a.projects-item {
 .contact-intro .intro-text {
   font-size: var(--font-m);
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 2.5vw;
 }
 
 .contact-intro .faq-link {
