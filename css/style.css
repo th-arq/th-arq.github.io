@@ -147,6 +147,12 @@ header.is-scrolled:hover {
   transform: scaleX(1);
 }
 
+/* PCではスマホ用メニューを隠す */
+.sp-nav, .burger-btn {
+  display: none;
+}
+
+
 /* =========================
   MENU (SP)
 ========================= */
