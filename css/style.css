@@ -148,8 +148,10 @@ header.is-scrolled:hover {
 }
 
 /* PCではスマホ用メニューを隠す */
-.sp-nav, .burger-btn {
-  display: none;
+@media (min-width: 901px) {
+  .sp-nav, .burger-btn {
+    display: none !important;
+  }
 }
 
 
@@ -157,8 +159,10 @@ header.is-scrolled:hover {
   MENU (SP) 修正版
 ========================= */
 @media (max-width: 900px) {
-  /* PC用パーツを隠す */
-  #menu, .contact-btn { display: none !important; }
+  /* 900px以下のときは強制的に出す */
+  .burger-btn {
+    display: block !important;
+  }
 
   /* ① バーガーボタン：display: block を追加して強制表示 */
   .burger-btn {
