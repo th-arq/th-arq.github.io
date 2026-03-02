@@ -39,14 +39,18 @@ window.addEventListener("load", () => {
 
   // --- 3. Header / Footer の読み込み ＋ ヘッダー監視 ＋ バーガーメニュー ---
   const loadParts = (id, path) => {
-    fetch(path).then(res => res.text()).then(html => {
-      const el = document.getElementById(id);
-      if (el) el.innerHTML = html;
+    fetch(path)
+      .then(res => res.text())
+      .then(html => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.innerHTML = html;
 
-      if (id === 'header') {
-        const headerTag = el.querySelector('header');
-        
-        if (headerTag) {
+        if (id === 'header') {
+          // fetchで流し込んだ直後のDOMの中からheaderを探す
+          const headerTag = el.querySelector('header');
+          if (!headerTag) return;
+
           // A: スクロール監視
           window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -56,10 +60,11 @@ window.addEventListener("load", () => {
             }
           });
 
-          // B: バーガーボタンのクリック処理 (追加！)
-          const burgerBtn = headerTag.querySelector('.burger-btn');
+          // B: バーガーボタンのクリック処理
+          const burgerBtn = el.querySelector('.burger-btn'); // elの中から探すのが一番確実！
           if (burgerBtn) {
-            burgerBtn.addEventListener('click', () => {
+            burgerBtn.addEventListener('click', (e) => {
+              e.preventDefault(); // ボタンのデフォルト動作を抑止
               headerTag.classList.toggle('nav-open');
               
               // メニューが開いているときは背景をスクロールさせない
@@ -74,8 +79,7 @@ window.addEventListener("load", () => {
             });
           }
         }
-      }
-    });
+      });
   };
   loadParts('header', '/head.html');
   loadParts('footer', '/foot.html');
