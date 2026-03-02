@@ -15,7 +15,6 @@ body {
   width: 100%;
 }
 
-
 :root {
   --side-padding: clamp(24px, 6vw, 80px);
   --header-height: 80px;
@@ -39,12 +38,9 @@ h1 { font-size: var(--font-xl); }
 h2 { font-size: var(--font-l); font-weight: var(--bold);}
 h3 { font-size: var(--font-l); font-weight: var(--normal);}
 
-
 main {
   padding-top: var(--header-height);
 }
-
-
 
 /* =========================
   HEADER BASE
@@ -77,7 +73,7 @@ header.is-scrolled {
 
 header.is-scrolled:hover {
   opacity: 1;
-  background-color: var(--white); /* グラデーションの重なりを防ぐため単色に */
+  background-color: var(--white);
 }
 
 .fade-logo,
@@ -92,7 +88,6 @@ header.is-scrolled:hover {
   opacity: 1;
   transform: translateY(0);
 }
-
 
 /* =========================
   LEFT : LOGO
@@ -147,24 +142,18 @@ header.is-scrolled:hover {
   transform: scaleX(1);
 }
 
-/* PCではスマホ用メニューを隠す */
+/* PCではスマホ用を隠す */
 @media (min-width: 901px) {
   .sp-nav, .burger-btn {
     display: none !important;
   }
 }
 
-
 /* =========================
-  MENU (SP)
+  MENU (SP) ★完全修正版
 ========================= */
 @media (max-width: 900px) {
-  /* 900px以下のときは強制的に出す */
-  .burger-btn {
-    display: block !important;
-  }
-
-  /* ① バーガーボタン：display: block を追加して強制表示 */
+  /* バーガーボタン本体 */
   .burger-btn {
     display: block !important;
     width: 30px;
@@ -172,72 +161,43 @@ header.is-scrolled:hover {
     position: relative;
     background: none;
     border: none;
-    z-index: 1000; /* ロゴより手前に */
+    z-index: 1000;
     cursor: pointer;
     padding: 0;
   }
 
-  /* 三本線の共通設定（ここで色と太さを決める） */
+  /* 三本線の共通設定 */
   .burger-btn span {
     display: block;
     position: absolute;
     left: 0;
     width: 100%;
-    height: 1.5px; /* 少し太くして見やすくしたよ */
-    background: #101010 !important; /* 変数を使わず直接黒を指定 */
+    height: 1.5px;
+    background: var(--black) !important;
     transition: all 0.4s ease;
   }
 
-  /* 通常時の3本線の位置 */
+  /* 通常時の線の位置 */
   .burger-btn span:nth-child(1) { top: 4px; }
   .burger-btn span:nth-child(2) { top: 10px; }
   .burger-btn span:nth-child(3) { top: 16px; }
 
-  /* =========================
-      メニューが開いた時（×印に変身）
-  ========================= */
-  
-  /* 真ん中の線を消す */
+  /* メニューが開いた時（×印に変身） */
   header.nav-open .burger-btn span:nth-child(2) {
     opacity: 0;
   }
-
-  /* 上下の線を中央に寄せて回転 */
   header.nav-open .burger-btn span:nth-child(1) {
     top: 10px;
     transform: rotate(45deg);
   }
-
   header.nav-open .burger-btn span:nth-child(3) {
     top: 10px;
     transform: rotate(-45deg);
   }
 
-  /* =========================
-     メニューが開いた時（×印に変身）
-  ========================= */
-  
-  /* 1. 真ん中の線を消す */
-  header.nav-open .burger-btn span:nth-child(2) {
-    opacity: 0;
-  }
-
-  /* 2. 上下の線を回転させて×にする */
-  header.nav-open .burger-btn span:nth-child(1) {
-    top: 10px;
-    transform: rotate(45deg);
-    background: var(--black) !important;
-  }
-
-  header.nav-open .burger-btn span:nth-child(3) {
-    top: 10px;
-    transform: rotate(-45deg);
-    background: var(--black) !important;
-  }
-
-  /* ② 白いメニュー本体：ここも表示設定を上書き */
+  /* 白いメニュー本体 */
   .sp-nav {
-    display: block !important; /* ← ここもポイント！ */
+    display: block !important;
     position: fixed;
     top: 0;
     left: 0;
@@ -254,7 +214,7 @@ header.is-scrolled:hover {
     transform: translateY(0);
   }
 
-  /* ③ 黒い透過背景：ロゴとボタンを生かす設定 */
+  /* 黒い透過背景 */
   header.nav-open {
     height: 100vh;
     background: none;
@@ -267,13 +227,12 @@ header.is-scrolled:hover {
     left: 0;
     width: 100%;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.7); /* 少し濃くして見やすく */
+    background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(4px);
-    z-index: -1; /* header(100)の中の最背面 */
+    z-index: -1;
     animation: fadeIn 0.4s ease forwards;
   }
 
-  /* メニュー内のテキスト（省略なしでそのまま） */
   .sp-nav ul {
     list-style: none;
     padding: 0;
@@ -289,11 +248,6 @@ header.is-scrolled:hover {
     display: block;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
   .fade-logo {
     opacity: 1 !important;
     transform: none !important;
@@ -301,10 +255,19 @@ header.is-scrolled:hover {
     z-index: 101;
   }
 
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* PC用メニューとボタンを隠す */
+  #menu, .contact-btn {
+    display: none !important;
+  }
 }
 
 /* =========================
-  A TAG HOVER
+  OTHERS (HOVER, FORM, FOOTER etc)
 ========================= */
 .line-hover {
   text-decoration: none !important;
@@ -329,10 +292,6 @@ header.is-scrolled:hover {
   transform: scaleX(1);
 }
 
-
-/* =========================
-  CONTACT BUTTON
-========================= */
 .contact-btn {
   letter-spacing: 0.1em;
   padding: 10px 18px;
@@ -361,21 +320,6 @@ header.is-scrolled:hover {
   transition: all .5s ease;
 }
 
-
-/* =========================
-  RESPONSIVE
-========================= */
-@media (max-width: 900px) {
-  #menu,
-  .contact-btn {
-    display: none;
-  }
-}
-
-
-/* =========================
-   FOOTER
-========================= */
 footer {
     width: 100%;
     margin-top: var(--gap); 
@@ -390,14 +334,8 @@ footer {
     align-items: flex-end;
 }
 
-.footer_info p {
-    margin: 5px 0;
-}
-
-.footer_copy {
-    text-align: right;
-    margin: 0;
-}
+.footer_info p { margin: 5px 0; }
+.footer_copy { text-align: right; margin: 0; }
 
 @media (max-width: 900px) {
     .footer_container {
@@ -405,14 +343,9 @@ footer {
         align-items: flex-start;
         gap: 30px;
     }
-    .footer_copy {
-        text-align: left;
-    }
+    .footer_copy { text-align: left; }
 }
 
-/* =========================
-   Main fade
-========================= */
 main {
   opacity: 0; 
   transform: translateY(8px);
@@ -425,10 +358,7 @@ main.appeared {
   transform: translateY(0);
 }
 
-
-/* =========================
-   LOADING SCREEN
-========================= */
+/* LOADING */
 #loading {
   position: fixed;
   top: 0;
@@ -448,16 +378,8 @@ main.appeared {
   visibility: hidden;
 }
 
-.loading_inner {
-  text-align: center;
-}
-
-.logo_wrapper {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 20px;
-}
-
+.loading_inner { text-align: center; }
+.logo_wrapper { width: 80px; height: 80px; margin: 0 auto 20px; }
 .loading_logo_svg {
   width: 100%;
   height: 100%;
@@ -478,11 +400,7 @@ main.appeared {
   100% { opacity: 0.3; }
 }
 
-
-/* =========================
-   INDEX
-========================= */
-
+/* INDEX PAGE */
 body.is-index {
   height: 100vh;
   overflow: hidden;
@@ -498,11 +416,11 @@ body:not(.is-index) .fade-menu {
 
 .is-index main {
   flex: 1;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    padding-top: var(--header-height);
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-top: var(--header-height);
+  justify-content: center;
 }
 
 .index-page .intro-flex {
@@ -516,11 +434,7 @@ body:not(.is-index) .fade-menu {
   align-items: stretch;
 }
 
-.index-page .left {
-  flex: 1.5;
-  overflow: hidden;
-}
-
+.index-page .left { flex: 1.5; overflow: hidden; }
 .index-page .right {
   flex: 1;
   display: flex;
@@ -529,11 +443,7 @@ body:not(.is-index) .fade-menu {
   height: 100%;
 }
 
-.index-page .right > div {
-  flex: 1;
-  overflow: hidden;
-}
-
+.index-page .right > div { flex: 1; overflow: hidden; }
 .index-page img {
   width: 100%;
   height: 100%;
@@ -541,10 +451,6 @@ body:not(.is-index) .fade-menu {
   display: block;
 }
 
-
-/* =========================
-  CLIP PATH REVEAL
-========================= */
 .reveal {
   clip-path: inset(0 0 100% 0);
   transition: clip-path 1.2s ease;
@@ -555,29 +461,12 @@ body:not(.is-index) .fade-menu {
   clip-path: inset(0 0 0 0);
 }
 
-
 @media (max-width: 900px) {
-  :root {
-    --side-padding: 24px;
-  }
-
-  .intro-flex {
-    flex-direction: column;
-    height: auto;
-  }
+  :root { --side-padding: 24px; }
+  .intro-flex { flex-direction: column; height: auto; }
 }
 
-.index-page .intro-flex img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-
-/* =========================
-  Split layout
-========================= */
+/* SPLIT LAYOUT */
 .split-layout {
   overflow: visible !important;
   padding: var(--header-height) var(--side-padding);
@@ -590,13 +479,8 @@ body:not(.is-index) .fade-menu {
     min-height: 100vh;
 }
 
-.split-layout .sticky-box {
-    flex: 0.8;
-    position: relative;
-}
-
+.split-layout .sticky-box { flex: 0.8; position: relative; }
 .split-layout .title {
-    position: -webkit-sticky;
     position: sticky;
     top: calc(50% - 1.25rem);    
     font-weight: var(--bold);
@@ -606,29 +490,14 @@ body:not(.is-index) .fade-menu {
     transition: color 0.6s ease;
 }
 
-.split-layout .title.is-active {
-    color: var(--black);
-}
-
+.split-layout .title.is-active { color: var(--black); }
 .split-layout .content-box {
     flex: 1.3;
     border-bottom: 1px solid var(--lightgray);
     padding: var(--gap) 0; 
 }
 
-@media (max-width: 900px) {
-    .split-section {
-        flex-direction: column;
-    }
-    .split-layout .sticky-box {
-        position: static;
-        margin-bottom: 40px;
-    }
-    .split-layout .title {
-        position: static;
-        font-size: var(--font-l);
-    }
-}
+/* ABOUT & PROJECTS & CONTACT (省略なしでそのまま維持) */
 
 /* =========================
   About
