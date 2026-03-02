@@ -158,21 +158,22 @@ header.is-scrolled:hover {
 ========================= */
 @media (max-width: 900px) {
   /* PC用パーツを隠す */
-  #menu, .contact-btn { display: none; }
+  #menu, .contact-btn { display: none !important; }
 
-  /* ① バーガーボタン：header(100)の中で一番手前に */
+  /* ① バーガーボタン：display: block を追加して強制表示 */
   .burger-btn {
-    display: block;
+    display: block !important; /* ← ここがポイント！ */
     width: 30px;
     height: 20px;
     position: relative;
     background: none;
     border: none;
-    z-index: 10; /* header内での順序 */
+    z-index: 10;
     cursor: pointer;
     padding: 0;
   }
 
+  /* （中略：spanの設定はそのまま） */
   .burger-btn span {
     display: block;
     position: absolute;
@@ -181,22 +182,15 @@ header.is-scrolled:hover {
     background: var(--black);
     transition: transform 0.5s ease, top 0.5s ease;
   }
-
   .burger-btn span:first-child { top: 4px; }
   .burger-btn span:last-child { top: 14px; }
 
-  /* ×印のアニメーション */
-  header.nav-open .burger-btn span:first-child {
-    top: 10px;
-    transform: rotate(45deg);
-  }
-  header.nav-open .burger-btn span:last-child {
-    top: 10px;
-    transform: rotate(-45deg);
-  }
+  header.nav-open .burger-btn span:first-child { top: 10px; transform: rotate(45deg); }
+  header.nav-open .burger-btn span:last-child { top: 10px; transform: rotate(-45deg); }
 
-  /* ② 白いメニュー本体：z-indexを少し下げてボタンの下に */
+  /* ② 白いメニュー本体：ここも表示設定を上書き */
   .sp-nav {
+    display: block !important; /* ← ここもポイント！ */
     position: fixed;
     top: 0;
     left: 0;
@@ -204,16 +198,16 @@ header.is-scrolled:hover {
     height: auto; 
     padding: calc(var(--header-height) + 20px) var(--side-padding) 60px;
     background: var(--white);
-    transform: translateY(-101%); /* 完全に隠す */
+    transform: translateY(-101%);
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    z-index: 5; /* ボタン(10)より下、黒背景より上 */
+    z-index: 5;
   }
 
   header.nav-open .sp-nav {
     transform: translateY(0);
   }
 
-  /* ③ 黒い透過背景：header(100)全体を画面いっぱいにして背景を出す */
+  /* ③ 黒い透過背景：ロゴとボタンを生かす設定 */
   header.nav-open {
     height: 100vh;
     background: none;
@@ -228,11 +222,11 @@ header.is-scrolled:hover {
     height: 100vh;
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(2px);
-    z-index: -1; /* header(100)の中の最背面＝メインコンテンツよりは上 */
+    z-index: -1;
     animation: fadeIn 0.4s ease forwards;
   }
 
-  /* メニュー内のテキスト */
+  /* メニュー内のテキスト（省略なしでそのまま） */
   .sp-nav ul {
     list-style: none;
     padding: 0;
@@ -253,7 +247,6 @@ header.is-scrolled:hover {
     to { opacity: 1; }
   }
 }
-
 
 /* =========================
   A TAG HOVER
