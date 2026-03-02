@@ -48,6 +48,7 @@ main {
 #header {
     width: 100%;
     max-width: 1700px;
+    z-index: 1000 !important;
 }
 
 header {
