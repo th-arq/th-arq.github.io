@@ -607,12 +607,10 @@ body:not(.is-index) .fade-menu {
 
 .profile-text .name {
     margin: 0;
-    line-height: 1.5;
 }
 
 .content-box h3 {
     margin-top: var(--gap);
-    text-transform: uppercase;
 }
 
 @media (max-width: 900px) {
