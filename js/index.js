@@ -49,36 +49,20 @@ window.addEventListener("load", () => {
       // 2. ローディング画面を非表示にする
       if (loading) loading.classList.add('loaded');
 
-      // 3. 重要！ローディングが消えたらすぐにスクロールを解禁（演出を待たない）
-      // ただし、トップページ(is-index)の場合は固定したいので条件をつける
-      if (!document.body.classList.contains('is-index')) {
-        document.body.style.overflow = "";
-      }
+      // indexページはもともとスクロールしない設定(is-index)なので
+      // ここで overflow = "" にする必要はなし
 
-      fetch('/head.html')
-        .then(res => res.text())
-        .then(html => {
-          const headerEl = document.getElementById('header');
-          if (headerEl) headerEl.innerHTML = html;
+      // ★ここが修正ポイント！
+      // index専用JSでは fetch('/head.html') をしない。
+      // ①の共通JSが読み込んでくれるのを待つだけにするよ。
 
-          requestAnimationFrame(() => {
-            const reveals = document.querySelectorAll(".reveal");
-            const logo = document.querySelector(".fade-logo");
-            const menu = document.querySelector(".fade-menu");
-
-            setTimeout(() => {
-              reveals.forEach(el => el.classList.add("show"));
-            }, 300);
-
-            setTimeout(() => { if (logo) logo.classList.add("show"); }, 900);
-            setTimeout(() => { if (menu) menu.classList.add("show"); }, 1200);
-            
-            // 念のため、全ての演出が終わった後にもう一度解禁（ダメ押し）
-            if (!document.body.classList.contains('is-index')) {
-              document.body.style.overflow = "";
-            }
-          });
-        });
+      requestAnimationFrame(() => {
+        // メインコンテンツ（画像など）のフェードインだけ担当する
+        const reveals = document.querySelectorAll(".reveal");
+        setTimeout(() => {
+          reveals.forEach(el => el.classList.add("show"));
+        }, 300);
+      });
     }, 600);
   }
 });
