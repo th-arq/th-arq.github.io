@@ -77,7 +77,7 @@ header.is-scrolled {
 
 header.is-scrolled:hover {
   opacity: 1;
-  background-color: linear-gradient(0deg, transparent, var(--white));
+  background-color: var(--white); /* グラデーションの重なりを防ぐため単色に */
 }
 
 .fade-logo,
@@ -150,9 +150,6 @@ header.is-scrolled:hover {
 /* =========================
   MENU (SP)
 ========================= */
-/* =========================
-  MENU (SP)
-========================= */
 @media (max-width: 900px) {
   /* ①・② ボタンの形とアニメーション：z-indexを上げて手前に */
   .burger-btn {
@@ -172,15 +169,12 @@ header.is-scrolled:hover {
     width: 100%;
     height: 1px;
     background: var(--black);
-    /* ② ゆっくり動くように transition を 0.5s に調整 */
     transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), top 0.5s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.5s ease;
   }
 
-  /* 二本線の初期位置 */
   .burger-btn span:first-child { top: 4px; }
   .burger-btn span:last-child { top: 14px; }
 
-  /* ① ボタンが押された時の形（きれいな×印に） */
   header.nav-open .burger-btn span:first-child {
     top: 9px;
     transform: rotate(45deg);
@@ -190,24 +184,34 @@ header.is-scrolled:hover {
     transform: rotate(-45deg);
   }
 
-  /* ④・⑤ メニューの背景と配置 */
+  /* メニュー本体 */
   .sp-nav {
     position: fixed;
     top: 0;
-    left: 0; /* rightからleftに変更して全面・上面に対応しやすく */
+    left: 0;
     width: 100%;
-    /* ④ 全面じゃなく上面（自動高さ） */
     height: auto; 
     padding: calc(var(--header-height) + 20px) var(--side-padding) 60px;
     background: var(--white);
-    
-    /* 初期状態：上に隠しておく（right: -100% から変更） */
     transform: translateY(-100%);
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     z-index: 999;
+    pointer-events: auto; /* ナビ内はクリック可能 */
   }
 
-  /* ⑤ 背景の黒透過（メニューが開いている時だけ表示） */
+  /* メニューが開いた時のheaderの挙動をSP限定にする */
+  header.nav-open {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 2000;
+    transform: none; /* 中央寄せ解除 */
+    background: none; /* header自身の背景は消して、疑似要素に任せる */
+  }
+
+  /* 背景の黒透過（疑似要素） */
   header.nav-open::before {
     content: "";
     position: fixed;
@@ -221,27 +225,15 @@ header.is-scrolled:hover {
     animation: fadeIn 0.4s ease forwards;
   }
 
-  /* メニューが開いた時、上から降りてくる */
   header.nav-open .sp-nav {
     transform: translateY(0);
   }
 
-  /* 背景クリックを有効にするための設定 */
-  header.nav-open {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 1000;
-  }
-
-  /* ③ メニュー文字を右寄せ */
   .sp-nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    text-align: right; /* ③ 右寄せ */
+    text-align: right;
   }
 
   .sp-nav ul li {
@@ -267,19 +259,19 @@ header.is-scrolled:hover {
   A TAG HOVER
 ========================= */
 .line-hover {
-  text-decoration: none !important; /* デフォルトの下線を消す */
+  text-decoration: none !important;
   position: relative;
-  display: inline-block; /* 線を文字の幅に合わせるために必要 */
+  display: inline-block;
 }
 
 .line-hover::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -4px;      /* 線の位置（文字との距離） */
+  bottom: -4px;
   width: 100%;
-  height: 1px;       /* 線の太さ */
-  background: currentColor; /* 文字の色と同じ色にする */
+  height: 1px;
+  background: currentColor;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s ease;
@@ -314,11 +306,10 @@ header.is-scrolled:hover {
 }
 
 .contact-btn:hover {
-  background: transparent;
+  background: var(--white);
   color: var(--black);
   border: 1px solid var(--black);
   border-radius: 50px;
-  background: var(--white);
   transition: all .5s ease;
 }
 
@@ -355,13 +346,11 @@ footer {
     margin: 5px 0;
 }
 
-/* 右側のコピーライト */
 .footer_copy {
     text-align: right;
     margin: 0;
 }
 
-/* モバイル対応：スマホでは左寄せで縦に並べる */
 @media (max-width: 900px) {
     .footer_container {
         flex-direction: column;
@@ -406,7 +395,6 @@ main.appeared {
   transition: opacity 1s ease, visibility 1s ease;
 }
 
-/* 読み込み完了後に消すためのクラス */
 #loading.loaded {
   opacity: 0;
   visibility: hidden;
@@ -417,7 +405,7 @@ main.appeared {
 }
 
 .logo_wrapper {
-  width: 80px; /* ロゴの大きさ */
+  width: 80px;
   height: 80px;
   margin: 0 auto 20px;
 }
@@ -426,7 +414,6 @@ main.appeared {
   width: 100%;
   height: 100%;
   color: var(--black);
-  /* じわじわ点滅させるアニメーション */
   animation: pulse 2s infinite ease-in-out;
 }
 
@@ -481,13 +468,11 @@ body:not(.is-index) .fade-menu {
   align-items: stretch;
 }
 
-/* 左：縦長 */
 .index-page .left {
   flex: 1.5;
   overflow: hidden;
 }
 
-/* 右：上下 */
 .index-page .right {
   flex: 1;
   display: flex;
@@ -496,7 +481,6 @@ body:not(.is-index) .fade-menu {
   height: 100%;
 }
 
-/* 右の上下画像 */
 .index-page .right > div {
   flex: 1;
   overflow: hidden;
@@ -558,7 +542,6 @@ body:not(.is-index) .fade-menu {
     min-height: 100vh;
 }
 
-/* 左側の固定ボックス */
 .split-layout .sticky-box {
     flex: 0.8;
     position: relative;
@@ -580,14 +563,12 @@ body:not(.is-index) .fade-menu {
     color: var(--black);
 }
 
-/* 右側のコンテンツボックス */
 .split-layout .content-box {
     flex: 1.3;
     border-bottom: 1px solid var(--lightgray);
     padding: var(--gap) 0; 
 }
 
-/* モバイル対応 */
 @media (max-width: 900px) {
     .split-section {
         flex-direction: column;
@@ -598,7 +579,7 @@ body:not(.is-index) .fade-menu {
     }
     .split-layout .title {
         position: static;
-        font-size: var(--font-l); /* スマホでは少し小さく */
+        font-size: var(--font-l);
     }
 }
 
@@ -632,14 +613,11 @@ body:not(.is-index) .fade-menu {
     line-height: 1.5;
 }
 
-
-/* セクションの見出し（h3）の余白調整 */
 .content-box h3 {
     margin-top: var(--gap);
     text-transform: uppercase;
 }
 
-/* モバイル対応：スマホでは縦に並べて少し余白を調整 */
 @media (max-width: 900px) {
     .split-profile {
         flex-direction: column;
@@ -650,8 +628,6 @@ body:not(.is-index) .fade-menu {
         flex: 0 0 140px;
     }
 }
-
-
 
 /* =========================
   PROJECTS
@@ -697,7 +673,6 @@ a.projects-item {
   transform: scaleX(1);
 }
 
-
 .filter-btn.active {
   color: var(--black);
   font-weight: var(--bold);
@@ -710,17 +685,14 @@ a.projects-item {
   opacity: 0;
 }
 
-
 .projects-item.reveal.show {
   clip-path: inset(0 0 0 0);
   opacity: 1;
 }
 
-
 .projects-item.is-hidden {
   display: none;
 }
-
 
 .projects-item .thumbnail {
   overflow: hidden;
@@ -732,7 +704,6 @@ a.projects-item {
   display: block;
   transition: transform 0.6s ease;
 }
-
 
 .projects-item:hover .thumbnail img {
   transform: scale(1.1);
@@ -747,29 +718,15 @@ a.projects-item {
   color: var(--darkgray);
 }
 
-/* グリッドレイアウト */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
 }
 
-/* 各アイテムの挙動 */
 .projects-item {
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
-
-.projects-item.is-hidden {
-  display: none;
-}
-
-.projects-item img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-
 
 /* =========================
   PROJECTS DETAIL
@@ -780,7 +737,6 @@ a.projects-item {
   padding: var(--gap) 0;
 }
 
-/* 左側の固定エリア */
 .project-info {
   flex: 1;
 }
@@ -788,7 +744,7 @@ a.projects-item {
 .sticky-content {
   position: -webkit-sticky;
   position: sticky;
-  top: 120px; /* ヘッダーの高さ＋余白 */
+  top: 120px;
 }
 
 .project-title {
@@ -808,7 +764,6 @@ a.projects-item {
   font-size: var(--font-m);
 }
 
-/* 右側のギャラリーエリア */
 .project-gallery {
   flex: 1.5;
 }
@@ -824,25 +779,16 @@ a.projects-item {
   display: block;
 }
 
-
-/* 個別ページの画像を表示させるための設定 */
 .image-wrapper.reveal {
   clip-path: inset(0 0 100% 0);
-  transition: clip-path 1.2s cubic-bezier(0.25, 1, 0.5, 1); /* 少し滑らかな動きに */
+  transition: clip-path 1.2s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: clip-path;
   overflow: hidden;
 }
 
-/* showクラスがついたら表示 */
 .image-wrapper.reveal.show {
   clip-path: inset(0 0 0 0) !important;
   opacity: 1 !important;
-}
-
-/* ページ全体のフェードインを確実にする */
-main.appeared {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
 }
 
 .reveal img {
@@ -851,12 +797,10 @@ main.appeared {
   will-change: transform;
 }
 
-/* 表示された時：1.1倍から1倍（等倍）に戻る＝引きになる */
 .reveal.show img {
   transform: scale(1);
 }
 
-/* モバイル対応 */
 @media (max-width: 900px) {
   .project-detail .container {
     flex-direction: column;
@@ -865,8 +809,6 @@ main.appeared {
     position: static;
   }
 }
-
-
 
 /* =========================
    CONTACT FORM SECTION
@@ -931,15 +873,6 @@ main.appeared {
     font-family: 'Jost', sans-serif;
 }
 
-/* ブラウザごとの微調整（念のため） */
-input::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder {
-  color: var(--gray);
-  font-weight: 300;
-}
-
-
-/* Radio Buttons */
 .radio-group {
   display: flex;
   gap: 2.5vw;
@@ -953,7 +886,6 @@ textarea::-webkit-input-placeholder {
   font-size: var(--font-m);
 }
 
-/* Submit Button */
 .submit-btn {
   margin-top: 40px;
   width: 100%;
@@ -990,7 +922,7 @@ textarea::-webkit-input-placeholder {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 80vh; /* ヘッダー・フッターを除いた中央に配置 */
+    min-height: 80vh;
     text-align: center;
     padding: 0 var(--side-padding);
 }
@@ -1001,7 +933,7 @@ textarea::-webkit-input-placeholder {
 
 .thanks-title {
     font-size: var(--font-xl);
-    letter-spacing: 0.2em; /* コンタクトボタンと合わせて広めに */
+    letter-spacing: 0.2em;
     margin: 0;
 }
 
@@ -1018,7 +950,7 @@ textarea::-webkit-input-placeholder {
 
 .thanks-action .contact-btn {
     display: inline-block;
-    padding: 15px 40px; /* ホームに戻るボタンは少しゆったりめに */
+    padding: 15px 40px;
 }
 
 
@@ -1031,7 +963,7 @@ textarea::-webkit-input-placeholder {
 }
 
 .faq-question {
-    list-style: none; /* デフォルトの三角形を消す */
+    list-style: none;
     cursor: pointer;
     font-size: var(--font-m);
     font-weight: var(--bold);
@@ -1041,7 +973,6 @@ textarea::-webkit-input-placeholder {
     user-select: none;
 }
 
-/* 質問の横に + アイコンを表示 */
 .faq-question::after {
     content: '+';
     font-size: var(--font-l);
@@ -1049,12 +980,10 @@ textarea::-webkit-input-placeholder {
     transition: transform 0.4s ease;
 }
 
-/* 開いた時に + を × (45度回転) に変える */
 .faq-item[open] .faq-question::after {
     transform: rotate(45deg);
 }
 
-/* デフォルトの三角形を消す（Safari用） */
 .faq-question::-webkit-details-marker {
     display: none;
 }
