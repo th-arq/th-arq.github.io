@@ -154,18 +154,13 @@ header.is-scrolled:hover {
 
 
 /* =========================
-  MENU (SP)
-========================= */
-/* =========================
-  MENU (SP)
+  MENU (SP) 修正版
 ========================= */
 @media (max-width: 900px) {
   /* PC用パーツを隠す */
-  #menu, .contact-btn {
-    display: none;
-  }
+  #menu, .contact-btn { display: none; }
 
-  /* バーガーボタン */
+  /* ① バーガーボタン：header(100)の中で一番手前に */
   .burger-btn {
     display: block;
     width: 30px;
@@ -173,7 +168,7 @@ header.is-scrolled:hover {
     position: relative;
     background: none;
     border: none;
-    z-index: 2100; /* メニュー(2000)より上 */
+    z-index: 10; /* header内での順序 */
     cursor: pointer;
     padding: 0;
   }
@@ -184,24 +179,23 @@ header.is-scrolled:hover {
     width: 100%;
     height: 1px;
     background: var(--black);
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), top 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.5s ease, top 0.5s ease;
   }
 
-  /* 二本線の初期位置 */
   .burger-btn span:first-child { top: 4px; }
   .burger-btn span:last-child { top: 14px; }
 
-  /* 開いた時の×印（header.nav-openがついた時） */
+  /* ×印のアニメーション */
   header.nav-open .burger-btn span:first-child {
-    top: 10px; /* 真ん中に寄せる */
+    top: 10px;
     transform: rotate(45deg);
   }
   header.nav-open .burger-btn span:last-child {
-    top: 10px; /* 真ん中に寄せる */
+    top: 10px;
     transform: rotate(-45deg);
   }
 
-  /* メニュー本体（上から降ってくる） */
+  /* ② 白いメニュー本体：z-indexを少し下げてボタンの下に */
   .sp-nav {
     position: fixed;
     top: 0;
@@ -210,12 +204,21 @@ header.is-scrolled:hover {
     height: auto; 
     padding: calc(var(--header-height) + 20px) var(--side-padding) 60px;
     background: var(--white);
-    transform: translateY(-100%);
+    transform: translateY(-101%); /* 完全に隠す */
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    z-index: 2000;
+    z-index: 5; /* ボタン(10)より下、黒背景より上 */
   }
 
-  /* 背景の黒透過 */
+  header.nav-open .sp-nav {
+    transform: translateY(0);
+  }
+
+  /* ③ 黒い透過背景：header(100)全体を画面いっぱいにして背景を出す */
+  header.nav-open {
+    height: 100vh;
+    background: none;
+  }
+
   header.nav-open::before {
     content: "";
     position: fixed;
@@ -223,21 +226,10 @@ header.is-scrolled:hover {
     left: 0;
     width: 100%;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.6); /* 黒の透過 */
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(2px);
-    z-index: -1; /* これでロゴやボタン(z-index 100以上)より下に行くよ */
+    z-index: -1; /* header(100)の中の最背面＝メインコンテンツよりは上 */
     animation: fadeIn 0.4s ease forwards;
-    pointer-events: auto; /* 背景クリックを有効にする */
-  }
-
-  /* 開いた状態のレイアウト調整（ロゴ位置を固定するため上書きを最小限に） */
-  header.nav-open {
-    /* ここで position や left を変えないのがポイント！ */
-    background: none; 
-  }
-
-  header.nav-open .sp-nav {
-    transform: translateY(0);
   }
 
   /* メニュー内のテキスト */
@@ -247,9 +239,7 @@ header.is-scrolled:hover {
     margin: 0;
     text-align: right;
   }
-
   .sp-nav ul li { margin: 25px 0; }
-
   .sp-nav ul a {
     font-size: 24px;
     color: var(--black);
