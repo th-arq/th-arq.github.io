@@ -1,5 +1,5 @@
 window.addEventListener("load", () => {
-  // 1. ローディング開始時にスクロール禁止
+  // 1. 初期設定：スクロール禁止
   document.body.style.overflow = "hidden";
 
   const loading = document.getElementById('loading');
@@ -32,7 +32,7 @@ window.addEventListener("load", () => {
     });
   }
 
-  // ② カウントアップ（数字をじわじわ増やす）
+  // ② カウントアップ
   const timer = setInterval(() => {
     if (progress < targetProgress) {
       progress++;
@@ -45,27 +45,34 @@ window.addEventListener("load", () => {
     }
   }, 20);
 
+  // ③ サイト表示アニメーション
   function startSiteAnimation() {
+    // 確実に画像を表示するための処理
+    const showContent = () => {
+      const mainEl = document.querySelector('main');
+      if (mainEl) mainEl.classList.add('appeared');
+
+      const reveals = document.querySelectorAll(".reveal");
+      reveals.forEach(el => {
+        el.classList.add("show");
+      });
+    };
+
     setTimeout(() => {
-      // 2. ローディング画面を非表示にする
+      // ローディング画面を消す
       if (loading) loading.classList.add('loaded');
 
-      // 3. index専用のアニメーション（ヘッダー内の要素やメイン画像）
-      // ①の共通JSがヘッダーを読み込み終わるのを少し待ってから実行する
+      // 1. まずメインコンテンツ（画像）を出す
+      showContent();
+
+      // 2. その後、ヘッダー内の要素（ロゴ・メニュー）を出す
+      // 共通JSがHTMLを読み込む時間を考慮して少し遅らせる
       setTimeout(() => {
-        requestAnimationFrame(() => {
-          const reveals = document.querySelectorAll(".reveal");
-          const logo = document.querySelector(".fade-logo");
-          const menu = document.querySelector(".fade-menu");
-
-          // メインコンテンツの表示
-          reveals.forEach(el => el.classList.add("show"));
-
-          // ヘッダー内のロゴとメニューをフェードイン
-          setTimeout(() => { if (logo) logo.classList.add("show"); }, 300);
-          setTimeout(() => { if (menu) menu.classList.add("show"); }, 600);
-        });
-      }, 500); // 共通JSがHTMLを読み込むための待ち時間
+        const logo = document.querySelector(".fade-logo");
+        const menu = document.querySelector(".fade-menu");
+        if (logo) logo.classList.add("show");
+        if (menu) menu.classList.add("show");
+      }, 500);
 
     }, 600);
   }
