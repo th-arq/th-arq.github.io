@@ -1,4 +1,5 @@
 window.addEventListener("load", () => {
+  // 1. ローディング開始時にスクロール禁止
   document.body.style.overflow = "hidden";
 
   const loading = document.getElementById('loading');
@@ -9,7 +10,7 @@ window.addEventListener("load", () => {
   const images = document.querySelectorAll('img');
   const totalCount = images.length;
 
-  // ① 実際の画像読み込み監視
+  // ① 画像読み込み監視
   if (totalCount === 0) {
     targetProgress = 100;
   } else {
@@ -31,26 +32,28 @@ window.addEventListener("load", () => {
     });
   }
 
-  // ② 数字を「じわじわ」増やすアニメーション
+  // ② カウントアップ
   const timer = setInterval(() => {
-    // 実際の読み込み状況（targetProgress）を追いかけるように数字を増やす
     if (progress < targetProgress) {
       progress++;
     }
-    
-    // 表示を更新
     if (percentText) percentText.textContent = progress + "%";
-
-    // 100%になったら終了
     if (progress >= 100) {
       clearInterval(timer);
       startSiteAnimation();
     }
-  }, 20); // この数字を大きくするともっとゆっくりになるよ（20ms = 0.02秒ごと）
+  }, 20);
 
   function startSiteAnimation() {
     setTimeout(() => {
+      // 2. ローディング画面を非表示にする
       if (loading) loading.classList.add('loaded');
+
+      // 3. 重要！ローディングが消えたらすぐにスクロールを解禁（演出を待たない）
+      // ただし、トップページ(is-index)の場合は固定したいので条件をつける
+      if (!document.body.classList.contains('is-index')) {
+        document.body.style.overflow = "";
+      }
 
       fetch('/head.html')
         .then(res => res.text())
@@ -67,17 +70,13 @@ window.addEventListener("load", () => {
               reveals.forEach(el => el.classList.add("show"));
             }, 300);
 
-            setTimeout(() => {
-              if (logo) logo.classList.add("show");
-            }, 900);
-
-            setTimeout(() => {
-              if (menu) menu.classList.add("show");
-            }, 1200);
-
-            setTimeout(() => {
+            setTimeout(() => { if (logo) logo.classList.add("show"); }, 900);
+            setTimeout(() => { if (menu) menu.classList.add("show"); }, 1200);
+            
+            // 念のため、全ての演出が終わった後にもう一度解禁（ダメ押し）
+            if (!document.body.classList.contains('is-index')) {
               document.body.style.overflow = "";
-            }, 1500);
+            }
           });
         });
     }, 600);
