@@ -40,12 +40,22 @@ h2 { font-size: var(--font-l); font-weight: var(--bold);}
 h3 { font-size: var(--font-l); font-weight: var(--normal);}
 a { color: inherit;}
 
+
 main {
   padding-top: var(--header-height);
+  opacity: 0; 
+  transform: translateY(8px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  will-change: opacity, transform;
+}
+
+main.appeared {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* =========================
-  HEADER BASE
+  HEADER
 ========================= */
 #header {
     width: 100%;
@@ -149,7 +159,7 @@ header.is-scrolled:hover {
 
 
 /* =========================
-  MENU (SP) - New Minimal Style
+  MENU (SP)
 ========================= */
 @media (max-width: 900px) {
   /* バーガーボタン：枠線ありのスタイル */
@@ -176,9 +186,9 @@ header.is-scrolled:hover {
     transition: all 0.3s ease;
   }
 
-  /* メニューが開いている時のボタン（×にする） */
+ 
   header.nav-open .burger-btn {
-    border: none !important; /* ×の時は枠を消す */
+    border: none !important;
   }
   header.nav-open .burger-btn span:nth-child(1) {
     transform: translateY(3.5px) rotate(45deg);
@@ -187,21 +197,20 @@ header.is-scrolled:hover {
     transform: translateY(-3.5px) rotate(-45deg);
   }
   header.nav-open .burger-btn span:nth-child(3) {
-    display: none; /* 三本あっても一本消して×にする */
-  }
+    display: none; 
+ }
 
-  /* メニュー本体：画像のように上から全面に出す */
   .sp-nav {
     display: block !important;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh; /* 全画面 */
+    height: 100vh;
     background: var(--white);
     padding: 100px var(--side-padding) 40px;
-    transform: translateX(100%); /* 右からスライド */
-    transition: transform 0.4s ease;
+    transform: translateY(-100%); 
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
     z-index: 999;
     overflow-y: auto;
   }
@@ -217,7 +226,7 @@ header.is-scrolled:hover {
   }
 
   .sp-nav ul li {
-    border-bottom: 1px solid #f0f0f0; /* リストの区切り線 */
+    border-bottom: 1px solid #f0f0f0;
   }
 
   .sp-nav ul a {
@@ -226,7 +235,7 @@ header.is-scrolled:hover {
     font-size: 18px;
     color: var(--black);
     text-decoration: none;
-    text-align: left; /* 画像に合わせて左寄せ */
+    text-align: left; 
   }
 
   /* 不要な装飾をリセット */
@@ -234,6 +243,35 @@ header.is-scrolled:hover {
   .fade-logo { opacity: 1 !important; transform: none !important; z-index: 1001; }
   #menu, .contact-btn { display: none !important; }
 }
+
+
+/* =========================
+  Footer
+========================= */
+footer {
+    width: 100%;
+    padding: var(--gap) var(--side-padding) 2.5vw;
+}
+
+.footer_container {
+    color: var(--darkgray);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.footer_info p { margin: 5px 0; }
+.footer_copy { text-align: right; margin: 0; }
+
+@media (max-width: 900px) {
+    .footer_container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+    }
+    .footer_copy { text-align: left; }
+}
+
 
 /* =========================
  Hover
@@ -287,43 +325,10 @@ header.is-scrolled:hover {
   transition: all .5s ease;
 }
 
-footer {
-    width: 100%;
-    padding: var(--gap) var(--side-padding) 2.5vw;
-}
 
-.footer_container {
-    color: var(--darkgray);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-}
-
-.footer_info p { margin: 5px 0; }
-.footer_copy { text-align: right; margin: 0; }
-
-@media (max-width: 900px) {
-    .footer_container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 30px;
-    }
-    .footer_copy { text-align: left; }
-}
-
-main {
-  opacity: 0; 
-  transform: translateY(8px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-  will-change: opacity, transform;
-}
-
-main.appeared {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* LOADING */
+/* =========================
+  Loading
+========================= */
 #loading {
   position: fixed;
   top: 0;
@@ -366,7 +371,9 @@ main.appeared {
   100% { opacity: 0.3; }
 }
 
-/* INDEX PAGE */
+/* =========================
+  Index
+========================= */
 body.is-index {
   height: 100vh;
   overflow: hidden;
@@ -471,7 +478,6 @@ body:not(.is-index) .fade-menu {
 }
 }
 
-
 /* =========================
   About
 ========================= */
@@ -517,7 +523,7 @@ body:not(.is-index) .fade-menu {
 }
 
 /* =========================
-  PROJECTS
+  Projects
 ========================= */
 a.projects-item {
   text-decoration: none;
@@ -616,7 +622,7 @@ a.projects-item {
 }
 
 /* =========================
-  PROJECTS DETAIL
+  Projects - Detail
 ========================= */
 .project-detail .container {
   display: flex;
@@ -696,7 +702,7 @@ a.projects-item {
 }
 
 /* =========================
-   CONTACT FORM SECTION
+   Contact - Form
 ========================= */
 .contact-intro {
   margin-bottom: var(--gap);
@@ -799,7 +805,7 @@ a.projects-item {
 
 
 /* =========================
-   THANKS PAGE
+   Thanks Page
 ========================= */
 .thanks-page {
     display: flex;
@@ -837,7 +843,7 @@ a.projects-item {
 
 
 /* =========================
-   FAQ SECTION (Accordion)
+   FAQ
 ========================= */
 .faq-item {
     border-bottom: 1px solid var(--lightgray);
