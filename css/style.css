@@ -123,7 +123,7 @@ header.is-scrolled:hover {
 .header-right {
   display: flex;
   align-items: center;
-  gap: 40px;
+  z-index: 1000;
 }
 
 #menu ul {
@@ -435,8 +435,15 @@ body:not(.is-index) .fade-menu {
 }
 
 @media (max-width: 900px) {
-  :root { --side-padding: 24px; }
-  .intro-flex { flex-direction: column; height: auto; }
+  .intro-flex { 
+    flex-direction: column;
+    height: auto;
+  }
+
+  .index-page .right {
+    flex: 2;
+    flex-direction: row;
+  }
 }
 
 /* =========================
