@@ -161,6 +161,7 @@ header.is-scrolled:hover {
     width: 44px;
     height: 34px;
     background: none;
+    border: none;
     z-index: 1000;
     cursor: pointer;
   }
