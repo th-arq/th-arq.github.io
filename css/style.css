@@ -160,7 +160,6 @@ header.is-scrolled:hover {
     gap: 6px;
     width: 44px;
     height: 34px;
-    border: 1px solid #d4a017 !important; /* 画像のようなゴールド/茶系の枠 */
     background: none;
     z-index: 1000;
     cursor: pointer;
@@ -340,6 +339,7 @@ main.appeared {
 #loading.loaded {
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
 }
 
 .loading_inner { text-align: center; }
