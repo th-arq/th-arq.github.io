@@ -1,5 +1,5 @@
 window.addEventListener("load", () => {
-  // --- 1. ライブラリ(Lenis)を動的に読み込む ---
+  // --- 1. Lenis (スムーススクロール) ---
   const script = document.createElement('script');
   script.src = "https://unpkg.com/lenis@1.1.13/dist/lenis.min.js";
   script.onload = () => {
@@ -8,9 +8,10 @@ window.addEventListener("load", () => {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
-    if (document.body.classList.contains('is-index')) {
-      lenis.stop();
-    }
+    
+    // indexページでもスクロールしたい場合は、lenis.stop()を消すかコメントアウト
+    // if (document.body.classList.contains('is-index')) { lenis.stop(); }
+
     function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -19,7 +20,7 @@ window.addEventListener("load", () => {
   };
   document.head.appendChild(script);
 
-  // --- 2. スクロール監視（タイトルの色変化） ---
+  // --- 2. スクロール監視 (Aboutページなどのタイトル用) ---
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -28,16 +29,13 @@ window.addEventListener("load", () => {
         entry.target.classList.remove('is-active');
       }
     });
-  }, {
-    rootMargin: '-45% 0px -45% 0px',
-    threshold: 0 
-  });
+  }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
 
   document.querySelectorAll('.split-layout .title').forEach(title => {
     observer.observe(title);
   });
 
-  // --- 3. Header / Footer の読み込み ＋ ヘッダー監視 ＋ バーガーメニュー ---
+  // --- 3. Header / Footer 読み込み ---
   const loadParts = (id, path) => {
     fetch(path)
       .then(res => res.text())
@@ -50,7 +48,7 @@ window.addEventListener("load", () => {
           const headerTag = el.querySelector('header');
           if (!headerTag) return;
 
-          // A: スクロール監視
+          // スクロールで透明度変化
           window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
               headerTag.classList.add('is-scrolled');
@@ -59,36 +57,15 @@ window.addEventListener("load", () => {
             }
           });
 
-          // B: バーガーボタンのクリック処理
+          // バーガーボタン
           const burgerBtn = el.querySelector('.burger-btn');
-          const closeMenu = () => {
-            headerTag.classList.remove('nav-open');
-            if (!document.body.classList.contains('is-index')) {
-              document.body.style.overflow = '';
-            }
-          };
-
           if (burgerBtn) {
             burgerBtn.addEventListener('click', (e) => {
               e.preventDefault();
-              e.stopPropagation(); // headerへのイベント伝播を止める
               headerTag.classList.toggle('nav-open');
-              
-              if (headerTag.classList.contains('nav-open')) {
-                document.body.style.overflow = 'hidden';
-              } else {
-                closeMenu();
-              }
+              document.body.style.overflow = headerTag.classList.contains('nav-open') ? 'hidden' : '';
             });
           }
-
-          // C: 背景（headerの余白）をクリックして閉じる
-          headerTag.addEventListener('click', (e) => {
-            // nav-open かつ クリックされたのが header 自身（背景）の場合のみ閉じる
-            if (headerTag.classList.contains('nav-open') && e.target === headerTag) {
-              closeMenu();
-            }
-          });
         }
       });
   };
@@ -96,17 +73,12 @@ window.addEventListener("load", () => {
   loadParts('header', '/head.html');
   loadParts('footer', '/foot.html');
 
-  // --- 4. メインコンテンツの表示 ---
+  // --- 4. コンテンツ表示 (Aboutなどの下層ページ用) ---
   if (!document.body.classList.contains('is-index')) {
     setTimeout(() => {
-      const mainEl = document.querySelector('main');
-      if (mainEl) mainEl.classList.add('appeared');
-
-      // Aboutページなどでもロゴとメニューを表示させる
-      const logo = document.querySelector(".fade-logo");
-      const menu = document.querySelector(".fade-menu");
-      if (logo) logo.classList.add("show");
-      if (menu) menu.classList.add("show");
+      document.querySelector('main')?.classList.add('appeared');
+      document.querySelector(".fade-logo")?.classList.add("show");
+      document.querySelector(".fade-menu")?.classList.add("show");
     }, 100);
   }
 });
