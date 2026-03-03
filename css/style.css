@@ -38,7 +38,7 @@ body {
 h1 { font-size: var(--font-xl); }
 h2 { font-size: var(--font-l); font-weight: var(--bold);}
 h3 { font-size: var(--font-l); font-weight: var(--normal);}
-a { color: inherit;}
+a { color: inherit; text-decoration: none;}
 
 
 main {
@@ -53,6 +53,22 @@ main.appeared {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* =========================
+  Motion
+========================= */
+main, .fade-logo, .fade-menu, .projects-item.reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  will-change: opacity, transform;
+}
+
+main.appeared, .fade-logo.show, .fade-menu.show, .projects-item.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 /* =========================
   HEADER
@@ -89,20 +105,6 @@ header.is-scrolled:hover {
   background-color: var(--white);
 }
 
-.fade-logo,
-.fade-menu {
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.fade-logo.show,
-.fade-menu.show {
-  opacity: 1;
-  transform: translateY(0);
-  z-index: 1000;
-}
-
 .TAG_logo img {
   height: 24px;
   display: block;
@@ -129,7 +131,6 @@ header.is-scrolled:hover {
   font-size: var(--font-s);
   letter-spacing: 0.08em;
   color: var(--black);
-  text-decoration: none;
   position: relative;
 }
 
@@ -186,7 +187,7 @@ header.is-scrolled:hover {
     transition: all 0.3s ease;
   }
 
- 
+
   header.nav-open .burger-btn {
     border: none !important;
   }
@@ -199,7 +200,6 @@ header.is-scrolled:hover {
   header.nav-open .burger-btn span:nth-child(3) {
     display: none; 
  }
-
   .sp-nav {
     display: block !important;
     position: fixed;
@@ -216,7 +216,7 @@ header.is-scrolled:hover {
   }
 
   header.nav-open .sp-nav {
-    transform: translateX(0);
+    transform: translateY(0);
   }
 
   .sp-nav ul {
@@ -234,7 +234,6 @@ header.is-scrolled:hover {
     padding: 20px 0;
     font-size: 18px;
     color: var(--black);
-    text-decoration: none;
     text-align: left; 
   }
 
@@ -303,7 +302,6 @@ footer {
   padding: 10px 18px;
   background: var(--black);
   color: var(--white);
-  text-decoration: none;
   white-space: nowrap;
 }
 
@@ -312,7 +310,6 @@ footer {
   background: var(--black);
   border: 1px solid var(--black);
   color: var(--white);
-  text-decoration: none;
   white-space: nowrap;
   text-transform: uppercase;
 }
@@ -526,7 +523,6 @@ body:not(.is-index) .fade-menu {
   Projects
 ========================= */
 a.projects-item {
-  text-decoration: none;
   color: inherit;
   display: block;
   overflow: hidden;
