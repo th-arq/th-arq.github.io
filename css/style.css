@@ -38,7 +38,7 @@ body {
 @media (max-width: 900px) {
   :root {
     --side-padding: 24px;
-    --header-height: 60px;
+    --header-height: 50px;
     --font-xl: 40px;
     --font-l: 30px;
     --font-m: 18px;
@@ -81,7 +81,7 @@ main.appeared, .fade-logo.show, .fade-menu.show, .projects-item.reveal.show {
 
 
 /* =========================
-  HEADER
+  HEADER PC
 ========================= */
 #header {
     width: 100%;
@@ -126,9 +126,6 @@ header.is-scrolled:hover {
   gap: 40px;
 }
 
-/* =========================
-  MENU (PC)
-========================= */
 #menu ul {
   display: flex;
   gap: 40px;
@@ -170,10 +167,12 @@ header.is-scrolled:hover {
 
 
 /* =========================
-  MENU (SP)
+  Headder SP
 ========================= */
 @media (max-width: 900px) {
-  /* バーガーボタン：枠線ありのスタイル */
+  .TAG_logo img {
+  height: 20px;
+}
   .burger-btn {
     display: flex !important;
     flex-direction: column;
@@ -188,7 +187,6 @@ header.is-scrolled:hover {
     cursor: pointer;
   }
 
-  /* 二本線（画像に合わせて二本にするね） */
   .burger-btn span {
     display: block;
     width: 24px;
@@ -196,7 +194,6 @@ header.is-scrolled:hover {
     background: var(--black);
     transition: all 0.3s ease;
   }
-
 
   header.nav-open .burger-btn {
     border: none !important;
@@ -241,7 +238,7 @@ header.is-scrolled:hover {
     padding: 20px 0;
     font-size: 18px;
     color: var(--black);
-    text-align: left; 
+    text-align: right; 
   }
 
   /* 不要な装飾をリセット */
