@@ -37,7 +37,7 @@ body {
 
 @media (max-width: 900px) {
   :root {
-    --side-padding: 24px;
+    --side-padding: 15px;
     --header-height: 50px;
     --font-xl: 40px;
     --font-l: 30px;
