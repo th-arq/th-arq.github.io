@@ -465,7 +465,9 @@ body:not(.is-index) .fade-menu {
   .intro-flex { flex-direction: column; height: auto; }
 }
 
-/* SPLIT LAYOUT */
+/* =========================
+  Spilit Layout
+========================= */
 .split-layout {
   overflow: visible !important;
   padding: var(--header-height) var(--side-padding);
@@ -496,7 +498,12 @@ body:not(.is-index) .fade-menu {
     padding: var(--gap) 0; 
 }
 
-/* ABOUT & PROJECTS & CONTACT (省略なしでそのまま維持) */
+@media (max-width: 900px) {
+  .split-section {
+    flex-direction: column;
+}
+}
+
 
 /* =========================
   About
