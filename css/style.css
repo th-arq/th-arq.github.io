@@ -20,7 +20,7 @@ body {
   --side-padding: clamp(24px, 6vw, 80px);
   --header-height: 80px;
   --font-xl: 60px;
-  --font-l: 40px;
+  --font-l: 38px;
   --font-m: 20px;
   --font-s: 18px;
   --font-xs: 16px;
@@ -196,7 +196,7 @@ header.is-scrolled:hover {
     left: 0;
     width: 100%;
     height: 100vh;
-    background: #ffffffd6;
+    background: #ffffffe8;
     padding: 100px var(--side-padding) 40px;
     transform: translateY(-100%); 
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
@@ -218,7 +218,7 @@ header.is-scrolled:hover {
 
   .sp-nav ul a {
     display: block;
-    padding: 2.5vw 0;
+    padding: 5vw 0;
     font-size: var(--font-l);
     color: var(--black);
     text-align: right; 
@@ -505,6 +505,7 @@ a.projects-item {
 
 .filter-nav {
   margin: var(--gap) 0 2.5vw;
+  display: flex;
 }
 
 .filter-btn {
@@ -514,32 +515,10 @@ a.projects-item {
   font-weight: var(--normal);
   background: none;
   border: none;
-  padding: 0 2.5vw 0 0;
+  margin: 0 2.5vw 0 0;
   cursor: pointer;
   transition: color 0.3s;
   position: relative;
-}
-
-.filter-btn::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .3s ease;
-}
-
-.filter-btn:hover::after {
-  transform: scaleX(1);
-}
-
-.filter-btn.active {
-  color: var(--black);
-  font-weight: var(--bold);
 }
 
 .projects-item.reveal {
