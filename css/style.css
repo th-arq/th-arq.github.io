@@ -197,35 +197,61 @@ header.is-scrolled:hover {
     width: 100%;
     height: 100vh;
     background: rgba(255, 255, 255, 0.98); /* ほんの少しだけ透かす */
-    padding: 120px var(--side-padding) 40px;
-    transform: translateY(-100%); 
-    transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); 
+    padding: 100px var(--side-padding) 40px;
+    transform: translateY(20px); 
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), 
+                opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0.6s;
     z-index: 999;
+    overflow-y: auto;
   }
 
   header.nav-open .sp-nav {
     transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
   }
 
   .sp-nav ul {
-    opacity: 0;
-    transition: opacity 0.4s ease 0.3s;
-    list-style-type: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
-  header.nav-open .sp-nav ul {
-  opacity: 1;
-}
+  /* ★各メニューが順番にふわんと出る設定 */
+  .sp-nav ul li {
+    border-bottom: 1px solid var(--lightgray);
+    opacity: 0; /* 最初は透明 */
+    transform: translateY(20px); /* 少し下から */
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
+                transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
 
- .sp-nav ul a {
+  /* メニューが開いた時：順番にふわんと出す（ディレイを設定） */
+  header.nav-open .sp-nav ul li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* 順番に遅らせる（1番目、2番目、3番目...） */
+  header.nav-open .sp-nav ul li:nth-child(1) { transition-delay: 0.2s; }
+  header.nav-open .sp-nav ul li:nth-child(2) { transition-delay: 0.3s; }
+  header.nav-open .sp-nav ul li:nth-child(3) { transition-delay: 0.4s; }
+  header.nav-open .sp-nav ul li:nth-child(4) { transition-delay: 0.5s; }
+
+  .sp-nav ul a {
     display: block;
     padding: 4vh 0;
     font-size: var(--font-l);
     color: var(--black);
     text-align: right;
-    transition: opacity 0.3s ease;
+    font-weight: 300;
+    letter-spacing: 0.15em;
   }
 
+  /* 不要な装飾をリセット */
   header.nav-open::before { display: none; }
   .fade-logo { opacity: 1 !important; transform: none !important; z-index: 1001; }
   #menu, .contact-btn { display: none !important; }
