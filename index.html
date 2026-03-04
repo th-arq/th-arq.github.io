@@ -1,51 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Projects | TAG Inc.</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <title>TAG Inc.</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="is-index">
+
+  <div id="loading">
+  <div class="loading_inner">
+    <div class="logo_wrapper">
+      <svg class="loading_logo_svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 675 676">
+        <path fill="currentColor" fill-rule="evenodd" d="M644.32 337.51c0 163.14-127.22 296.55-287.82 306.37V10.98q13.59.83 26.83 2.82v591.95l19.02-6.17c34.51-11.22 85.26-36.91 127.18-79.3 42.18-42.62 75.77-102.58 73.99-181.42l-.32-14.2H460.45v29.07h113.9c-2.42 62.37-30.22 110.47-65.48 146.1-30.92 31.27-67.35 52.64-96.48 64.95v-525c133.25 33.44 231.93 154.06 231.93 297.73Zm-613.64 0c0-162.94 126.92-296.23 287.26-306.32v634.35a308 308 0 0 1-21.24-2.08V77.2l-16.88 2.76c-41.61 6.83-93.1 34.56-134.22 77.73-41.38 43.45-73.39 103.7-73.87 176.37-.3 44.22 11.1 92.38 38.35 143.37l25.63-13.7c-22.13-41.4-32.52-79.92-34.55-115.03h166.48v287.76C131.84 604.83 30.68 483 30.68 337.51Zm316.32 337c181.73-5.03 327.5-153.98 327.5-337C674.5 154.5 528.73 5.55 347 .51zm-20.12-.03V.55C145.68 6.15.5 154.88.5 337.5c0 182.64 145.18 331.36 326.38 336.97Zm-59.24-354.86H101.37c4.24-57.36 30.78-105.66 65.27-141.87 31.75-33.34 69.45-55.6 101-65.12z" clip-rule="evenodd"/>
+      </svg>
+    </div>
+    <div id="loading_percent">0%</div>
+  </div>
+</div>
 
   <div id="header"></div>
 
-<main class="split-layout project-detail">
-<div class="container">
-    
-    <aside class="project-info">
-      <div class="sticky-content">
-        <h1 class="project-title">CAROLLSBURG CONDOMINIUM</h1>
-        <div class="meta-data">
-          <p class="location">Location: Washington, DC (SW)</p>
-          <p class="size">Size: 950 SF</p>
-        </div>
-        <div class="description">
-          <p>Full condo renovation: bathroom, kitchen, bedroom and living room.<br>
-            Including FFE (Furniture Fixtures & Equipment)</p>
-        </div>
-      </div>
-    </aside>
-
-    <section class="project-gallery">
-      <div class="image-wrapper reveal"><img src="/img/001.jpg" alt="Living Room"></div>
-      <div class="image-wrapper reveal"><img src="/img/002.jpg" alt="Kitchen"></div>
-      <div class="image-wrapper reveal"><img src="/img/003.jpg" alt="Bathroom"></div>
-      <div class="image-wrapper reveal"><img src="/img/004.jpg" alt="Living Room"></div>
-      <div class="image-wrapper reveal"><img src="/img/005.jpg" alt="Kitchen"></div>
-      <div class="image-wrapper reveal"><img src="/img/006.jpg" alt="Bathroom"></div>
-      <div class="image-wrapper reveal"><img src="/img/007.jpg" alt="Living Room"></div>
-      <div class="image-wrapper reveal"><img src="/img/008.jpg" alt="Kitchen"></div>
-      <div class="image-wrapper reveal"><img src="/img/009.jpg" alt="Bathroom"></div>   
-      <div class="image-wrapper reveal"><img src="/img/010.jpg" alt="Bathroom"></div>          
-      </section>
+<main class="index-page">
+<section class="intro-flex">
+  <div class="left reveal">
+    <img src="img/img3.jpg" alt="">
   </div>
+
+  <div class="right">
+    <div class="top reveal">
+      <img src="img/img1.jpg" alt="">
+    </div>
+    <div class="bottom reveal">
+      <img src="img/img2.jpg" alt="">
+    </div>
+  </div>
+</section>
 </main>
 
-  <div id="footer"></div>
 
-  <script src="../js/projects.js" defer></script>
-  <script src="../js/common.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/index.js" defer></script>
 </body>
 </html>
-
