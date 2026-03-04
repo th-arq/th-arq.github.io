@@ -222,20 +222,17 @@ header.is-scrolled:hover {
 
   /* ★各メニューが順番にふわんと出る設定 */
   .sp-nav ul li {
-    border-bottom: 1px solid var(--lightgray);
-    opacity: 0; /* 最初は透明 */
-    transform: translateY(20px); /* 少し下から */
+    opacity: 0;
+    transform: translateY(20px); 
     transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
                 transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  /* メニューが開いた時：順番にふわんと出す（ディレイを設定） */
   header.nav-open .sp-nav ul li {
     opacity: 1;
     transform: translateY(0);
   }
 
-  /* 順番に遅らせる（1番目、2番目、3番目...） */
   header.nav-open .sp-nav ul li:nth-child(1) { transition-delay: 0.2s; }
   header.nav-open .sp-nav ul li:nth-child(2) { transition-delay: 0.3s; }
   header.nav-open .sp-nav ul li:nth-child(3) { transition-delay: 0.4s; }
@@ -479,6 +476,17 @@ body:not(.is-index) .fade-menu {
   .split-section {
     flex-direction: column;
 }
+
+.split-layout .title {
+    color: var(--black);
+    position: relative;
+    top: 0;
+    margin-bottom: 20px;
+  }
+
+.split-layout .title.is-active { 
+    color: var(--black);
+}   
 }
 
 /* =========================
