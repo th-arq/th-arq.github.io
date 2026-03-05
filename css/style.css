@@ -39,9 +39,9 @@ body {
   :root {
     --side-padding: 15px;
     --header-height: 50px;
-    --font-xl: 40px;
-    --font-l: 30px;
-    --font-m: 18px;
+    --font-xl: 26px;
+    --font-l: 20px;
+    --font-m: 16px;
   }
 }
 
@@ -152,7 +152,7 @@ header.is-scrolled:hover {
 ========================= */
 @media (max-width: 900px) {
   .TAG_logo img {
-  height: 20px;
+  height: 18px;
 }
   .burger-btn {
     display: flex !important;
@@ -475,13 +475,13 @@ body:not(.is-index) .fade-menu {
 @media (max-width: 900px) {
   .split-section {
     flex-direction: column;
+    margin: 10vw 0 0 0;
 }
 
 .split-layout .title {
     color: var(--black);
     position: relative;
     top: 0;
-    margin-bottom: 20px;
   }
 
 .split-layout .title.is-active { 
