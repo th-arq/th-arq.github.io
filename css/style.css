@@ -690,6 +690,40 @@ a.projects-item {
 }
 
 
+/* =========================
+   Related Projects Section
+   ========================= */
+.related-projects {
+    margin-top: var(--gap);
+    padding-top: var(--gap);
+    border-top: 1px solid var(--lightgray); /* 上に線を引いて区切りをはっきりさせる */
+}
+
+.related-title {
+    font-size: var(--font-m); /* あまり主張しすぎず、でも存在感はあるサイズ */
+    font-weight: var(--bold);
+    margin-bottom: 2.5vw;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+/* 詳細ページ内のグリッド調整 */
+.project-detail .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2つ並べるのがスッキリしておすすめ */
+    gap: 30px;
+}
+
+@media (max-width: 900px) {
+    .project-detail .projects-grid {
+        grid-template-columns: 1fr; /* スマホでは縦に並べる */
+        gap: 20px;
+    }
+    .related-projects {
+        margin-top: 20vw; /* スマホでは少し余白を広めに */
+    }
+}
+
 
 
 /* =========================
