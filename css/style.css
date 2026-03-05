@@ -42,6 +42,8 @@ body {
     --font-xl: 26px;
     --font-l: 20px;
     --font-m: 16px;
+    --font-m: 14px;
+    --font-m: 10px;
     --gap: 15vw;
   }
 }
@@ -718,7 +720,7 @@ a.projects-item {
 }
 
 .form-group {
-  margin-bottom: 40px;
+  margin-bottom: var(--gap);
   display: flex;
   flex-direction: column;
 }
@@ -731,7 +733,7 @@ a.projects-item {
 .form-group textarea,
 .form-group select {
   width: 100%;
-  padding: 0.5vw;
+  padding: 1vw;
   border: none;
   background: var(--lightgray);
   font-family: inherit;
