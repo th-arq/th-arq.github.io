@@ -42,8 +42,8 @@ body {
     --font-xl: 26px;
     --font-l: 20px;
     --font-m: 16px;
-    --font-m: 14px;
-    --font-m: 10px;
+    --font-s: 14px;
+    --font-xs: 10px;
     --gap: 15vw;
   }
 }
