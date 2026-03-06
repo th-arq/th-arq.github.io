@@ -1,48 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
   const filterButtons = document.querySelectorAll('.filter-btn');
-  const projectItems = document.querySelectorAll('.projects-item, .image-wrapper');
+  // 監視対象に .related-item も追加！
+  const projectItems = document.querySelectorAll('.projects-item, .image-wrapper, .related-item');
 
-  // --- ① 初期表示のアニメーション (1回だけ実行) ---
-  // 画面内にあるものだけを対象に、少しずつずらして表示
-  setTimeout(() => {
-    projectItems.forEach((item, index) => {
-      // 画面内に入っているかチェック（IntersectionObserverを使わずに初期表示だけ実行）
-      setTimeout(() => {
-        item.classList.add('show');
-      }, index * 100);
-    });
-  }, 500);
-
-  // --- ② フィルタリング機能 ---
-  filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      filterButtons.forEach(btn => btn.classList.remove('active'));
-      button.classList.add('active');
-
-      const filterValue = button.getAttribute('data-filter');
-
-      projectItems.forEach(item => {
-        // 一度フェードアウトさせる
-        item.classList.remove('show');
-
-        setTimeout(() => {
-          if (filterValue === 'all' || item.classList.contains(filterValue)) {
-            item.classList.remove('is-hidden');
-            // 表示する瞬間にアニメーションを再トリガー
-            setTimeout(() => {
-              item.classList.add('show');
-            }, 50); 
-          } else {
-            item.classList.add('is-hidden');
-          }
-        }, 300); // 300msはフェードアウトを待つ時間
-      });
-    });
-  });
-
-  // --- ③ スクロール時の監視 (個別ページや長い一覧用) ---
+  // --- ① スクロール時の監視 (IntersectionObserver) ---
   const observerOptions = {
     root: null,
+    rootMargin: '0px 0px -50px 0px', // 少し早めに反応するように調整
     threshold: 0.1
   };
 
@@ -50,12 +14,52 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('show');
-        // 一度表示されたら監視を止める（何度もパカパカしないように）
         observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
 
-  // .reveal クラスがついている要素すべてを監視
+  // 全ての .reveal 要素を監視対象にする
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+
+  // --- ② フィルタリング機能 (一覧ページ用) ---
+  if (filterButtons.length > 0) {
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const filterValue = button.getAttribute('data-filter');
+
+        projectItems.forEach(item => {
+          // 一度フェードアウト
+          item.classList.remove('show');
+
+          setTimeout(() => {
+            if (filterValue === 'all' || item.classList.contains(filterValue)) {
+              item.classList.remove('is-hidden');
+              // 再表示の際に監視をリセットしてアニメーションをトリガー
+              setTimeout(() => {
+                item.classList.add('show');
+              }, 50);
+            } else {
+              item.classList.add('is-hidden');
+            }
+          }, 300);
+        });
+      });
+    });
+  }
+
+  // --- ③ 初期表示の補助 ---
+  // ページ読み込み時にすでに画面内にあるものを確実に出す
+  setTimeout(() => {
+    document.querySelectorAll('.reveal').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add('show');
+      }
+    });
+  }, 100);
 });
