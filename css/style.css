@@ -709,11 +709,13 @@ a.projects-item {
 /* PCで横に並べる設定 */
 .related-grid {
   display: flex;
+  flex-wrap: wrap;
   gap: 30px;
 }
 
 .related-item {
-  flex: 1; /* 均等な幅にする */
+  flex: 0 0 calc((100% - 60px) / 4); 
+  min-width: 280px;
   display: block;
 }
 
