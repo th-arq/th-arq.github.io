@@ -243,12 +243,10 @@ header.is-scrolled:hover {
 
   .sp-nav ul a {
     display: block;
-    padding: 4vh 0;
-    font-size: var(--font-l);
+    padding: 5vw 0;
+    font-size: var(--font-xl);
     color: var(--black);
     text-align: right;
-    font-weight: 300;
-    letter-spacing: 0.15em;
   }
 
   /* 不要な装飾をリセット */
@@ -282,6 +280,7 @@ footer {
     .footer_container, .footer_copy {
         flex-direction: column;
         text-align: center;
+        margin: auto;
     }
 }
 
