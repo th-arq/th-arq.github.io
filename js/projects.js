@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // --- ① スクロール監視の設定 ---
+  // --- ① スクロール監視 (共通) ---
+  // revealクラスがついているものは、ページに関わらず全て監視する
   const observerOptions = {
     root: null,
-    rootMargin: '0px 0px -10% 0px', // 画面の下から10%の位置に来たら表示
+    rootMargin: '0px 0px -5% 0px', 
     threshold: 0.1
   };
 
@@ -10,36 +11,39 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('show');
-        observer.unobserve(entry.target); // 一度出たら監視終了
+        observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
 
-  // ページ内のすべての .reveal 要素を監視（これで関連プロジェクトも解決！）
+  // ページ内の全.reveal（一覧のカード、詳細の画像、関連リンク全部）を対象にする
   const revealElements = document.querySelectorAll('.reveal');
   revealElements.forEach(el => observer.observe(el));
 
 
-  // --- ② フィルタリング機能 (一覧ページにある場合のみ動く) ---
+  // --- ② フィルタリング機能 (一覧ページのみ) ---
   const filterButtons = document.querySelectorAll('.filter-btn');
-  const projectItems = document.querySelectorAll('.projects-item'); // 一覧のカードだけを対象に
+  const projectItems = document.querySelectorAll('.projects-item');
 
+  // ボタンが存在するページ（一覧ページ）のときだけ実行する
   if (filterButtons.length > 0) {
     filterButtons.forEach(button => {
       button.addEventListener('click', () => {
-        // ボタンの切り替え
+        // activeクラスの付け替え
         filterButtons.forEach(btn => btn.classList.remove('active'));
         button.classList.add('active');
 
         const filterValue = button.getAttribute('data-filter');
 
         projectItems.forEach(item => {
-          item.classList.remove('show'); // 一旦消す
+          // 一旦アニメーションをリセット
+          item.classList.remove('show');
 
           setTimeout(() => {
             if (filterValue === 'all' || item.classList.contains(filterValue)) {
               item.classList.remove('is-hidden');
-              setTimeout(() => item.classList.add('show'), 50);
+              // 10msだけ待ってからふわんと出す
+              setTimeout(() => item.classList.add('show'), 10);
             } else {
               item.classList.add('is-hidden');
             }
