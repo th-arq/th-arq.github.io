@@ -1,12 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  // 監視対象に .related-item も追加！
-  const projectItems = document.querySelectorAll('.projects-item, .image-wrapper, .related-item');
-
-  // --- ① スクロール時の監視 (IntersectionObserver) ---
+  // --- ① スクロール監視の設定 ---
   const observerOptions = {
     root: null,
-    rootMargin: '0px 0px -50px 0px', // 少し早めに反応するように調整
+    rootMargin: '0px 0px -10% 0px', // 画面の下から10%の位置に来たら表示
     threshold: 0.1
   };
 
@@ -14,35 +10,36 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('show');
-        observer.unobserve(entry.target);
+        observer.unobserve(entry.target); // 一度出たら監視終了
       }
     });
   }, observerOptions);
 
-  // 全ての .reveal 要素を監視対象にする
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // ページ内のすべての .reveal 要素を監視（これで関連プロジェクトも解決！）
+  const revealElements = document.querySelectorAll('.reveal');
+  revealElements.forEach(el => observer.observe(el));
 
 
-  // --- ② フィルタリング機能 (一覧ページ用) ---
+  // --- ② フィルタリング機能 (一覧ページにある場合のみ動く) ---
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const projectItems = document.querySelectorAll('.projects-item'); // 一覧のカードだけを対象に
+
   if (filterButtons.length > 0) {
     filterButtons.forEach(button => {
       button.addEventListener('click', () => {
+        // ボタンの切り替え
         filterButtons.forEach(btn => btn.classList.remove('active'));
         button.classList.add('active');
 
         const filterValue = button.getAttribute('data-filter');
 
         projectItems.forEach(item => {
-          // 一度フェードアウト
-          item.classList.remove('show');
+          item.classList.remove('show'); // 一旦消す
 
           setTimeout(() => {
             if (filterValue === 'all' || item.classList.contains(filterValue)) {
               item.classList.remove('is-hidden');
-              // 再表示の際に監視をリセットしてアニメーションをトリガー
-              setTimeout(() => {
-                item.classList.add('show');
-              }, 50);
+              setTimeout(() => item.classList.add('show'), 50);
             } else {
               item.classList.add('is-hidden');
             }
@@ -51,15 +48,4 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-
-  // --- ③ 初期表示の補助 ---
-  // ページ読み込み時にすでに画面内にあるものを確実に出す
-  setTimeout(() => {
-    document.querySelectorAll('.reveal').forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight) {
-        el.classList.add('show');
-      }
-    });
-  }, 100);
 });
