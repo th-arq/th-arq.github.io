@@ -489,6 +489,7 @@ body:not(.is-index) .fade-menu {
 @media (max-width: 900px) {
   .split-section {
     flex-direction: column;
+    margin: var(--gap-m) auto 0 auto;
 }
 
 .split-layout .title {
@@ -505,7 +506,7 @@ body:not(.is-index) .fade-menu {
 /* =========================
   About
 ========================= */
-.about-page h2, .about-page h3, .about-page p, .affiliations {
+.about-page h1, .about-page h2, .about-page h3, .about-page p, .affiliations {
     margin: 0 auto var(--gap-xs) auto;
 }
 
@@ -540,13 +541,13 @@ body:not(.is-index) .fade-menu {
 }
 
 @media (max-width: 900px) {
+  .about-page h1, .about-page h2, .about-page h3, .about-page p, .affiliations {
+    margin: 0 auto var(--gap-s) auto;
+}
     .profile-image-container {
-        flex: 0 0 45%;
+        flex: 0 0 40%;
     }
 
-    .about-page p {
-    margin: 0 auto var(--gap-m) auto;
-}
 
 }
 
