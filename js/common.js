@@ -85,6 +85,7 @@ window.addEventListener("load", () => {
     });
   });
 
+  /*
   // --- 5. Contact Form Ajax Redirect (NEW!) ---
   const contactForm = document.querySelector('.contact-form');
   if (contactForm) {
@@ -116,7 +117,7 @@ window.addEventListener("load", () => {
         submitBtn.disabled = false;
       }
     });
-  }
+  }*/
 
   // --- 6. Page Appearance ---
   if (!document.body.classList.contains('is-index')) {
