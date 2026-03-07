@@ -1,5 +1,5 @@
 window.addEventListener("load", () => {
-  // --- 1. Lenis (スムーススクロール) ---
+  // --- 1. Lenis (そのまま) ---
   const script = document.createElement('script');
   script.src = "https://unpkg.com/lenis@1.1.13/dist/lenis.min.js";
   script.onload = () => {
@@ -8,10 +8,6 @@ window.addEventListener("load", () => {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
-    
-    // indexページでもスクロールしたい場合は、lenis.stop()を消すかコメントアウト
-    // if (document.body.classList.contains('is-index')) { lenis.stop(); }
-
     function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -20,7 +16,7 @@ window.addEventListener("load", () => {
   };
   document.head.appendChild(script);
 
-  // --- 2. スクロール監視 (Aboutページなどのタイトル用) ---
+  // --- 2. Scroll (そのまま) ---
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -35,7 +31,7 @@ window.addEventListener("load", () => {
     observer.observe(title);
   });
 
-  // --- 3. Header / Footer 読み込み ---
+  // --- 3. Header / Footer (そのまま) ---
   const loadParts = (id, path) => {
     fetch(path)
       .then(res => res.text())
@@ -43,21 +39,13 @@ window.addEventListener("load", () => {
         const el = document.getElementById(id);
         if (!el) return;
         el.innerHTML = html;
-
         if (id === 'header') {
           const headerTag = el.querySelector('header');
           if (!headerTag) return;
-
-          // スクロールで透明度変化
           window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-              headerTag.classList.add('is-scrolled');
-            } else {
-              headerTag.classList.remove('is-scrolled');
-            }
+            if (window.scrollY > 50) headerTag.classList.add('is-scrolled');
+            else headerTag.classList.remove('is-scrolled');
           });
-
-          // バーガーボタン
           const burgerBtn = el.querySelector('.burger-btn');
           if (burgerBtn) {
             burgerBtn.addEventListener('click', (e) => {
@@ -73,7 +61,34 @@ window.addEventListener("load", () => {
   loadParts('header', '/head.html');
   loadParts('footer', '/foot.html');
 
-  // --- 4. コンテンツ表示 (Aboutなどの下層ページ用) ---
+  // --- 4. FAQ Smooth Accordion (New!) ---
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const summary = item.querySelector('.faq-question');
+    const content = item.querySelector('.faq-answer');
+
+    summary.addEventListener('click', (e) => {
+      e.preventDefault(); // デフォルトのパチッと開く動きを止める
+
+      if (item.hasAttribute('open')) {
+        // 閉じるときのアニメーション
+        const closing = content.animate([
+          { opacity: 1, height: content.scrollHeight + 'px' },
+          { opacity: 0, height: '0px' }
+        ], { duration: 400, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' });
+
+        closing.onfinish = () => item.removeAttribute('open');
+      } else {
+        // 開くとき
+        item.setAttribute('open', '');
+        content.animate([
+          { opacity: 0, height: '0px' },
+          { opacity: 1, height: content.scrollHeight + 'px' }
+        ], { duration: 400, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' });
+      }
+    });
+  });
+
   if (!document.body.classList.contains('is-index')) {
     setTimeout(() => {
       document.querySelector('main')?.classList.add('appeared');
