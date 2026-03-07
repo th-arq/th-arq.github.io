@@ -22,8 +22,9 @@ body {
   --side-padding: clamp(24px, 6vw, 80px);
   --header-height: 80px;
   --font-xl: 60px;
-  --font-l: 38px;
-  --font-m: 20px;
+  --font-l: 42px;
+  --font-m: 32px;
+  --font-n: 20px;
   --font-s: 18px;
   --font-xs: 16px;
   --bold: 400;
@@ -45,7 +46,8 @@ body {
     --header-height: 50px;
     --font-xl: 26px;
     --font-l: 20px;
-    --font-m: 16px;
+    --font-m: 18px;
+    --font-n: 16px;
     --font-s: 14px;
     --font-xs: 10px;
     --gap-l: 15vw;
@@ -56,8 +58,8 @@ body {
 
 h1 { font-size: var(--font-xl); }
 h2 { font-size: var(--font-l); font-weight: var(--bold);}
-h3 { font-size: var(--font-l); font-weight: var(--normal);}
-h4 { font-size: var(--font-m); font-weight: var(--bold);}
+h3 { font-size: var(--font-m); font-weight: var(--normal);}
+h4 { font-size: var(--font-n); font-weight: var(--bold);}
 a { color: inherit; text-decoration: none;}
 
 
@@ -455,7 +457,7 @@ body:not(.is-index) .fade-menu {
 .split-layout {
   overflow: visible !important;
   padding: var(--header-height) var(--side-padding);
-  font-size: var(--font-m);
+  font-size: var(--font-n);
 }
 
 .split-section {
@@ -563,7 +565,7 @@ a.projects-item {
 .filter-btn {
   color: var(--gray);
   font-family: 'Jost';
-  font-size: var(--font-m);
+  font-size: var(--font-n);
   font-weight: var(--normal);
   background: none;
   border: none;
@@ -581,7 +583,7 @@ a.projects-item {
 
 @media (max-width: 900px) {
   .filter-btn {
-    font-size: var(--font-m);
+    font-size: var(--font-n);
   }
 }
 
@@ -662,7 +664,7 @@ a.projects-item {
 
 .description {
   margin-top: var(--gap-m);
-  font-size: var(--font-m);
+  font-size: var(--font-n);
 }
 
 .project-gallery {
@@ -721,8 +723,6 @@ a.projects-item {
 }
 
 .related-title {
-  font-size: var(--font-s);
-  font-weight: var(--bold);
   text-transform: uppercase;
   letter-spacing: 0.15em;
   margin-bottom: 30px;
@@ -758,10 +758,6 @@ a.projects-item {
   transform: scale(1.05);
 }
 
-.related-item p {
-  font-size: 14px;
-  color: var(--black);
-}
 
 /* スマホの時は1枚ずつ縦に並べる */
 @media (max-width: 900px) {
@@ -783,13 +779,13 @@ a.projects-item {
 }
 
 .contact-intro .intro-text {
-  font-size: var(--font-m);
+  font-size: var(--font-n);
   line-height: 1.6;
   margin-bottom: 2.5vw;
 }
 
 .contact-intro .faq-link {
-  font-size: var(--font-m);
+  font-size: var(--font-n);
   color: var(--darkgray);
 }
 
@@ -820,7 +816,7 @@ a.projects-item {
   border: none;
   background: var(--lightgray);
   font-family: inherit;
-  font-size: var(--font-m);
+  font-size: var(--font-n);
   outline: none;
   transition: border-color 0.3s ease;
 }
@@ -847,7 +843,7 @@ a.projects-item {
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  font-size: var(--font-m);
+  font-size: var(--font-n);
 }
 
 .submit-btn {
@@ -858,7 +854,7 @@ a.projects-item {
   color: var(--white);
   border: 1px solid var(--black);
   cursor: pointer;
-  font-size: var(--font-m);
+  font-size: var(--font-n);
   text-transform: uppercase;
   transition: all 0.4s ease;
 }
