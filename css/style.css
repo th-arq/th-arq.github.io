@@ -38,6 +38,7 @@ body {
   --gap-l: 10vw;
   --gap-m: 5vw;
   --gap-s: 2.5vw;
+  --gap-xs: 1.5vw;
 }
 
 @media (max-width: 900px) {
@@ -53,6 +54,7 @@ body {
     --gap-l: 15vw;
     --gap-m: 10vw;
     --gap-s: 5vw;
+    --gap-s: 2.5vw;
   }
 }
 
