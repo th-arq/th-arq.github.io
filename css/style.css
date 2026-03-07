@@ -786,7 +786,7 @@ a.projects-item {
 .contact-intro .intro-text {
   font-size: var(--font-n);
   line-height: 1.6;
-  margin-bottom: 2.5vw;
+  margin-bottom: var(--gap-xs);
 }
 
 .contact-intro .faq-link {
@@ -817,7 +817,7 @@ a.projects-item {
 .form-group textarea,
 .form-group select {
   width: 100%;
-  padding: 1vw;
+  padding: 0.3em;
   border: none;
   background: var(--lightgray);
   font-family: inherit;
