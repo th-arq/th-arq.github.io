@@ -782,7 +782,7 @@ a.projects-item {
 }
 
 .form-group {
-  margin-bottom: var(--gap-m);
+  margin-bottom: var(--gap-s);
   display: flex;
   flex-direction: column;
 }
