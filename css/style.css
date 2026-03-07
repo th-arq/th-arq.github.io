@@ -603,8 +603,8 @@ a.projects-item {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--gap-s);
 }
 
 .projects-item {
@@ -900,8 +900,7 @@ a.projects-item {
    FAQ
 ========================= */
 .faq-item {
-    border-bottom: 1px solid var(--lightgray);
-    padding: var(--gap-s) 0;
+    padding: var(--gap-s) 0 0 0;
 }
 
 .faq-question {
