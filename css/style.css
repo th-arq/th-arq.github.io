@@ -503,7 +503,6 @@ body:not(.is-index) .fade-menu {
 /* =========================
   About
 ========================= */
-
 .split-profile {
     display: flex;
     align-items: flex-start;
@@ -529,6 +528,10 @@ body:not(.is-index) .fade-menu {
     margin: 0;
 }
 
+.content-box iframe {
+  width: 100%;
+  max-width: var(--gap-s) 0;
+}
 
 @media (max-width: 900px) {
     .profile-image-container {
