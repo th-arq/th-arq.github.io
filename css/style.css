@@ -907,61 +907,57 @@ a.projects-item {
    FAQ
 ========================= */
 .faq-item {
-    border-bottom: 1px solid var(--lightgray); /* 下線を入れて区切りを明確に */
-    overflow: hidden;
+  border-bottom: 1px solid var(--lightgray);
+  transition: background-color 0.4s ease;
+}
+
+/* ホバー時の演出：背景を少しだけ明るくして、高級感を出す */
+.faq-item:hover {
+  background-color: #fafafa;
 }
 
 .faq-question {
-    list-style: none;
-    cursor: pointer;
-    font-size: var(--font-m);
-    font-weight: var(--bold);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    user-select: none;
-    padding: 30px 0; /* クリックエリアを広げつつ余白を確保 */
-    transition: color 0.3s ease;
+  list-style: none;
+  cursor: pointer;
+  padding: 35px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: var(--bold);
+  transition: padding-left 0.4s ease;
 }
 
-/* ★ホバー時の動作：文字色を少し薄くして「押せる感」を出す */
-.faq-question:hover {
-    color: var(--darkgray);
+/* ホバー時にテキストが少し右に動く（わかりやすい！） */
+.faq-item:hover .faq-question {
+  padding-left: 10px;
 }
 
+/* カスタムアイコン：一本の棒が回転してマイナスになる */
 .faq-question::after {
-    content: '+';
-    font-size: 32px; /* 少し大きめにしてアイコンっぽく */
-    font-weight: 300;
-    line-height: 1;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* 回転を滑らかに */
+  content: '';
+  width: 20px;
+  height: 20px;
+  position: relative;
+  background-image: 
+    linear-gradient(var(--black), var(--black)), 
+    linear-gradient(var(--black), var(--black));
+  background-size: 100% 1px, 1px 100%; /* 横棒と縦棒 */
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 開いた時の＋の動き（45度回転して×に見せる） */
+/* 開いた時に縦棒が消えてマイナスになるように見せる */
 .faq-item[open] .faq-question::after {
-    transform: rotate(45deg);
+  transform: rotate(180deg);
+  background-size: 100% 1px, 0% 100%; /* 縦棒の幅を0にして消す */
 }
 
-.faq-question::-webkit-details-marker {
-    display: none;
-}
+.faq-question::-webkit-details-marker { display: none; }
 
-/* ★なめらかな開閉アニメーションの肝 */
 .faq-answer {
-    padding-bottom: 30px;
-    color: var(--darkgray);
-    line-height: 1.8;
-    /* アニメーション設定 */
-    animation: slideDown 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  overflow: hidden; /* JSアニメーションのために必須 */
+  color: var(--darkgray);
+  line-height: 1.8;
+  padding-bottom: 30px;
 }
