@@ -45,12 +45,13 @@ body {
   :root {
     --side-padding: 15px;
     --header-height: 50px;
-    --font-xl: 26px;
-    --font-l: 20px;
-    --font-m: 18px;
+    --font-xl: 32px;
+    --font-l: 24px;
+    --font-m: 20px;
     --font-n: 16px;
     --font-s: 14px;
     --font-xs: 10px;
+    --gap-xl: 20vw;
     --gap-l: 15vw;
     --gap-m: 10vw;
     --gap-s: 5vw;
@@ -489,7 +490,7 @@ body:not(.is-index) .fade-menu {
 @media (max-width: 900px) {
   .split-section {
     flex-direction: column;
-    margin: var(--gap-m) auto 0 auto;
+    margin: var(--gap-xl) auto 0 auto;
 }
 
 .split-layout .title {
