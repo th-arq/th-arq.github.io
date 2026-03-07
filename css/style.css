@@ -462,6 +462,7 @@ body:not(.is-index) .fade-menu {
     display: flex;
     position: relative;
     min-height: 100vh;
+    margin: 0 0 var(--gap-l) 0;
 }
 
 .split-layout .sticky-box { flex: 0.8; position: relative; }
@@ -484,7 +485,6 @@ body:not(.is-index) .fade-menu {
 @media (max-width: 900px) {
   .split-section {
     flex-direction: column;
-    margin: 0 0 var(--gap-l) 0;
 }
 
 .split-layout .title {
@@ -501,10 +501,18 @@ body:not(.is-index) .fade-menu {
 /* =========================
   About
 ========================= */
+.about-page h3, .about-page p, .affiliations {
+    margin: 0 auto var(--gap-s) auto;
+}
+
+.affiliations ul, .registration ul {
+    margin: 0 0 var(--gap-s) 1.5em;
+}
+
 .split-profile {
     display: flex;
     align-items: flex-start;
-    gap: clamp(20px, 4vw, 40px);
+    gap: var(--gap-s);;
     margin-bottom: var(--gap-s);
 }
 
@@ -912,19 +920,14 @@ a.projects-item {
    FAQ
 ========================= */
 .faq-item {
-  border-bottom: 1px solid var(--lightgray);
   transition: background-color 0.4s ease;
 }
 
-/* ホバー時の演出：背景を少しだけ明るくして、高級感を出す */
-.faq-item:hover {
-  background-color: #fafafa;
-}
 
 .faq-question {
   list-style: none;
   cursor: pointer;
-  padding: 35px 0;
+  padding: var(--gap-s) 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
