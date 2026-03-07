@@ -892,13 +892,10 @@ a.projects-item {
     padding: 0 var(--side-padding);
 }
 
-.thanks-container {
-    max-width: 600px;
-}
 
 .thanks-title {
     font-size: var(--font-xl);
-    margin: 0;
+    font-weight: var(--bold);
 }
 
 .thanks-message {
