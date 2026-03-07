@@ -1,5 +1,5 @@
 window.addEventListener("load", () => {
-  // --- 1. Lenis (そのまま) ---
+  // --- 1. Lenis (Smooth Scroll) ---
   const script = document.createElement('script');
   script.src = "https://unpkg.com/lenis@1.1.13/dist/lenis.min.js";
   script.onload = () => {
@@ -16,7 +16,7 @@ window.addEventListener("load", () => {
   };
   document.head.appendChild(script);
 
-  // --- 2. Scroll (そのまま) ---
+  // --- 2. Scroll Observer (Title fade) ---
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -31,7 +31,7 @@ window.addEventListener("load", () => {
     observer.observe(title);
   });
 
-  // --- 3. Header / Footer (そのまま) ---
+  // --- 3. Header / Footer Loader ---
   const loadParts = (id, path) => {
     fetch(path)
       .then(res => res.text())
@@ -61,25 +61,21 @@ window.addEventListener("load", () => {
   loadParts('header', '/head.html');
   loadParts('footer', '/foot.html');
 
-  // --- 4. FAQ Smooth Accordion (New!) ---
+  // --- 4. FAQ Smooth Accordion ---
   const faqItems = document.querySelectorAll('.faq-item');
   faqItems.forEach(item => {
     const summary = item.querySelector('.faq-question');
     const content = item.querySelector('.faq-answer');
 
     summary.addEventListener('click', (e) => {
-      e.preventDefault(); // デフォルトのパチッと開く動きを止める
-
+      e.preventDefault();
       if (item.hasAttribute('open')) {
-        // 閉じるときのアニメーション
         const closing = content.animate([
           { opacity: 1, height: content.scrollHeight + 'px' },
           { opacity: 0, height: '0px' }
         ], { duration: 400, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' });
-
         closing.onfinish = () => item.removeAttribute('open');
       } else {
-        // 開くとき
         item.setAttribute('open', '');
         content.animate([
           { opacity: 0, height: '0px' },
@@ -89,6 +85,40 @@ window.addEventListener("load", () => {
     });
   });
 
+  // --- 5. Contact Form Ajax Redirect (NEW!) ---
+  const contactForm = document.querySelector('.contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(contactForm);
+      const submitBtn = contactForm.querySelector('.submit-btn');
+      
+      const originalText = submitBtn.innerText;
+      submitBtn.innerText = 'SENDING...';
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          // 送信成功したら thanks.html へ
+          window.location.href = 'thanks.html';
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch (err) {
+        alert('Oops! Something went wrong. Please try again.');
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  }
+
+  // --- 6. Page Appearance ---
   if (!document.body.classList.contains('is-index')) {
     setTimeout(() => {
       document.querySelector('main')?.classList.add('appeared');
