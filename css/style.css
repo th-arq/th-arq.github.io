@@ -496,6 +496,7 @@ body:not(.is-index) .fade-menu {
     color: var(--black);
     position: relative;
     top: 0;
+    margin: 0 auto var(--gap-m);
   }
 
 .split-layout .title.is-active { 
@@ -541,8 +542,8 @@ body:not(.is-index) .fade-menu {
 }
 
 @media (max-width: 900px) {
-  .about-page h1, .about-page h2, .about-page h3, .about-page p, .affiliations {
-    margin: 0 auto var(--gap-s) auto;
+.about-page h2, .about-page h3, .about-page p, .affiliations {
+    margin: 0 auto var(--gap-s) auto!important;
 }
     .profile-image-container {
         flex: 0 0 40%;
