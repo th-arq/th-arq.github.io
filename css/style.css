@@ -816,11 +816,9 @@ a.projects-item {
   text-transform: uppercase;
 }
 
-.form-group input, 
-.form-group textarea,
-.form-group select {
+.form-group input, .form-group textarea, .form-group select {
   width: 100%;
-  padding: 0.3em;
+  padding: 0.5em;
   border: none;
   background: var(--lightgray);
   font-family: inherit;
