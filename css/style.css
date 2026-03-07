@@ -558,6 +558,13 @@ a.projects-item {
   cursor: pointer;
 }
 
+.filter-btn.active {
+  color: var(--black);
+}
+
+.filter-btn:hover {
+  color: var(--black);
+}
 
 @media (max-width: 900px) {
   .filter-btn {
