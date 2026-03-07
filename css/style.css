@@ -907,7 +907,8 @@ a.projects-item {
    FAQ
 ========================= */
 .faq-item {
-    padding: var(--gap-s) 0 0 0;
+    border-bottom: 1px solid var(--lightgray); /* 下線を入れて区切りを明確に */
+    overflow: hidden;
 }
 
 .faq-question {
@@ -919,15 +920,24 @@ a.projects-item {
     justify-content: space-between;
     align-items: center;
     user-select: none;
+    padding: 30px 0; /* クリックエリアを広げつつ余白を確保 */
+    transition: color 0.3s ease;
+}
+
+/* ★ホバー時の動作：文字色を少し薄くして「押せる感」を出す */
+.faq-question:hover {
+    color: var(--darkgray);
 }
 
 .faq-question::after {
     content: '+';
-    font-size: var(--font-l);
+    font-size: 32px; /* 少し大きめにしてアイコンっぽく */
     font-weight: 300;
-    transition: transform 0.4s ease;
+    line-height: 1;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* 回転を滑らかに */
 }
 
+/* 開いた時の＋の動き（45度回転して×に見せる） */
 .faq-item[open] .faq-question::after {
     transform: rotate(45deg);
 }
@@ -936,12 +946,22 @@ a.projects-item {
     display: none;
 }
 
+/* ★なめらかな開閉アニメーションの肝 */
 .faq-answer {
-    padding-top: var(--gap-s);
+    padding-bottom: 30px;
     color: var(--darkgray);
     line-height: 1.8;
+    /* アニメーション設定 */
+    animation: slideDown 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.faq-answer p {
-    margin: 0;
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
