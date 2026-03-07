@@ -269,7 +269,7 @@ header.is-scrolled:hover {
 ========================= */
 footer {
     width: 100%;
-    padding: var(--gap-m) var(--side-padding) 2.5vw;
+    padding: var(--gap-l) var(--side-padding) var(--gap-m);
 }
 
 .footer_container {
@@ -486,7 +486,6 @@ body:not(.is-index) .fade-menu {
 @media (max-width: 900px) {
   .split-section {
     flex-direction: column;
-    margin: 10vw 0 0 0;
 }
 
 .split-layout .title {
