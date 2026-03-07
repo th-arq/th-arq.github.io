@@ -505,8 +505,8 @@ body:not(.is-index) .fade-menu {
 /* =========================
   About
 ========================= */
-.about-page h3, .about-page p, .affiliations {
-    margin: 0 auto var(--gap-s) auto;
+.about-page h2, .about-page h3, .about-page p, .affiliations {
+    margin: 0 auto var(--gap-xs) auto;
 }
 
 .affiliations ul, .registration ul {
