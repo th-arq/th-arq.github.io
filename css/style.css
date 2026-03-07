@@ -470,7 +470,10 @@ body:not(.is-index) .fade-menu {
     margin: 0 0 var(--gap-l) 0;
 }
 
-.split-layout .sticky-box { flex: 0.8; position: relative; }
+.split-layout .sticky-box { 
+  flex: 0.8; position: relative;
+}
+
 .split-layout .title {
     position: sticky;
     top: calc(50% - 1.25rem);    
@@ -765,7 +768,6 @@ a.projects-item {
 }
 
 
-/* スマホの時は1枚ずつ縦に並べる */
 @media (max-width: 900px) {
   .related-area {
     margin-top: 60px;
@@ -937,12 +939,10 @@ a.projects-item {
   transition: padding-left 0.4s ease;
 }
 
-/* ホバー時にテキストが少し右に動く（わかりやすい！） */
 .faq-item:hover .faq-question {
   padding-left: 10px;
 }
 
-/* カスタムアイコン：一本の棒が回転してマイナスになる */
 .faq-question::after {
   content: '';
   width: 20px;
@@ -951,23 +951,30 @@ a.projects-item {
   background-image: 
     linear-gradient(var(--black), var(--black)), 
     linear-gradient(var(--black), var(--black));
-  background-size: 100% 1px, 1px 100%; /* 横棒と縦棒 */
+  background-size: 100% 1px, 1px 100%;
   background-position: center;
   background-repeat: no-repeat;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 開いた時に縦棒が消えてマイナスになるように見せる */
+
 .faq-item[open] .faq-question::after {
   transform: rotate(180deg);
-  background-size: 100% 1px, 0% 100%; /* 縦棒の幅を0にして消す */
+  background-size: 100% 1px, 0% 100%; 
 }
 
 .faq-question::-webkit-details-marker { display: none; }
 
 .faq-answer {
-  overflow: hidden; /* JSアニメーションのために必須 */
+  overflow: hidden;
   color: var(--darkgray);
   line-height: 1.8;
   padding-bottom: 30px;
+}
+
+
+@media (max-width: 900px) {
+  .faq-page .sticky-box {
+    flex: 0;
+  }
 }
