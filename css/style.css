@@ -558,8 +558,9 @@ a.projects-item {
 }
 
 .filter-nav {
-  margin: var(--gap-m) 0 2.5vw;
+  margin: var(--gap-m) 0 var(--gap-s);
   display: flex;
+  flex-wrap: wrap;
 }
 
 .filter-btn {
