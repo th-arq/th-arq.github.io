@@ -8,6 +8,7 @@ html {
   margin: initial;
   padding: initial;
   box-sizing: border-box;
+  font-family: inherit;
 }
 
 body {
@@ -120,16 +121,6 @@ main.appeared, .fade-logo.show, .fade-menu.show, .projects-item.reveal.show {
   transform: scaleX(1);
 }
 
-.contact-btn {
-  padding: 10px 18px;
-  background: var(--black);
-  color: var(--white);
-}
-
-.contact-btn a {
-  color: var(--white);
-}
-
 
 /* =========================
   Button
@@ -203,6 +194,10 @@ header.is-scrolled:hover {
 
 #menu a {
   position: relative;
+}
+
+.contact-btn {
+  padding: 10px 18px;
 }
 
 @media (min-width: 901px) {
