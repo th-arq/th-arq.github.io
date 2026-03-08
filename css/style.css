@@ -134,6 +134,18 @@ main.appeared, .fade-logo.show, .fade-menu.show, .projects-item.reveal.show {
 /* =========================
   Button
 ========================= */
+.btn {
+  background: var(--black);
+  color: var(--white);
+  border: 1px solid var(--black);
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.btn:hover {
+  background: transparent;
+  color: var(--black);
+}
 
 /* =========================
   Header PC
@@ -855,18 +867,8 @@ a.projects-item {
   margin-top: var(--gap-s);
   width: 100%;
   padding: 25px;
-  background: var(--black);
-  color: var(--white);
-  border: 1px solid var(--black);
-  cursor: pointer;
   font-size: var(--font-n);
   text-transform: uppercase;
-  transition: all 0.4s ease;
-}
-
-.submit-btn:hover {
-  background: transparent;
-  color: var(--black);
 }
 
 .form-group-row {
