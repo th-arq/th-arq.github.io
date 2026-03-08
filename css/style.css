@@ -459,6 +459,7 @@ body:not(.is-index) .fade-menu {
 ========================= */
 .split-layout {
   overflow: visible !important;
+  margin: var(--gap-m) 0 0 0;
   padding: var(--header-height) var(--side-padding);
   font-size: var(--font-n);
 }
@@ -566,7 +567,7 @@ a.projects-item {
 }
 
 .filter-nav {
-  margin: var(--gap-m) 0 var(--gap-s);
+  margin: 0 auto var(--gap-s) auto;
   display: flex;
   flex-wrap: wrap;
 }
