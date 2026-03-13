@@ -614,6 +614,8 @@ a.projects-item {
 
 .projects-item .thumbnail {
   overflow: hidden;
+  width: 14vw;
+  height: 13vw;
 }
 
 .projects-item .thumbnail img {
