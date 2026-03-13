@@ -1,50 +1,51 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // --- ① ふわっと出す処理 (共通) ---
+  // --- ① ふわっと出す処理 ---
   const revealElements = document.querySelectorAll('.reveal');
-
   const showElements = () => {
     revealElements.forEach((el) => {
       const rect = el.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      // 要素が画面の「下から少し入った」か、既に「画面より上」にあるなら表示
-      if (rect.top < windowHeight * 0.9) {
+      if (rect.top < window.innerHeight * 0.9) {
         el.classList.add('show');
       }
     });
   };
-
-  // 読み込み時とスクロール時に実行
   window.addEventListener('scroll', showElements);
-  // 少しだけ遅らせて確実に実行
   setTimeout(showElements, 200);
 
-
-  // --- ② フィルタリング機能 (一覧ページのみ) ---
+  // --- ② フィルタリング機能 (Updated!) ---
   const filterButtons = document.querySelectorAll('.filter-btn');
   const projectItems = document.querySelectorAll('.projects-item');
+  const subNav = document.getElementById('sub-residential'); // HTMLにこのIDをつけてね
 
-  if (filterButtons.length > 0) {
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const filterValue = button.getAttribute('data-filter');
 
-        const filterValue = button.getAttribute('data-filter');
+      // 1. アクティブなボタンの見た目を切り替え
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
 
-        projectItems.forEach(item => {
-          item.classList.remove('show');
+      // 2. Residential関連のサブメニュー開閉
+      // Residential本体、またはその子要素(bath/kitchen)が押されたら開く
+      if (filterValue === 'residential' || button.classList.contains('sub-item')) {
+        subNav.classList.add('is-open');
+      } else {
+        subNav.classList.remove('is-open');
+      }
 
-          setTimeout(() => {
-            if (filterValue === 'all' || item.classList.contains(filterValue)) {
-              item.classList.remove('is-hidden');
-              setTimeout(() => item.classList.add('show'), 50);
-            } else {
-              item.classList.add('is-hidden');
-            }
-          }, 300);
-        });
+      // 3. フィルタリング実行
+      projectItems.forEach(item => {
+        item.classList.remove('show'); // 一旦消すアニメーション用
+
+        setTimeout(() => {
+          if (filterValue === 'all' || item.classList.contains(filterValue)) {
+            item.classList.remove('is-hidden');
+            setTimeout(() => item.classList.add('show'), 50);
+          } else {
+            item.classList.add('is-hidden');
+          }
+        }, 300);
       });
     });
-  }
+  });
 });
