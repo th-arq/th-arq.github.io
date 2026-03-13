@@ -12,33 +12,40 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', showElements);
   setTimeout(showElements, 200);
 
-  // --- ② フィルタリング機能 (Updated!) ---
+  // --- ② フィルタリング機能 ---
   const filterButtons = document.querySelectorAll('.filter-btn');
   const projectItems = document.querySelectorAll('.projects-item');
-  const subNav = document.getElementById('sub-residential'); // HTMLにこのIDをつけてね
+  const subNav = document.getElementById('sub-residential');
 
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
       const filterValue = button.getAttribute('data-filter');
 
-      // 1. アクティブなボタンの見た目を切り替え
+      // アクティブボタンの切り替え
       filterButtons.forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
 
-      // 2. Residential関連のサブメニュー開閉
-      // Residential本体、またはその子要素(bath/kitchen)が押されたら開く
+      // サブメニューの開閉制御
+      // 「RESIDENTIAL」か、その中の「Bathroom/Kitchen」が選ばれている時だけ開く
       if (filterValue === 'residential' || button.classList.contains('sub-item')) {
         subNav.classList.add('is-open');
       } else {
         subNav.classList.remove('is-open');
       }
 
-      // 3. フィルタリング実行
+      // 画像の絞り込み
       projectItems.forEach(item => {
-        item.classList.remove('show'); // 一旦消すアニメーション用
+        item.classList.remove('show'); 
 
         setTimeout(() => {
-          if (filterValue === 'all' || item.classList.contains(filterValue)) {
+          let shouldShow = false;
+          if (filterValue === 'all') {
+            shouldShow = true;
+          } else if (item.classList.contains(filterValue)) {
+            shouldShow = true;
+          }
+
+          if (shouldShow) {
             item.classList.remove('is-hidden');
             setTimeout(() => item.classList.add('show'), 50);
           } else {
