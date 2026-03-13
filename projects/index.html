@@ -13,15 +13,19 @@
 <main class="split-layout projects">
 
   <nav class="filter-nav">
-    <button class="filter-btn active line-hover" data-filter="all">All</button>
-    <button class="filter-btn line-hover" data-filter="residential">Residential</button>
-    <button class="filter-btn line-hover" data-filter="bath">Bathroom</button>
-    <button class="filter-btn line-hover" data-filter="kitchen">Kitchen</button>
-    <button class="filter-btn line-hover" data-filter="a1">AAAA</button>   
-    <button class="filter-btn line-hover" data-filter="a2">AAAA</button>   
-    <button class="filter-btn line-hover" data-filter="a3">AAAA</button>       
-    <button class="filter-btn line-hover" data-filter="construction">Construction</button>
-  </nav>
+  <div class="filter-main">
+    <button class="filter-btn active line-hover" data-filter="all">ALL</button>
+    <button class="filter-btn line-hover" data-filter="condominium">CONDOMINIUM</button>
+    <button class="filter-btn line-hover has-sub" data-filter="residential">RESIDENTIAL</button>
+    <button class="filter-btn line-hover" data-filter="architectural">ARCHITECTURAL PROJECTS</button>
+  </div>
+
+  <div class="filter-sub" id="sub-residential">
+    <button class="filter-btn line-hover sub-item" data-filter="bath">↳ Bathroom</button>
+    <button class="filter-btn line-hover sub-item" data-filter="kitchen">↳ Kitchen</button>
+  </div>
+</nav>
+
 
   <section class="projects-grid">
     <a href="./002/" class="projects-item a1 reveal">
