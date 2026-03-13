@@ -649,6 +649,80 @@ a.projects-item {
 
 
 /* =========================
+   Projects (Updated Filter)
+========================= */
+.filter-nav {
+  margin: 0 auto var(--gap-s) auto;
+  display: flex;
+  flex-direction: column; /* 縦に並べる（メインの下にサブ） */
+  gap: 15px;
+}
+
+.filter-main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* サブメニューの初期状態（隠しておく） */
+.filter-sub {
+  display: flex;
+  gap: 20px;
+  padding-left: 20px; 
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* クラスがついたら表示 */
+.filter-sub.is-open {
+  height: auto;
+  opacity: 1;
+  visibility: visible;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.filter-btn {
+  color: var(--gray);
+  font-family: 'Jost';
+  font-size: var(--font-n);
+  font-weight: var(--normal);
+  background: none;
+  border: none;
+  margin: 0 2.5vw 0 0;
+  cursor: pointer;
+  padding: 5px 0;
+}
+
+/* サブアイテムは少し小さめにして親子感を出す */
+.sub-item {
+  font-size: var(--font-s) !important;
+  color: var(--gray);
+}
+
+.filter-btn.active {
+  color: var(--black);
+}
+
+.filter-btn:hover {
+  color: var(--black);
+}
+
+/* 以下、既存のプロジェクトグリッド設定 */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--gap-s);
+}
+
+.projects-item.is-hidden {
+  display: none;
+}
+
+
+/* =========================
   Projects - Detail
 ========================= */
 .project-detail .container {
