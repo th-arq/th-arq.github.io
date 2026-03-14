@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // --- ① ふわっと出す処理 ---
+  // --- ① スクロール時のふわっと表示 ---
   const revealElements = document.querySelectorAll('.reveal');
   const showElements = () => {
     revealElements.forEach((el) => {
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', showElements);
   setTimeout(showElements, 200);
 
-  // --- ② フィルタリング機能 ---
+  // --- ② カテゴリ切り替え（フェードアニメーション付き） ---
   const filterButtons = document.querySelectorAll('.filter-btn');
   const projectItems = document.querySelectorAll('.projects-item');
   const subNav = document.getElementById('sub-residential');
@@ -21,38 +21,44 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', () => {
       const filterValue = button.getAttribute('data-filter');
 
-      // アクティブボタンの切り替え
+      // ボタンのactive切り替え
       filterButtons.forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
 
-      // サブメニューの開閉制御
-      // 「RESIDENTIAL」か、その中の「Bathroom/Kitchen」が選ばれている時だけ開く
+      // サブメニューの開閉
       if (filterValue === 'residential' || button.classList.contains('sub-item')) {
         subNav.classList.add('is-open');
       } else {
         subNav.classList.remove('is-open');
       }
 
-      // 画像の絞り込み
+      // --- ここからアニメーションの核 ---
+      // 1. まず全てのアイテムを透明にする（上にふわっと消えていく感じ）
       projectItems.forEach(item => {
-        item.classList.remove('show'); 
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(-10px)';
+        item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      });
 
-        setTimeout(() => {
-          let shouldShow = false;
-          if (filterValue === 'all') {
-            shouldShow = true;
-          } else if (item.classList.contains(filterValue)) {
-            shouldShow = true;
-          }
+      // 2. 少し待ってから、中身を入れ替えて再表示
+      setTimeout(() => {
+        projectItems.forEach(item => {
+          // 判定
+          const shouldShow = (filterValue === 'all' || item.classList.contains(filterValue));
 
           if (shouldShow) {
             item.classList.remove('is-hidden');
-            setTimeout(() => item.classList.add('show'), 50);
+            // リフロー（再描画）を促してからshowをつけることでアニメーションを確実に発火
+            void item.offsetWidth; 
+            item.style.opacity = ''; // CSS側の設定に戻す
+            item.style.transform = '';
+            item.classList.add('show');
           } else {
             item.classList.add('is-hidden');
+            item.classList.remove('show');
           }
-        }, 300);
-      });
+        });
+      }, 300); // 0.3秒待ってから表示開始
     });
   });
 });
