@@ -188,7 +188,7 @@ header.is-scrolled:hover {
 
 #menu ul {
   display: flex;
-  gap: 40px;
+  gap: var(--gap-s);
   list-style: none;
   padding: 0;
   margin: 0;
@@ -196,10 +196,11 @@ header.is-scrolled:hover {
 
 #menu a {
   position: relative;
+  font-size: var(--font-s);
 }
 
 .contact-btn {
-  padding: 10px 18px;
+  padding: 0.4em 1em;
 }
 
 @media (min-width: 901px) {
@@ -532,7 +533,7 @@ body:not(.is-index) .fade-menu {
 .split-profile {
     display: flex;
     align-items: flex-start;
-    gap: var(--gap-s);;
+    gap: var(--gap-s);
     margin-bottom: var(--gap-s);
 }
 
@@ -579,7 +580,7 @@ a.projects-item {
 .filter-nav {
   margin: 0 auto var(--gap-s) auto;
   display: flex;
-  flex-direction: column; /* 縦に並べる（メインの下にサブ） */
+  flex-direction: column;
   gap: 15px;
 }
 
@@ -639,20 +640,19 @@ a.projects-item {
 
 .projects-grid {
   display: grid;
-  /* PC：横に4つ並べる（1frを4回繰り返す）。幅に合わせて自動調整。 */
-  grid-template-columns: repeat(4, 1fr); 
+  grid-template-columns: repeat(5, 1fr); 
   gap: var(--gap-s);
   width: 100%;
 }
 
 .projects-item {
-  width: 100%; /* グリッドの幅いっぱいにする */
+  width: 100%;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .projects-item .thumbnail {
   width: 100%;
-  aspect-ratio: 1 / 1; /* ★これだけで強制的に正方形になるよ！ */
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   position: relative;
 }
@@ -660,7 +660,7 @@ a.projects-item {
 .projects-item .thumbnail img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* ★画像が歪まないように中央で切り抜く設定 */
+  object-fit: cover;
   display: block;
   transition: transform 0.6s ease;
 }
