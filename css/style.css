@@ -987,10 +987,9 @@ p.memo {
 .faq-question {
   list-style: none;
   cursor: pointer;
-  padding: var(--gap-s) 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: var(--gap-s) 60px var(--gap-s) 0; /* 右側にアイコン用の余白(60px)を確保 */
+  position: relative; /* アイコンを絶対配置するための基準 */
+  display: block; /* Flexを解除して文字の折り返しを安定させる */
   font-weight: var(--bold);
   transition: padding-left 0.4s ease;
 }
@@ -1001,22 +1000,26 @@ p.memo {
 
 .faq-question::after {
   content: '';
+  position: absolute;
+  right: 10px; /* 右端から10pxに固定 */
+  top: 50%; /* 上下中央 */
+  transform: translateY(-50%); /* 完璧な中央寄せ */
   width: 20px;
   height: 20px;
-  position: relative;
   background-image: 
     linear-gradient(var(--black), var(--black)), 
     linear-gradient(var(--black), var(--black));
-  background-size: 100% 1px, 1px 100%;
+  background-size: 100% 1px, 1px 100%; /* 横棒と縦棒 */
   background-position: center;
   background-repeat: no-repeat;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0; /* サイズが縮まないように固定 */
 }
 
-
+/* 開いたときの（ー）の状態 */
 .faq-item[open] .faq-question::after {
-  transform: rotate(180deg);
-  background-size: 100% 1px, 0% 100%; 
+  transform: translateY(-50%) rotate(180deg);
+  background-size: 100% 1px, 0% 100%; /* 縦棒だけ消してマイナスにする */
 }
 
 .faq-question::-webkit-details-marker { display: none; }
@@ -1024,18 +1027,20 @@ p.memo {
 .faq-answer {
   overflow: hidden;
   color: var(--darkgray);
-  padding: 0 var(--gap-xs) var(--gap-l);
+  padding: 0 60px var(--gap-m) 0; /* アイコンに被らないよう右に余白 */
 }
-
 
 @media (max-width: 900px) {
-  .faq-page .sticky-box {
-    flex: 0;
-  }
-  
   .faq-question {
-    padding: var(--gap-s) 0 var(--gap-m) 0;
-}
+    padding-right: 40px; /* スマホでは少し余白を詰める */
+    font-size: var(--font-n);
+    line-height: 1.4;
+  }
+  .faq-question::after {
+    right: 5px;
+    width: 16px; /* アイコンを少し小さくしてバランス調整 */
+    height: 16px;
+  }
 }
 
 
