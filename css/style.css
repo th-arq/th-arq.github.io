@@ -15,7 +15,7 @@ body {
   font-family: 'Jost', sans-serif;
   font-weight: 300;
   letter-spacing: 0.05em;
-  line-height: 1.6em;
+  line-height: 1.6;
   word-break: break-word;
   margin: auto;
   width: 100%;
@@ -301,7 +301,7 @@ header.is-scrolled:hover {
 
   .sp-nav ul a {
     display: block;
-    padding: 5vw 0;
+    padding: var(--gap-m) 0;
     font-size: var(--font-xl);
     color: var(--black);
     text-align: right;
@@ -673,7 +673,8 @@ a.projects-item {
 .projects-item .info p {
   font-size: var(--font-xs);
   color: var(--darkgray);
-  margin: 1em 0 0 0;
+  margin: 0.5em 0 0 0;
+  line-height: 1.5;
 }
 
 
@@ -688,12 +689,9 @@ a.projects-item {
   .projects-grid {
     /* スマホ：横に2つ並べる */
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--gap-s); /* ルートで設定した8vwが適用されるよ */
+    gap: var(--gap-xs);
   }
   
-  .projects-item .info p {
-    font-size: 12px; /* スマホだと少し文字を小さくすると綺麗かも */
-  }
 }
 
 
