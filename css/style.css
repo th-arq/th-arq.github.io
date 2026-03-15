@@ -14,7 +14,9 @@ html {
 body {
   font-family: 'Jost', sans-serif;
   font-weight: 300;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
+  line-height: 1.6em;
+  word-break: break-word;
   margin: auto;
   width: 100%;
 }
@@ -554,9 +556,12 @@ body:not(.is-index) .fade-menu {
 }
 
 @media (max-width: 900px) {
-.about-page h2, .about-page h3, .about-page p, .affiliations {
+  .about-page h2, .about-page h3 {
     margin: 0 auto var(--gap-s) auto!important;
-}
+ }
+   .about-page p, .affiliations {
+    margin: 0 auto var(--gap-m) auto!important;
+ }
     .profile-image-container {
         flex: 0 0 40%;
     }
@@ -1004,8 +1009,7 @@ p.memo {
 .faq-answer {
   overflow: hidden;
   color: var(--darkgray);
-  line-height: 1.8;
-  padding-bottom: 30px;
+  padding: 0 var(--gap-xs) var(--gap-l);
 }
 
 
@@ -1013,6 +1017,10 @@ p.memo {
   .faq-page .sticky-box {
     flex: 0;
   }
+  
+  .faq-question {
+    padding: var(--gap-s) 0 var(--gap-m) 0;
+}
 }
 
 
