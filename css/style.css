@@ -636,18 +636,35 @@ a.projects-item {
   opacity: 1;
 }
 
+
+.projects-grid {
+  display: grid;
+  /* PC：横に4つ並べる（1frを4回繰り返す）。幅に合わせて自動調整。 */
+  grid-template-columns: repeat(4, 1fr); 
+  gap: var(--gap-s);
+  width: 100%;
+}
+
+.projects-item {
+  width: 100%; /* グリッドの幅いっぱいにする */
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
 .projects-item .thumbnail {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* ★これだけで強制的に正方形になるよ！ */
   overflow: hidden;
-  width: 14vw;
-  height: 13vw;
+  position: relative;
 }
 
 .projects-item .thumbnail img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover; /* ★画像が歪まないように中央で切り抜く設定 */
   display: block;
   transition: transform 0.6s ease;
 }
+
 
 .projects-item:hover .thumbnail img {
   transform: scale(1.1);
@@ -659,16 +676,6 @@ a.projects-item {
   margin: 1em 0 0 0;
 }
 
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: var(--gap-s);
-}
-
-.projects-item {
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
 
 .projects-item.is-hidden {
   display: none;
@@ -678,7 +685,17 @@ a.projects-item {
   .filter-btn {
     font-size: var(--font-n);
   }
+  .projects-grid {
+    /* スマホ：横に2つ並べる */
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--gap-s); /* ルートで設定した8vwが適用されるよ */
+  }
+  
+  .projects-item .info p {
+    font-size: 12px; /* スマホだと少し文字を小さくすると綺麗かも */
+  }
 }
+
 
 
 
@@ -861,7 +878,7 @@ p.memo {
 
 .form-group label {
     text-transform: uppercase;
-    margin: 0 0 var(--gap-xs) 0;
+    margin: 0 0 0.5em 0;
 }
 
 .form-group input, .form-group textarea, .form-group select {
