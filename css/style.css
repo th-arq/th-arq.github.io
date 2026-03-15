@@ -332,7 +332,7 @@ footer {
 }
 
 @media (max-width: 900px) {
-    .footer_container, .footer_copy {
+    .footer_container, .footer_info, .footer_copy {
         flex-direction: column;
         text-align: center;
         margin: auto;
@@ -597,7 +597,6 @@ a.projects-item {
   color: var(--black);
 }
 
-
 .filter-main {
   display: flex;
   flex-wrap: wrap;
@@ -619,7 +618,6 @@ a.projects-item {
   opacity: 1;
   visibility: visible;
 }
-
 
 .projects-item.reveal {
   clip-path: inset(0 0 100% 0);
@@ -667,11 +665,9 @@ a.projects-item {
 }
 
 
-
 .projects-item.is-hidden {
   display: none;
 }
-
 
 @media (max-width: 900px) {
   .filter-btn {
@@ -707,12 +703,19 @@ a.projects-item {
 
 .meta-data p {
   color: var(--darkgray);
+}
+
+p.memo {
+  margin: var(--gap-s) 0 0 0;
+}
+
+.meta-data p {
+  color: var(--darkgray);
   margin: 0;
 }
 
 .description {
   margin-top: var(--gap-m);
-  font-size: var(--font-n);
 }
 
 .project-gallery {
@@ -846,18 +849,19 @@ a.projects-item {
 }
 
 .form-group {
-  margin-bottom: var(--gap-s);
+  margin-bottom: var(--gap-m);
   display: flex;
   flex-direction: column;
 }
 
 .form-group label {
-  text-transform: uppercase;
+    text-transform: uppercase;
+    margin: 0 0 var(--gap-xs) 0;
 }
 
 .form-group input, .form-group textarea, .form-group select {
   width: 100%;
-  padding: 0.5em;
+  padding: 1em;
   border: none;
   background: var(--lightgray);
   font-family: inherit;
@@ -886,15 +890,16 @@ a.projects-item {
 .radio-label {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5em;
   cursor: pointer;
   font-size: var(--font-n);
+  width: fit-content;
 }
 
 .submit-btn {
   margin-top: var(--gap-s);
   width: 100%;
-  padding: 25px;
+  padding: 1.5em;
   font-size: var(--font-n);
   text-transform: uppercase;
 }
@@ -906,6 +911,14 @@ a.projects-item {
 
 .form-group-row .form-group {
   flex: 1;
+}
+
+@media (max-width: 900px) {
+  .radio-group {
+    flex-direction: column;
+    align-self: flex-start;
+}
+
 }
 
 
@@ -1000,4 +1013,12 @@ a.projects-item {
   .faq-page .sticky-box {
     flex: 0;
   }
+}
+
+
+/* =========================
+  Privacy policy
+========================= */
+.privacy-page p {
+    margin: 0 0 var(--gap-s) 0;
 }
