@@ -905,6 +905,7 @@ p.memo {
 .radio-group {
   display: flex;
   gap: var(--gap-s);
+  width: 100%;
 }
 
 .radio-label {
