@@ -302,7 +302,7 @@ header.is-scrolled:hover {
 
   .sp-nav ul a {
     display: block;
-    padding: 0 0 var(--gap-xl) 0;
+    padding: var(--gap-m) 0;
     font-size: var(--font-xl);
     color: var(--black);
     text-align: right;
@@ -557,11 +557,11 @@ body:not(.is-index) .fade-menu {
 }
 
 @media (max-width: 900px) {
-  .about-page h3 {
+  .about-page h2, .about-page h3 {
     margin: 0 auto var(--gap-s) auto!important;
  }
    .about-page p, .affiliations {
-    margin: 0 auto var(--gap-s) auto!important;
+    margin: 0 auto var(--gap-m) auto!important;
  }
     .profile-image-container {
         flex: 0 0 40%;
@@ -571,35 +571,6 @@ body:not(.is-index) .fade-menu {
 /* =========================
   Projects
 ========================= */
-.projects-item {
-  opacity: 0;
-  transform: translateY(12px) scale(0.98);
-  pointer-events: none;
-
-  /* これ重要 */
-  height: 0;
-  overflow: hidden;
-
-  transition:
-    opacity 0.45s ease,
-    transform 0.45s ease,
-    height 0.45s ease;
-}
-
-.projects-item.is-show {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-
-  /* トルツメ復活ポイント */
-  height: auto;
-  pointer-events: auto;
-}
-
-/* hoverはそのままOK */
-.projects-item:hover .thumbnail img {
-  transform: scale(1.1);
-}
-
 a.projects-item {
   color: inherit;
   display: block;
@@ -669,8 +640,14 @@ a.projects-item {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, 1fr); 
   gap: var(--gap-s);
+  width: 100%;
+}
+
+.projects-item {
+  width: 100%;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .projects-item .thumbnail {
@@ -700,6 +677,10 @@ a.projects-item {
   line-height: 1.5;
 }
 
+
+.projects-item.is-hidden {
+  display: none;
+}
 
 @media (max-width: 900px) {
   .filter-btn {
