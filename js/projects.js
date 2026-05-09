@@ -10,20 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let shouldShow = false;
 
-      // ALL
       if (filterValue === 'all') {
         shouldShow = item.classList.contains('all');
-      }
-
-      // residential（親カテゴリ）
-      else if (filterValue === 'residential') {
-        shouldShow =
-          item.classList.contains('residential') &&
-          item.classList.contains('all');
-      }
-
-      // それ以外（living / bath / kitchen etc）
-      else {
+      } else {
         shouldShow = item.classList.contains(filterValue);
       }
 
@@ -32,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         item.classList.remove('is-show');
       }
+
     });
   };
 
@@ -43,9 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const filterValue = button.getAttribute('data-filter');
 
+      // active切替
       filterButtons.forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
 
+      // subnav
       if (filterValue === 'residential' || button.classList.contains('sub-item')) {
         subNav.classList.add('is-open');
       } else {
@@ -53,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       applyFilter(filterValue);
+
     });
   });
 
