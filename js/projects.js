@@ -10,9 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let shouldShow = false;
 
+      // ALLは全部出す
       if (filterValue === 'all') {
-        shouldShow = item.classList.contains('all');
-      } else {
+        shouldShow = true;
+      } 
+      // それ以外はクラス一致
+      else {
         shouldShow = item.classList.contains(filterValue);
       }
 
@@ -33,11 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const filterValue = button.getAttribute('data-filter');
 
-      // active切替
       filterButtons.forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
 
-      // subnav
+      // subnav制御
       if (filterValue === 'residential' || button.classList.contains('sub-item')) {
         subNav.classList.add('is-open');
       } else {
