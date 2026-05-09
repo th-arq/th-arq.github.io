@@ -302,7 +302,7 @@ header.is-scrolled:hover {
 
   .sp-nav ul a {
     display: block;
-    padding: var(--gap-m) 0;
+    padding: 0 0 var(--gap-xl) 0;
     font-size: var(--font-xl);
     color: var(--black);
     text-align: right;
@@ -557,11 +557,11 @@ body:not(.is-index) .fade-menu {
 }
 
 @media (max-width: 900px) {
-  .about-page h2, .about-page h3 {
+  .about-page h3 {
     margin: 0 auto var(--gap-s) auto!important;
  }
    .about-page p, .affiliations {
-    margin: 0 auto var(--gap-m) auto!important;
+    margin: 0 auto var(--gap-s) auto!important;
  }
     .profile-image-container {
         flex: 0 0 40%;
@@ -571,6 +571,14 @@ body:not(.is-index) .fade-menu {
 /* =========================
   Projects
 ========================= */
+.projects-item {
+  display: none;
+}
+
+.projects-item.is-show {
+  display: block;
+}
+
 a.projects-item {
   color: inherit;
   display: block;
