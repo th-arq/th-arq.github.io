@@ -571,14 +571,6 @@ body:not(.is-index) .fade-menu {
 /* =========================
   Projects
 ========================= */
-.projects-item {
-  display: none;
-}
-
-.projects-item.is-show {
-  display: block;
-}
-
 a.projects-item {
   color: inherit;
   display: block;
