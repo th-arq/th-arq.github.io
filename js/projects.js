@@ -4,27 +4,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const projectItems = document.querySelectorAll('.projects-item');
   const subNav = document.getElementById('sub-residential');
 
-  // --- 初期表示（重要：これで.allだけ出す） ---
-  const init = () => {
-    projectItems.forEach(item => {
-      if (item.classList.contains('all')) {
-        item.classList.add('is-show');
-      } else {
-        item.classList.remove('is-show');
-      }
-    });
-  };
-
-  // --- フィルター処理 ---
   const applyFilter = (filterValue) => {
 
     projectItems.forEach(item => {
 
       let shouldShow = false;
 
+      // ALL
       if (filterValue === 'all') {
         shouldShow = item.classList.contains('all');
-      } else {
+      }
+
+      // residential（親カテゴリ）
+      else if (filterValue === 'residential') {
+        shouldShow =
+          item.classList.contains('residential') &&
+          item.classList.contains('all');
+      }
+
+      // それ以外（living / bath / kitchen etc）
+      else {
         shouldShow = item.classList.contains(filterValue);
       }
 
@@ -36,19 +35,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // 初期状態
-  init();
+  // 初期表示
+  applyFilter('all');
 
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
 
       const filterValue = button.getAttribute('data-filter');
 
-      // active切り替え
       filterButtons.forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
 
-      // sub nav制御
       if (filterValue === 'residential' || button.classList.contains('sub-item')) {
         subNav.classList.add('is-open');
       } else {
