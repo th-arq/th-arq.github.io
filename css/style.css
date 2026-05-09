@@ -572,16 +572,23 @@ body:not(.is-index) .fade-menu {
   Projects
 ========================= */
 .projects-item {
+  display: none; /* ←最初は全部消す（重要） */
   opacity: 0;
   transform: translateY(10px);
-  pointer-events: none;
   transition: opacity 0.4s ease, transform 0.4s ease;
+  will-change: opacity, transform;
 }
 
+/* 表示状態 */
 .projects-item.is-show {
+  display: block;
   opacity: 1;
   transform: translateY(0);
-  pointer-events: auto;
+}
+
+/* hoverはそのままOK */
+.projects-item:hover .thumbnail img {
+  transform: scale(1.1);
 }
 
 a.projects-item {
@@ -690,10 +697,6 @@ a.projects-item {
   line-height: 1.5;
 }
 
-
-.projects-item.is-hidden {
-  display: none;
-}
 
 @media (max-width: 900px) {
   .filter-btn {
