@@ -1,5 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  // --- スクロール時のふわっと表示（詳細ページ用） ---
+  const revealElements = document.querySelectorAll('.image-wrapper.reveal, .related-item.reveal');
+  if (revealElements.length) {
+    const showOnScroll = () => {
+      revealElements.forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight * 0.9) {
+          el.classList.add('show');
+        }
+      });
+    };
+    window.addEventListener('scroll', showOnScroll);
+    setTimeout(showOnScroll, 200);
+  }
+
+  // --- カテゴリフィルター（一覧ページ用） ---
   const filterButtons = document.querySelectorAll('.filter-btn');
   const projectItems = document.querySelectorAll('.projects-item');
   const subNav = document.getElementById('sub-residential');
