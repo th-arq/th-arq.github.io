@@ -586,10 +586,6 @@ body:not(.is-index) .fade-menu {
   }
 }
 
-/* hoverはそのままOK */
-.projects-item:hover .thumbnail img {
-  transform: scale(1.1);
-}
 
 a.projects-item {
   color: inherit;
@@ -729,10 +725,6 @@ a.projects-item {
 .project-title {
   font-weight: var(--bold);
   margin: 0 0 2.5vw 0;
-}
-
-.meta-data p {
-  color: var(--darkgray);
 }
 
 p.memo {
@@ -1052,6 +1044,160 @@ p.memo {
     right: 5px;
     width: 16px; /* アイコンを少し小さくしてバランス調整 */
     height: 16px;
+  }
+}
+
+
+/* =========================
+  Reviews
+========================= */
+.reviews-heading {
+  margin: 0 0 var(--gap-l) 0;
+}
+
+.reviews-eyebrow {
+  font-size: var(--font-xs);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin: 0 0 16px 0;
+}
+
+.reviews-title {
+  font-size: var(--font-l);
+  font-weight: var(--normal);
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+}
+
+/* リスト */
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 共通カード */
+.review-item {
+  display: grid;
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+  padding: clamp(40px, 6vw, 80px) 0;
+  border-top: 1px solid var(--lightgray);
+}
+
+.review-item:last-child {
+  border-bottom: 1px solid var(--lightgray);
+}
+
+/* サムネイル共通 */
+.review-thumb {
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.review-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s ease;
+}
+
+.review-item:hover .review-thumb img {
+  transform: scale(1.04);
+}
+
+/* テキスト共通 */
+.review-body {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2.5vw, 28px);
+}
+
+.review-quote {
+  font-size: var(--font-s);
+  font-weight: var(--normal);
+  color: var(--darkgray);
+  line-height: 1.9;
+  margin: 0;
+}
+
+.review-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.review-name {
+  font-size: var(--font-xs);
+  font-weight: var(--bold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+.review-city {
+  font-size: var(--font-xs);
+  color: var(--gray);
+  letter-spacing: 0.05em;
+}
+
+/* A: 小写真・左 */
+.review-a {
+  grid-template-columns: clamp(100px, 14vw, 180px) 1fr;
+}
+
+.review-a .review-thumb {
+  aspect-ratio: 1 / 1;
+}
+
+/* B: 写真なし・テキスト大きく・インデント */
+.review-b {
+  grid-template-columns: 1fr;
+}
+
+.review-b .review-body {
+  padding: 0 clamp(0px, 8vw, 120px);
+}
+
+.review-b .review-quote {
+  font-size: var(--font-m);
+  color: var(--black);
+  line-height: 1.7;
+}
+
+/* C: 写真・右、テキスト左 */
+.review-c {
+  grid-template-columns: 1fr clamp(160px, 24vw, 300px);
+}
+
+.review-c .review-thumb {
+  aspect-ratio: 3 / 4;
+}
+
+/* SP */
+@media (max-width: 900px) {
+  .reviews-title {
+    font-size: var(--font-l);
+  }
+
+  .review-a,
+  .review-c {
+    grid-template-columns: 1fr;
+  }
+
+  .review-c .review-thumb {
+    order: -1;
+    aspect-ratio: 4 / 3;
+    width: 60%;
+  }
+
+  .review-b .review-body {
+    padding: 0;
+  }
+
+  .review-b .review-quote {
+    font-size: var(--font-n);
   }
 }
 
