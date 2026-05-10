@@ -8,6 +8,148 @@
 </head>
 <body>
 
+
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --black:#101010;
+  --white:#ffffff;
+  --gray:#a5a4a2;
+  --darkgray:#6d6c6b;
+  --lightgray:#f6f6f6;
+  --side-padding:clamp(24px,6vw,80px);
+  --font-n:20px;
+  --font-s:18px;
+  --font-xs:16px;
+  --font-xxs:13px;
+  --bold:400;
+  --normal:300;
+  --gap-s:2.5vw;
+  --gap-xs:1.5vw;
+}
+.tag-root{
+  font-family:'Jost',sans-serif;
+  font-weight:300;
+  letter-spacing:0.05em;
+  line-height:1.6;
+  color:var(--black);
+  padding:40px var(--side-padding) 80px;
+  background:var(--white);
+}
+.tag-filter-nav{
+  margin:0 0 3vw 0;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+.tag-filter-main{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0;
+}
+.tag-filter-btn{
+  color:var(--gray);
+  font-family:'Jost',sans-serif;
+  font-size:var(--font-n);
+  font-weight:var(--normal);
+  letter-spacing:.1rem;
+  background:none;
+  border:none;
+  margin:0 2.5vw 0 0;
+  cursor:pointer;
+  transition:color 0.2s ease;
+  position:relative;
+  display:inline-block;
+}
+.tag-filter-btn::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-4px;
+  width:100%;
+  height:1px;
+  background:var(--black);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 0.3s ease;
+}
+.tag-filter-btn:hover::after,.tag-filter-btn.active::after{transform:scaleX(1);}
+.tag-filter-btn.active,.tag-filter-btn:hover{color:var(--black);}
+
+.tag-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:var(--gap-s);
+}
+.tag-card{
+  display:flex;
+  flex-direction:column;
+  animation:tagFade 0.45s ease;
+}
+@keyframes tagFade{
+  from{opacity:0;transform:translateY(12px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.tag-thumb{
+  width:100%;
+  aspect-ratio:1/1;
+  overflow:hidden;
+  position:relative;
+}
+.tag-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform 0.6s ease;
+}
+.tag-card:hover .tag-thumb img{transform:scale(1.05);}
+.tag-body{
+  padding:1em 0 0 0;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:0.6em;
+}
+.tag-quote{
+  font-size:var(--font-xs);
+  font-weight:var(--normal);
+  color:var(--darkgray);
+  line-height:1.7;
+}
+.tag-quote::before{
+  content:"\201C";
+  font-size:1.2em;
+  color:var(--gray);
+  margin-right:2px;
+}
+.tag-quote::after{
+  content:"\201D";
+  font-size:1.2em;
+  color:var(--gray);
+  margin-left:2px;
+}
+.tag-info{
+  margin-top:0.4em;
+  border-top:1px solid var(--lightgray);
+  padding-top:0.6em;
+}
+.tag-name{
+  font-size:var(--font-xxs);
+  font-weight:var(--bold);
+  color:var(--black);
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+}
+.tag-location{
+  font-size:var(--font-xxs);
+  color:var(--gray);
+  letter-spacing:0.05em;
+}
+</style>
+
+
   <div id="header"></div>
 
   reviews page
@@ -15,252 +157,124 @@
   
 <main class="split-layout projects">
 
-<nav class="filter-nav">
-  <div class="filter-main">
-    <button class="filter-btn active line-hover" data-filter="all">ALL</button>
-    <button class="filter-btn line-hover" data-filter="condominium">CONDOMINIUM</button>
-    <button class="filter-btn line-hover" data-filter="residential">RESIDENTIAL</button>
-    <button class="filter-btn line-hover" data-filter="architectural">ARCHITECTURAL PROJECTS</button>
+<div class="tag-root">
+  <h2 style="display:none">Client reviews</h2>
+
+  <nav class="tag-filter-nav">
+    <div class="tag-filter-main">
+      <button class="tag-filter-btn active" data-filter="all">ALL</button>
+      <button class="tag-filter-btn" data-filter="kitchen">KITCHEN</button>
+      <button class="tag-filter-btn" data-filter="living">LIVING DINING</button>
+      <button class="tag-filter-btn" data-filter="bath">BATHROOM</button>
+    </div>
+  </nav>
+
+  <div class="tag-grid" id="tag-grid">
+
+    <div class="tag-card" data-cat="kitchen">
+      <div class="tag-thumb">
+        <img src="https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=600&q=75" alt="Kitchen renovation">
+      </div>
+      <div class="tag-body">
+        <div class="tag-quote">Our kitchen was completely transformed. The team listened to everything we wanted and delivered beyond expectations.</div>
+        <div class="tag-info">
+          <div class="tag-name">Jessica M.</div>
+          <div class="tag-location">Portland, OR</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tag-card" data-cat="living">
+      <div class="tag-thumb">
+        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=75" alt="Living room renovation">
+      </div>
+      <div class="tag-body">
+        <div class="tag-quote">Zero surprises — communication was proactive throughout. The built-in shelving looks like it was always part of the house.</div>
+        <div class="tag-info">
+          <div class="tag-name">Robert T.</div>
+          <div class="tag-location">Austin, TX</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tag-card" data-cat="bath">
+      <div class="tag-thumb">
+        <img src="https://images.unsplash.com/photo-1620626011761-996317702782?w=600&q=75" alt="Bathroom renovation">
+      </div>
+      <div class="tag-body">
+        <div class="tag-quote">The spa bathroom exceeded my dreams. I still can't believe this is my own home every morning.</div>
+        <div class="tag-info">
+          <div class="tag-name">Sarah L.</div>
+          <div class="tag-location">Seattle, WA</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tag-card" data-cat="living">
+      <div class="tag-thumb">
+        <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=600&q=75" alt="Living room renovation">
+      </div>
+      <div class="tag-body">
+        <div class="tag-quote">From first meeting to final walkthrough, every detail was handled with care. The living room feels brand new.</div>
+        <div class="tag-info">
+          <div class="tag-name">Michael D.</div>
+          <div class="tag-location">Washington, DC</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tag-card" data-cat="kitchen">
+      <div class="tag-thumb">
+        <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=600&q=75" alt="Kitchen renovation">
+      </div>
+      <div class="tag-body">
+        <div class="tag-quote">Incredible attention to detail. The workflow was smooth and the result is exactly what we envisioned.</div>
+        <div class="tag-info">
+          <div class="tag-name">Anna K.</div>
+          <div class="tag-location">Irvine, CA</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tag-card" data-cat="bath">
+      <div class="tag-thumb">
+        <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&q=75" alt="Bathroom renovation">
+      </div>
+      <div class="tag-body">
+        <div class="tag-quote">Professional, clean, and on schedule. Our bathroom remodel exceeded every expectation we had going in.</div>
+        <div class="tag-info">
+          <div class="tag-name">David H.</div>
+          <div class="tag-location">Downey, CA</div>
+        </div>
+      </div>
+    </div>
+
   </div>
-
-  <div class="filter-sub" id="sub-residential">
-    <button class="filter-btn line-hover sub-item" data-filter="bath">Bathroom</button>
-    <button class="filter-btn line-hover sub-item" data-filter="kitchen">Kitchen</button>
-    <button class="filter-btn line-hover sub-item" data-filter="kitchen">Patio</button>
-  </div>
-</nav>
-
-
-
-<section class="projects-grid">
-    <a href="./012/" class="projects-item all">
-      <article>
-        <div class="thumbnail">
-          <img src="./012/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>LWV - 3200-C</p>
-        </div>
-      </article>
-    </a>
-
-     <a href="./013/" class="projects-item all">
-      <article>
-        <div class="thumbnail">
-          <img src="./013/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>LWV - 834-P</p>
-        </div>
-      </article>
-    </a>
-    
-    <a href="./014/" class="projects-item all">
-      <article>
-        <div class="thumbnail">
-          <img src="./014/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>LWV - 3501-3G</p>
-        </div>
-      </article>
-    </a>
-    
-     <a href="./015/" class="projects-item all">
-      <article>
-        <div class="thumbnail">
-          <img src="./015/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>Downey- 9227 Florence</p>
-        </div>
-      </article>
-    </a>
-    
-     <a href="./016/" class="projects-item all">
-      <article>
-        <div class="thumbnail">
-          <img src="./017/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>LWV - 3499-2H</p>
-        </div>
-      </article>
-    </a>
-    
-     <a href="./017/" class="projects-item all">
-      <article>
-        <div class="thumbnail">
-          <img src="./017/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>Irvine - 36 Brenna</p>
-        </div>
-      </article>
-    </a>
-    
-     <a href="./018/" class="projects-item all">
-      <article>
-        <div class="thumbnail">
-          <img src="./018/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>LWV - 5006</p>
-        </div>
-      </article>
-    </a>   
-
-    <a href="./001/" class="projects-item all condominium">
-      <article>
-        <div class="thumbnail">
-          <img src="./001/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>CAROLLSBURG CONDOMINIUM</p>
-        </div>
-      </article>
-    </a>
-
-    <a href="./001/" class="projects-item all condominium">
-      <article>
-        <div class="thumbnail">
-          <img src="./001/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>CAROLLSBURG CONDOMINIUM</p>
-        </div>
-      </article>
-    </a>
-
-    <a href="./001/" class="projects-item all condominium">
-      <article>
-        <div class="thumbnail">
-          <img src="./001/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>CAROLLSBURG CONDOMINIUM</p>
-        </div>
-      </article>
-    </a>
-
-    <a href="./002/" class="projects-item all residential">
-      <article>
-        <div class="thumbnail">
-          <img src="./002/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>BASEMENT REMODEL</p>
-        </div>
-      </article>
-    </a>    
-
-    <a href="./003/" class="projects-item all residential">
-      <article>
-        <div class="thumbnail">
-          <img src="./003/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>NEW HOUSE</p>
-        </div>
-      </article>
-    </a>   
-
-     <a href="./004/" class="projects-item all architectural">
-      <article>
-        <div class="thumbnail">
-          <img src="./004/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>U.S. CONSULATE RIO DE JANEIRO</p>
-        </div>
-      </article>
-    </a>   
-    
-     <a href="./005/" class="projects-item all architectural">
-      <article>
-        <div class="thumbnail">
-          <img src="./005/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>U.S. EMBASSY BRASILIA</p>
-        </div>
-      </article>
-    </a>   
-    
-     <a href="./006/" class="projects-item all architectural">
-      <article>
-        <div class="thumbnail">
-          <img src="./006/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>U.S. EMBASSY PORT MORESBY</p>
-        </div>
-      </article>
-    </a>   
-    
-     <a href="./007/" class="projects-item all architectural">
-      <article>
-        <div class="thumbnail">
-          <img src="./007/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>U.S. EMBASSY MBABANE</p>
-        </div>
-      </article>
-    </a>   
-    
-     <a href="./008/" class="projects-item all architectural">
-      <article>
-        <div class="thumbnail">
-          <img src="./008/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>NEW U.S. CONSULATE MONTERREY</p>
-        </div>
-      </article>
-    </a>   
-    
-     <a href="./009/" class="projects-item all architectural">
-      <article>
-        <div class="thumbnail">
-          <img src="./009/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>POTOMAC ANNEX</p>
-        </div>
-      </article>
-    </a>   
-    
- 
-     <a href="./010/" class="projects-item all residential">
-      <article>
-        <div class="thumbnail">
-          <img src="./010/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>DESIGN STUDY</p>
-        </div>
-      </article>
-    </a> 
-
-     <a href="./011/" class="projects-item all residential">
-      <article>
-        <div class="thumbnail">
-          <img src="./011/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>DESIGN STUDY</p>
-        </div>
-      </article>
-    </a>     
-    
-    </section>
-</main>
+</div>
 
   <div id="footer"></div>
 
   <script src="../js/projects.js" defer></script>
   <script src="../js/common.js" defer></script>
 </body>
+
+
+
+<script>
+document.querySelectorAll('.tag-filter-btn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.tag-filter-btn').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    const f=this.dataset.filter;
+    document.querySelectorAll('.tag-card').forEach(card=>{
+      const show=f==='all'||card.dataset.cat===f;
+      card.style.display=show?'flex':'none';
+      if(show){card.style.animation='none';void card.offsetWidth;card.style.animation='tagFade 0.45s ease';}
+    });
+  });
+});
+</script>
+
+
 </html>
 
