@@ -623,6 +623,138 @@ footer {
     }
 }
 
+
+/* =========================
+   Services
+========================= */
+ 
+/* --- Hero --- */
+.services-hero {
+  padding: calc(var(--header-height) + var(--gap-m)) var(--side-padding) var(--gap-m);
+}
+ 
+.services-eyebrow {
+  font-size: var(--font-xs);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin: 0 0 16px 0;
+}
+ 
+.services-hero-title {
+  font-size: var(--font-xl);
+  font-weight: var(--bold);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  margin: 0 0 var(--gap-s) 0;
+}
+ 
+.services-hero-desc {
+  font-size: var(--font-s);
+  font-weight: var(--normal);
+  color: var(--darkgray);
+  line-height: 1.8;
+  max-width: 520px;
+  margin: 0;
+}
+ 
+/* --- Grid --- */
+.services-grid-section {
+  padding: 0 var(--side-padding) var(--gap-l);
+}
+ 
+.services-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(8px, 1.2vw, 16px);
+}
+ 
+/* --- Card --- */
+.services-card {
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+ 
+/* reveal を上書き：clip-path ではなく translateY でフェードイン */
+.services-card.reveal {
+  clip-path: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+ 
+.services-card.reveal.show {
+  clip-path: none;
+  opacity: 1;
+  transform: translateY(0);
+}
+ 
+.services-card-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  position: relative;
+}
+ 
+.services-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+ 
+.services-card:hover .services-card-img img {
+  transform: scale(1.06);
+}
+ 
+/* テキストはカード下に — 写真を背景にはしない */
+.services-card-body {
+  padding: 16px 4px 0;
+}
+ 
+.services-card-title {
+  font-size: var(--font-s);
+  font-weight: var(--bold);
+  margin: 0 0 6px 0;
+}
+ 
+.services-card-desc {
+  font-size: var(--font-xs);
+  font-weight: var(--normal);
+  color: var(--darkgray);
+  line-height: 1.6;
+  margin: 0;
+}
+ 
+/* --- Reviews section (既存 .reviews-* を再利用) --- */
+.services-reviews {
+  padding: 0 var(--side-padding) var(--gap-l);
+}
+ 
+/* stagger delay for services grid */
+.services-card:nth-child(1) { transition-delay: 0s; }
+.services-card:nth-child(2) { transition-delay: 0.08s; }
+.services-card:nth-child(3) { transition-delay: 0.16s; }
+.services-card:nth-child(4) { transition-delay: 0.24s; }
+.services-card:nth-child(5) { transition-delay: 0.32s; }
+.services-card:nth-child(6) { transition-delay: 0.40s; }
+ 
+@media (max-width: 900px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+ 
+  .services-hero-title {
+    line-height: 1;
+  }
+}
+
+
 /* =========================
   Projects
 ========================= */
