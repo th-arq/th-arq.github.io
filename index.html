@@ -1,264 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Projects | TAG Inc.</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <title>TAG Inc.</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="is-index">
+
+  <div id="loading">
+  <div class="loading_inner">
+    <div class="logo_wrapper">
+      <svg class="loading_logo_svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 675 676">
+        <path fill="currentColor" fill-rule="evenodd" d="M644.32 337.51c0 163.14-127.22 296.55-287.82 306.37V10.98q13.59.83 26.83 2.82v591.95l19.02-6.17c34.51-11.22 85.26-36.91 127.18-79.3 42.18-42.62 75.77-102.58 73.99-181.42l-.32-14.2H460.45v29.07h113.9c-2.42 62.37-30.22 110.47-65.48 146.1-30.92 31.27-67.35 52.64-96.48 64.95v-525c133.25 33.44 231.93 154.06 231.93 297.73Zm-613.64 0c0-162.94 126.92-296.23 287.26-306.32v634.35a308 308 0 0 1-21.24-2.08V77.2l-16.88 2.76c-41.61 6.83-93.1 34.56-134.22 77.73-41.38 43.45-73.39 103.7-73.87 176.37-.3 44.22 11.1 92.38 38.35 143.37l25.63-13.7c-22.13-41.4-32.52-79.92-34.55-115.03h166.48v287.76C131.84 604.83 30.68 483 30.68 337.51Zm316.32 337c181.73-5.03 327.5-153.98 327.5-337C674.5 154.5 528.73 5.55 347 .51zm-20.12-.03V.55C145.68 6.15.5 154.88.5 337.5c0 182.64 145.18 331.36 326.38 336.97Zm-59.24-354.86H101.37c4.24-57.36 30.78-105.66 65.27-141.87 31.75-33.34 69.45-55.6 101-65.12z" clip-rule="evenodd"/>
+      </svg>
+    </div>
+    <div id="loading_percent">0%</div>
+  </div>
+</div>
 
   <div id="header"></div>
 
-<main class="split-layout projects">
-
-<nav class="filter-nav">
-  <div class="filter-main">
-    <button class="filter-btn active line-hover" data-filter="all">ALL</button>
-    <button class="filter-btn line-hover" data-filter="condominium">CONDOMINIUM</button>
-    <button class="filter-btn line-hover" data-filter="residential">RESIDENTIAL</button>
-    <button class="filter-btn line-hover" data-filter="architectural">ARCHITECTURAL PROJECTS</button>
-  </div>
-
-  <div class="filter-sub" id="sub-residential">
-    <button class="filter-btn line-hover sub-item" data-filter="living">Living Dining</button>
-    <button class="filter-btn line-hover sub-item" data-filter="kitchen">Kitchen</button>
-    <button class="filter-btn line-hover sub-item" data-filter="bath">Bathroom</button>
-    <button class="filter-btn line-hover sub-item" data-filter="patio">Patio</button>
-  </div>
-</nav>
-
-
-
-<section class="projects-grid">
-    <a href="./012/" class="projects-item all">
-      <article>
-        <div class="thumbnail">
-          <img src="./012/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>LWV - 3200-C</p>
-        </div>
-      </article>
-    </a>
-
-     <a href="./012a/" class="projects-item living residential">
-      <article>
-        <div class="thumbnail">
-          <img src="./012a/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>LWV - 3200-C</p>
-        </div>
-      </article>
-    </a>   
-
-     <a href="./012b/" class="projects-item kitchen residential">
-      <article>
-        <div class="thumbnail">
-          <img src="./012b/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>LWV - 3200-C</p>
-        </div>
-      </article>
-    </a>   
-
-     <a href="./013/" class="projects-item all kitchen bath residential">
-      <article>
-        <div class="thumbnail">
-          <img src="./013/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>LWV - 834-P</p>
-        </div>
-      </article>
-    </a>
-    
-    <a href="./014/" class="projects-item all patio residential">
-      <article>
-        <div class="thumbnail">
-          <img src="./014/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>LWV - 3501-3G</p>
-        </div>
-      </article>
-    </a>
-    
-     <a href="./015/" class="projects-item all kitchen bath condominium">
-      <article>
-        <div class="thumbnail">
-          <img src="./015/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>Downey- 9227 Florence</p>
-        </div>
-      </article>
-    </a>
-    
-     <a href="./016/" class="projects-item all bath residential">
-      <article>
-        <div class="thumbnail">
-          <img src="./016/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>LWV - 3499-2H</p>
-        </div>
-      </article>
-    </a>
-    
-     <a href="./017/" class="projects-item all bath residential">
-      <article>
-        <div class="thumbnail">
-          <img src="./017/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>Irvine - 36 Brenna</p>
-        </div>
-      </article>
-    </a>
-    
-     <a href="./018/" class="projects-item all kitchen bath residential">
-      <article>
-        <div class="thumbnail">
-          <img src="./018/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>LWV - 5006</p>
-        </div>
-      </article>
-    </a>   
-
-    <a href="./001/" class="projects-item all condominium">
-      <article>
-        <div class="thumbnail">
-          <img src="./001/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>CAROLLSBURG CONDOMINIUM</p>
-        </div>
-      </article>
-    </a>
-
-    <a href="./002/" class="projects-item all residential">
-      <article>
-        <div class="thumbnail">
-          <img src="./002/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>BASEMENT REMODEL</p>
-        </div>
-      </article>
-    </a>    
-
-    <a href="./003/" class="projects-item all residential">
-      <article>
-        <div class="thumbnail">
-          <img src="./003/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>NEW HOUSE</p>
-        </div>
-      </article>
-    </a>   
-
-     <a href="./004/" class="projects-item all architectural">
-      <article>
-        <div class="thumbnail">
-          <img src="./004/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>U.S. CONSULATE RIO DE JANEIRO</p>
-        </div>
-      </article>
-    </a>   
-    
-     <a href="./005/" class="projects-item all architectural">
-      <article>
-        <div class="thumbnail">
-          <img src="./005/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>U.S. EMBASSY BRASILIA</p>
-        </div>
-      </article>
-    </a>   
-    
-     <a href="./006/" class="projects-item all architectural">
-      <article>
-        <div class="thumbnail">
-          <img src="./006/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>U.S. EMBASSY PORT MORESBY</p>
-        </div>
-      </article>
-    </a>   
-    
-     <a href="./007/" class="projects-item all architectural">
-      <article>
-        <div class="thumbnail">
-          <img src="./007/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>U.S. EMBASSY MBABANE</p>
-        </div>
-      </article>
-    </a>   
-    
-     <a href="./008/" class="projects-item all architectural">
-      <article>
-        <div class="thumbnail">
-          <img src="./008/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>NEW U.S. CONSULATE MONTERREY</p>
-        </div>
-      </article>
-    </a>   
-    
-     <a href="./009/" class="projects-item all architectural">
-      <article>
-        <div class="thumbnail">
-          <img src="./009/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>POTOMAC ANNEX</p>
-        </div>
-      </article>
-    </a>   
-    
+<main class="index-page">
+    <section class="gallery-section">
+      <div class="gallery-grid" id="galleryGrid">
  
-     <a href="./010/" class="projects-item all residential">
-      <article>
-        <div class="thumbnail">
-          <img src="./010/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>DESIGN STUDY</p>
-        </div>
-      </article>
-    </a> 
-
-     <a href="./011/" class="projects-item all residential">
-      <article>
-        <div class="thumbnail">
-          <img src="./011/img/main.jpg" alt="AAA">
-        </div>
-        <div class="info">
-          <p>DESIGN STUDY</p>
-        </div>
-      </article>
-    </a>     
-    
+        <!--
+          ======================================================
+          画像リストのみここを編集してください。
+          各 <a> タグの href にプロジェクトページのURLを、
+          <img> の src に画像パスを、
+          data-title にホバー時に表示するプロジェクト名を設定します。
+          ======================================================
+        -->
+ 
+        <a class="gallery-item" href="projects/project01.html" data-title="Project 01">
+          <img src="/projects/001/img/001.jpg" alt="Project 01" loading="lazy">
+          <div class="overlay"><span class="overlay-text">Project 01</span></div>
+        </a>
+ 
+        <a class="gallery-item" href="projects/project02.html" data-title="Project 02">
+          <img src="/projects/001/img/001.jpg" alt="Project 02" loading="lazy">
+          <div class="overlay"><span class="overlay-text">Project 02</span></div>
+        </a>
+ 
+        <a class="gallery-item" href="projects/project03.html" data-title="Project 03">
+          <img src="/projects/001/img/001.jpg" alt="Project 03" loading="lazy">
+          <div class="overlay"><span class="overlay-text">Project 03</span></div>
+        </a>
+ 
+        <a class="gallery-item" href="projects/project04.html" data-title="Project 04">
+          <img src="/projects/001/img/001.jpg" alt="Project 04" loading="lazy">
+          <div class="overlay"><span class="overlay-text">Project 04</span></div>
+        </a>
+ 
+        <a class="gallery-item" href="projects/project05.html" data-title="Project 05">
+          <img src="/projects/001/img/001.jpg" alt="Project 05" loading="lazy">
+          <div class="overlay"><span class="overlay-text">Project 05</span></div>
+        </a>
+ 
+        <a class="gallery-item" href="projects/project06.html" data-title="Project 06">
+          <img src="/projects/001/img/001.jpg" alt="Project 06" loading="lazy">
+          <div class="overlay"><span class="overlay-text">Project 06</span></div>
+        </a>
+ 
+        <a class="gallery-item" href="projects/project07.html" data-title="Project 07">
+          <img src="/projects/001/img/001.jpg" alt="Project 07" loading="lazy">
+          <div class="overlay"><span class="overlay-text">Project 07</span></div>
+        </a>
+ 
+        <a class="gallery-item" href="projects/project08.html" data-title="Project 08">
+          <img src="/projects/001/img/001.jpg" alt="Project 08" loading="lazy">
+          <div class="overlay"><span class="overlay-text">Project 08</span></div>
+        </a>
+ 
+        <a class="gallery-item" href="projects/project09.html" data-title="Project 09">
+          <img src="/projects/001/img/001.jpg" alt="Project 09" loading="lazy">
+          <div class="overlay"><span class="overlay-text">Project 09</span></div>
+        </a>
+ 
+        <a class="gallery-item" href="projects/project10.html" data-title="Project 10">
+          <img src="/projects/001/img/001.jpg" alt="Project 10" loading="lazy">
+          <div class="overlay"><span class="overlay-text">Project 10</span></div>
+        </a>
+ 
+        <a class="gallery-item" href="projects/project11.html" data-title="Project 11">
+          <img src="/projects/001/img/001.jpg" alt="Project 11" loading="lazy">
+          <div class="overlay"><span class="overlay-text">Project 11</span></div>
+        </a>
+ 
+        <a class="gallery-item" href="projects/project12.html" data-title="Project 12">
+          <img src="/projects/001/img/001.jpg" alt="Project 12" loading="lazy">
+          <div class="overlay"><span class="overlay-text">Project 12</span></div>
+        </a>
+ 
+        <a class="gallery-item" href="projects/project13.html" data-title="Project 13">
+          <img src="/projects/001/img/001.jpg" alt="Project 13" loading="lazy">
+          <div class="overlay"><span class="overlay-text">Project 13</span></div>
+        </a>
+ 
+        <a class="gallery-item" href="projects/project14.html" data-title="Project 14">
+          <img src="/projects/001/img/001.jpg" alt="Project 14" loading="lazy">
+          <div class="overlay"><span class="overlay-text">Project 14</span></div>
+        </a>
+ 
+        <a class="gallery-item" href="projects/project15.html" data-title="Project 15">
+          <img src="/projects/001/img/001.jpg" alt="Project 15" loading="lazy">
+          <div class="overlay"><span class="overlay-text">Project 15</span></div>
+        </a>
+ 
+        <!-- 以下、必要なだけ同じ形式で追加 -->
+ 
+      </div>
     </section>
-</main>
+  </main>
 
-  <div id="footer"></div>
 
-  <script src="../js/projects.js" defer></script>
-  <script src="../js/common.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/index.js" defer></script>
 </body>
 </html>
-
