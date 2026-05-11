@@ -128,3 +128,27 @@ window.addEventListener("load", () => {
     }, 100);
   }
 });
+
+  // --- 6. Page Appearance ---
+  if (!document.body.classList.contains('is-index')) {
+    setTimeout(() => {
+      document.querySelector('main')?.classList.add('appeared');
+      document.querySelector(".fade-logo")?.classList.add("show");
+      document.querySelector(".fade-menu")?.classList.add("show");
+    }, 100);
+  }
+
+  // --- 7. Services Card Reveal (scroll) ---
+  // .services-card.reveal を IntersectionObserver でフェードイン
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        cardObserver.unobserve(entry.target); // 一度表示したら監視解除
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.services-card.reveal').forEach(card => {
+    cardObserver.observe(card);
+  });
