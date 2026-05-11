@@ -66,27 +66,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // 初期表示（ALL）
-  applyFilter('projects-item');
+  
+});
+const applyFilter = (filterValue) => {
+  const isAll       = filterValue === 'projects-item';
+  const isSubFilter = SUB_FILTERS.has(filterValue);
 
-  // ボタンクリック
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const filterValue = btn.dataset.filter;
+  // 表示・非表示を分類
+  const toShow = [];
+  const toHide = [];
 
-      // active 切り替え
-      filterButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+  projectItems.forEach(item => {
+    const level = item.dataset.level;
+    let show = false;
 
-      // サブナビ開閉
-      // RESIDENTIAL 本体 or サブカテゴリ選択中 → open
-      if (filterValue === 'residential' || SUB_FILTERS.has(filterValue)) {
-        subNav.classList.add('is-open');
-      } else {
-        subNav.classList.remove('is-open');
-      }
+    if (isAll) {
+      show = level === 'parent';
+    } else if (isSubFilter) {
+      show = item.classList.contains(filterValue);
+    } else {
+      show = level === 'parent' && item.classList.contains(filterValue);
+    }
 
-      applyFilter(filterValue);
+    show ? toShow.push(item) : toHide.push(item);
+  });
+
+  // ① まず全非表示アイテムを即座にdisplay:noneに（アニメなし）
+  toHide.forEach(item => {
+    item.classList.remove('is-show');
+    item.style.display = 'none';
+  });
+
+  // ② 次フレームで表示アイテムを一斉にin
+  requestAnimationFrame(() => {
+    toShow.forEach(item => {
+      item.style.display = 'block';
+      // display:blockが反映されてから（もう1フレーム後に）アニメ開始
+      requestAnimationFrame(() => {
+        item.classList.add('is-show');
+      });
     });
   });
-});
+};
