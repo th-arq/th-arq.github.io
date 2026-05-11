@@ -593,52 +593,110 @@ a.projects-item {
   overflow: hidden;
 }
 
+/* =========================
+  Filter Nav — 案C
+========================= */
 .filter-nav {
   margin: 0 auto var(--gap-s) auto;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 0;
+}
+
+.filter-main {
+  display: flex;
+  border-bottom: 1px solid var(--lightgray);
+  gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.filter-main::-webkit-scrollbar {
+  display: none;
 }
 
 .filter-btn {
-  color: var(--gray);
-  font-size: var(--font-n);
-  font-weight: var(--normal);
-  letter-spacing: .1rem;
+  flex-shrink: 0;
   background: none;
   border: none;
-  margin: 0 var(--gap-s) 0 0;
   cursor: pointer;
+  font-family: inherit;
+  font-weight: var(--normal);
+  letter-spacing: 0.1em;
+  color: var(--gray);
+  font-size: var(--font-xs);
+
+  /* タブ本体 */
+  padding: 0 0 14px 0;
+  margin-right: 32px;
+  position: relative;
+  transition: color 0.25s ease;
+
+  /* 下線 */
+}
+
+.filter-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: var(--black);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .filter-btn.active {
   color: var(--black);
 }
 
+.filter-btn.active::after {
+  transform: scaleX(1);
+}
+
 .filter-btn:hover {
   color: var(--black);
 }
 
-.filter-main {
-  display: flex;
-  flex-wrap: wrap;
-}
-
+/* サブカテゴリ行 */
 .filter-sub {
   display: flex;
-  gap: 20px;
-  padding-left: 20px; 
+  gap: 0;
+  padding: 14px 0 0 0;
+
   height: 0;
   opacity: 0;
   visibility: hidden;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    height   0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity  0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.4s;
+
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.filter-sub::-webkit-scrollbar {
+  display: none;
 }
 
 .filter-sub.is-open {
-  height: auto;
+  height: 42px; /* padding-top 14px + テキスト行高 */
   opacity: 1;
   visibility: visible;
+}
+
+/* サブアイテムはメインより少し小さく */
+.filter-sub .filter-btn {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  padding-bottom: 12px;
+  margin-right: 24px;
 }
 
 .projects-item.reveal {
