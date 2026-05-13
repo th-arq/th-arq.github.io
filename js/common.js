@@ -32,6 +32,7 @@ window.addEventListener("load", () => {
   });
 
   // --- 3. Header / Footer Loader ---
+  // 【修正】fetchコールバック内でfade表示を処理するように変更
   const loadParts = (id, path) => {
     fetch(path)
       .then(res => res.text())
@@ -39,13 +40,24 @@ window.addEventListener("load", () => {
         const el = document.getElementById(id);
         if (!el) return;
         el.innerHTML = html;
+
         if (id === 'header') {
           const headerTag = el.querySelector('header');
           if (!headerTag) return;
+
+          // 【修正】ヘッダー挿入直後にfadeクラスを付与（非同期タイミングのズレを解消）
+          if (!document.body.classList.contains('is-index')) {
+            setTimeout(() => {
+              el.querySelector(".fade-logo")?.classList.add("show");
+              el.querySelector(".fade-menu")?.classList.add("show");
+            }, 100);
+          }
+
           window.addEventListener('scroll', () => {
             if (window.scrollY > 50) headerTag.classList.add('is-scrolled');
             else headerTag.classList.remove('is-scrolled');
           });
+
           const burgerBtn = el.querySelector('.burger-btn');
           if (burgerBtn) {
             burgerBtn.addEventListener('click', (e) => {
@@ -85,15 +97,14 @@ window.addEventListener("load", () => {
     });
   });
 
- 
-  // --- 5. Contact Form Ajax Redirect (NEW!) ---
+  // --- 5. Contact Form Ajax Redirect ---
   const contactForm = document.querySelector('.contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const formData = new FormData(contactForm);
       const submitBtn = contactForm.querySelector('.submit-btn');
-      
+
       const originalText = submitBtn.innerText;
       submitBtn.innerText = 'SENDING...';
       submitBtn.disabled = true;
@@ -106,7 +117,6 @@ window.addEventListener("load", () => {
         });
 
         if (response.ok) {
-          // 送信成功したら thanks.html へ
           window.location.href = 'thanks.html';
         } else {
           throw new Error('Form submission failed');
@@ -120,22 +130,20 @@ window.addEventListener("load", () => {
   }
 
   // --- 6. Page Appearance ---
+  // 【修正】重複していたコードブロックを削除し、こちら1箇所のみに統一
+  // ※ is-index ページのfade-logo/fade-menuはloadParts内で処理するため、ここではmainのみ対応
   if (!document.body.classList.contains('is-index')) {
     setTimeout(() => {
       document.querySelector('main')?.classList.add('appeared');
-      document.querySelector(".fade-logo")?.classList.add("show");
-      document.querySelector(".fade-menu")?.classList.add("show");
     }, 100);
   }
-});
 
   // --- 7. Services Card Reveal (scroll) ---
-  // .services-card.reveal を IntersectionObserver でフェードイン
   const cardObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('show');
-        cardObserver.unobserve(entry.target); // 一度表示したら監視解除
+        cardObserver.unobserve(entry.target);
       }
     });
   }, { threshold: 0.12 });
@@ -143,3 +151,6 @@ window.addEventListener("load", () => {
   document.querySelectorAll('.services-card.reveal').forEach(card => {
     cardObserver.observe(card);
   });
+
+});
+// 【修正】load イベント外に重複していた「6. Page Appearance」ブロックを削除
