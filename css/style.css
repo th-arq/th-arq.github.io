@@ -130,17 +130,12 @@ main.appeared, .fade-logo.show, .fade-menu.show, .projects-item.reveal.show {
 /* =========================
   Header PC
 ========================= */
-#header {
-    width: 100%;
-    max-width: 1700px;
-    z-index: 1000 !important;
-}
-
 header {
   position: fixed;
   top: 0;
   left: 50%;
   width: 100%;
+  max-width: 1700px;
   transform: translateX(-50%);
   height: var(--header-height);
   background: linear-gradient(0deg, transparent, var(--white));
@@ -148,7 +143,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 100;
+  z-index: 1000 !important;
   transition: opacity 0.4s ease, background-color 0.4s ease;
   opacity: 1;
 }
@@ -187,7 +182,7 @@ header.is-scrolled:hover {
 }
 
 .contact-btn {
-  padding: 0.4em 1em;
+  padding: 0.2em 1em;
 }
 
 @media (min-width: 901px) {
@@ -826,11 +821,11 @@ footer {
   font-weight: var(--normal);
   letter-spacing: 0.1em;
   color: var(--gray);
-  font-size: var(--font-xs);
+  font-size: var(--font-s);
 
   /* タブ本体 */
   padding: 0 0 14px 0;
-  margin-right: 32px;
+  margin-right: 1.5em;
   position: relative;
   transition: color 0.25s ease;
 
@@ -887,17 +882,15 @@ footer {
 }
 
 .filter-sub.is-open {
-  height: 42px; /* padding-top 14px + テキスト行高 */
+  height: 42px; 
   opacity: 1;
   visibility: visible;
 }
 
 /* サブアイテムはメインより少し小さく */
 .filter-sub .filter-btn {
-  font-size: 11px;
+  font-size: var(--font-s);
   letter-spacing: 0.1em;
-  padding-bottom: 12px;
-  margin-right: 24px;
 }
 
 .projects-item.reveal {
