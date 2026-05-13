@@ -129,15 +129,6 @@ window.addEventListener("load", () => {
   }
 });
 
-  // --- 6. Page Appearance ---
-  if (!document.body.classList.contains('is-index')) {
-    setTimeout(() => {
-      document.querySelector('main')?.classList.add('appeared');
-      document.querySelector(".fade-logo")?.classList.add("show");
-      document.querySelector(".fade-menu")?.classList.add("show");
-    }, 100);
-  }
-
   // --- 7. Services Card Reveal (scroll) ---
   // .services-card.reveal を IntersectionObserver でフェードイン
   const cardObserver = new IntersectionObserver((entries) => {
