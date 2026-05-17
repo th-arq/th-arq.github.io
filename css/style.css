@@ -623,11 +623,6 @@ footer {
    Services
 ========================= */
  
-/* --- Hero --- */
-.services-hero {
-  padding: calc(var(--header-height) + var(--gap-m)) var(--side-padding) var(--gap-m);
-}
- 
 .services-eyebrow {
   font-size: var(--font-xs);
   letter-spacing: 0.25em;
@@ -726,10 +721,6 @@ footer {
   margin: 0;
 }
  
-/* --- Reviews section (既存 .reviews-* を再利用) --- */
-.services-reviews {
-  padding: 0 var(--side-padding) var(--gap-l);
-}
  
 /* stagger delay for services grid */
 .services-card:nth-child(1) { transition-delay: 0s; }
