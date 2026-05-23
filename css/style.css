@@ -516,19 +516,6 @@ body.is-index main {
   transform: translateY(0);
 }
 
-.gallery-item[data-delay="0"]  { transition-delay: 0s; }
-.gallery-item[data-delay="1"]  { transition-delay: 0.08s; }
-.gallery-item[data-delay="2"]  { transition-delay: 0.16s; }
-.gallery-item[data-delay="3"]  { transition-delay: 0.24s; }
-.gallery-item[data-delay="4"]  { transition-delay: 0.32s; }
-.gallery-item[data-delay="5"]  { transition-delay: 0.40s; }
-.gallery-item[data-delay="6"]  { transition-delay: 0.48s; }
-.gallery-item[data-delay="7"]  { transition-delay: 0.56s; }
-.gallery-item[data-delay="8"]  { transition-delay: 0.64s; }
-
-.gallery-item.no-delay {
-  transition-delay: 0s !important;
-}
 
 .reveal {
   clip-path: inset(0 0 100% 0);
