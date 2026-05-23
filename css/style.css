@@ -150,7 +150,6 @@ header {
   top: 0;
   left: 50%;
   width: 100%;
-  max-width: 1700px;
   transform: translateX(-50%);
   height: var(--header-height);
   background: linear-gradient(0deg, transparent, var(--white));
