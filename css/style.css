@@ -369,6 +369,7 @@ footer {
   Loading
 ========================= */
 #loading {
+  clip-path: inset(0 0 0 0); 
   position: fixed;
   top: 0;
   left: 0;
@@ -424,6 +425,12 @@ body.is-index main {
   align-items: unset;
   justify-content: unset;
   padding-top: var(--header-height);
+}
+
+.gallery-item {
+  transform: translateY(var(--parallax-y, 0));
+  /* 既存の transition に will-change を追加 */
+  will-change: transform;
 }
 
 .gallery-section {
