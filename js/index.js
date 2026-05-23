@@ -61,26 +61,35 @@ window.addEventListener("load", () => {
 function initGallery() {
   const items = document.querySelectorAll('.gallery-item');
 
-  // ② ランダム方向スライドイン
-  const directions = [
-    'translateY(-30px)',
-    'translateY(30px)',
-    'translateX(-30px)',
-    'translateX(30px)',
-  ];
+  // ランダム遅延で登場（0〜900ms）
+  items.forEach((item) => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(14px)';
 
-  items.forEach((item, i) => {
-    const dir = directions[i % directions.length];
-    item.style.transform = dir;
-    item.setAttribute('data-delay', i % 9);
+    const delay = Math.random() * 900;
+    setTimeout(() => {
+      item.style.transition = 'opacity 1.2s ease, transform 1.4s cubic-bezier(0.16, 1, 0.3, 1)';
+      item.style.opacity = '1';
+      item.style.transform = 'translateY(0)';
+    }, delay);
   });
 
+  // スクロール reveal（画面外から入ってきたアイテム用）
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const el = entry.target;
-        el.classList.add('visible');
-        setTimeout(() => el.classList.add('no-delay'), 800);
+        // すでに登場済みならスキップ
+        if (el.dataset.entered) return;
+        el.dataset.entered = 'true';
+
+        const delay = Math.random() * 400; // スクロール時は短めに
+        setTimeout(() => {
+          el.style.transition = 'opacity 1.2s ease, transform 1.4s cubic-bezier(0.16, 1, 0.3, 1)';
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, delay);
+
         io.unobserve(el);
       }
     });
@@ -90,12 +99,6 @@ function initGallery() {
   });
 
   items.forEach(item => io.observe(item));
-
-  // ③ パララックス（奇数列・偶数列で逆方向）
-  initParallax();
-
-  // ③ マウス tilt
-  initTilt();
 }
 
 
