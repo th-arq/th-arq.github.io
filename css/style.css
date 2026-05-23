@@ -774,18 +774,47 @@ body.is-index main {
   Projects
 ========================= */
 .projects-item {
-  opacity: 0;
-  transform: translateY(12px) scale(0.98);
-  pointer-events: none;
   display: none;
+  opacity: 0;
+  clip-path: inset(0 0 100% 0);
+  transform: none;
+  pointer-events: none;
+  transition:
+    clip-path 0.65s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity   0.45s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: clip-path, opacity;
 }
+
 
 .projects-item.is-show {
   display: block;
   opacity: 1;
-  transform: translateY(0) scale(1);
+  clip-path: inset(0 0 0% 0);
   pointer-events: auto;
-  animation: projectFade 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.projects-item.is-exit {
+  opacity: 0;
+  clip-path: inset(100% 0 0% 0);   /* 上から閉じる */
+  transition:
+    clip-path 0.35s cubic-bezier(0.4, 0, 1, 1),
+    opacity   0.25s ease;
+  transition-delay: 0ms !important;
+  pointer-events: none;
+}
+
+/* reveal クラス（スクロール表示用・詳細ページ共用）は既存のまま残す */
+.projects-item.reveal {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.2s ease, opacity 0.4s ease, transform 0.4s ease;
+  will-change: clip-path, transform, opacity;
+  opacity: 0;
+}
+
+.projects-item.reveal.show {
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
 }
 
 @keyframes projectFade {
