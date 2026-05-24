@@ -1,144 +1,121 @@
-document.addEventListener('DOMContentLoaded', () => {
+// js/services.js
 
-  // --- スクロール時のふわっと表示（詳細ページ用） ---
-  const revealElements = document.querySelectorAll('.image-wrapper.reveal, .related-item.reveal');
-  if (revealElements.length) {
-    const showOnScroll = () => {
-      revealElements.forEach(el => {
-        if (el.getBoundingClientRect().top < window.innerHeight * 0.9) {
-          el.classList.add('show');
-        }
-      });
-    };
-    window.addEventListener('scroll', showOnScroll);
-    setTimeout(showOnScroll, 200);
-  }
+(function () {
 
-  // --- カテゴリフィルター ---
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  const projectItems  = document.querySelectorAll('.projects-item');
-  const subNav        = document.getElementById('sub-residential');
-  const projectsGrid  = document.querySelector('.projects-grid');
+  // Services ページ以外では何もしない
+  if (!document.querySelector('.services-page')) return;
 
-  const SUB_FILTERS = new Set(['living', 'kitchen', 'bath', 'patio']);
-
-  const getColumnCount = () => {
-    if (!projectsGrid) return window.innerWidth <= 900 ? 2 : 5;
-    const visible = Array.from(projectItems).find(el => el.style.display !== 'none');
-    if (!visible) return window.innerWidth <= 900 ? 2 : 5;
-    return Math.max(1, Math.round(projectsGrid.offsetWidth / visible.offsetWidth));
-  };
-
-  // グリッド全体を呼吸させる（待機中アニメーション）
-  const startBreathing = () => {
-    projectsGrid?.classList.add('is-breathing');
-  };
-
-  const stopBreathing = () => {
-    projectsGrid?.classList.remove('is-breathing');
-  };
-
-  // アイテムをクリップパス斜めウェーブで展開
-  const revealItems = (items) => {
-    stopBreathing();
-
-    const cols = getColumnCount();
-    const COL_DELAY = 70;
-    const ROW_DELAY = 160;
-
-    items.forEach((item, index) => {
-      const col = index % cols;
-      const row = Math.floor(index / cols);
-      const delay = row * ROW_DELAY + col * COL_DELAY;
-
-      item.style.setProperty('--reveal-delay', `${delay}ms`);
-      item.style.display = 'block';
-      item.classList.remove('is-show', 'is-exit');
-
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          item.classList.add('is-show');
-        });
-      });
+  // ── 初期状態をCSSではなくJSで即セット（DOMContentLoaded前でも安全）──
+  // HTMLパース後すぐに隠す（CSSの wipe-inner transform より確実）
+  const setInitial = () => {
+    document.querySelectorAll('.services-page .wipe-inner').forEach(el => {
+      el.style.transform = 'translateY(105%)';
+      el.style.transition = 'none';
+    });
+    document.querySelectorAll('.services-page .summary-p').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(10px)';
+      el.style.transition = 'none';
+    });
+    document.querySelectorAll('.services-page .services-card').forEach(el => {
+      el.style.clipPath = 'inset(0 0 100% 0)';
+      el.style.transition = 'none';
     });
   };
 
-  // アイテムをフェードアウト
-  const hideItems = (items, onComplete) => {
-    if (!items.length) { onComplete?.(); return; }
+  // ── アニメーション本体 ────────────────────────────────────────────
+  const fire = () => {
 
-    let completed = 0;
-    items.forEach(item => {
-      item.classList.remove('is-show');
-      item.classList.add('is-exit');
+    // タイトル
+    setTimeout(() => {
+      const tw = document.querySelector('.services-page .title-wipe');
+      if (!tw) return;
+      tw.style.transition = 'transform 0.85s cubic-bezier(0.22, 1, 0.36, 1)';
+      tw.style.transform  = 'translateY(0)';
+    }, 60);
 
-      const finish = () => {
-        item.classList.remove('is-exit');
-        item.style.display = 'none';
-        completed++;
-        if (completed >= items.length) onComplete?.();
-      };
-
-      const timer = setTimeout(finish, 500);
-      item.addEventListener('transitionend', () => {
-        clearTimeout(timer);
-        finish();
-      }, { once: true });
-    });
-  };
-
-  let filterTimeout = null;
-
-  const applyFilter = (filterValue, initialLoad = false) => {
-    const isAll       = filterValue === 'projects-item';
-    const isSubFilter = SUB_FILTERS.has(filterValue);
-
-    const toShow = [];
-    const toHide = [];
-
-    projectItems.forEach(item => {
-      const level = item.dataset.level;
-      let show = false;
-      if (isAll)            show = level === 'parent';
-      else if (isSubFilter) show = item.classList.contains(filterValue);
-      else                  show = level === 'parent' && item.classList.contains(filterValue);
-      show ? toShow.push(item) : toHide.push(item);
-    });
-
-    clearTimeout(filterTimeout);
-
-    // 非表示アイテムをまず隠す
-    hideItems(toHide, () => {
-      // 呼吸アニメ開始（待機中の演出）
-      // 初期ロードは display:block にしてから呼吸させる
-      toShow.forEach(item => { item.style.display = 'block'; });
-      startBreathing();
-
-      // 850ms 後にクリップ展開
-      filterTimeout = setTimeout(() => {
-        revealItems(toShow);
-      }, initialLoad ? 850 : 700);
-    });
-  };
-
-  // 初期表示
-  applyFilter('projects-item', true);
-
-  // ボタンクリック
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const filterValue = btn.dataset.filter;
-      filterButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      if (filterValue === 'residential' || SUB_FILTERS.has(filterValue)) {
-        subNav.classList.add('is-open');
-      } else {
-        subNav.classList.remove('is-open');
+    // summary h3 + p（時間差）
+    document.querySelectorAll('.services-page .summary-block').forEach((block, i) => {
+      const inner = block.querySelector('.wipe-inner');
+      const p     = block.querySelector('.summary-p');
+      if (inner) {
+        setTimeout(() => {
+          inner.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
+          inner.style.transform  = 'translateY(0)';
+        }, 300 + i * 340);
       }
-
-      applyFilter(filterValue);
+      if (p) {
+        setTimeout(() => {
+          p.style.transition = 'opacity 0.65s ease, transform 0.65s ease';
+          p.style.opacity    = '1';
+          p.style.transform  = 'translateY(0)';
+        }, 480 + i * 340);
+      }
     });
+
+    // カード wipe
+    document.querySelectorAll('.services-page .services-card').forEach((card, i) => {
+      setTimeout(() => {
+        card.style.transition = 'clip-path 0.85s cubic-bezier(0.25, 1, 0.5, 1)';
+        card.style.clipPath   = 'inset(0 0 0% 0)';
+      }, 1380 + i * 110);
+    });
+  };
+
+  // ── main.appeared を監視して発火 ─────────────────────────────────
+  // common.js が window load 後 100ms で .appeared を付ける
+  // → MutationObserver で確実に捕まえる
+  const observeAppeared = () => {
+    const main = document.querySelector('main');
+    if (!main) return;
+
+    // すでに appeared なら即発火（キャッシュ等で速い場合）
+    if (main.classList.contains('appeared')) {
+      fire();
+      return;
+    }
+
+    const obs = new MutationObserver((_, o) => {
+      if (main.classList.contains('appeared')) {
+        o.disconnect();
+        fire();
+      }
+    });
+    obs.observe(main, { attributes: true, attributeFilter: ['class'] });
+  };
+
+  // ── Reviews タイトル：スクロールトリガー ─────────────────────────
+  const initReviewsTitle = () => {
+    const sections = document.querySelectorAll('.services-page .split-section');
+    const last = sections[sections.length - 1];
+    if (!last) return;
+    const title = last.querySelector('.title');
+    if (!title) return;
+
+    // wipe構造に差し替え
+    const text = title.textContent.trim();
+    title.innerHTML = `<span class="wipe-line"><span class="wipe-inner">${text}</span></span>`;
+    // 初期状態セット（setInitialより後なのでここで直接セット）
+    const inner = title.querySelector('.wipe-inner');
+    inner.style.transform  = 'translateY(105%)';
+    inner.style.transition = 'none';
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        inner.style.transition = 'transform 0.85s cubic-bezier(0.22, 1, 0.36, 1)';
+        inner.style.transform  = 'translateY(0)';
+        io.unobserve(title);
+      });
+    }, { threshold: 0.3 });
+    io.observe(title);
+  };
+
+  // ── エントリーポイント ────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    setInitial();
+    initReviewsTitle();
+    observeAppeared();
   });
 
-});
+}());
