@@ -61,31 +61,31 @@ window.addEventListener("load", () => {
 function initGallery() {
   const items = document.querySelectorAll('.gallery-item');
 
-  // ランダム遅延で登場（0〜900ms）
   items.forEach((item) => {
     item.style.opacity = '0';
     item.style.transform = 'translateY(14px)';
 
-    const delay = Math.random() * 900;
+    // 100ms〜2100ms のランダム幅でばらつかせる
+    const delay = 100 + Math.random() * 2000;
+
     setTimeout(() => {
-      item.style.transition = 'opacity 1.2s ease, transform 1.4s cubic-bezier(0.16, 1, 0.3, 1)';
+      item.style.transition = 'opacity 1.4s ease, transform 1.6s cubic-bezier(0.16, 1, 0.3, 1)';
       item.style.opacity = '1';
       item.style.transform = 'translateY(0)';
     }, delay);
   });
 
-  // スクロール reveal（画面外から入ってきたアイテム用）
+  // スクロールreveal（画面外から入ってきたアイテム用）
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const el = entry.target;
-        // すでに登場済みならスキップ
         if (el.dataset.entered) return;
         el.dataset.entered = 'true';
 
-        const delay = Math.random() * 400; // スクロール時は短めに
+        const delay = 100 + Math.random() * 600; // スクロール時は短めに
         setTimeout(() => {
-          el.style.transition = 'opacity 1.2s ease, transform 1.4s cubic-bezier(0.16, 1, 0.3, 1)';
+          el.style.transition = 'opacity 1.4s ease, transform 1.6s cubic-bezier(0.16, 1, 0.3, 1)';
           el.style.opacity = '1';
           el.style.transform = 'translateY(0)';
         }, delay);
