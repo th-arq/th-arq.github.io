@@ -731,51 +731,43 @@ body.is-index main {
 /* =========================
   Projects
 ========================= */
+.projects-grid.is-breathing {
+  animation: grid-breathe 1.6s ease-in-out infinite;
+}
+
+@keyframes grid-breathe {
+  0%, 100% { opacity: 0.25; }
+  50%       { opacity: 0.6;  }
+}
+
+/* イン：クリップパスで下からめくれる */
 .projects-item {
   display: none;
-  opacity: 0;
-  transform: scale(1.08);
-  filter: blur(6px);
+  clip-path: inset(0 0 100% 0);
   pointer-events: none;
   transition:
-    opacity    1.0s cubic-bezier(0.16, 1, 0.3, 1),
-    transform  1.0s cubic-bezier(0.16, 1, 0.3, 1),
-    filter     0.9s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, transform, filter;
+    clip-path 1100ms cubic-bezier(0.25, 1, 0.5, 1) var(--reveal-delay, 0ms),
+    opacity   400ms ease var(--reveal-delay, 0ms);
+  will-change: clip-path;
 }
 
 .projects-item.is-show {
   display: block;
-  opacity: 1;
-  transform: scale(1);
-  filter: blur(0px);
+  clip-path: inset(0 0 0% 0);
   pointer-events: auto;
 }
 
-/* --- アウト：縮みながらゆっくり消える --- */
+/* アウト：さっと消える */
 .projects-item.is-exit {
+  clip-path: inset(0 0 100% 0);
   opacity: 0;
-  transform: scale(0.96);
-  filter: blur(2px);
   transition:
-    opacity   0.45s cubic-bezier(0.4, 0, 1, 1),
-    transform 0.45s cubic-bezier(0.4, 0, 1, 1),
-    filter    0.35s ease;
+    clip-path 380ms cubic-bezier(0.4, 0, 1, 1),
+    opacity   280ms ease;
   transition-delay: 0ms !important;
   pointer-events: none;
 }
 
-@keyframes projectFade {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 /* =========================
   Filter Nav
