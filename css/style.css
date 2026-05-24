@@ -669,9 +669,8 @@ body.is-index main {
   color: var(--darkgray);
   line-height: 1.9;
   margin: 0;
-  opacity: 0;              /* ← 追加 */
-  transform: translateY(10px); /* ← 追加 */
 }
+
 
 /* wipe共通 */
 .wipe-line {
@@ -681,8 +680,9 @@ body.is-index main {
 
 .wipe-inner {
   display: block;
-  transform: translateY(105%); /* ← 追加：最初から隠す */
 }
+
+
 
 /* services-card hover（revealクラスを外したので再定義） */
 .services-card {
