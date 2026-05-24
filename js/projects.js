@@ -18,36 +18,42 @@ document.addEventListener('DOMContentLoaded', () => {
   const filterButtons = document.querySelectorAll('.filter-btn');
   const projectItems  = document.querySelectorAll('.projects-item');
   const subNav        = document.getElementById('sub-residential');
+  const projectsGrid  = document.querySelector('.projects-grid');
 
   const SUB_FILTERS = new Set(['living', 'kitchen', 'bath', 'patio']);
 
-  // グリッドの列数を取得（CSS gridのcolumnsに合わせて動的に取得）
   const getColumnCount = () => {
-    const grid = document.querySelector('.projects-grid');
-    if (!grid) return 5;
-    return Math.round(grid.offsetWidth / grid.querySelector('.projects-item')?.offsetWidth) || 5;
+    if (!projectsGrid) return window.innerWidth <= 900 ? 2 : 5;
+    const visible = Array.from(projectItems).find(el => el.style.display !== 'none');
+    if (!visible) return window.innerWidth <= 900 ? 2 : 5;
+    return Math.max(1, Math.round(projectsGrid.offsetWidth / visible.offsetWidth));
   };
 
-  /**
-   * アイテムにクリップパス縦スライドアニメーションをかける
-   * @param {Element[]} items  表示するアイテム配列
-   * @param {number} baseDelay 行・列ごとのベース遅延(ms)
-   */
-  const revealItems = (items, baseDelay = 60) => {
+  // グリッド全体を呼吸させる（待機中アニメーション）
+  const startBreathing = () => {
+    projectsGrid?.classList.add('is-breathing');
+  };
+
+  const stopBreathing = () => {
+    projectsGrid?.classList.remove('is-breathing');
+  };
+
+  // アイテムをクリップパス斜めウェーブで展開
+  const revealItems = (items) => {
+    stopBreathing();
+
     const cols = getColumnCount();
+    const COL_DELAY = 70;
+    const ROW_DELAY = 160;
 
     items.forEach((item, index) => {
-      const col = index % cols;       // 列番号（左から0始まり）
-      const row = Math.floor(index / cols); // 行番号
-
-      // 行が下がるほど + 列が右ほど遅れる（斜めウェーブ）
-      const delay = row * baseDelay * 1.4 + col * baseDelay;
+      const col = index % cols;
+      const row = Math.floor(index / cols);
+      const delay = row * ROW_DELAY + col * COL_DELAY;
 
       item.style.setProperty('--reveal-delay', `${delay}ms`);
       item.style.display = 'block';
-
-      // 一度リセットしてから付与（フィルター切り替え時のリプレイ用）
-      item.classList.remove('is-show');
+      item.classList.remove('is-show', 'is-exit');
 
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
@@ -57,30 +63,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  /**
-   * アイテムを上方向にスライドアウトさせてから非表示にする
-   * @param {Element[]} items
-   */
-  const hideItems = (items) => {
-    items.forEach(item => {
-      item.classList.add('is-exit');
-      // トランジション完了後に非表示
-      const onEnd = () => {
-        item.classList.remove('is-show', 'is-exit');
-        item.style.display = 'none';
-        item.removeEventListener('transitionend', onEnd);
-      };
-      item.addEventListener('transitionend', onEnd);
+  // アイテムをフェードアウト
+  const hideItems = (items, onComplete) => {
+    if (!items.length) { onComplete?.(); return; }
 
-      // transitionが発火しない（すでに非表示など）ときのフォールバック
-      setTimeout(() => {
-        item.classList.remove('is-show', 'is-exit');
+    let completed = 0;
+    items.forEach(item => {
+      item.classList.remove('is-show');
+      item.classList.add('is-exit');
+
+      const finish = () => {
+        item.classList.remove('is-exit');
         item.style.display = 'none';
-      }, 450);
+        completed++;
+        if (completed >= items.length) onComplete?.();
+      };
+
+      const timer = setTimeout(finish, 500);
+      item.addEventListener('transitionend', () => {
+        clearTimeout(timer);
+        finish();
+      }, { once: true });
     });
   };
 
-  const applyFilter = (filterValue) => {
+  let filterTimeout = null;
+
+  const applyFilter = (filterValue, initialLoad = false) => {
     const isAll       = filterValue === 'projects-item';
     const isSubFilter = SUB_FILTERS.has(filterValue);
 
@@ -90,33 +99,35 @@ document.addEventListener('DOMContentLoaded', () => {
     projectItems.forEach(item => {
       const level = item.dataset.level;
       let show = false;
-
-      if (isAll) {
-        show = level === 'parent';
-      } else if (isSubFilter) {
-        show = item.classList.contains(filterValue);
-      } else {
-        show = level === 'parent' && item.classList.contains(filterValue);
-      }
-
+      if (isAll)            show = level === 'parent';
+      else if (isSubFilter) show = item.classList.contains(filterValue);
+      else                  show = level === 'parent' && item.classList.contains(filterValue);
       show ? toShow.push(item) : toHide.push(item);
     });
 
-    // 非表示アイテムをアウトアニメーション付きで隠す
-    hideItems(toHide);
+    clearTimeout(filterTimeout);
 
-    // 表示アイテムを少し待ってからイン
-    setTimeout(() => revealItems(toShow), 80);
+    // 非表示アイテムをまず隠す
+    hideItems(toHide, () => {
+      // 呼吸アニメ開始（待機中の演出）
+      // 初期ロードは display:block にしてから呼吸させる
+      toShow.forEach(item => { item.style.display = 'block'; });
+      startBreathing();
+
+      // 850ms 後にクリップ展開
+      filterTimeout = setTimeout(() => {
+        revealItems(toShow);
+      }, initialLoad ? 850 : 700);
+    });
   };
 
-  // 初期表示（ALL）
-  applyFilter('projects-item');
+  // 初期表示
+  applyFilter('projects-item', true);
 
   // ボタンクリック
   filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const filterValue = btn.dataset.filter;
-
       filterButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
