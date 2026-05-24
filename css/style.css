@@ -647,6 +647,55 @@ body.is-index main {
 /* =========================
    Services
 ========================= */
+/* summary block */
+.summary-block {
+  padding: var(--gap-m) 0;
+  border-top: 1px solid var(--lightgray);
+}
+
+.summary-block:last-of-type {
+  border-bottom: 1px solid var(--lightgray);
+  margin-bottom: var(--gap-l);
+}
+
+.summary-h3 {
+  font-size: var(--font-m);
+  font-weight: var(--normal);
+  margin: 0 0 var(--gap-xs) 0;
+}
+
+.summary-p {
+  font-size: var(--font-s);
+  color: var(--darkgray);
+  line-height: 1.9;
+  margin: 0;
+}
+
+/* wipe共通 */
+.wipe-line {
+  display: block;
+  overflow: hidden;
+}
+
+.wipe-inner {
+  display: block;
+}
+
+/* services-card hover（revealクラスを外したので再定義） */
+.services-card {
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+
+.services-card-img img {
+  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.services-card:hover .services-card-img img {
+  transform: scale(1.06);
+}
+
 .services-grid {
   list-style: none;
   padding: 0;
