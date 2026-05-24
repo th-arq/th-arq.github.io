@@ -1,0 +1,90 @@
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ── アニメーション本体 ────────────────────────────────────────────
+  const fire = () => {
+
+    // タイトル
+    setTimeout(() => {
+      const titleWipe = document.querySelector('.title-wipe');
+      if (titleWipe) {
+        titleWipe.style.transition = 'transform 0.85s cubic-bezier(0.22, 1, 0.36, 1)';
+        titleWipe.style.transform  = 'translateY(0)';
+      }
+    }, 80);
+
+    // summary h3 + p（時間差で順番に）
+    document.querySelectorAll('.summary-block').forEach((block, i) => {
+      const inner = block.querySelector('.wipe-inner');
+      const p     = block.querySelector('.summary-p');
+
+      if (inner) {
+        setTimeout(() => {
+          inner.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
+          inner.style.transform  = 'translateY(0)';
+        }, 320 + i * 360);
+      }
+      if (p) {
+        setTimeout(() => {
+          p.style.transition = 'opacity 0.65s ease, transform 0.65s ease';
+          p.style.opacity    = '1';
+          p.style.transform  = 'translateY(0)';
+        }, 520 + i * 360);
+      }
+    });
+
+    // カード wipe
+    document.querySelectorAll('.services-card').forEach((card, i) => {
+      card.style.clipPath = 'inset(0 0 100% 0)';
+      setTimeout(() => {
+        card.style.transition = 'clip-path 0.85s cubic-bezier(0.25, 1, 0.5, 1)';
+        card.style.clipPath   = 'inset(0 0 0% 0)';
+      }, 1480 + i * 110);
+    });
+  };
+
+  // ── main.appeared を待って発火 ────────────────────────────────────
+  // common.js が main に .appeared を付けるのを監視する
+  const main = document.querySelector('main');
+
+  const waitForAppeared = () => {
+    if (main && main.classList.contains('appeared')) {
+      fire();
+      return;
+    }
+    // .appeared がまだなければ MutationObserver で待つ
+    const obs = new MutationObserver(() => {
+      if (main.classList.contains('appeared')) {
+        obs.disconnect();
+        fire();
+      }
+    });
+    if (main) obs.observe(main, { attributes: true, attributeFilter: ['class'] });
+  };
+
+  waitForAppeared();
+
+
+  // ── Reviews タイトル：スクロールトリガー ──────────────────────────
+  const reviewsSection = document.querySelector('.split-section:last-of-type');
+  const reviewsTitle   = reviewsSection ? reviewsSection.querySelector('.title') : null;
+
+  if (reviewsTitle) {
+    // wipe構造に組み換え（CSS側で transform: translateY(105%) が初期値なのでそのまま使う）
+    const text = reviewsTitle.textContent.trim();
+    reviewsTitle.innerHTML =
+      `<span class="wipe-line"><span class="wipe-inner">${text}</span></span>`;
+
+    const inner = reviewsTitle.querySelector('.wipe-inner');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        inner.style.transition = 'transform 0.85s cubic-bezier(0.22, 1, 0.36, 1)';
+        inner.style.transform  = 'translateY(0)';
+        io.unobserve(reviewsTitle);
+      });
+    }, { threshold: 0.3 });
+
+    io.observe(reviewsTitle);
+  }
+
+});
