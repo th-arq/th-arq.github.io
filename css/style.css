@@ -647,32 +647,6 @@ body.is-index main {
 /* =========================
    Services
 ========================= */
-
-.services-eyebrow {
-  font-size: var(--font-xs);
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--gray);
-  margin: 0 0 16px 0;
-}
-
-.services-hero-title {
-  font-size: var(--font-xl);
-  font-weight: var(--bold);
-  line-height: 0.95;
-  letter-spacing: 0.02em;
-  margin: 0 0 var(--gap-s) 0;
-}
-
-.services-hero-desc {
-  font-size: var(--font-s);
-  font-weight: var(--normal);
-  color: var(--darkgray);
-  line-height: 1.8;
-  max-width: 520px;
-  margin: 0;
-}
-
 .services-grid {
   list-style: none;
   padding: 0;
@@ -725,8 +699,6 @@ body.is-index main {
 }
 
 .services-card-title {
-  font-size: var(--font-s);
-  font-weight: var(--bold);
   margin: 0 0 6px 0;
 }
 
