@@ -66,4 +66,153 @@ window.addEventListener('load', () => {
   // ═══════════════════════════════════════════════
   // 3. Page Appearance — main フェードイン
   // ═══════════════════════════════════════════════
-  if (!document.body.classList.contains('is-
+  if (!document.body.classList.contains('is-index')) {
+    setTimeout(() => {
+      document.querySelector('main')?.classList.add('appeared');
+    }, 200);
+  }
+
+
+  // ═══════════════════════════════════════════════
+  // 4. Split Title — wipe アニメーション
+  //    最初の .title はページロード時、以降はスクロールトリガー
+  // ═══════════════════════════════════════════════
+  const titles = document.querySelectorAll('.split-layout .title');
+
+  // services-page の最初のタイトルは services.js が管理するためスキップ
+  const isServices = document.querySelector('.services-page');
+
+  titles.forEach((title, index) => {
+
+    // services の1つ目は services.js 側で処理
+    if (isServices && index === 0) return;
+
+    // wipe 構造に差し替え（まだ .wipe-line がない場合のみ）
+    if (!title.querySelector('.wipe-line')) {
+      const text = title.innerHTML;
+      title.innerHTML = `<span class="wipe-line"><span class="wipe-inner" style="transform:translateY(105%)">${text}</span></span>`;
+    }
+
+    const inner = title.querySelector('.wipe-inner');
+    if (!inner) return;
+
+    const reveal = () => {
+      inner.style.transition = 'transform 0.85s cubic-bezier(0.22, 1, 0.36, 1)';
+      inner.style.transform  = 'translateY(0)';
+    };
+
+    if (index === 0) {
+      // 最初のタイトルはページロード直後
+      setTimeout(reveal, 300);
+    } else {
+      // 2つ目以降はスクロールトリガー
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          reveal();
+          io.unobserve(title);
+        });
+      }, { threshold: 0.3 });
+      io.observe(title);
+    }
+  });
+
+
+  // ═══════════════════════════════════════════════
+  // 5. Split Title — is-active（既存のスクロール連動カラー）
+  // ═══════════════════════════════════════════════
+  const activeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      entry.target.classList.toggle('is-active', entry.isIntersecting);
+    });
+  }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+
+  titles.forEach(title => activeObserver.observe(title));
+
+
+  // ═══════════════════════════════════════════════
+  // 6. Content Fade-up — content-box 内の要素をスクロールで順番に
+  // ═══════════════════════════════════════════════
+  // services-page は services.js が管理するためスキップ
+  if (!isServices) {
+    const fadeTargets = document.querySelectorAll(
+      '.content-box > section, .content-box > p, .content-box > h2, .content-box > h4, .content-box > ul, .content-box > iframe'
+    );
+
+    fadeTargets.forEach(el => {
+      el.style.opacity   = '0';
+      el.style.transform = 'translateY(16px)';
+      el.style.transition = 'none';
+    });
+
+    const fadeObserver = new IntersectionObserver(entries => {
+      entries.forEach((entry, i) => {
+        if (!entry.isIntersecting) return;
+        setTimeout(() => {
+          entry.target.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+          entry.target.style.opacity    = '1';
+          entry.target.style.transform  = 'translateY(0)';
+        }, 80);
+        fadeObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.1 });
+
+    fadeTargets.forEach(el => fadeObserver.observe(el));
+  }
+
+
+  // ═══════════════════════════════════════════════
+  // 7. FAQ Smooth Accordion
+  // ═══════════════════════════════════════════════
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const summary = item.querySelector('.faq-question');
+    const content = item.querySelector('.faq-answer');
+    if (!summary || !content) return;
+
+    summary.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (item.hasAttribute('open')) {
+        content.animate([
+          { opacity: 1, height: content.scrollHeight + 'px' },
+          { opacity: 0, height: '0px' }
+        ], { duration: 400, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' })
+          .onfinish = () => item.removeAttribute('open');
+      } else {
+        item.setAttribute('open', '');
+        content.animate([
+          { opacity: 0, height: '0px' },
+          { opacity: 1, height: content.scrollHeight + 'px' }
+        ], { duration: 400, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' });
+      }
+    });
+  });
+
+
+  // ═══════════════════════════════════════════════
+  // 8. Contact Form Ajax
+  // ═══════════════════════════════════════════════
+  const contactForm = document.querySelector('.contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData  = new FormData(contactForm);
+      const submitBtn = contactForm.querySelector('.submit-btn');
+      const original  = submitBtn.innerText;
+      submitBtn.innerText = 'SENDING...';
+      submitBtn.disabled  = true;
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST', body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) { window.location.href = 'thanks.html'; }
+        else throw new Error();
+      } catch {
+        alert('Oops! Something went wrong. Please try again.');
+        submitBtn.innerText = original;
+        submitBtn.disabled  = false;
+      }
+    });
+  }
+
+});
