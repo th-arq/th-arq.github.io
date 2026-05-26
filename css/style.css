@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400&display=swap');
 
 html {
   scrollbar-gutter: stable;
@@ -12,7 +12,7 @@ html {
 }
 
 body {
-  font-family: 'Jost', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-weight: 300;
   letter-spacing: 0.05em;
   line-height: 1.6;
@@ -398,7 +398,7 @@ footer {
 }
 
 #loading_percent {
-  font-family: 'Jost', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: var(--font-xs);
   letter-spacing: 0.2em;
   color: var(--darkgray);
@@ -493,7 +493,7 @@ body.is-index main {
 
 .gallery-item .overlay-text {
   color: #ffffff;
-  font-family: 'Jost', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-weight: 300;
   font-size: clamp(11px, 1.1vw, 15px);
   letter-spacing: 0.12em;
@@ -1169,7 +1169,7 @@ p.memo {
     color: var(--gray);
     opacity: 0.6;
     font-weight: var(--normal);
-    font-family: 'Jost', sans-serif;
+    font-family: 'Manrope', sans-serif;
 }
 
 .radio-group {
