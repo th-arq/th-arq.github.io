@@ -115,18 +115,34 @@ function initParallax() {
   const items = document.querySelectorAll('.gallery-item');
   if (!items.length) return;
 
+  // columns数をCSSから動的に取得
+  const getColumns = () => {
+    const grid = document.querySelector('.gallery-grid');
+    if (!grid) return 3;
+    const style = window.getComputedStyle(grid);
+    const cols  = style.getPropertyValue('column-count');
+    return parseInt(cols, 10) || 3;
+  };
+
   let ticking = false;
   window.addEventListener('scroll', () => {
     if (!ticking) {
       requestAnimationFrame(() => {
         const scrollY = window.scrollY;
+        const cols    = getColumns(); // ← リアルタイムで列数取得
         items.forEach((item, i) => {
-          // ⑤ 3列それぞれ異なる方向・速度でオフセット
-          const col = i % 3;
+          const col = i % cols;
           let offset = 0;
-          if (col === 0) offset = scrollY * -0.08;
-          if (col === 1) offset = scrollY *  0.05;
-          if (col === 2) offset = scrollY * -0.11;
+          if (cols === 2) {
+            // モバイル2列
+            if (col === 0) offset = scrollY * -0.06;
+            if (col === 1) offset = scrollY *  0.04;
+          } else {
+            // PC3列
+            if (col === 0) offset = scrollY * -0.08;
+            if (col === 1) offset = scrollY *  0.05;
+            if (col === 2) offset = scrollY * -0.11;
+          }
           item.style.setProperty('--parallax-y', `${offset}px`);
         });
         ticking = false;
