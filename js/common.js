@@ -35,7 +35,7 @@ window.addEventListener('load', () => {
           if (!headerTag) return;
 
           if (!isIndex) {
-            headerTag.style.opacity = '0';
+            headerTag.style.opacity   = '0';
             headerTag.style.transition = 'none';
           }
 
@@ -60,20 +60,17 @@ window.addEventListener('load', () => {
               el.querySelector('.fade-logo')?.classList.add('show');
               el.querySelector('.fade-menu')?.classList.add('show');
               headerTag.style.transition = 'opacity 0.9s ease';
-              headerTag.style.opacity = '1';
+              headerTag.style.opacity    = '1';
 
+              // ヘッダーfade-in完了(0.9s)後にタイトルwipe発火
               setTimeout(() => {
                 document.dispatchEvent(new CustomEvent('header:revealed'));
-              }, 800);
-
+              }, 900);
             }, 1800);
           };
 
           const mainEl = document.querySelector('main');
-          if (!mainEl) {
-            setTimeout(revealHeader, 500);
-            return;
-          }
+          if (!mainEl) { setTimeout(revealHeader, 500); return; }
 
           if (mainEl.classList.contains('appeared')) {
             revealHeader();
@@ -86,10 +83,11 @@ window.addEventListener('load', () => {
             });
             obs.observe(mainEl, { attributes: true, attributeFilter: ['class'] });
 
+            // フォールバック
             setTimeout(() => {
               obs.disconnect();
               headerTag.style.transition = 'opacity 0.7s ease';
-              headerTag.style.opacity = '1';
+              headerTag.style.opacity    = '1';
               el.querySelector('.fade-logo')?.classList.add('show');
               el.querySelector('.fade-menu')?.classList.add('show');
               setTimeout(() => {
@@ -116,14 +114,16 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 4. Split Title — wipe アニメーション
+  // 4. Split Title — wipe アニメーション（全ページ共通）
   // ═══════════════════════════════════════════════
   const titles = document.querySelectorAll('.split-layout .title');
 
   titles.forEach((title, index) => {
+    // .wipe-line がなければラップして初期位置を下に隠す
     if (!title.querySelector('.wipe-line')) {
       const text = title.innerHTML;
-      title.innerHTML = `<span class="wipe-line"><span class="wipe-inner" style="transform:translateY(105%)">${text}</span></span>`;
+      title.innerHTML =
+        `<span class="wipe-line"><span class="wipe-inner" style="transform:translateY(105%)">${text}</span></span>`;
     }
 
     const inner = title.querySelector('.wipe-inner');
@@ -135,9 +135,10 @@ window.addEventListener('load', () => {
     };
 
     if (index === 0) {
-      // ヘッダーが出終わってから最初のtitleをwipe
+      // ページ最初のタイトル：ヘッダー表示完了後にwipe
       document.addEventListener('header:revealed', reveal, { once: true });
     } else {
+      // 2つ目以降：スクロールでビューに入ったらwipe
       const io = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (!entry.isIntersecting) return;
@@ -151,7 +152,7 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 5. Split Title — is-active（スクロール連動カラー）
+  // 5. Split Title — is-active（スクロール連動カラー、全ページ共通）
   // ═══════════════════════════════════════════════
   const activeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -163,35 +164,42 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 6. Content Fade-up
+  // 6. Content Fade-up（全ページ共通）
+  //    .content-box の直下要素を下からフェードイン
+  //    services-page は services.js が summary/card/review を個別制御するが、
+  //    .services-grid（ul）はここで一括フェードしても問題ない。
+  //    ただし services.js の card clip-path と競合しないよう
+  //    ul.services-grid は除外し、services.js 側に任せる。
   // ═══════════════════════════════════════════════
   const isServices = document.querySelector('.services-page');
 
-  if (!isServices) {
-    const fadeTargets = document.querySelectorAll(
-      '.content-box > section, .content-box > p, .content-box > h2, .content-box > h4, .content-box > ul, .content-box > iframe'
-    );
+  const fadeSelector = isServices
+    // services-page: summary セクションと reviews-list のみ（cards は services.js が担当）
+    ? '.content-box > .summary, .content-box > .reviews-list'
+    // その他ページ: 直下の全要素
+    : '.content-box > section, .content-box > p, .content-box > h2, .content-box > h4, .content-box > ul, .content-box > iframe';
 
-    fadeTargets.forEach(el => {
-      el.style.opacity    = '0';
-      el.style.transform  = 'translateY(20px)';
-      el.style.transition = 'none';
+  const fadeTargets = document.querySelectorAll(fadeSelector);
+
+  fadeTargets.forEach(el => {
+    el.style.opacity    = '0';
+    el.style.transform  = 'translateY(20px)';
+    el.style.transition = 'none';
+  });
+
+  const fadeObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      setTimeout(() => {
+        entry.target.style.transition = 'opacity 0.9s ease, transform 0.9s ease';
+        entry.target.style.opacity    = '1';
+        entry.target.style.transform  = 'translateY(0)';
+      }, 80);
+      fadeObserver.unobserve(entry.target);
     });
+  }, { threshold: 0.1 });
 
-    const fadeObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        setTimeout(() => {
-          entry.target.style.transition = 'opacity 0.9s ease, transform 0.9s ease';
-          entry.target.style.opacity    = '1';
-          entry.target.style.transform  = 'translateY(0)';
-        }, 80);
-        fadeObserver.unobserve(entry.target);
-      });
-    }, { threshold: 0.1 });
-
-    fadeTargets.forEach(el => fadeObserver.observe(el));
-  }
+  fadeTargets.forEach(el => fadeObserver.observe(el));
 
 
   // ═══════════════════════════════════════════════
