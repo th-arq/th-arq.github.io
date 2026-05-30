@@ -1,4 +1,4 @@
-// index.js — Gallery reveal & loading（改修版）
+// index.js — Gallery reveal & loading（①時間差拡大 ③clip-pathリビール ⑤パララックス）
 
 window.addEventListener("load", () => {
   const loading = document.getElementById('loading');
@@ -33,7 +33,7 @@ window.addEventListener("load", () => {
     if (progress >= 100) {
       clearInterval(timer);
       setTimeout(() => {
-        // ① ローディング：clip-pathでスライス退場
+        // ローディング：clip-pathでスライス退場
         if (loading) {
           loading.style.transition = 'clip-path 0.7s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.3s ease 0.5s';
           loading.style.clipPath = 'inset(0 0 100% 0)';
@@ -52,6 +52,7 @@ window.addEventListener("load", () => {
         }, 400);
 
         initGallery();
+        initParallax();
       }, 600);
     }
   }, 20);
@@ -62,16 +63,18 @@ function initGallery() {
   const items = document.querySelectorAll('.gallery-item');
 
   items.forEach((item) => {
-    item.style.opacity = '0';
-    item.style.transform = 'translateY(14px)';
+    // ③ clip-path で隠す（translateY は使わない）
+    item.style.opacity = '1';
+    item.style.clipPath = 'inset(0 0 100% 0)';
+    item.style.transform = '';
 
-    // 100ms〜2100ms のランダム幅でばらつかせる
-    const delay = 100 + Math.random() * 2000;
+    // ① 200〜3500ms のランダム幅で時間差
+    const delay = 200 + Math.random() * 3300;
 
     setTimeout(() => {
-      item.style.transition = 'opacity 1.4s ease, transform 1.6s cubic-bezier(0.16, 1, 0.3, 1)';
-      item.style.opacity = '1';
-      item.style.transform = 'translateY(0)';
+      // ③ clip-path をめくれるように展開
+      item.style.transition = 'clip-path 1000ms cubic-bezier(0.25, 1, 0.5, 1)';
+      item.style.clipPath = 'inset(0 0 0% 0)';
     }, delay);
   });
 
@@ -83,11 +86,17 @@ function initGallery() {
         if (el.dataset.entered) return;
         el.dataset.entered = 'true';
 
-        const delay = 100 + Math.random() * 600; // スクロール時は短めに
+        // すでに登場済み（clip-pathが解除されている）ならスキップ
+        const current = el.style.clipPath;
+        if (!current || current === 'inset(0 0 0% 0)' || current === 'none') {
+          io.unobserve(el);
+          return;
+        }
+
+        const delay = 100 + Math.random() * 600;
         setTimeout(() => {
-          el.style.transition = 'opacity 1.4s ease, transform 1.6s cubic-bezier(0.16, 1, 0.3, 1)';
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
+          el.style.transition = 'clip-path 1000ms cubic-bezier(0.25, 1, 0.5, 1)';
+          el.style.clipPath = 'inset(0 0 0% 0)';
         }, delay);
 
         io.unobserve(el);
@@ -103,22 +112,21 @@ function initGallery() {
 
 
 function initParallax() {
-  const grid = document.querySelector('.gallery-grid');
-  if (!grid) return;
+  const items = document.querySelectorAll('.gallery-item');
+  if (!items.length) return;
 
   let ticking = false;
   window.addEventListener('scroll', () => {
     if (!ticking) {
       requestAnimationFrame(() => {
         const scrollY = window.scrollY;
-        const items = document.querySelectorAll('.gallery-item');
         items.forEach((item, i) => {
-          // 3カラムなので列番号で判定
+          // ⑤ 3列それぞれ異なる方向・速度でオフセット
           const col = i % 3;
           let offset = 0;
-          if (col === 0) offset = scrollY * -0.04;
-          if (col === 1) offset = scrollY * 0.02;
-          if (col === 2) offset = scrollY * -0.06;
+          if (col === 0) offset = scrollY * -0.08;
+          if (col === 1) offset = scrollY *  0.05;
+          if (col === 2) offset = scrollY * -0.11;
           item.style.setProperty('--parallax-y', `${offset}px`);
         });
         ticking = false;
