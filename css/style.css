@@ -84,6 +84,13 @@ main.appeared, .fade-logo.show, .fade-menu.show, .projects-item.reveal.show {
   transform: translateY(0);
 }
 
+
+/* ヘッダーの初期状態 — is-index以外 */
+body:not(.is-index) #header header {
+  opacity: 0;
+}
+
+
 /* =========================
   Link
 ========================= */
@@ -217,11 +224,11 @@ header.is-scrolled:hover {
 
 #menu a {
   position: relative;
-  font-size: var(--font-s);
+  font-size: var(--font-xs);
 }
 
 .contact-btn {
-  padding: 0.2em 1em;
+  padding: 0.5em 1em;
 }
 
 @media (min-width: 901px) {
