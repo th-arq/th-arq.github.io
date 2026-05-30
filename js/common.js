@@ -63,7 +63,6 @@ window.addEventListener('load', () => {
               headerTag.style.opacity = '1';
 
               // ヘッダーfade-in完了(0.7s)後にtitleをwipe
-              // ヘッダー開始から700ms = ヘッダーがちょうど出終わるタイミング
               setTimeout(() => {
                 document.dispatchEvent(new CustomEvent('header:revealed'));
               }, 700);
@@ -119,14 +118,12 @@ window.addEventListener('load', () => {
 
   // ═══════════════════════════════════════════════
   // 4. Split Title — wipe アニメーション
-  //    header:revealed イベントを受けて最初のtitleを発火
+  //    全ページ共通。header:revealed イベントを受けて最初のtitleを発火。
+  //    ※ services.js 側の独自タイトルwipeは削除し、ここに統一。
   // ═══════════════════════════════════════════════
   const titles = document.querySelectorAll('.split-layout .title');
-  const isServices = document.querySelector('.services-page');
 
   titles.forEach((title, index) => {
-    if (isServices && index === 0) return;
-
     if (!title.querySelector('.wipe-line')) {
       const text = title.innerHTML;
       title.innerHTML = `<span class="wipe-line"><span class="wipe-inner" style="transform:translateY(105%)">${text}</span></span>`;
@@ -170,15 +167,18 @@ window.addEventListener('load', () => {
 
   // ═══════════════════════════════════════════════
   // 6. Content Fade-up
+  //    services-page は services.js が独自に制御するためスキップ
   // ═══════════════════════════════════════════════
+  const isServices = document.querySelector('.services-page');
+
   if (!isServices) {
     const fadeTargets = document.querySelectorAll(
       '.content-box > section, .content-box > p, .content-box > h2, .content-box > h4, .content-box > ul, .content-box > iframe'
     );
 
     fadeTargets.forEach(el => {
-      el.style.opacity   = '0';
-      el.style.transform = 'translateY(16px)';
+      el.style.opacity    = '0';
+      el.style.transform  = 'translateY(16px)';
       el.style.transition = 'none';
     });
 
@@ -242,7 +242,7 @@ window.addEventListener('load', () => {
           method: 'POST', body: formData,
           headers: { 'Accept': 'application/json' }
         });
-        if (res.ok) { window.location.href = 'thanks.html'; }
+        if (res.ok) { window.location.href = '/contact/thanks.html'; }
         else throw new Error();
       } catch {
         alert('Oops! Something went wrong. Please try again.');
