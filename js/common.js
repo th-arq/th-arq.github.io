@@ -68,7 +68,7 @@ window.addEventListener('load', () => {
                 document.dispatchEvent(new CustomEvent('header:revealed'));
               }, 700);
 
-            }, 300);
+            }, 900);
           };
 
           const mainEl = document.querySelector('main');
