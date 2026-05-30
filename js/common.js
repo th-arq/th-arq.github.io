@@ -59,15 +59,14 @@ window.addEventListener('load', () => {
             setTimeout(() => {
               el.querySelector('.fade-logo')?.classList.add('show');
               el.querySelector('.fade-menu')?.classList.add('show');
-              headerTag.style.transition = 'opacity 0.7s ease';
+              headerTag.style.transition = 'opacity 0.9s ease';
               headerTag.style.opacity = '1';
 
-              // ヘッダーfade-in完了(0.7s)後にtitleをwipe
               setTimeout(() => {
                 document.dispatchEvent(new CustomEvent('header:revealed'));
-              }, 700);
+              }, 800);
 
-            }, 2000);
+            }, 1800);
           };
 
           const mainEl = document.querySelector('main');
@@ -112,14 +111,12 @@ window.addEventListener('load', () => {
   if (!isIndex) {
     setTimeout(() => {
       document.querySelector('main')?.classList.add('appeared');
-    }, 200);
+    }, 300);
   }
 
 
   // ═══════════════════════════════════════════════
   // 4. Split Title — wipe アニメーション
-  //    全ページ共通。header:revealed イベントを受けて最初のtitleを発火。
-  //    ※ services.js 側の独自タイトルwipeは削除し、ここに統一。
   // ═══════════════════════════════════════════════
   const titles = document.querySelectorAll('.split-layout .title');
 
@@ -133,7 +130,7 @@ window.addEventListener('load', () => {
     if (!inner) return;
 
     const reveal = () => {
-      inner.style.transition = 'transform 0.85s cubic-bezier(0.22, 1, 0.36, 1)';
+      inner.style.transition = 'transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)';
       inner.style.transform  = 'translateY(0)';
     };
 
@@ -147,7 +144,7 @@ window.addEventListener('load', () => {
           reveal();
           io.unobserve(title);
         });
-      }, { threshold: 0.3 });
+      }, { threshold: 0.5 });
       io.observe(title);
     }
   });
@@ -167,7 +164,6 @@ window.addEventListener('load', () => {
 
   // ═══════════════════════════════════════════════
   // 6. Content Fade-up
-  //    services-page は services.js が独自に制御するためスキップ
   // ═══════════════════════════════════════════════
   const isServices = document.querySelector('.services-page');
 
@@ -178,7 +174,7 @@ window.addEventListener('load', () => {
 
     fadeTargets.forEach(el => {
       el.style.opacity    = '0';
-      el.style.transform  = 'translateY(16px)';
+      el.style.transform  = 'translateY(20px)';
       el.style.transition = 'none';
     });
 
@@ -186,7 +182,7 @@ window.addEventListener('load', () => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
         setTimeout(() => {
-          entry.target.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+          entry.target.style.transition = 'opacity 0.9s ease, transform 0.9s ease';
           entry.target.style.opacity    = '1';
           entry.target.style.transform  = 'translateY(0)';
         }, 80);
