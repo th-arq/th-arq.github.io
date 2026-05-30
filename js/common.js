@@ -20,6 +20,8 @@ window.addEventListener('load', () => {
   // ═══════════════════════════════════════════════
   // 2. Header / Footer Loader
   // ═══════════════════════════════════════════════
+  const isIndex = document.body.classList.contains('is-index');
+
   const loadParts = (id, path) => {
     fetch(path)
       .then(res => res.text())
@@ -31,6 +33,12 @@ window.addEventListener('load', () => {
         if (id === 'header') {
           const headerTag = el.querySelector('header');
           if (!headerTag) return;
+
+          // is-index 以外はヘッダーを最初は非表示に
+          if (!isIndex) {
+            headerTag.style.opacity = '0';
+            headerTag.style.transition = 'none';
+          }
 
           // スクロールでガラス化
           window.addEventListener('scroll', () => {
@@ -48,12 +56,51 @@ window.addEventListener('load', () => {
             });
           }
 
-          // ヘッダーは main より少し遅れてふわっと
-          if (!document.body.classList.contains('is-index')) {
+          if (isIndex) {
+            // index は index.js 側でローディング後に fade-logo/fade-menu を制御するため何もしない
+            return;
+          }
+
+          // ── 非indexページ: main.appeared を待ってからヘッダーをふわっと表示
+          const revealHeader = () => {
             setTimeout(() => {
+              // fade-logo / fade-menu
               el.querySelector('.fade-logo')?.classList.add('show');
               el.querySelector('.fade-menu')?.classList.add('show');
-            }, 400); // main(200ms) より遅らせる
+              // header本体
+              headerTag.style.transition = 'opacity 0.7s ease';
+              headerTag.style.opacity = '1';
+            }, 300); // main appeared(200ms) + 300ms = 合計約500msでヘッダー登場
+          };
+
+          // main要素は同期的に存在しているはずだが念のためフォールバック
+          const mainEl = document.querySelector('main');
+          if (!mainEl) {
+            // mainが見つからない場合はタイムアウトで強制表示
+            setTimeout(revealHeader, 500);
+            return;
+          }
+
+          if (mainEl.classList.contains('appeared')) {
+            // すでに appeared 済みなら即実行
+            revealHeader();
+          } else {
+            const obs = new MutationObserver((_, o) => {
+              if (mainEl.classList.contains('appeared')) {
+                o.disconnect();
+                revealHeader();
+              }
+            });
+            obs.observe(mainEl, { attributes: true, attributeFilter: ['class'] });
+
+            // フォールバック: 2秒経っても appeared しなかった場合は強制表示
+            setTimeout(() => {
+              obs.disconnect();
+              headerTag.style.transition = 'opacity 0.7s ease';
+              headerTag.style.opacity = '1';
+              el.querySelector('.fade-logo')?.classList.add('show');
+              el.querySelector('.fade-menu')?.classList.add('show');
+            }, 2000);
           }
         }
       });
@@ -66,7 +113,7 @@ window.addEventListener('load', () => {
   // ═══════════════════════════════════════════════
   // 3. Page Appearance — main フェードイン
   // ═══════════════════════════════════════════════
-  if (!document.body.classList.contains('is-index')) {
+  if (!isIndex) {
     setTimeout(() => {
       document.querySelector('main')?.classList.add('appeared');
     }, 200);
@@ -75,19 +122,13 @@ window.addEventListener('load', () => {
 
   // ═══════════════════════════════════════════════
   // 4. Split Title — wipe アニメーション
-  //    最初の .title はページロード時、以降はスクロールトリガー
   // ═══════════════════════════════════════════════
   const titles = document.querySelectorAll('.split-layout .title');
-
-  // services-page の最初のタイトルは services.js が管理するためスキップ
   const isServices = document.querySelector('.services-page');
 
   titles.forEach((title, index) => {
-
-    // services の1つ目は services.js 側で処理
     if (isServices && index === 0) return;
 
-    // wipe 構造に差し替え（まだ .wipe-line がない場合のみ）
     if (!title.querySelector('.wipe-line')) {
       const text = title.innerHTML;
       title.innerHTML = `<span class="wipe-line"><span class="wipe-inner" style="transform:translateY(105%)">${text}</span></span>`;
@@ -102,10 +143,8 @@ window.addEventListener('load', () => {
     };
 
     if (index === 0) {
-      // 最初のタイトルはページロード直後
       setTimeout(reveal, 300);
     } else {
-      // 2つ目以降はスクロールトリガー
       const io = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (!entry.isIntersecting) return;
@@ -119,7 +158,7 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 5. Split Title — is-active（既存のスクロール連動カラー）
+  // 5. Split Title — is-active（スクロール連動カラー）
   // ═══════════════════════════════════════════════
   const activeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -131,9 +170,8 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 6. Content Fade-up — content-box 内の要素をスクロールで順番に
+  // 6. Content Fade-up
   // ═══════════════════════════════════════════════
-  // services-page は services.js が管理するためスキップ
   if (!isServices) {
     const fadeTargets = document.querySelectorAll(
       '.content-box > section, .content-box > p, .content-box > h2, .content-box > h4, .content-box > ul, .content-box > iframe'
@@ -146,7 +184,7 @@ window.addEventListener('load', () => {
     });
 
     const fadeObserver = new IntersectionObserver(entries => {
-      entries.forEach((entry, i) => {
+      entries.forEach(entry => {
         if (!entry.isIntersecting) return;
         setTimeout(() => {
           entry.target.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
