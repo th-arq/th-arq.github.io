@@ -4,16 +4,11 @@
 
   /* ============================================================
      INITIAL STATE
+     ※ タイトルwipeは common.js に統一したため、ここでは設定しない
   ============================================================ */
   const setInitial = () => {
-    /* タイトル wipe */
-    const titleWipe = document.querySelector('.services-page .title-wipe');
-    if (titleWipe) {
-      titleWipe.style.transform  = 'translateY(105%)';
-      titleWipe.style.transition = 'none';
-    }
 
-    /* summary block — h3 + p + border-line は個別 IntersectionObserver で管理 */
+    /* summary block — h3 wipe + p フェード */
     document.querySelectorAll('.services-page .summary-block .wipe-inner').forEach(el => {
       el.style.transform  = 'translateY(105%)';
       el.style.transition = 'none';
@@ -24,7 +19,7 @@
       el.style.transition = 'none';
     });
 
-    /* summary-block border-line (① スクロール演出) */
+    /* summary-block border-line */
     document.querySelectorAll('.services-page .summary-block').forEach(el => {
       el.style.setProperty('--line-scaleX', '0');
     });
@@ -37,14 +32,9 @@
 
     /* reviews */
     document.querySelectorAll('.services-page .review-item').forEach(el => {
-      el.style.opacity   = '0';
-      el.style.transform = 'translateY(24px)';
+      el.style.opacity    = '0';
+      el.style.transform  = 'translateY(24px)';
       el.style.transition = 'none';
-    });
-
-    /* sticky titles — 初期は lightgray */
-    document.querySelectorAll('.services-page .split-layout .title').forEach(el => {
-      el.classList.remove('is-active');
     });
   };
 
@@ -90,17 +80,9 @@
 
 
   /* ============================================================
-     MAIN FIRE (ページ表示後に一度だけ走る)
+     MAIN FIRE (main.appeared を待ってから起動)
   ============================================================ */
   const fire = () => {
-
-    /* タイトル wipe */
-    setTimeout(() => {
-      const tw = document.querySelector('.services-page .title-wipe');
-      if (!tw) return;
-      tw.style.transition = 'transform 0.85s cubic-bezier(0.22, 1, 0.36, 1)';
-      tw.style.transform  = 'translateY(0)';
-    }, 60);
 
     /* ================================================
        ② Summary ブロック — スクロールで個別発火
@@ -114,7 +96,7 @@
         const inner = block.querySelector('.wipe-inner');
         const p     = block.querySelector('.summary-p');
 
-        /* ① ボーダーライン左から伸びる */
+        /* ボーダーライン左から伸びる */
         block.style.setProperty('--line-scaleX', '1');
         if (block === summaryBlocks[summaryBlocks.length - 1]) {
           block.style.setProperty('--line-bottom-scaleX', '1');
@@ -156,7 +138,6 @@
         const img   = card.querySelector('.services-card-img');
         const index = cards.indexOf(card);
 
-        /* カラム数を取得 (CSS grid の実列数) */
         const gridEl   = card.closest('.services-grid');
         const cols     = gridEl
           ? Math.round(gridEl.offsetWidth / card.offsetWidth)
@@ -178,7 +159,8 @@
 
 
     /* ================================================
-       ④ Sticky タイトル — セクション内でアクティブに
+       ④ Sticky タイトル — is-active はすでに common.js が管理
+          ここでは services-page 固有の rootMargin で上書き
     ================================================ */
     const sections = [...document.querySelectorAll('.services-page .split-section')];
 
@@ -186,11 +168,7 @@
       entries.forEach(entry => {
         const title = entry.target.querySelector('.title');
         if (!title) return;
-        if (entry.isIntersecting) {
-          title.classList.add('is-active');
-        } else {
-          title.classList.remove('is-active');
-        }
+        title.classList.toggle('is-active', entry.isIntersecting);
       });
     }, {
       threshold: 0,
