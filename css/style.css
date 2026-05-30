@@ -63,31 +63,54 @@ body {
 }
 
 h1 { font-size: var(--font-xl); }
-h2 { font-size: var(--font-l); font-weight: var(--bold);}
-h3 { font-size: var(--font-m); font-weight: var(--normal);}
-h4 { font-size: var(--font-n); font-weight: var(--bold);}
-a { color: inherit; text-decoration: none;}
+h2 { font-size: var(--font-l); font-weight: var(--bold); }
+h3 { font-size: var(--font-m); font-weight: var(--normal); }
+h4 { font-size: var(--font-n); font-weight: var(--bold); }
+a  { color: inherit; text-decoration: none; }
 
 
 /* =========================
   Motion
 ========================= */
-main, .fade-logo, .fade-menu, .projects-item.reveal {
+main, .fade-logo, .fade-menu {
   opacity: 0;
   transform: translateY(8px);
   transition: opacity 0.8s ease, transform 0.8s ease;
   will-change: opacity, transform;
 }
 
-main.appeared, .fade-logo.show, .fade-menu.show, .projects-item.reveal.show {
+main.appeared, .fade-logo.show, .fade-menu.show {
   opacity: 1;
   transform: translateY(0);
 }
 
-
-/* ヘッダーの初期状態 — is-index以外 */
+/* ヘッダーの初期状態 — is-index 以外 */
 body:not(.is-index) #header header {
   opacity: 0;
+}
+
+/* reveal（詳細ページ: image-wrapper, related-item）*/
+.image-wrapper.reveal,
+.related-item.reveal {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: clip-path;
+  overflow: hidden;
+}
+
+.image-wrapper.reveal.show,
+.related-item.reveal.show {
+  clip-path: inset(0 0 0 0);
+}
+
+.reveal img {
+  transform: scale(1.1);
+  transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+.reveal.show img {
+  transform: scale(1);
 }
 
 
@@ -100,7 +123,6 @@ body:not(.is-index) #header header {
   display: inline-block;
 }
 
-/* ホバー⑤ — 中央から広がる下線 */
 .line-hover::after {
   content: "";
   position: absolute;
@@ -110,7 +132,7 @@ body:not(.is-index) #header header {
   height: 1px;
   background: currentColor;
   transform: scaleX(0);
-  transform-origin: center; /* left → center に変更 */
+  transform-origin: center;
   transition: transform 0.55s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -118,7 +140,7 @@ body:not(.is-index) #header header {
   transform: scaleX(1);
 }
 
-/* ホバー⑤ — ナビ全体ホバーで全項目を薄く、個別ホバーで戻す */
+/* ナビ全体ホバーで全項目を薄く、個別ホバーで戻す */
 #menu a.line-hover {
   opacity: 1;
   transition: opacity 0.45s ease;
@@ -149,6 +171,7 @@ body:not(.is-index) #header header {
   color: var(--black);
 }
 
+
 /* =========================
   Header PC
 ========================= */
@@ -164,10 +187,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 1000 !important;
+  z-index: 1000;
   transition: opacity 0.4s ease, background 0.4s ease, backdrop-filter 0.4s ease;
   opacity: 1;
-  overflow: hidden; /* 走査線がはみ出ないよう */
+  overflow: hidden;
 }
 
 /* 入りC — 走査線 */
@@ -190,7 +213,6 @@ header {
   transform: translateX(110%);
 }
 
-/* スクロールA — ガラス質（既存の is-scrolled を置き換え） */
 header.is-scrolled {
   opacity: 0.5;
   background: rgba(255, 255, 255, 0.75);
@@ -232,9 +254,9 @@ header.is-scrolled:hover {
 }
 
 @media (min-width: 901px) {
-.sp-nav, .burger-btn {
-  display: none !important;
-}
+  .sp-nav, .burger-btn {
+    display: none !important;
+  }
 }
 
 
@@ -242,9 +264,10 @@ header.is-scrolled:hover {
   Header SP
 ========================= */
 @media (max-width: 900px) {
-.TAG_logo img {
-  height: 18px;
-}
+  .TAG_logo img {
+    height: 18px;
+  }
+
   .burger-btn {
     display: flex !important;
     flex-direction: column;
@@ -327,6 +350,7 @@ header.is-scrolled:hover {
   header.nav-open .sp-nav ul li:nth-child(2) { transition-delay: 0.3s; }
   header.nav-open .sp-nav ul li:nth-child(3) { transition-delay: 0.4s; }
   header.nav-open .sp-nav ul li:nth-child(4) { transition-delay: 0.5s; }
+  header.nav-open .sp-nav ul li:nth-child(5) { transition-delay: 0.6s; }
 
   .sp-nav ul a {
     display: block;
@@ -346,28 +370,35 @@ header.is-scrolled:hover {
   Footer
 ========================= */
 footer {
-    width: 100%;
-    padding: var(--gap-l) var(--side-padding) var(--gap-m);
+  width: 100%;
+  padding: var(--gap-l) var(--side-padding) var(--gap-m);
 }
 
 .footer_container {
-    color: var(--darkgray);
-    font-size: var(--font-xs);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+  color: var(--darkgray);
+  font-size: var(--font-xs);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .footer_copy {
-  text-align: right; margin: 0;
+  text-align: right;
+  margin: 0;
 }
 
 @media (max-width: 900px) {
-    .footer_container, .footer_info, .footer_copy {
-        flex-direction: column;
-        text-align: center;
-        margin: auto;
-    }
+  .footer_container {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .footer_info,
+  .footer_copy {
+    text-align: center;
+  }
 }
 
 
@@ -375,7 +406,7 @@ footer {
   Loading
 ========================= */
 #loading {
-  clip-path: inset(0 0 0 0); 
+  clip-path: inset(0 0 0 0);
   position: fixed;
   top: 0;
   left: 0;
@@ -396,7 +427,7 @@ footer {
 }
 
 .loading_inner { text-align: center; }
-.logo_wrapper { width: 80px; height: 80px; margin: 0 auto 20px; }
+.logo_wrapper  { width: 80px; height: 80px; margin: 0 auto 20px; }
 .loading_logo_svg {
   width: 100%;
   height: 100%;
@@ -412,10 +443,11 @@ footer {
 }
 
 @keyframes pulse {
-  0% { opacity: 0.3; }
-  50% { opacity: 1; }
+  0%   { opacity: 0.3; }
+  50%  { opacity: 1;   }
   100% { opacity: 0.3; }
 }
+
 
 /* =========================
   Index
@@ -449,12 +481,6 @@ body.is-index main {
   }
 }
 
-@media (max-width: 500px) {
-  .gallery-grid {
-    columns: 2;
-  }
-}
-
 .gallery-item {
   display: block;
   break-inside: avoid;
@@ -462,15 +488,9 @@ body.is-index main {
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  /* ③ clip-path で制御するので opacity/transform の初期値は不要 */
   opacity: 1;
-  transform: translateY(var(--parallax-y, 0)); /* ⑤ パララックス */
+  transform: translateY(var(--parallax-y, 0));
   will-change: transform, clip-path;
-}
-
-.gallery-item.visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .gallery-item img {
@@ -516,17 +536,6 @@ body.is-index main {
   transform: translateY(0);
 }
 
-
-.reveal {
-  clip-path: inset(0 0 100% 0);
-  transition: clip-path 1.2s ease;
-  will-change: clip-path;
-}
-
-.reveal.show {
-  clip-path: inset(0 0 0 0);
-}
-
 @media (max-width: 900px) {
   .intro-flex {
     flex-direction: column;
@@ -539,6 +548,7 @@ body.is-index main {
   }
 }
 
+
 /* =========================
   Split Layout
 ========================= */
@@ -550,30 +560,31 @@ body.is-index main {
 }
 
 .split-section {
-    display: flex;
-    position: relative;
-    min-height: 100vh;
-    margin: 0 0 var(--gap-l) 0;
+  display: flex;
+  position: relative;
+  min-height: 100vh;
+  margin: 0 0 var(--gap-l) 0;
 }
 
 .split-layout .sticky-box {
-  flex: 0.8; position: relative;
+  flex: 0.8;
+  position: relative;
 }
 
 .split-layout .title {
-    position: sticky;
-    top: calc(50% - 1.25rem);
-    font-weight: var(--bold);
-    margin: 0;
-    line-height: 1;
-    color: var(--lightgray);
-    transition: color 0.6s ease;
+  position: sticky;
+  top: calc(50% - 1.25rem);
+  font-weight: var(--bold);
+  margin: 0;
+  line-height: 1;
+  color: var(--lightgray);
+  transition: color 0.6s ease;
 }
 
 .split-layout .title.is-active { color: var(--black); }
 
 .split-layout .content-box {
-    flex: 1.3;
+  flex: 1.3;
 }
 
 @media (max-width: 900px) {
@@ -594,41 +605,41 @@ body.is-index main {
   }
 }
 
+
 /* =========================
   About
 ========================= */
 .about-page h1, .about-page h2, .about-page h3, .about-page p, .affiliations {
-    margin: 0 auto var(--gap-xs) auto;
+  margin: 0 auto var(--gap-xs) auto;
 }
 
 .affiliations ul, .registration ul {
-    margin: 0 0 var(--gap-s) 1.5em;
+  margin: 0 0 var(--gap-s) 1.5em;
 }
 
 .split-profile {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--gap-s);
-    margin-bottom: var(--gap-s);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-s);
+  margin-bottom: var(--gap-s);
 }
 
 .profile-image-container {
-    flex: 0 0 180px;
-    aspect-ratio: 3 / 4;
-    overflow: hidden;
+  flex: 0 0 180px;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
 }
 
 .profile-image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.6s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
 }
 
 .content-box iframe {
   width: 100%;
-  max-width: var(--gap-s) 0;
 }
 
 @media (max-width: 900px) {
@@ -645,7 +656,7 @@ body.is-index main {
 
 
 /* =========================
-   Services
+  Services
 ========================= */
 /* summary block */
 .summary-block {
@@ -671,8 +682,7 @@ body.is-index main {
   margin: 0;
 }
 
-
-/* wipe共通 */
+/* wipe 共通 */
 .wipe-line {
   display: block;
   overflow: hidden;
@@ -682,23 +692,7 @@ body.is-index main {
   display: block;
 }
 
-
-
-/* services-card hover（revealクラスを外したので再定義） */
-.services-card {
-  position: relative;
-  overflow: hidden;
-  cursor: default;
-}
-
-.services-card-img img {
-  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.services-card:hover .services-card-img img {
-  transform: scale(1.06);
-}
-
+/* services-grid */
 .services-grid {
   list-style: none;
   padding: 0;
@@ -708,23 +702,11 @@ body.is-index main {
   gap: clamp(8px, 1.2vw, 16px);
 }
 
+/* services-card（重複を統合） */
 .services-card {
   position: relative;
   overflow: hidden;
   cursor: default;
-}
-
-.services-card.reveal {
-  clip-path: none;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-.services-card.reveal.show {
-  clip-path: none;
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .services-card-img {
@@ -762,6 +744,7 @@ body.is-index main {
   margin: 0;
 }
 
+/* カード transition-delay（services.js の clip-path 制御に合わせて列遅延のみ残す） */
 .services-card:nth-child(1) { transition-delay: 0s; }
 .services-card:nth-child(2) { transition-delay: 0.08s; }
 .services-card:nth-child(3) { transition-delay: 0.16s; }
@@ -772,10 +755,6 @@ body.is-index main {
 @media (max-width: 900px) {
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .services-hero-title {
-    line-height: 1;
   }
 }
 
@@ -912,23 +891,6 @@ body.is-index main {
   visibility: visible;
 }
 
-.filter-sub .filter-btn {
-  font-size: var(--font-s);
-  letter-spacing: 0.1em;
-}
-
-.projects-item.reveal {
-  clip-path: inset(0 0 100% 0);
-  transition: clip-path 1.2s ease, opacity 0.4s ease, transform 0.4s ease;
-  will-change: clip-path, transform, opacity;
-  opacity: 0;
-}
-
-.projects-item.reveal.show {
-  clip-path: inset(0 0 0 0);
-  opacity: 1;
-}
-
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -1024,28 +986,6 @@ p.memo {
   display: block;
 }
 
-.image-wrapper.reveal {
-  clip-path: inset(0 0 100% 0);
-  transition: clip-path 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-  will-change: clip-path;
-  overflow: hidden;
-}
-
-.image-wrapper.reveal.show {
-  clip-path: inset(0 0 0 0) !important;
-  opacity: 1 !important;
-}
-
-.reveal img {
-  transform: scale(1.1);
-  transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
-  will-change: transform;
-}
-
-.reveal.show img {
-  transform: scale(1);
-}
-
 @media (max-width: 900px) {
   .project-detail .container {
     flex-direction: column;
@@ -1055,8 +995,9 @@ p.memo {
   }
 }
 
+
 /* =========================
-   Related Projects
+  Related Projects
 ========================= */
 .related-area {
   margin-top: 100px;
@@ -1111,7 +1052,7 @@ p.memo {
 
 
 /* =========================
-   Contact - Form
+  Contact - Form
 ========================= */
 .contact-intro {
   margin-bottom: var(--gap-m);
@@ -1144,12 +1085,14 @@ p.memo {
 }
 
 .form-group label {
-    text-transform: uppercase;
-    margin: 0 0 0.5em 0;
-    white-space: nowrap;
+  text-transform: uppercase;
+  margin: 0 0 0.5em 0;
+  white-space: nowrap;
 }
 
-.form-group input, .form-group textarea, .form-group select {
+.form-group input,
+.form-group textarea,
+.form-group select {
   width: 100%;
   padding: 1em;
   border: none;
@@ -1166,10 +1109,10 @@ p.memo {
 }
 
 ::placeholder {
-    color: var(--gray);
-    opacity: 0.6;
-    font-weight: var(--normal);
-    font-family: 'Manrope', sans-serif;
+  color: var(--gray);
+  opacity: 0.6;
+  font-weight: var(--normal);
+  font-family: 'Manrope', sans-serif;
 }
 
 .radio-group {
@@ -1213,41 +1156,41 @@ p.memo {
 
 
 /* =========================
-   Thanks Page
+  Thanks Page
 ========================= */
 .thanks-page {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 80vh;
-    text-align: center;
-    padding: 0 var(--side-padding);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
+  padding: 0 var(--side-padding);
 }
 
 .thanks-title {
-    font-size: var(--font-xl);
-    font-weight: var(--bold);
+  font-size: var(--font-xl);
+  font-weight: var(--bold);
 }
 
 .thanks-message {
-    margin: 40px 0;
-    font-size: var(--font-s);
-    line-height: 2;
-    color: var(--darkgray);
+  margin: 40px 0;
+  font-size: var(--font-s);
+  line-height: 2;
+  color: var(--darkgray);
 }
 
 .thanks-action {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .thanks-action .contact-btn {
-    display: inline-block;
-    padding: 15px 40px;
+  display: inline-block;
+  padding: 15px 40px;
 }
 
 
 /* =========================
-   FAQ
+  FAQ
 ========================= */
 .faq-item {
   transition: background-color 0.4s ease;
@@ -1315,25 +1258,6 @@ p.memo {
 /* =========================
   Reviews
 ========================= */
-.reviews-heading {
-  margin: 0 0 var(--gap-l) 0;
-}
-
-.reviews-eyebrow {
-  font-size: var(--font-xs);
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--gray);
-  margin: 0 0 16px 0;
-}
-
-.reviews-title {
-  font-size: var(--font-l);
-  font-weight: var(--normal);
-  letter-spacing: 0.03em;
-  line-height: 1.2;
-}
-
 .reviews-list {
   display: flex;
   flex-direction: column;
@@ -1414,7 +1338,6 @@ p.memo {
   grid-template-columns: 1fr;
 }
 
-
 .review-b .review-quote {
   font-size: var(--font-m);
   color: var(--black);
@@ -1430,10 +1353,6 @@ p.memo {
 }
 
 @media (max-width: 900px) {
-  .reviews-title {
-    font-size: var(--font-l);
-  }
-
   .review-a,
   .review-c {
     grid-template-columns: 1fr;
@@ -1456,8 +1375,8 @@ p.memo {
 
 
 /* =========================
-  Privacy policy
+  Privacy Policy
 ========================= */
 .privacy-page p {
-    margin: 0 0 var(--gap-s) 0;
+  margin: 0 0 var(--gap-s) 0;
 }
