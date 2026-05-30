@@ -4,34 +4,39 @@
 
   /* ============================================================
      INITIAL STATE
-     ※ タイトルwipeは common.js に統一したため、ここでは設定しない
+     - タイトルwipe    → common.js に統一
+     - コンテンツfade  → common.js に統一（isServices 判定を外した）
+     - is-active       → common.js に統一
+     ここでは services 専用の演出（border-line / card / review）のみ初期化
   ============================================================ */
   const setInitial = () => {
 
-    /* summary block — h3 wipe + p フェード */
-    document.querySelectorAll('.services-page .summary-block .wipe-inner').forEach(el => {
+    /* summary-block — h3 wipe */
+    document.querySelectorAll('.summary-block .wipe-inner').forEach(el => {
       el.style.transform  = 'translateY(105%)';
       el.style.transition = 'none';
     });
-    document.querySelectorAll('.services-page .summary-p').forEach(el => {
+
+    /* summary-block — p フェード */
+    document.querySelectorAll('.summary-p').forEach(el => {
       el.style.opacity    = '0';
       el.style.transform  = 'translateY(10px)';
       el.style.transition = 'none';
     });
 
-    /* summary-block border-line */
-    document.querySelectorAll('.services-page .summary-block').forEach(el => {
+    /* summary-block — border-line */
+    document.querySelectorAll('.summary-block').forEach(el => {
       el.style.setProperty('--line-scaleX', '0');
     });
 
-    /* services-card 画像 */
-    document.querySelectorAll('.services-page .services-card-img').forEach(el => {
+    /* services-card — 画像 clip-path */
+    document.querySelectorAll('.services-card-img').forEach(el => {
       el.style.clipPath   = 'inset(0 0 100% 0)';
       el.style.transition = 'none';
     });
 
-    /* reviews */
-    document.querySelectorAll('.services-page .review-item').forEach(el => {
+    /* review-item — フェード */
+    document.querySelectorAll('.review-item').forEach(el => {
       el.style.opacity    = '0';
       el.style.transform  = 'translateY(24px)';
       el.style.transition = 'none';
@@ -40,7 +45,7 @@
 
 
   /* ============================================================
-     ① ボーダーライン scaleX アニメーション用 CSS 注入
+     ボーダーライン scaleX アニメーション用 CSS 注入
   ============================================================ */
   const injectBorderCSS = () => {
     const style = document.createElement('style');
@@ -80,14 +85,13 @@
 
 
   /* ============================================================
-     MAIN FIRE (main.appeared を待ってから起動)
+     FIRE — main.appeared 後に起動
+     services 専用演出のみ担当
   ============================================================ */
   const fire = () => {
 
-    /* ================================================
-       ② Summary ブロック — スクロールで個別発火
-    ================================================ */
-    const summaryBlocks = [...document.querySelectorAll('.services-page .summary-block')];
+    /* ① Summary ブロック — border-line / h3 wipe / p フェード */
+    const summaryBlocks = [...document.querySelectorAll('.summary-block')];
 
     const summaryObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -96,13 +100,11 @@
         const inner = block.querySelector('.wipe-inner');
         const p     = block.querySelector('.summary-p');
 
-        /* ボーダーライン左から伸びる */
         block.style.setProperty('--line-scaleX', '1');
         if (block === summaryBlocks[summaryBlocks.length - 1]) {
           block.style.setProperty('--line-bottom-scaleX', '1');
         }
 
-        /* h3 wipe */
         if (inner) {
           setTimeout(() => {
             inner.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
@@ -110,7 +112,6 @@
           }, 120);
         }
 
-        /* p フェードアップ */
         if (p) {
           setTimeout(() => {
             p.style.transition = 'opacity 0.65s ease, transform 0.65s ease';
@@ -126,22 +127,17 @@
     summaryBlocks.forEach(b => summaryObserver.observe(b));
 
 
-    /* ================================================
-       ③ Services カード — 行ごとに波のように開く
-    ================================================ */
-    const cards = [...document.querySelectorAll('.services-page .services-card')];
+    /* ② Services カード — 列ごとに時間差で clip-path 展開 */
+    const cards = [...document.querySelectorAll('.services-card')];
 
     const cardObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
-        const card  = entry.target;
-        const img   = card.querySelector('.services-card-img');
-        const index = cards.indexOf(card);
-
+        const card     = entry.target;
+        const img      = card.querySelector('.services-card-img');
+        const index    = cards.indexOf(card);
         const gridEl   = card.closest('.services-grid');
-        const cols     = gridEl
-          ? Math.round(gridEl.offsetWidth / card.offsetWidth)
-          : 3;
+        const cols     = gridEl ? Math.round(gridEl.offsetWidth / card.offsetWidth) : 3;
         const colIndex = index % cols;
 
         if (img) {
@@ -158,10 +154,8 @@
     cards.forEach(c => cardObserver.observe(c));
 
 
-    /* ================================================
-       ⑤ Reviews — 下からフェードアップ
-    ================================================ */
-    const reviewItems = [...document.querySelectorAll('.services-page .review-item')];
+    /* ③ Reviews — 下からフェードアップ */
+    const reviewItems = [...document.querySelectorAll('.review-item')];
 
     const reviewObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -180,27 +174,30 @@
     }, { threshold: 0.12 });
 
     reviewItems.forEach(r => reviewObserver.observe(r));
-
   };
 
 
   /* ============================================================
-     BOOT
+     BOOT — DOMContentLoaded で初期化、main.appeared を待って fire
   ============================================================ */
-  const observeAppeared = () => {
-    const main = document.querySelector('main');
-    if (!main) return;
-    if (main.classList.contains('appeared')) { fire(); return; }
-    const obs = new MutationObserver((_, o) => {
-      if (main.classList.contains('appeared')) { o.disconnect(); fire(); }
-    });
-    obs.observe(main, { attributes: true, attributeFilter: ['class'] });
-  };
-
   document.addEventListener('DOMContentLoaded', () => {
     injectBorderCSS();
     setInitial();
-    observeAppeared();
+
+    const main = document.querySelector('main');
+    if (!main) return;
+
+    if (main.classList.contains('appeared')) {
+      fire();
+    } else {
+      const obs = new MutationObserver((_, o) => {
+        if (main.classList.contains('appeared')) {
+          o.disconnect();
+          fire();
+        }
+      });
+      obs.observe(main, { attributes: true, attributeFilter: ['class'] });
+    }
   });
 
 }());
