@@ -426,12 +426,6 @@ body.is-index main {
   padding-top: var(--header-height);
 }
 
-.gallery-item {
-  transform: translateY(var(--parallax-y, 0));
-  /* 既存の transition に will-change を追加 */
-  will-change: transform;
-}
-
 .gallery-section {
   padding: var(--gap-xs) var(--side-padding) var(--gap-m);
 }
@@ -461,11 +455,10 @@ body.is-index main {
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
+  /* ③ clip-path で制御するので opacity/transform の初期値は不要 */
+  opacity: 1;
+  transform: translateY(var(--parallax-y, 0)); /* ⑤ パララックス */
+  will-change: transform, clip-path;
 }
 
 .gallery-item.visible {
@@ -1414,9 +1407,6 @@ p.memo {
   grid-template-columns: 1fr;
 }
 
-.review-b .review-body {
-  padding: 0 clamp(0px, 8vw, 120px);
-}
 
 .review-b .review-quote {
   font-size: var(--font-m);
