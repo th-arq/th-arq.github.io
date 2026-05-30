@@ -159,26 +159,6 @@
 
 
     /* ================================================
-       ④ Sticky タイトル — is-active はすでに common.js が管理
-          ここでは services-page 固有の rootMargin で上書き
-    ================================================ */
-    const sections = [...document.querySelectorAll('.services-page .split-section')];
-
-    const titleObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const title = entry.target.querySelector('.title');
-        if (!title) return;
-        title.classList.toggle('is-active', entry.isIntersecting);
-      });
-    }, {
-      threshold: 0,
-      rootMargin: '-10% 0px -10% 0px'
-    });
-
-    sections.forEach(s => titleObserver.observe(s));
-
-
-    /* ================================================
        ⑤ Reviews — 下からフェードアップ
     ================================================ */
     const reviewItems = [...document.querySelectorAll('.services-page .review-item')];
