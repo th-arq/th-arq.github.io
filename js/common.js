@@ -34,18 +34,15 @@ window.addEventListener('load', () => {
           const headerTag = el.querySelector('header');
           if (!headerTag) return;
 
-          // is-index 以外はヘッダーを最初は非表示に
           if (!isIndex) {
             headerTag.style.opacity = '0';
             headerTag.style.transition = 'none';
           }
 
-          // スクロールでガラス化
           window.addEventListener('scroll', () => {
             headerTag.classList.toggle('is-scrolled', window.scrollY > 50);
           });
 
-          // バーガーメニュー
           const burgerBtn = el.querySelector('.burger-btn');
           if (burgerBtn) {
             burgerBtn.addEventListener('click', (e) => {
@@ -56,33 +53,31 @@ window.addEventListener('load', () => {
             });
           }
 
-          if (isIndex) {
-            // index は index.js 側でローディング後に fade-logo/fade-menu を制御するため何もしない
-            return;
-          }
+          if (isIndex) return;
 
-          // ── 非indexページ: main.appeared を待ってからヘッダーをふわっと表示
           const revealHeader = () => {
             setTimeout(() => {
-              // fade-logo / fade-menu
               el.querySelector('.fade-logo')?.classList.add('show');
               el.querySelector('.fade-menu')?.classList.add('show');
-              // header本体
               headerTag.style.transition = 'opacity 0.7s ease';
               headerTag.style.opacity = '1';
-            }, 300); // main appeared(200ms) + 300ms = 合計約500msでヘッダー登場
+
+              // ヘッダーfade-in完了(0.7s)後にtitleをwipe
+              // ヘッダー開始から700ms = ヘッダーがちょうど出終わるタイミング
+              setTimeout(() => {
+                document.dispatchEvent(new CustomEvent('header:revealed'));
+              }, 700);
+
+            }, 300);
           };
 
-          // main要素は同期的に存在しているはずだが念のためフォールバック
           const mainEl = document.querySelector('main');
           if (!mainEl) {
-            // mainが見つからない場合はタイムアウトで強制表示
             setTimeout(revealHeader, 500);
             return;
           }
 
           if (mainEl.classList.contains('appeared')) {
-            // すでに appeared 済みなら即実行
             revealHeader();
           } else {
             const obs = new MutationObserver((_, o) => {
@@ -93,13 +88,15 @@ window.addEventListener('load', () => {
             });
             obs.observe(mainEl, { attributes: true, attributeFilter: ['class'] });
 
-            // フォールバック: 2秒経っても appeared しなかった場合は強制表示
             setTimeout(() => {
               obs.disconnect();
               headerTag.style.transition = 'opacity 0.7s ease';
               headerTag.style.opacity = '1';
               el.querySelector('.fade-logo')?.classList.add('show');
               el.querySelector('.fade-menu')?.classList.add('show');
+              setTimeout(() => {
+                document.dispatchEvent(new CustomEvent('header:revealed'));
+              }, 700);
             }, 2000);
           }
         }
@@ -122,6 +119,7 @@ window.addEventListener('load', () => {
 
   // ═══════════════════════════════════════════════
   // 4. Split Title — wipe アニメーション
+  //    header:revealed イベントを受けて最初のtitleを発火
   // ═══════════════════════════════════════════════
   const titles = document.querySelectorAll('.split-layout .title');
   const isServices = document.querySelector('.services-page');
@@ -143,7 +141,8 @@ window.addEventListener('load', () => {
     };
 
     if (index === 0) {
-      setTimeout(reveal, 300);
+      // ヘッダーが出終わってから最初のtitleをwipe
+      document.addEventListener('header:revealed', reveal, { once: true });
     } else {
       const io = new IntersectionObserver(entries => {
         entries.forEach(entry => {
