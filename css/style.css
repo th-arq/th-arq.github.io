@@ -483,7 +483,7 @@ body.is-index main {
   }
 }
 
-/* gallery-item: clip-pathとパララックスをJSで制御 */
+/* gallery-item: 最初から隠す。リビールはJSで制御 */
 .gallery-item {
   display: block;
   break-inside: avoid;
@@ -491,7 +491,13 @@ body.is-index main {
   overflow: hidden;
   position: relative;
   cursor: pointer;
+  clip-path: inset(0 0 100% 0);
   will-change: clip-path;
+}
+
+.gallery-item img {
+  transform: scale(1.1);
+  transition: transform 6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .gallery-item img {
