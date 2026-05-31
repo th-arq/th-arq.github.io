@@ -55,7 +55,8 @@ window.addEventListener('load', () => {
 
           if (isIndex) return;
 
-          // ③ ヘッダーはタイトルwipe開始後に出る
+          // ③ ヘッダーは page:title-shown を受けて出る
+          // タイトルのないページ（projects等）では page:content-shown 直後に発火するフォールバックで対応
           document.addEventListener('page:title-shown', () => {
             setTimeout(() => {
               headerTag.style.transition = 'opacity 0.9s ease';
@@ -87,42 +88,52 @@ window.addEventListener('load', () => {
 
   // ═══════════════════════════════════════════════
   // 4. Split Title — ② タイトルはコンテンツの直後にwipe
+  //    .title がないページはフォールバックで page:title-shown を即発火
   // ═══════════════════════════════════════════════
   const titles = document.querySelectorAll('.split-layout .title');
 
-  titles.forEach((title, index) => {
-    if (!title.querySelector('.wipe-line')) {
-      const text = title.innerHTML;
-      title.innerHTML =
-        `<span class="wipe-line"><span class="wipe-inner" style="transform:translateY(105%)">${text}</span></span>`;
-    }
+  if (titles.length === 0) {
+    // タイトルなしページ（projects, thanks 等）:
+    // コンテンツ表示後すぐヘッダーを出す
+    document.addEventListener('page:content-shown', () => {
+      document.dispatchEvent(new CustomEvent('page:title-shown'));
+    }, { once: true });
+  } else {
+    titles.forEach((title, index) => {
+      if (!title.querySelector('.wipe-line')) {
+        const text = title.innerHTML;
+        title.innerHTML =
+          `<span class="wipe-line"><span class="wipe-inner" style="transform:translateY(105%)">${text}</span></span>`;
+      }
 
-    const inner = title.querySelector('.wipe-inner');
-    if (!inner) return;
+      const inner = title.querySelector('.wipe-inner');
+      if (!inner) return;
 
-    const reveal = () => {
-      inner.style.transition = 'transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)';
-      inner.style.transform  = 'translateY(0)';
-    };
+      const reveal = () => {
+        inner.style.transition = 'transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)';
+        inner.style.transform  = 'translateY(0)';
+      };
 
-    if (index === 0) {
-      document.addEventListener('page:content-shown', () => {
-        reveal();
-        setTimeout(() => {
-          document.dispatchEvent(new CustomEvent('page:title-shown'));
-        }, 100);
-      }, { once: true });
-    } else {
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
+      if (index === 0) {
+        document.addEventListener('page:content-shown', () => {
           reveal();
-          io.unobserve(title);
-        });
-      }, { threshold: 0.5 });
-      io.observe(title);
-    }
-  });
+          // タイトルwipe開始をヘッダーに通知
+          setTimeout(() => {
+            document.dispatchEvent(new CustomEvent('page:title-shown'));
+          }, 100);
+        }, { once: true });
+      } else {
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            reveal();
+            io.unobserve(title);
+          });
+        }, { threshold: 0.5 });
+        io.observe(title);
+      }
+    });
+  }
 
 
   // ═══════════════════════════════════════════════
@@ -139,8 +150,7 @@ window.addEventListener('load', () => {
 
   // ═══════════════════════════════════════════════
   // 6. Content Fade-up（全ページ共通）
-  //    services-page は services.js が全コンテンツ演出を担当するため
-  //    common.js 側のフェードは services-page では走らせない
+  //    services-page は services.js が担当するためスキップ
   // ═══════════════════════════════════════════════
   const isServices = document.querySelector('.services-page');
 
