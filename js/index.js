@@ -81,11 +81,22 @@ function initGallery() {
       io.unobserve(el);
     });
   }, {
-    rootMargin: '0px 0px -5% 0px',
-    threshold: 0.05,
+    rootMargin: '0px 0px 0px 0px',
+    threshold: 0,
   });
 
   items.forEach(item => io.observe(item));
+
+  // Observerが発火しない場合のフォールバック：登録直後に画面内のアイテムを強制チェック
+  setTimeout(() => {
+    items.forEach(item => {
+      if (item.dataset.revealed) return;
+      const rect = item.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        revealItem(item);
+      }
+    });
+  }, 100);
 }
 
 
