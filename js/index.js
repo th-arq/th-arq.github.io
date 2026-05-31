@@ -108,7 +108,7 @@ function revealItem(item) {
 
   setTimeout(() => {
     // clip-path: 上から下にめくれて登場
-    item.style.transition = 'clip-path 0.95s cubic-bezier(0.25, 1, 0.5, 1)';
+    item.style.transition = 'clip-path 1.4s cubic-bezier(0.16, 1, 0.3, 1)';
     item.style.clipPath   = 'inset(0 0 0% 0)';
 
     // ケンバーンズ: clip-path開始と同時に引きズーム開始
