@@ -491,8 +491,7 @@ body.is-index main {
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  transform: translateY(var(--parallax-y, 0));
-  will-change: transform, clip-path;
+  will-change: clip-path;
 }
 
 .gallery-item img {
