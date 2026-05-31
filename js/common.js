@@ -34,7 +34,6 @@ window.addEventListener('load', () => {
           const headerTag = el.querySelector('header');
           if (!headerTag) return;
 
-          // is-index 以外は最初から透明にしておく
           if (!isIndex) {
             headerTag.style.opacity    = '0';
             headerTag.style.transition = 'none';
@@ -56,15 +55,14 @@ window.addEventListener('load', () => {
 
           if (isIndex) return;
 
-          // ③ ヘッダーは最後に出る
-          // 'page:title-shown' イベントを受けて fade-in
+          // ③ ヘッダーはタイトルwipe開始後に出る
           document.addEventListener('page:title-shown', () => {
             setTimeout(() => {
               headerTag.style.transition = 'opacity 0.9s ease';
               headerTag.style.opacity    = '1';
               el.querySelector('.fade-logo')?.classList.add('show');
               el.querySelector('.fade-menu')?.classList.add('show');
-            }, 200); // タイトルwipe開始から少し遅れて
+            }, 200);
           }, { once: true });
         }
       });
@@ -80,7 +78,6 @@ window.addEventListener('load', () => {
   if (!isIndex) {
     setTimeout(() => {
       document.querySelector('main')?.classList.add('appeared');
-      // コンテンツfade開始から少し後にタイトルwipeを発火
       setTimeout(() => {
         document.dispatchEvent(new CustomEvent('page:content-shown'));
       }, 300);
@@ -109,16 +106,13 @@ window.addEventListener('load', () => {
     };
 
     if (index === 0) {
-      // 最初のタイトル：コンテンツ表示直後に発火
       document.addEventListener('page:content-shown', () => {
         reveal();
-        // タイトルwipe開始を③ヘッダーに通知
         setTimeout(() => {
           document.dispatchEvent(new CustomEvent('page:title-shown'));
         }, 100);
       }, { once: true });
     } else {
-      // 2つ目以降：スクロールでビューに入ったらwipe
       const io = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (!entry.isIntersecting) return;
@@ -145,34 +139,36 @@ window.addEventListener('load', () => {
 
   // ═══════════════════════════════════════════════
   // 6. Content Fade-up（全ページ共通）
+  //    services-page は services.js が全コンテンツ演出を担当するため
+  //    common.js 側のフェードは services-page では走らせない
   // ═══════════════════════════════════════════════
   const isServices = document.querySelector('.services-page');
 
-  const fadeSelector = isServices
-    ? '.content-box > .summary, .content-box > .reviews-list'
-    : '.content-box > section, .content-box > p, .content-box > h2, .content-box > h4, .content-box > ul, .content-box > iframe';
+  if (!isServices) {
+    const fadeTargets = document.querySelectorAll(
+      '.content-box > section, .content-box > p, .content-box > h2, .content-box > h4, .content-box > ul, .content-box > iframe'
+    );
 
-  const fadeTargets = document.querySelectorAll(fadeSelector);
-
-  fadeTargets.forEach(el => {
-    el.style.opacity    = '0';
-    el.style.transform  = 'translateY(20px)';
-    el.style.transition = 'none';
-  });
-
-  const fadeObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      setTimeout(() => {
-        entry.target.style.transition = 'opacity 0.9s ease, transform 0.9s ease';
-        entry.target.style.opacity    = '1';
-        entry.target.style.transform  = 'translateY(0)';
-      }, 80);
-      fadeObserver.unobserve(entry.target);
+    fadeTargets.forEach(el => {
+      el.style.opacity    = '0';
+      el.style.transform  = 'translateY(20px)';
+      el.style.transition = 'none';
     });
-  }, { threshold: 0.1 });
 
-  fadeTargets.forEach(el => fadeObserver.observe(el));
+    const fadeObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        setTimeout(() => {
+          entry.target.style.transition = 'opacity 0.9s ease, transform 0.9s ease';
+          entry.target.style.opacity    = '1';
+          entry.target.style.transform  = 'translateY(0)';
+        }, 80);
+        fadeObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.1 });
+
+    fadeTargets.forEach(el => fadeObserver.observe(el));
+  }
 
 
   // ═══════════════════════════════════════════════
