@@ -71,16 +71,6 @@ function initGallery() {
   const items = Array.from(document.querySelectorAll('.gallery-item'));
   if (!items.length) return;
 
-  // 全アイテムを初期状態にセット
-  items.forEach(item => {
-    item.style.clipPath = 'inset(0 0 100% 0)';
-    const img = item.querySelector('img');
-    if (img) {
-      img.style.transform  = 'scale(1.1)';
-      img.style.transition = 'transform 6s cubic-bezier(0.25, 1, 0.5, 1)';
-    }
-  });
-
   // IntersectionObserver — フレームインしたら発火
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
