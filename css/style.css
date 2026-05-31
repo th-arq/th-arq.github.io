@@ -84,6 +84,12 @@ main.appeared, .fade-logo.show, .fade-menu.show {
   transform: translateY(0);
 }
 
+/* is-index の main は loading退場後すぐ見えている状態にする */
+body.is-index main {
+  opacity: 1;
+  transform: none;
+}
+
 /* ヘッダーの初期状態 — is-index 以外 */
 body:not(.is-index) #header header {
   opacity: 0;
@@ -140,7 +146,6 @@ body:not(.is-index) #header header {
   transform: scaleX(1);
 }
 
-/* ナビ全体ホバーで全項目を薄く、個別ホバーで戻す */
 #menu a.line-hover {
   opacity: 1;
   transition: opacity 0.45s ease;
@@ -193,7 +198,6 @@ header {
   overflow: hidden;
 }
 
-/* 入りC — 走査線 */
 .header-sweep {
   position: absolute;
   inset: 0;
@@ -406,7 +410,6 @@ footer {
   Loading
 ========================= */
 #loading {
-  clip-path: inset(0 0 0 0);
   position: fixed;
   top: 0;
   left: 0;
@@ -417,7 +420,6 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 1s ease, visibility 1s ease;
 }
 
 #loading.loaded {
@@ -481,6 +483,7 @@ body.is-index main {
   }
 }
 
+/* gallery-item: clip-pathとパララックスをJSで制御 */
 .gallery-item {
   display: block;
   break-inside: avoid;
@@ -488,7 +491,6 @@ body.is-index main {
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  opacity: 1;
   transform: translateY(var(--parallax-y, 0));
   will-change: transform, clip-path;
 }
@@ -497,7 +499,12 @@ body.is-index main {
   display: block;
   width: 100%;
   height: auto;
+  /* hover時のscaleはここで定義。初期scale(1.12)はJSで付与 */
   transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.06) !important;
 }
 
 .gallery-item .overlay {
@@ -527,25 +534,9 @@ body.is-index main {
   background: rgba(16, 16, 16, 0.38);
 }
 
-.gallery-item:hover img {
-  transform: scale(1.06);
-}
-
 .gallery-item:hover .overlay-text {
   opacity: 1;
   transform: translateY(0);
-}
-
-@media (max-width: 900px) {
-  .intro-flex {
-    flex-direction: column;
-    height: auto;
-  }
-
-  .index-page .right {
-    flex: 2;
-    flex-direction: row;
-  }
 }
 
 
@@ -658,7 +649,6 @@ body.is-index main {
 /* =========================
   Services
 ========================= */
-/* summary block */
 .summary-block {
   padding: var(--gap-m) 0;
   border-top: 1px solid var(--lightgray);
@@ -682,7 +672,6 @@ body.is-index main {
   margin: 0;
 }
 
-/* wipe 共通 */
 .wipe-line {
   display: block;
   overflow: hidden;
@@ -692,7 +681,6 @@ body.is-index main {
   display: block;
 }
 
-/* services-grid */
 .services-grid {
   list-style: none;
   padding: 0;
@@ -702,7 +690,6 @@ body.is-index main {
   gap: clamp(8px, 1.2vw, 16px);
 }
 
-/* services-card（重複を統合） */
 .services-card {
   position: relative;
   overflow: hidden;
@@ -744,7 +731,6 @@ body.is-index main {
   margin: 0;
 }
 
-/* カード transition-delay（services.js の clip-path 制御に合わせて列遅延のみ残す） */
 .services-card:nth-child(1) { transition-delay: 0s; }
 .services-card:nth-child(2) { transition-delay: 0.08s; }
 .services-card:nth-child(3) { transition-delay: 0.16s; }
@@ -771,7 +757,6 @@ body.is-index main {
   50%       { opacity: 0.6;  }
 }
 
-/* イン：クリップパスで下からめくれる */
 .projects-item {
   display: none;
   clip-path: inset(0 0 100% 0);
@@ -788,7 +773,6 @@ body.is-index main {
   pointer-events: auto;
 }
 
-/* アウト：さっと消える */
 .projects-item.is-exit {
   clip-path: inset(0 0 100% 0);
   opacity: 0;
@@ -819,9 +803,7 @@ body.is-index main {
   scrollbar-width: none;
 }
 
-.filter-main::-webkit-scrollbar {
-  display: none;
-}
+.filter-main::-webkit-scrollbar { display: none; }
 
 .filter-btn {
   flex-shrink: 0;
@@ -881,9 +863,7 @@ body.is-index main {
   scrollbar-width: none;
 }
 
-.filter-sub::-webkit-scrollbar {
-  display: none;
-}
+.filter-sub::-webkit-scrollbar { display: none; }
 
 .filter-sub.is-open {
   height: 42px;
