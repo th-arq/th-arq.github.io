@@ -1,65 +1,72 @@
-// index.js — ローディング上へ退場 + スクロール連動clip-pathリビール + 引きズーム + パララックス
+// index.js — ローディング上へ退場 + clip-pathリビール + 引きズーム + パララックス
 
 window.addEventListener("load", () => {
-  const loading    = document.getElementById('loading');
-  const percentEl  = document.getElementById('loading_percent');
+  const loading   = document.getElementById('loading');
+  const percentEl = document.getElementById('loading_percent');
 
   let progress       = 0;
   let targetProgress = 0;
 
-  const eagerImages = Array.from(document.querySelectorAll('img'))
-    .filter(img => img.loading !== 'lazy');
+  // lazy外したので全画像を対象にカウント
+  const allImages = Array.from(document.querySelectorAll('.gallery-item img'));
 
-  if (eagerImages.length === 0) {
+  if (allImages.length === 0) {
     targetProgress = 100;
   } else {
-    let loadedCount = 0;
-    eagerImages.forEach(img => {
+    let loaded = 0;
+    allImages.forEach(img => {
       const update = () => {
-        loadedCount++;
-        targetProgress = Math.floor((loadedCount / eagerImages.length) * 100);
+        loaded++;
+        targetProgress = Math.floor((loaded / allImages.length) * 100);
       };
-      if (img.complete) update();
-      else {
-        img.addEventListener('load',  update);
-        img.addEventListener('error', update);
+      if (img.complete && img.naturalWidth > 0) {
+        update();
+      } else {
+        img.addEventListener('load',  update, { once: true });
+        img.addEventListener('error', update, { once: true });
       }
     });
   }
 
+  // パーセント表示を進めるタイマー
   const timer = setInterval(() => {
     if (progress < targetProgress) progress++;
     if (percentEl) percentEl.textContent = progress + '%';
 
     if (progress >= 100) {
       clearInterval(timer);
-      setTimeout(() => {
-        exitLoading();
-      }, 300);
+      setTimeout(exitLoading, 300);
     }
   }, 20);
+
+  // 3秒経っても100にならない場合のフォールバック
+  setTimeout(() => {
+    if (progress < 100) {
+      targetProgress = 100;
+    }
+  }, 3000);
 
 
   function exitLoading() {
     if (!loading) return;
 
     // 白地が上へスライドして退場
-    loading.style.transition = 'transform 0.85s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.3s ease 0.6s';
+    loading.style.transition = 'transform 0.85s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.4s ease 0.55s';
     loading.style.transform  = 'translateY(-100%)';
     loading.style.opacity    = '0';
 
     setTimeout(() => {
       loading.classList.add('loaded');
       loading.style.transform = '';
-    }, 1000);
+    }, 1050);
 
-    // ヘッダー表示
+    // ヘッダー
     setTimeout(() => {
       document.querySelector('.fade-logo')?.classList.add('show');
       document.querySelector('.fade-menu')?.classList.add('show');
-    }, 500);
+    }, 600);
 
-    // ギャラリー初期化
+    // ギャラリー
     initGallery();
     initParallax();
   }
@@ -67,12 +74,12 @@ window.addEventListener("load", () => {
 
 
 function initGallery() {
-  const items = document.querySelectorAll('.gallery-item');
+  const items = Array.from(document.querySelectorAll('.gallery-item'));
+  if (!items.length) return;
 
+  // 全アイテムを隠す＋imgにズーム初期値
   items.forEach(item => {
-    // clip-path で隠す。img に引きズーム初期値をセット
     item.style.clipPath = 'inset(0 0 100% 0)';
-    item.style.willChange = 'clip-path';
     const img = item.querySelector('img');
     if (img) {
       img.style.transform  = 'scale(1.12)';
@@ -80,47 +87,75 @@ function initGallery() {
     }
   });
 
-  // --- IntersectionObserver でスクロール連動リビール ---
+  // ── 画面内アイテム：ローディング退場後に順次リビール ──
+  // columnsレイアウトなので列番号ベースのstagger
+  const cols = getColumns();
+  
+  items.forEach((item, i) => {
+    const col = i % cols;
+    // 列ごとにベースdelay、さらに行方向に少しずつ追加
+    const row   = Math.floor(i / cols);
+    const delay = 100 + col * 120 + row * 60 + Math.random() * 80;
+
+    setTimeout(() => {
+      revealItem(item);
+    }, delay);
+  });
+
+  // ── スクロールで画面外から入ってきたアイテム ──
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       const el = entry.target;
       if (el.dataset.revealed) return;
-      el.dataset.revealed = '1';
-
-      const delay = 40 + Math.random() * 200;
-      setTimeout(() => {
-        // ③ clip-path: 上から下にめくれて登場
-        el.style.transition = 'clip-path 0.9s cubic-bezier(0.25, 1, 0.5, 1)';
-        el.style.clipPath    = 'inset(0 0 0% 0)';
-
-        // リビール完了後に引きズーム
-        setTimeout(() => {
-          const img = el.querySelector('img');
-          if (img) img.style.transform = 'scale(1.0)';
-        }, 50);
-      }, delay);
-
+      revealItem(el);
       io.unobserve(el);
     });
   }, {
-    rootMargin: '0px 0px -4% 0px',
-    threshold:  0.04,
+    rootMargin: '0px 0px 0px 0px',
+    threshold: 0,
   });
 
-  items.forEach(item => io.observe(item));
+  // ページ下部のアイテム（初期表示外）をObserverに登録
+  // 一定時間後にまだ未リビールのものだけ対象にする
+  setTimeout(() => {
+    items.forEach(item => {
+      if (!item.dataset.revealed) {
+        io.observe(item);
+      }
+    });
+  }, 200);
+}
+
+
+function revealItem(item) {
+  if (item.dataset.revealed) return;
+  item.dataset.revealed = '1';
+
+  item.style.transition = 'clip-path 0.9s cubic-bezier(0.25, 1, 0.5, 1)';
+  item.style.clipPath   = 'inset(0 0 0% 0)';
+
+  // リビール開始と同時に引きズーム
+  const img = item.querySelector('img');
+  if (img) {
+    setTimeout(() => {
+      img.style.transform = 'scale(1.0)';
+    }, 30);
+  }
+}
+
+
+function getColumns() {
+  const grid = document.querySelector('.gallery-grid');
+  if (!grid) return 3;
+  const val = window.getComputedStyle(grid).columnCount;
+  return parseInt(val, 10) || 3;
 }
 
 
 function initParallax() {
   const items = document.querySelectorAll('.gallery-item');
   if (!items.length) return;
-
-  const getColumns = () => {
-    const grid = document.querySelector('.gallery-grid');
-    if (!grid) return 3;
-    return parseInt(window.getComputedStyle(grid).columnCount, 10) || 3;
-  };
 
   let ticking = false;
   window.addEventListener('scroll', () => {
