@@ -116,8 +116,8 @@ function revealItem(item) {
       // ケンバーンズ: 少し遅れてゆっくり引きズーム開始
       if (img) {
         setTimeout(() => {
-          img.style.transform = 'scale(1.5)';
-        }, 2000);
+          img.style.transform = 'scale(1.2)';
+        }, 10000);
       }
     }, delay);
   };
