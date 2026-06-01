@@ -104,17 +104,29 @@ function revealItem(item) {
   if (item.dataset.revealed) return;
   item.dataset.revealed = '1';
 
+  const img   = item.querySelector('img');
   const delay = Math.random() * 120;
 
-  setTimeout(() => {
-    // clip-path: 上から下にめくれて登場
-    item.style.transition = 'clip-path 1.4s cubic-bezier(0.16, 1, 0.3, 1)';
-    item.style.clipPath   = 'inset(0 0 0% 0)';
+  const doReveal = () => {
+    setTimeout(() => {
+      // clip-path: ゆっくりめくれて登場
+      item.style.transition = 'clip-path 2.2s cubic-bezier(0.16, 1, 0.3, 1)';
+      item.style.clipPath   = 'inset(0 0 0% 0)';
 
-    // ケンバーンズ: clip-path開始と同時に引きズーム開始
-    const img = item.querySelector('img');
-    if (img) {
-      img.style.transform = 'scale(1.0)';
-    }
-  }, delay);
+      // ケンバーンズ: 少し遅れてゆっくり引きズーム開始
+      if (img) {
+        setTimeout(() => {
+          img.style.transform = 'scale(1.0)';
+        }, 300);
+      }
+    }, delay);
+  };
+
+  // 画像ロード済みならすぐ、未ロードなら待ってから発火
+  if (!img || (img.complete && img.naturalWidth > 0)) {
+    doReveal();
+  } else {
+    img.addEventListener('load',  doReveal, { once: true });
+    img.addEventListener('error', doReveal, { once: true });
+  }
 }
