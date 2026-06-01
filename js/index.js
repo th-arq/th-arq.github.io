@@ -117,7 +117,7 @@ function revealItem(item) {
       if (img) {
         setTimeout(() => {
           img.style.transform = 'scale(1.0)';
-        }, 400);
+        }, 800);
       }
     }, delay);
   };
