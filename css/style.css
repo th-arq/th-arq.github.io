@@ -99,7 +99,7 @@ body:not(.is-index) #header header {
 .image-wrapper.reveal,
 .related-item.reveal {
   clip-path: inset(0 0 100% 0);
-  transition: clip-path 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: clip-path 2s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: clip-path;
   overflow: hidden;
 }
@@ -111,7 +111,7 @@ body:not(.is-index) #header header {
 
 .reveal img {
   transform: scale(1.1);
-  transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 4s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform;
 }
 
