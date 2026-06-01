@@ -105,19 +105,19 @@ function revealItem(item) {
   item.dataset.revealed = '1';
 
   const img   = item.querySelector('img');
-  const delay = Math.random() * 120;
+  const delay = Math.random() * 150;
 
   const doReveal = () => {
     setTimeout(() => {
       // clip-path: ゆっくりめくれて登場
-      item.style.transition = 'clip-path 2.2s cubic-bezier(0.16, 1, 0.3, 1)';
+      item.style.transition = 'clip-path 3s cubic-bezier(0.16, 1, 0.3, 1)';
       item.style.clipPath   = 'inset(0 0 0% 0)';
 
       // ケンバーンズ: 少し遅れてゆっくり引きズーム開始
       if (img) {
         setTimeout(() => {
           img.style.transform = 'scale(1.0)';
-        }, 300);
+        }, 400);
       }
     }, delay);
   };
