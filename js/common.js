@@ -55,8 +55,6 @@ window.addEventListener('load', () => {
 
           if (isIndex) return;
 
-          // ③ ヘッダーは page:title-shown を受けて出る
-          // タイトルのないページ（projects等）では page:content-shown 直後に発火するフォールバックで対応
           document.addEventListener('page:title-shown', () => {
             setTimeout(() => {
               headerTag.style.transition = 'opacity 0.9s ease';
@@ -74,7 +72,7 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 3. Page Appearance — ① コンテンツ最初に表示
+  // 3. Page Appearance
   // ═══════════════════════════════════════════════
   if (!isIndex) {
     setTimeout(() => {
@@ -87,14 +85,11 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 4. Split Title — ② タイトルはコンテンツの直後にwipe
-  //    .title がないページはフォールバックで page:title-shown を即発火
+  // 4. Split Title — wipe アニメーション
   // ═══════════════════════════════════════════════
   const titles = document.querySelectorAll('.split-layout .title');
 
   if (titles.length === 0) {
-    // タイトルなしページ（projects, thanks 等）:
-    // コンテンツ表示後すぐヘッダーを出す
     document.addEventListener('page:content-shown', () => {
       document.dispatchEvent(new CustomEvent('page:title-shown'));
     }, { once: true });
@@ -117,7 +112,6 @@ window.addEventListener('load', () => {
       if (index === 0) {
         document.addEventListener('page:content-shown', () => {
           reveal();
-          // タイトルwipe開始をヘッダーに通知
           setTimeout(() => {
             document.dispatchEvent(new CustomEvent('page:title-shown'));
           }, 100);
@@ -149,8 +143,85 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 6. Content Fade-up（全ページ共通）
-  //    services-page は services.js が担当するためスキップ
+  // 6. Scroll Reveal — clip-path + ケンバーンズ
+  //    .image-wrapper.reveal / .related-item.reveal
+  //    ※ projects.js を読んでいるページはそちらが担当
+  //      → projects.js がない（common.js のみの）ページ用
+  // ═══════════════════════════════════════════════
+  const isProjectsPage = !!document.querySelector('.projects-grid, .projects-item');
+
+  if (!isProjectsPage) {
+    const revealEls = document.querySelectorAll('.image-wrapper.reveal, .related-item.reveal');
+
+    if (revealEls.length) {
+
+      // 事前に img を拡大しておく（transition なし）
+      revealEls.forEach(el => {
+        const img = el.querySelector('img');
+        if (img) {
+          img.style.transform  = 'scale(1.12)';
+          img.style.transition = 'none';
+        }
+      });
+
+      const revealOne = (el) => {
+        if (el.dataset.revealed) return;
+        el.dataset.revealed = '1';
+
+        // clip-path は CSS (.reveal → .reveal.show) が担う
+        el.classList.add('show');
+
+        const img = el.querySelector('img');
+        if (img) {
+          // clip-path の transition(2s) と同期してケンバーンズ
+          requestAnimationFrame(() => {
+            img.style.transition = 'transform 2.4s cubic-bezier(0.25, 1, 0.5, 1)';
+            img.style.transform  = 'scale(1)';
+          });
+          // reveal 完了後はホバー用に戻す
+          setTimeout(() => {
+            img.style.transition = 'transform 0.6s ease';
+          }, 2500);
+        }
+      };
+
+      const checkReveal = () => {
+        let remaining = false;
+        revealEls.forEach(el => {
+          if (el.dataset.revealed) return;
+          remaining = true;
+          if (el.getBoundingClientRect().top < window.innerHeight * 0.88) {
+            revealOne(el);
+          }
+        });
+        if (!remaining) window.removeEventListener('scroll', checkReveal);
+      };
+
+      // main.appeared を待ってからスタート
+      const startReveal = () => {
+        window.addEventListener('scroll', checkReveal, { passive: true });
+        setTimeout(checkReveal, 80);
+      };
+
+      const mainEl = document.querySelector('main');
+      if (!mainEl || mainEl.classList.contains('appeared')) {
+        startReveal();
+      } else {
+        const obs = new MutationObserver((_, o) => {
+          if (mainEl.classList.contains('appeared')) {
+            o.disconnect();
+            startReveal();
+          }
+        });
+        obs.observe(mainEl, { attributes: true, attributeFilter: ['class'] });
+        setTimeout(() => { obs.disconnect(); startReveal(); }, 2000);
+      }
+    }
+  }
+
+
+  // ═══════════════════════════════════════════════
+  // 7. Content Fade-up（services-page 以外の全ページ共通）
   // ═══════════════════════════════════════════════
   const isServices = document.querySelector('.services-page');
 
@@ -182,7 +253,7 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 7. FAQ Smooth Accordion
+  // 8. FAQ Smooth Accordion
   // ═══════════════════════════════════════════════
   document.querySelectorAll('.faq-item').forEach(item => {
     const summary = item.querySelector('.faq-question');
@@ -209,7 +280,7 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 8. Contact Form Ajax
+  // 9. Contact Form Ajax
   // ═══════════════════════════════════════════════
   const contactForm = document.querySelector('.contact-form');
   if (contactForm) {
