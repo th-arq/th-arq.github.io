@@ -2,28 +2,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ═══════════════════════════════════════════════
   // スクロール reveal（詳細ページ用）
-  // main.appeared を待ってから開始
+  // .image-wrapper.reveal — clip-path + ケンバーンズ
   // ═══════════════════════════════════════════════
   const revealElements = document.querySelectorAll('.image-wrapper.reveal, .related-item.reveal');
 
   if (revealElements.length) {
 
+    // 各要素の img を事前に拡大しておく（transition なし）
+    revealElements.forEach(el => {
+      const img = el.querySelector('img');
+      if (img) {
+        img.style.transform  = 'scale(1.12)';
+        img.style.transition = 'none';
+      }
+    });
+
+    const revealDetail = (el) => {
+      if (el.dataset.revealed) return;
+      el.dataset.revealed = '1';
+      el.classList.add('show'); // clip-path は CSS の .reveal.show で動く
+
+      const img = el.querySelector('img');
+      if (img) {
+        // CSS の clip-path transition(2s) に合わせてケンバーンズ開始
+        requestAnimationFrame(() => {
+          img.style.transition = 'transform 2.4s cubic-bezier(0.25, 1, 0.5, 1)';
+          img.style.transform  = 'scale(1)';
+        });
+      }
+    };
+
     const showOnScroll = () => {
       let allShown = true;
       revealElements.forEach(el => {
-        if (el.classList.contains('show')) return;
+        if (el.dataset.revealed) return;
         allShown = false;
-        if (el.getBoundingClientRect().top < window.innerHeight * 0.9) {
-          el.classList.add('show');
+        if (el.getBoundingClientRect().top < window.innerHeight * 0.88) {
+          revealDetail(el);
         }
       });
-      // 全要素が show になったらリスナー解除
       if (allShown) window.removeEventListener('scroll', showOnScroll);
     };
 
     const startReveal = () => {
       window.addEventListener('scroll', showOnScroll, { passive: true });
-      // appeared直後に画面内の要素を即チェック
       setTimeout(showOnScroll, 50);
     };
 
@@ -38,8 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
       obs.observe(mainEl, { attributes: true, attributeFilter: ['class'] });
-
-      // フォールバック
       setTimeout(() => { obs.disconnect(); startReveal(); }, 2000);
     }
   }
@@ -53,13 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const subNav        = document.getElementById('sub-residential');
   const projectsGrid  = document.querySelector('.projects-grid');
 
-  // フィルター要素がなければ終了（詳細ページでは何もしない）
   if (!filterButtons.length || !projectItems.length) return;
 
   const SUB_FILTERS = new Set(['living', 'kitchen', 'bath', 'patio']);
 
   const getColumnCount = () => {
-    if (!projectsGrid) return window.innerWidth <= 900 ? 2 : 5;
     const visible = Array.from(projectItems).find(el => el.style.display !== 'none');
     if (!visible) return window.innerWidth <= 900 ? 2 : 5;
     return Math.max(1, Math.round(projectsGrid.offsetWidth / visible.offsetWidth));
@@ -68,9 +86,44 @@ document.addEventListener('DOMContentLoaded', () => {
   const startBreathing = () => projectsGrid?.classList.add('is-breathing');
   const stopBreathing  = () => projectsGrid?.classList.remove('is-breathing');
 
+  // ── ケンバーンズ付き reveal ──
+  const revealOneItem = (item, delay) => {
+    const img = item.querySelector('img');
+
+    // 初期スケールを先にセット（transition なし）
+    if (img) {
+      img.style.transition = 'none';
+      img.style.transform  = 'scale(1.15)';
+    }
+
+    item.style.setProperty('--reveal-delay', `${delay}ms`);
+    item.style.display = 'block';
+    item.classList.remove('is-show', 'is-exit');
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        // clip-path 開始
+        item.classList.add('is-show');
+
+        // ケンバーンズ: clip-path の transition 時間(1100ms)に合わせて縮む
+        if (img) {
+          setTimeout(() => {
+            img.style.transition = `transform 1200ms cubic-bezier(0.25, 1, 0.5, 1) ${delay}ms`;
+            img.style.transform  = 'scale(1)';
+          }, 20);
+
+          // reveal 完了後はホバー用 transition に戻す
+          setTimeout(() => {
+            img.style.transition = 'transform 0.6s ease';
+          }, delay + 1300);
+        }
+      });
+    });
+  };
+
   const revealItems = (items) => {
     stopBreathing();
-    const cols = getColumnCount();
+    const cols      = getColumnCount();
     const COL_DELAY = 70;
     const ROW_DELAY = 160;
 
@@ -78,16 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const col   = index % cols;
       const row   = Math.floor(index / cols);
       const delay = row * ROW_DELAY + col * COL_DELAY;
-
-      item.style.setProperty('--reveal-delay', `${delay}ms`);
-      item.style.display = 'block';
-      item.classList.remove('is-show', 'is-exit');
-
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          item.classList.add('is-show');
-        });
-      });
+      revealOneItem(item, delay);
     });
   };
 
@@ -96,10 +140,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let completed  = 0;
     const total    = items.length;
-    let   finished = false; // 二重呼び出し防止
+    let   finished = false;
 
     const finish = (item) => {
-      if (item._hideFinished) return; // 同一アイテムの二重発火防止
+      if (item._hideFinished) return;
       item._hideFinished = true;
       item.classList.remove('is-exit');
       item.style.display = 'none';
