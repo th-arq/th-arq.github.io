@@ -132,7 +132,6 @@ window.addEventListener('load', () => {
     });
   }
 
-
   // ═══════════════════════════════════════════════
   // 5. Split Title — is-active（スクロール連動カラー）
   // ═══════════════════════════════════════════════
@@ -147,8 +146,6 @@ window.addEventListener('load', () => {
 
   // ═══════════════════════════════════════════════
   // 6. Scroll Reveal — clip-path + ケンバーンズ
-  //    .image-wrapper.reveal / .related-item.reveal
-  //    ※ projects.js を読んでいるページはそちらが担当
   // ═══════════════════════════════════════════════
   const isProjectsPage = !!document.querySelector('.projects-grid, .projects-item');
 
@@ -217,9 +214,6 @@ window.addEventListener('load', () => {
 
   // ═══════════════════════════════════════════════
   // 7. Content Fade-up — ② 右コンテンツ スクロールで下から上
-  //    About / Services / その他 すべてのページ共通
-  //    services.js 専用演出（border / card / review）と重複しない
-  //    セレクタのみ担当する
   // ═══════════════════════════════════════════════
   const fadeTargets = document.querySelectorAll([
     // about-page: profile / summary / affiliations / registration
@@ -227,8 +221,6 @@ window.addEventListener('load', () => {
     '.about-page .content-box > h2',
     '.about-page .content-box > p',
     '.about-page .content-box > iframe',
-    // services-page: services-grid / reviews-list
-    // （summary-block と review-item は services.js が担当）
     '.services-page .services-grid',
     '.services-page .reviews-list',
     // その他ページの汎用 content-box 直下要素
@@ -316,3 +308,23 @@ window.addEventListener('load', () => {
   }
 
 });
+
+
+// ═══════════════════════════════════════════════
+// 10. Footer Fade-up
+// ═══════════════════════════════════════════════
+const footerEl = document.querySelector('footer');
+if (footerEl) {
+  const footerObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      setTimeout(() => {
+        footerEl.style.transition = 'opacity 0.9s ease, transform 0.9s ease';
+        footerEl.classList.add('footer-visible');
+      }, 80);
+      footerObserver.unobserve(footerEl);
+    });
+  }, { threshold: 0.08 });
+
+  footerObserver.observe(footerEl);
+}
