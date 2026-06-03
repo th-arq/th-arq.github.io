@@ -55,6 +55,7 @@ window.addEventListener('load', () => {
 
           if (isIndex) return;
 
+          // ③ ヘッダー: page:title-shown を受けてふわっと表示
           document.addEventListener('page:title-shown', () => {
             setTimeout(() => {
               headerTag.style.transition = 'opacity 0.9s ease';
@@ -72,7 +73,7 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 3. Page Appearance
+  // 3. Page Appearance — main ふわっと表示
   // ═══════════════════════════════════════════════
   if (!isIndex) {
     setTimeout(() => {
@@ -85,7 +86,7 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 4. Split Title — wipe アニメーション
+  // 4. Split Title — ① 左タイトル 下から上 wipe
   // ═══════════════════════════════════════════════
   const titles = document.querySelectorAll('.split-layout .title');
 
@@ -110,6 +111,7 @@ window.addEventListener('load', () => {
       };
 
       if (index === 0) {
+        // 最初のタイトル: ページ表示直後に wipe
         document.addEventListener('page:content-shown', () => {
           reveal();
           setTimeout(() => {
@@ -117,6 +119,7 @@ window.addEventListener('load', () => {
           }, 100);
         }, { once: true });
       } else {
+        // 2つ目以降: スクロールで交差したら wipe
         const io = new IntersectionObserver(entries => {
           entries.forEach(entry => {
             if (!entry.isIntersecting) return;
@@ -146,7 +149,6 @@ window.addEventListener('load', () => {
   // 6. Scroll Reveal — clip-path + ケンバーンズ
   //    .image-wrapper.reveal / .related-item.reveal
   //    ※ projects.js を読んでいるページはそちらが担当
-  //      → projects.js がない（common.js のみの）ページ用
   // ═══════════════════════════════════════════════
   const isProjectsPage = !!document.querySelector('.projects-grid, .projects-item');
 
@@ -154,8 +156,6 @@ window.addEventListener('load', () => {
     const revealEls = document.querySelectorAll('.image-wrapper.reveal, .related-item.reveal');
 
     if (revealEls.length) {
-
-      // 事前に img を拡大しておく（transition なし）
       revealEls.forEach(el => {
         const img = el.querySelector('img');
         if (img) {
@@ -167,18 +167,14 @@ window.addEventListener('load', () => {
       const revealOne = (el) => {
         if (el.dataset.revealed) return;
         el.dataset.revealed = '1';
-
-        // clip-path は CSS (.reveal → .reveal.show) が担う
         el.classList.add('show');
 
         const img = el.querySelector('img');
         if (img) {
-          // clip-path の transition(2s) と同期してケンバーンズ
           requestAnimationFrame(() => {
             img.style.transition = 'transform 2.4s cubic-bezier(0.25, 1, 0.5, 1)';
             img.style.transform  = 'scale(1)';
           });
-          // reveal 完了後はホバー用に戻す
           setTimeout(() => {
             img.style.transition = 'transform 0.6s ease';
           }, 2500);
@@ -197,7 +193,6 @@ window.addEventListener('load', () => {
         if (!remaining) window.removeEventListener('scroll', checkReveal);
       };
 
-      // main.appeared を待ってからスタート
       const startReveal = () => {
         window.addEventListener('scroll', checkReveal, { passive: true });
         setTimeout(checkReveal, 80);
@@ -221,35 +216,49 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 7. Content Fade-up（services-page 以外の全ページ共通）
+  // 7. Content Fade-up — ② 右コンテンツ スクロールで下から上
+  //    About / Services / その他 すべてのページ共通
+  //    services.js 専用演出（border / card / review）と重複しない
+  //    セレクタのみ担当する
   // ═══════════════════════════════════════════════
-  const isServices = document.querySelector('.services-page');
+  const fadeTargets = document.querySelectorAll([
+    // about-page: profile / summary / affiliations / registration
+    '.about-page .content-box > section',
+    '.about-page .content-box > h2',
+    '.about-page .content-box > p',
+    '.about-page .content-box > iframe',
+    // services-page: services-grid / reviews-list
+    // （summary-block と review-item は services.js が担当）
+    '.services-page .services-grid',
+    '.services-page .reviews-list',
+    // その他ページの汎用 content-box 直下要素
+    ':not(.about-page):not(.services-page) .content-box > section',
+    ':not(.about-page):not(.services-page) .content-box > p',
+    ':not(.about-page):not(.services-page) .content-box > h2',
+    ':not(.about-page):not(.services-page) .content-box > h4',
+    ':not(.about-page):not(.services-page) .content-box > ul',
+    ':not(.about-page):not(.services-page) .content-box > iframe',
+  ].join(', '));
 
-  if (!isServices) {
-    const fadeTargets = document.querySelectorAll(
-      '.content-box > section, .content-box > p, .content-box > h2, .content-box > h4, .content-box > ul, .content-box > iframe'
-    );
+  fadeTargets.forEach(el => {
+    el.style.opacity    = '0';
+    el.style.transform  = 'translateY(20px)';
+    el.style.transition = 'none';
+  });
 
-    fadeTargets.forEach(el => {
-      el.style.opacity    = '0';
-      el.style.transform  = 'translateY(20px)';
-      el.style.transition = 'none';
+  const fadeObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      setTimeout(() => {
+        entry.target.style.transition = 'opacity 0.9s ease, transform 0.9s ease';
+        entry.target.style.opacity    = '1';
+        entry.target.style.transform  = 'translateY(0)';
+      }, 80);
+      fadeObserver.unobserve(entry.target);
     });
+  }, { threshold: 0.08 });
 
-    const fadeObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        setTimeout(() => {
-          entry.target.style.transition = 'opacity 0.9s ease, transform 0.9s ease';
-          entry.target.style.opacity    = '1';
-          entry.target.style.transform  = 'translateY(0)';
-        }, 80);
-        fadeObserver.unobserve(entry.target);
-      });
-    }, { threshold: 0.1 });
-
-    fadeTargets.forEach(el => fadeObserver.observe(el));
-  }
+  fadeTargets.forEach(el => fadeObserver.observe(el));
 
 
   // ═══════════════════════════════════════════════
