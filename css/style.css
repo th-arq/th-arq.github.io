@@ -376,6 +376,15 @@ header.is-scrolled:hover {
 footer {
   width: 100%;
   padding: var(--gap-l) var(--side-padding) var(--gap-m);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: none;
+}
+
+footer.footer-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.9s ease, transform 0.9s ease;
 }
 
 .footer_container {
