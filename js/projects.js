@@ -1,73 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ═══════════════════════════════════════════════
-  // スクロール reveal（詳細ページ用）
-  // .image-wrapper.reveal — clip-path + ケンバーンズ
-  // ═══════════════════════════════════════════════
-  const revealElements = document.querySelectorAll('.image-wrapper.reveal, .related-item.reveal');
-
-  if (revealElements.length) {
-
-    // 各要素の img を事前に拡大しておく（transition なし）
-    revealElements.forEach(el => {
-      const img = el.querySelector('img');
-      if (img) {
-        img.style.transform  = 'scale(1.12)';
-        img.style.transition = 'none';
-      }
-    });
-
-    const revealDetail = (el) => {
-      if (el.dataset.revealed) return;
-      el.dataset.revealed = '1';
-      el.classList.add('show'); // clip-path は CSS の .reveal.show で動く
-
-      const img = el.querySelector('img');
-      if (img) {
-        // CSS の clip-path transition(2s) に合わせてケンバーンズ開始
-        requestAnimationFrame(() => {
-          img.style.transition = 'transform 2.4s cubic-bezier(0.25, 1, 0.5, 1)';
-          img.style.transform  = 'scale(1)';
-        });
-      }
-    };
-
-    const showOnScroll = () => {
-      let allShown = true;
-      revealElements.forEach(el => {
-        if (el.dataset.revealed) return;
-        allShown = false;
-        if (el.getBoundingClientRect().top < window.innerHeight * 0.88) {
-          revealDetail(el);
-        }
-      });
-      if (allShown) window.removeEventListener('scroll', showOnScroll);
-    };
-
-    const startReveal = () => {
-      window.addEventListener('scroll', showOnScroll, { passive: true });
-      setTimeout(showOnScroll, 50);
-    };
-
-    const mainEl = document.querySelector('main');
-    if (!mainEl || mainEl.classList.contains('appeared')) {
-      startReveal();
-    } else {
-      const obs = new MutationObserver((_, o) => {
-        if (mainEl.classList.contains('appeared')) {
-          o.disconnect();
-          startReveal();
-        }
-      });
-      obs.observe(mainEl, { attributes: true, attributeFilter: ['class'] });
-      setTimeout(() => { obs.disconnect(); startReveal(); }, 2000);
-    }
-  }
-
-
-  // ═══════════════════════════════════════════════
-  // カテゴリフィルター（一覧ページ専用）
-  // ═══════════════════════════════════════════════
   const filterButtons = document.querySelectorAll('.filter-btn');
   const projectItems  = document.querySelectorAll('.projects-item');
   const subNav        = document.getElementById('sub-residential');
@@ -77,97 +9,108 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const SUB_FILTERS = new Set(['living', 'kitchen', 'bath', 'patio']);
 
+  // ═══════════════════════════════════════════════
+  // Utility: 表示列数を取得
+  // ═══════════════════════════════════════════════
   const getColumnCount = () => {
-    const visible = Array.from(projectItems).find(el => el.style.display !== 'none');
-    if (!visible) return window.innerWidth <= 900 ? 2 : 5;
-    return Math.max(1, Math.round(projectsGrid.offsetWidth / visible.offsetWidth));
+    if (!projectsGrid) return window.innerWidth <= 900 ? 2 : 5;
+    const style = getComputedStyle(projectsGrid);
+    const cols  = style.gridTemplateColumns.split(' ').length;
+    return cols || (window.innerWidth <= 900 ? 2 : 5);
   };
 
-  const startBreathing = () => projectsGrid?.classList.add('is-breathing');
-  const stopBreathing  = () => projectsGrid?.classList.remove('is-breathing');
-
-  // ── ケンバーンズ付き reveal ──
+  // ═══════════════════════════════════════════════
+  // Kenburns reveal — 1アイテム
+  // ═══════════════════════════════════════════════
   const revealOneItem = (item, delay) => {
     const img = item.querySelector('img');
 
-    // 初期スケールを先にセット（transition なし）
+    item.style.setProperty('--reveal-delay', `${delay}ms`);
+
+    // display: block を先に確定（clip-path: inset(100%) のまま）
+    item.style.visibility = 'visible';
+    item.style.opacity    = '1';
+
     if (img) {
       img.style.transition = 'none';
-      img.style.transform  = 'scale(1.15)';
+      img.style.transform  = 'scale(1.12)';
     }
 
-    item.style.setProperty('--reveal-delay', `${delay}ms`);
-    item.style.display = 'block';
-    item.classList.remove('is-show', 'is-exit');
-
+    // ダブル rAF で paint を確定させてからアニメ開始
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        // clip-path 開始
+        item.classList.remove('is-exit');
         item.classList.add('is-show');
 
-        // ケンバーンズ: clip-path の transition 時間(1100ms)に合わせて縮む
         if (img) {
           setTimeout(() => {
-            img.style.transition = `transform 1200ms cubic-bezier(0.25, 1, 0.5, 1) ${delay}ms`;
-            img.style.transform  = 'scale(1)';
-          }, 20);
+            img.style.transition = `transform 1400ms cubic-bezier(0.25, 1, 0.5, 1) ${delay}ms`;
+            img.style.transform  = 'scale(1.0)';
+          }, 16);
 
-          // reveal 完了後はホバー用 transition に戻す
+          // reveal 完了後はホバー用に戻す
           setTimeout(() => {
-            img.style.transition = 'transform 0.6s ease';
-          }, delay + 1300);
+            img.style.transition = '';
+            img.style.transform  = '';
+          }, delay + 1500);
         }
       });
     });
   };
 
+  // ═══════════════════════════════════════════════
+  // 複数アイテムを列・行オフセット付きで reveal
+  // ═══════════════════════════════════════════════
   const revealItems = (items) => {
-    stopBreathing();
+    if (!items.length) return;
     const cols      = getColumnCount();
-    const COL_DELAY = 70;
-    const ROW_DELAY = 160;
+    const COL_DELAY = 60;
+    const ROW_DELAY = 120;
 
-    items.forEach((item, index) => {
-      const col   = index % cols;
-      const row   = Math.floor(index / cols);
+    items.forEach((item, i) => {
+      const col   = i % cols;
+      const row   = Math.floor(i / cols);
       const delay = row * ROW_DELAY + col * COL_DELAY;
       revealOneItem(item, delay);
     });
   };
 
+  // ═══════════════════════════════════════════════
+  // アイテムを exit アニメーションで隠す
+  // ═══════════════════════════════════════════════
+  const EXIT_DURATION = 320; // ms — CSS の is-exit transition に合わせる
+
   const hideItems = (items, onComplete) => {
     if (!items.length) { onComplete?.(); return; }
 
-    let completed  = 0;
-    const total    = items.length;
-    let   finished = false;
-
-    const finish = (item) => {
-      if (item._hideFinished) return;
-      item._hideFinished = true;
-      item.classList.remove('is-exit');
-      item.style.display = 'none';
-      completed++;
-      if (completed >= total && !finished) {
-        finished = true;
-        onComplete?.();
-      }
-    };
-
     items.forEach(item => {
-      item._hideFinished = false;
       item.classList.remove('is-show');
       item.classList.add('is-exit');
-
-      const timer = setTimeout(() => finish(item), 500);
-      item.addEventListener('transitionend', () => {
-        clearTimeout(timer);
-        finish(item);
-      }, { once: true });
     });
+
+    setTimeout(() => {
+      items.forEach(item => {
+        item.classList.remove('is-exit');
+        item.style.visibility = 'hidden';
+        item.style.opacity    = '0';
+      });
+      onComplete?.();
+    }, EXIT_DURATION);
   };
 
-  let filterTimeout = null;
+  // ═══════════════════════════════════════════════
+  // 初期化: 全アイテムを hidden 状態に
+  // ═══════════════════════════════════════════════
+  projectItems.forEach(item => {
+    item.style.display    = 'block';  // display は常に block
+    item.style.visibility = 'hidden';
+    item.style.opacity    = '0';
+  });
+
+  // ═══════════════════════════════════════════════
+  // フィルター適用
+  // ═══════════════════════════════════════════════
+  let filterTimer = null;
 
   const applyFilter = (filterValue, initialLoad = false) => {
     const isAll       = filterValue === 'projects-item';
@@ -185,20 +128,23 @@ document.addEventListener('DOMContentLoaded', () => {
       show ? toShow.push(item) : toHide.push(item);
     });
 
-    clearTimeout(filterTimeout);
+    clearTimeout(filterTimer);
 
     hideItems(toHide, () => {
-      toShow.forEach(item => { item.style.display = 'block'; });
-      startBreathing();
-
-      filterTimeout = setTimeout(() => {
+      filterTimer = setTimeout(() => {
         revealItems(toShow);
-      }, initialLoad ? 850 : 700);
+      }, initialLoad ? 800 : 80);
     });
   };
 
+  // ═══════════════════════════════════════════════
+  // 初期表示
+  // ═══════════════════════════════════════════════
   applyFilter('projects-item', true);
 
+  // ═══════════════════════════════════════════════
+  // フィルターボタン
+  // ═══════════════════════════════════════════════
   filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const filterValue = btn.dataset.filter;
