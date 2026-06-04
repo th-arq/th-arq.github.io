@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Wix Madefor Text:wght@300;400&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=Wix+Madefor+Text:ital,wght@0,400..800;1,400..800&display=swap');
 
 html {
   scrollbar-gutter: stable;
@@ -12,7 +13,7 @@ html {
 }
 
 body {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Wix Madefor Text', sans-serif;
   font-weight: 300;
   letter-spacing: 0.05em;
   line-height: 1.6;
@@ -447,7 +448,7 @@ footer.footer-visible {
 }
 
 #loading_percent {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Wix Madefor Text', sans-serif;
   font-size: var(--font-xs);
   letter-spacing: 0.2em;
   color: var(--darkgray);
@@ -526,7 +527,7 @@ body.is-index main {
 
 .gallery-item .overlay-text {
   color: var(--white);
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Wix Madefor Text', sans-serif;
   font-weight: 300;
   font-size: clamp(11px, 1.1vw, 15px);
   letter-spacing: 0.12em;
@@ -1128,7 +1129,7 @@ p.memo {
   color: var(--gray);
   opacity: 0.6;
   font-weight: var(--normal);
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Wix Madefor Text', sans-serif;
 }
 
 .radio-group {
