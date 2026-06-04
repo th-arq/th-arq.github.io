@@ -27,19 +27,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     item.style.setProperty('--reveal-delay', `${delay}ms`);
 
-    // display: block を先に確定（clip-path: inset(100%) のまま）
-    item.style.visibility = 'visible';
-    item.style.opacity    = '1';
+    // ① display:block でグリッドにスペース確保 & clip-path をリセット状態に
+    item.style.display = 'block';
+    item.classList.remove('is-show', 'is-exit');
 
     if (img) {
       img.style.transition = 'none';
       img.style.transform  = 'scale(1.12)';
     }
 
-    // ダブル rAF で paint を確定させてからアニメ開始
+    // ② ダブル rAF で paint を確定させてからアニメ開始
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        item.classList.remove('is-exit');
         item.classList.add('is-show');
 
         if (img) {
@@ -48,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             img.style.transform  = 'scale(1.0)';
           }, 16);
 
-          // reveal 完了後はホバー用に戻す
+          // reveal 完了後はホバー用 transition に戻す
           setTimeout(() => {
             img.style.transition = '';
             img.style.transform  = '';
@@ -78,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ═══════════════════════════════════════════════
   // アイテムを exit アニメーションで隠す
   // ═══════════════════════════════════════════════
-  const EXIT_DURATION = 320; // ms — CSS の is-exit transition に合わせる
+  const EXIT_DURATION = 300;
 
   const hideItems = (items, onComplete) => {
     if (!items.length) { onComplete?.(); return; }
@@ -91,8 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       items.forEach(item => {
         item.classList.remove('is-exit');
-        item.style.visibility = 'hidden';
-        item.style.opacity    = '0';
+        item.style.display = 'none';  // グリッドからトルツメ
       });
       onComplete?.();
     }, EXIT_DURATION);
@@ -102,9 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 初期化: 全アイテムを hidden 状態に
   // ═══════════════════════════════════════════════
   projectItems.forEach(item => {
-    item.style.display    = 'block';  // display は常に block
-    item.style.visibility = 'hidden';
-    item.style.opacity    = '0';
+    item.style.display = 'none';
   });
 
   // ═══════════════════════════════════════════════
