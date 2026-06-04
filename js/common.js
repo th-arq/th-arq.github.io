@@ -307,7 +307,7 @@ window.addEventListener('load', () => {
     });
   }
 
-});
+
 
 
 // ═══════════════════════════════════════════════
@@ -328,3 +328,5 @@ if (footerEl) {
 
   footerObserver.observe(footerEl);
 }
+
+});
