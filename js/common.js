@@ -20,68 +20,73 @@ window.addEventListener('load', () => {
   // ═══════════════════════════════════════════════
   // 2. Header / Footer Loader
   // ═══════════════════════════════════════════════
+  const isIndex = document.body.classList.contains('is-index');
+
   const loadParts = (id, path) => {
-  fetch(path)
-    .then(res => res.text())
-    .then(html => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.innerHTML = html;
+    fetch(path)
+      .then(res => res.text())
+      .then(html => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.innerHTML = html;
 
-      if (id === 'header') {
-        const headerTag = el.querySelector('header');
-        if (!headerTag) return;
+        if (id === 'header') {
+          const headerTag = el.querySelector('header');
+          if (!headerTag) return;
 
-        if (!isIndex) {
-          headerTag.style.opacity    = '0';
-          headerTag.style.transition = 'none';
-        }
+          if (!isIndex) {
+            headerTag.style.opacity    = '0';
+            headerTag.style.transition = 'none';
+          }
 
-        window.addEventListener('scroll', () => {
-          headerTag.classList.toggle('is-scrolled', window.scrollY > 50);
-        });
-
-        const burgerBtn = el.querySelector('.burger-btn');
-        if (burgerBtn) {
-          burgerBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            headerTag.classList.toggle('nav-open');
-            document.body.style.overflow =
-              headerTag.classList.contains('nav-open') ? 'hidden' : '';
+          window.addEventListener('scroll', () => {
+            headerTag.classList.toggle('is-scrolled', window.scrollY > 50);
           });
-        }
 
-        if (isIndex) return;
+          const burgerBtn = el.querySelector('.burger-btn');
+          if (burgerBtn) {
+            burgerBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              headerTag.classList.toggle('nav-open');
+              document.body.style.overflow =
+                headerTag.classList.contains('nav-open') ? 'hidden' : '';
+            });
+          }
 
-        document.addEventListener('page:title-shown', () => {
-          setTimeout(() => {
-            headerTag.style.transition = 'opacity 0.9s ease';
-            headerTag.style.opacity    = '1';
-            el.querySelector('.fade-logo')?.classList.add('show');
-            el.querySelector('.fade-menu')?.classList.add('show');
-          }, 200);
-        }, { once: true });
-      }
+          if (isIndex) return;
 
-      if (id === 'footer') {
-        const footerEl = el.querySelector('footer');
-        if (!footerEl) return;
-
-        const footerObserver = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
+          document.addEventListener('page:title-shown', () => {
             setTimeout(() => {
-              footerEl.style.transition = 'opacity 0.9s ease, transform 0.9s ease';
-              footerEl.classList.add('footer-visible');
-            }, 80);
-            footerObserver.unobserve(footerEl);
-          });
-        }, { threshold: 0.08 });
+              headerTag.style.transition = 'opacity 0.9s ease';
+              headerTag.style.opacity    = '1';
+              el.querySelector('.fade-logo')?.classList.add('show');
+              el.querySelector('.fade-menu')?.classList.add('show');
+            }, 200);
+          }, { once: true });
+        }
 
-        footerObserver.observe(footerEl);
-      }
-    });
-};
+        if (id === 'footer') {
+          const footerEl = el.querySelector('footer');
+          if (!footerEl) return;
+
+          const footerObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+              if (!entry.isIntersecting) return;
+              setTimeout(() => {
+                footerEl.style.transition = 'opacity 0.9s ease, transform 0.9s ease';
+                footerEl.classList.add('footer-visible');
+              }, 80);
+              footerObserver.unobserve(footerEl);
+            });
+          }, { threshold: 0.08 });
+
+          footerObserver.observe(footerEl);
+        }
+      });
+  };
+
+  loadParts('header', '/head.html');
+  loadParts('footer', '/foot.html');
 
 
   // ═══════════════════════════════════════════════
@@ -123,7 +128,6 @@ window.addEventListener('load', () => {
       };
 
       if (index === 0) {
-        // 最初のタイトル: ページ表示直後に wipe
         document.addEventListener('page:content-shown', () => {
           reveal();
           setTimeout(() => {
@@ -131,7 +135,6 @@ window.addEventListener('load', () => {
           }, 100);
         }, { once: true });
       } else {
-        // 2つ目以降: スクロールで交差したら wipe
         const io = new IntersectionObserver(entries => {
           entries.forEach(entry => {
             if (!entry.isIntersecting) return;
@@ -143,6 +146,7 @@ window.addEventListener('load', () => {
       }
     });
   }
+
 
   // ═══════════════════════════════════════════════
   // 5. Split Title — is-active（スクロール連動カラー）
@@ -228,14 +232,12 @@ window.addEventListener('load', () => {
   // 7. Content Fade-up — ② 右コンテンツ スクロールで下から上
   // ═══════════════════════════════════════════════
   const fadeTargets = document.querySelectorAll([
-    // about-page: profile / summary / affiliations / registration
     '.about-page .content-box > section',
     '.about-page .content-box > h2',
     '.about-page .content-box > p',
     '.about-page .content-box > iframe',
     '.services-page .services-grid',
     '.services-page .reviews-list',
-    // その他ページの汎用 content-box 直下要素
     ':not(.about-page):not(.services-page) .content-box > section',
     ':not(.about-page):not(.services-page) .content-box > p',
     ':not(.about-page):not(.services-page) .content-box > h2',
@@ -318,6 +320,5 @@ window.addEventListener('load', () => {
       }
     });
   }
-
 
 });
