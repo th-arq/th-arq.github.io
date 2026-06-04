@@ -20,9 +20,7 @@ window.addEventListener('load', () => {
   // ═══════════════════════════════════════════════
   // 2. Header / Footer Loader
   // ═══════════════════════════════════════════════
-  const isIndex = document.body.classList.contains('is-index');
-
-const loadParts = (id, path) => {
+  const loadParts = (id, path) => {
   fetch(path)
     .then(res => res.text())
     .then(html => {
@@ -31,7 +29,38 @@ const loadParts = (id, path) => {
       el.innerHTML = html;
 
       if (id === 'header') {
-        // ...既存のheaderコードはそのまま...
+        const headerTag = el.querySelector('header');
+        if (!headerTag) return;
+
+        if (!isIndex) {
+          headerTag.style.opacity    = '0';
+          headerTag.style.transition = 'none';
+        }
+
+        window.addEventListener('scroll', () => {
+          headerTag.classList.toggle('is-scrolled', window.scrollY > 50);
+        });
+
+        const burgerBtn = el.querySelector('.burger-btn');
+        if (burgerBtn) {
+          burgerBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            headerTag.classList.toggle('nav-open');
+            document.body.style.overflow =
+              headerTag.classList.contains('nav-open') ? 'hidden' : '';
+          });
+        }
+
+        if (isIndex) return;
+
+        document.addEventListener('page:title-shown', () => {
+          setTimeout(() => {
+            headerTag.style.transition = 'opacity 0.9s ease';
+            headerTag.style.opacity    = '1';
+            el.querySelector('.fade-logo')?.classList.add('show');
+            el.querySelector('.fade-menu')?.classList.add('show');
+          }, 200);
+        }, { once: true });
       }
 
       if (id === 'footer') {
