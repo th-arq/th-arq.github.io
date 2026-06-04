@@ -525,7 +525,7 @@ body.is-index main {
 }
 
 .gallery-item .overlay-text {
-  color: #ffffff;
+  color: var(--white);
   font-family: 'Manrope', sans-serif;
   font-weight: 300;
   font-size: clamp(11px, 1.1vw, 15px);
@@ -754,27 +754,27 @@ body.is-index main {
 /* =========================
   Projects
 ========================= */
-.projects-grid.is-breathing {
-  animation: grid-breathe 1.6s ease-in-out infinite;
-}
-
-@keyframes grid-breathe {
-  0%, 100% { opacity: 0.25; }
-  50%       { opacity: 0.6;  }
+/* ── グリッド ── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--gap-s);
 }
 
 .projects-item {
-  display: none;
+  display: block;
+  visibility: hidden;
+  opacity: 0;
   clip-path: inset(0 0 100% 0);
   pointer-events: none;
   transition:
-    clip-path 1100ms cubic-bezier(0.25, 1, 0.5, 1) var(--reveal-delay, 0ms),
-    opacity   400ms ease var(--reveal-delay, 0ms);
+    clip-path 1100ms cubic-bezier(0.25, 1, 0.5, 1) var(--reveal-delay, 0ms);
   will-change: clip-path;
 }
 
 .projects-item.is-show {
-  display: block;
+  visibility: visible;
+  opacity: 1;
   clip-path: inset(0 0 0% 0);
   pointer-events: auto;
 }
@@ -783,10 +783,79 @@ body.is-index main {
   clip-path: inset(0 0 100% 0);
   opacity: 0;
   transition:
-    clip-path 380ms cubic-bezier(0.4, 0, 1, 1),
-    opacity   280ms ease;
+    clip-path 300ms cubic-bezier(0.4, 0, 1, 1),
+    opacity   200ms ease;
   transition-delay: 0ms !important;
   pointer-events: none;
+}
+
+/* ── サムネイル ── */
+.projects-item .thumbnail {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.projects-item .thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ── ホバー: ズーム ── */
+.projects-item:hover .thumbnail img {
+  transform: scale(1.08) !important;
+}
+
+/* ── ホバー: overlay ── */
+.projects-item .thumbnail::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(16, 16, 16, 0.55) 0%,
+    rgba(16, 16, 16, 0.10) 45%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+
+.projects-item:hover .thumbnail::after {
+  opacity: 1;
+}
+
+/* ── ホバー: info テキスト スライドアップ ── */
+.projects-item .info {
+  overflow: hidden;
+}
+
+.projects-item .info p {
+  font-size: var(--font-xs);
+  color: var(--darkgray);
+  margin: 0.5em 0 0 0;
+  line-height: 1.5;
+  transform: translateY(4px);
+  transition: color 0.3s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.projects-item:hover .info p {
+  color: var(--black);
+  transform: translateY(0);
+}
+
+/* ── SP ── */
+@media (max-width: 900px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--gap-xs);
+  }
 }
 
 
