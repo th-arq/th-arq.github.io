@@ -762,9 +762,7 @@ body.is-index main {
 }
 
 .projects-item {
-  display: block;
-  visibility: hidden;
-  opacity: 0;
+  display: none;  
   clip-path: inset(0 0 100% 0);
   pointer-events: none;
   transition:
@@ -773,8 +771,6 @@ body.is-index main {
 }
 
 .projects-item.is-show {
-  visibility: visible;
-  opacity: 1;
   clip-path: inset(0 0 0% 0);
   pointer-events: auto;
 }
