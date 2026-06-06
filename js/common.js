@@ -43,13 +43,22 @@ window.addEventListener('load', () => {
             headerTag.classList.toggle('is-scrolled', window.scrollY > 50);
           });
 
+          // バーガーボタン: メニューを開く
           const burgerBtn = el.querySelector('.burger-btn');
           if (burgerBtn) {
             burgerBtn.addEventListener('click', (e) => {
               e.preventDefault();
-              headerTag.classList.toggle('nav-open');
-              document.body.style.overflow =
-                headerTag.classList.contains('nav-open') ? 'hidden' : '';
+              headerTag.classList.add('nav-open');
+              document.body.style.overflow = 'hidden';
+            });
+          }
+
+          // ✕ボタン: メニューを閉じる
+          const closeBtn = el.querySelector('.sp-nav-close');
+          if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+              headerTag.classList.remove('nav-open');
+              document.body.style.overflow = '';
             });
           }
 
