@@ -82,12 +82,12 @@ window.addEventListener('load', () => {
             entries.forEach(entry => {
               if (!entry.isIntersecting) return;
               setTimeout(() => {
-                footerEl.style.transition = 'opacity 0.7s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)';
+                footerEl.style.transition = 'opacity 1.1s ease, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1)';
                 footerEl.classList.add('footer-visible');
-              }, 80);
+              }, 150);
               footerObserver.unobserve(footerEl);
             });
-          }, { threshold: 0.3 });
+          }, { threshold: 0.5 });
 
           footerObserver.observe(footerEl);
         }
