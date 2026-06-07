@@ -197,7 +197,7 @@ header {
   opacity: 1;
   overflow: hidden;
 }
-
+ 
 .header-sweep {
   position: absolute;
   inset: 0;
@@ -211,58 +211,149 @@ header {
   pointer-events: none;
   z-index: 1;
 }
-
+ 
 .header-sweep.sweep {
   transition: transform 1.1s cubic-bezier(0.25, 1, 0.5, 1);
   transform: translateX(110%);
 }
-
+ 
 header.is-scrolled {
   opacity: 0.5;
   background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
-
+ 
 header.is-scrolled:hover {
   opacity: 1;
   background-color: rgba(255, 255, 255, 0.97);
 }
-
+ 
 .TAG_logo img {
   height: 24px;
   display: block;
 }
-
+ 
 .header-right {
   display: flex;
   align-items: center;
   z-index: 1000;
 }
-
+ 
+/* ── メニューリスト ── */
 #menu ul {
   display: flex;
-  gap: var(--gap-s);
+  align-items: center;
+  gap: 32px;
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
+ 
+/* ── 各liをwrapとして使う（めくれアニメ用） ── */
+#menu li {
+  overflow: hidden;
+}
+ 
 #menu a {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
   position: relative;
-  font-size: var(--font-xs);
+  padding-bottom: 2px;
+  transform: translateY(110%);
+  transition: color 0.3s ease, transform 0s;
 }
-
+ 
+/* アンダーライン */
+#menu a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--black);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+ 
+#menu a:hover { color: var(--black); }
+#menu a:hover::after { transform: scaleX(1); }
+ 
+/* ── .show でめくれ登場 (stagger) ── */
+.fade-menu.show #menu li:nth-child(1) a {
+  transform: translateY(0);
+  transition: color 0.3s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.05s;
+}
+.fade-menu.show #menu li:nth-child(2) a {
+  transform: translateY(0);
+  transition: color 0.3s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.13s;
+}
+.fade-menu.show #menu li:nth-child(3) a {
+  transform: translateY(0);
+  transition: color 0.3s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.21s;
+}
+.fade-menu.show #menu li:nth-child(4) a {
+  transform: translateY(0);
+  transition: color 0.3s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.29s;
+}
+ 
+/* ── Contact ボタン ── */
 .contact-btn {
-  padding: 0.5em 1em;
+  font-size: 10px !important;
+  letter-spacing: 0.18em !important;
+  padding: 6px 16px !important;
+  background: var(--black) !important;
+  color: var(--white) !important;
+  border: 1px solid var(--black);
+  transition: background 0.35s ease, color 0.35s ease !important;
 }
-
+ 
+.contact-btn::after {
+  display: none !important;
+}
+ 
+.contact-btn:hover {
+  background: transparent !important;
+  color: var(--black) !important;
+}
+ 
+/* ── ホバー時: 他リンクをgray fade ── */
+#menu ul:hover a:not(:hover) {
+  color: var(--lightgray);
+}
+ 
+/* ── ロゴも同じめくれ ── */
+.fade-logo {
+  overflow: hidden;
+}
+ 
+.fade-logo img {
+  transform: translateY(110%);
+  transition: transform 0s;
+}
+ 
+.fade-logo.show img {
+  transform: translateY(0);
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0s;
+}
+ 
+/* ── fade-menu 自体のopacity/transform は不要になるので無効化 ── */
+.fade-menu {
+  opacity: 1 !important;
+  transform: none !important;
+}
+ 
 @media (min-width: 901px) {
   .sp-nav, .burger-btn {
     display: none !important;
   }
 }
-
+ 
 
 /* =========================
   Header SP
