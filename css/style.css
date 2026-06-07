@@ -1,5 +1,4 @@
-/*@import url('https://fonts.googleapis.com/css2?family=Wix Madefor Text:wght@300;400&display=swap');*/
-@import url('https://fonts.googleapis.com/css2?family=Wix+Madefor+Text:ital,wght@0,400..800;1,400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400&display=swap');
 
 html {
   scrollbar-gutter: stable;
@@ -13,8 +12,9 @@ html {
 }
 
 body {
-  font-family: 'Wix Madefor Text', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-weight: 300;
+  letter-spacing: 0.05em;
   line-height: 1.6;
   word-break: break-word;
   margin: auto;
@@ -29,8 +29,8 @@ body {
   --font-m: 32px;
   --font-n: 20px;
   --font-s: 18px;
-  --font-xs: 14px;
-  --bold: 450;
+  --font-xs: 16px;
+  --bold: 400;
   --normal: 300;
   --black: #101010;
   --white: #ffffff;
@@ -99,7 +99,7 @@ body:not(.is-index) #header header {
 .image-wrapper.reveal,
 .related-item.reveal {
   clip-path: inset(0 0 100% 0);
-  transition: clip-path 2s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: clip-path 1.2s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: clip-path;
   overflow: hidden;
 }
@@ -111,7 +111,7 @@ body:not(.is-index) #header header {
 
 .reveal img {
   transform: scale(1.1);
-  transition: transform 4s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform;
 }
 
@@ -195,6 +195,7 @@ header {
   z-index: 1000;
   transition: opacity 0.4s ease, background 0.4s ease, backdrop-filter 0.4s ease;
   opacity: 1;
+  overflow: hidden;
 }
 
 .header-sweep {
@@ -208,7 +209,6 @@ header {
   );
   transform: translateX(-110%);
   pointer-events: none;
-  overflow: hidden;
   z-index: 1;
 }
 
@@ -376,15 +376,6 @@ header.is-scrolled:hover {
 footer {
   width: 100%;
   padding: var(--gap-l) var(--side-padding) var(--gap-m);
-  opacity: 0;
-  transform: translateY(60px);
-  transition: none;
-}
-
-footer.footer-visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.9s ease, transform 0.9s ease;
 }
 
 .footer_container {
@@ -447,7 +438,7 @@ footer.footer-visible {
 }
 
 #loading_percent {
-  font-family: 'Wix Madefor Text', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: var(--font-xs);
   letter-spacing: 0.2em;
   color: var(--darkgray);
@@ -505,14 +496,25 @@ body.is-index main {
 }
 
 .gallery-item img {
+  /* 初期scale/transitionはJS(revealItem)で制御 */
   display: block;
   width: 100%;
   height: auto;
+  transform: scale(1.22);
 }
- 
+
+.gallery-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* hover時のscaleはここで定義。初期scale(1.12)はJSで付与 */
+  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
 .gallery-item:hover img {
-  transform: scale(1.06) !important;
+  transform: scale(1.06);
 }
+
 .gallery-item .overlay {
   position: absolute;
   inset: 0;
@@ -525,8 +527,8 @@ body.is-index main {
 }
 
 .gallery-item .overlay-text {
-  color: var(--white);
-  font-family: 'Wix Madefor Text', sans-serif;
+  color: #ffffff;
+  font-family: 'Manrope', sans-serif;
   font-weight: 300;
   font-size: clamp(11px, 1.1vw, 15px);
   letter-spacing: 0.12em;
@@ -754,23 +756,27 @@ body.is-index main {
 /* =========================
   Projects
 ========================= */
-/* ── グリッド ── */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: var(--gap-s);
+.projects-grid.is-breathing {
+  animation: grid-breathe 1.6s ease-in-out infinite;
+}
+
+@keyframes grid-breathe {
+  0%, 100% { opacity: 0.25; }
+  50%       { opacity: 0.6;  }
 }
 
 .projects-item {
-  display: none;  
+  display: none;
   clip-path: inset(0 0 100% 0);
   pointer-events: none;
   transition:
-    clip-path 1100ms cubic-bezier(0.25, 1, 0.5, 1) var(--reveal-delay, 0ms);
+    clip-path 1100ms cubic-bezier(0.25, 1, 0.5, 1) var(--reveal-delay, 0ms),
+    opacity   400ms ease var(--reveal-delay, 0ms);
   will-change: clip-path;
 }
 
 .projects-item.is-show {
+  display: block;
   clip-path: inset(0 0 0% 0);
   pointer-events: auto;
 }
@@ -779,13 +785,106 @@ body.is-index main {
   clip-path: inset(0 0 100% 0);
   opacity: 0;
   transition:
-    clip-path 300ms cubic-bezier(0.4, 0, 1, 1),
-    opacity   200ms ease;
+    clip-path 380ms cubic-bezier(0.4, 0, 1, 1),
+    opacity   280ms ease;
   transition-delay: 0ms !important;
   pointer-events: none;
 }
 
-/* ── サムネイル ── */
+
+/* =========================
+  Filter Nav
+========================= */
+.filter-nav {
+  margin: 0 auto var(--gap-s) auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.filter-main {
+  display: flex;
+  border-bottom: 1px solid var(--lightgray);
+  gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.filter-main::-webkit-scrollbar { display: none; }
+
+.filter-btn {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: var(--normal);
+  letter-spacing: 0.1em;
+  color: var(--gray);
+  font-size: var(--font-s);
+  padding: 0 0 14px 0;
+  margin-right: 1.5em;
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+.filter-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: var(--black);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.filter-btn.active {
+  color: var(--black);
+}
+
+.filter-btn.active::after {
+  transform: scaleX(1);
+}
+
+.filter-btn:hover {
+  color: var(--black);
+}
+
+.filter-sub {
+  display: flex;
+  gap: 0;
+  padding: 14px 0 0 0;
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+  transition:
+    height   0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity  0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.4s;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.filter-sub::-webkit-scrollbar { display: none; }
+
+.filter-sub.is-open {
+  height: 42px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--gap-s);
+}
+
 .projects-item .thumbnail {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -798,38 +897,11 @@ body.is-index main {
   height: 100%;
   object-fit: cover;
   display: block;
-  transform-origin: center center;
-  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 0.6s ease;
 }
 
-/* ── ホバー: ズーム ── */
 .projects-item:hover .thumbnail img {
-  transform: scale(1.08) !important;
-}
-
-/* ── ホバー: overlay ── */
-.projects-item .thumbnail::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(16, 16, 16, 0.55) 0%,
-    rgba(16, 16, 16, 0.10) 45%,
-    transparent 100%
-  );
-  opacity: 0;
-  transition: opacity 0.45s ease;
-  pointer-events: none;
-}
-
-.projects-item:hover .thumbnail::after {
-  opacity: 1;
-}
-
-/* ── ホバー: info テキスト スライドアップ ── */
-.projects-item .info {
-  overflow: hidden;
+  transform: scale(1.1);
 }
 
 .projects-item .info p {
@@ -837,158 +909,18 @@ body.is-index main {
   color: var(--darkgray);
   margin: 0.5em 0 0 0;
   line-height: 1.5;
-  transform: translateY(4px);
-  transition: color 0.3s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.projects-item:hover .info p {
-  color: var(--black);
-  transform: translateY(0);
-}
-
-/* ── SP ── */
 @media (max-width: 900px) {
+  .filter-btn {
+    font-size: var(--font-n);
+  }
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--gap-xs);
   }
 }
 
-
-/* =========================
-  Filter Nav
-========================= */
- 
-.filter-nav {
-  margin: 0 auto var(--gap-s) auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
- 
-/* ── メイン: アンダーライン型 ── */
-.filter-main {
-  display: flex;
-  border-bottom: 0.5px solid var(--lightgray);
-  flex-wrap: wrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.filter-main::-webkit-scrollbar { display: none; }
- 
-.filter-btn {
-  flex-shrink: 0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  color: var(--gray);
-  font-size: var(--font-xs);
-  padding: 0 2em 1em 0;
-  position: relative;
-  transition: color 0.3s ease;
-  text-transform: uppercase;
-}
- 
-.filter-btn::after {
-  content: '';
-  position: absolute;
-  bottom: -0.5px;
-  left: 0;
-  right: 28px;
-  height: 1px;
-  background: var(--black);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
- 
-.filter-btn.active {
-  color: var(--black);
-}
- 
-.filter-btn.active::after {
-  transform: scaleX(1);
-}
- 
-.filter-btn:hover {
-  color: var(--black);
-}
- 
-/* ── サブ: 4B めくれ + フェード ── */
-.filter-sub {
-  overflow: hidden;
-  height: 0;
-}
- 
-.filter-sub .sub-row {
-  display: flex;
-  gap: 28px;
-  align-items: baseline;
-  padding-top: 16px;
-  flex-wrap: wrap;
-}
- 
-/* サブのボタンはメインの::afterを上書きして無効化 */
-.filter-sub .filter-btn {
-  font-size: var(--font-xs);
-  color: var(--gray);
-  padding: 0;
-  transform: translateY(110%);
-  opacity: 0;
-  transition:
-    color     0.3s ease,
-    font-size 0.3s ease,
-    letter-spacing 0.3s ease,
-    transform 0s,
-    opacity   0s;
-}
- 
-.filter-sub .filter-btn::after {
-  display: none;
-}
- 
-/* is-open: めくれ + フェード with stagger */
-.filter-sub.is-open .filter-btn {
-  transform: translateY(0);
-  opacity: 1;
-  transition:
-    color          0.3s ease,
-    font-size      0.3s ease,
-    letter-spacing 0.3s ease,
-    transform      0.65s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity        0.4s ease;
-}
- 
-.filter-sub.is-open .sub-row .filter-btn:nth-child(1) { transition-delay: 0.12s; }
-.filter-sub.is-open .sub-row .filter-btn:nth-child(2) { transition-delay: 0.21s; }
-.filter-sub.is-open .sub-row .filter-btn:nth-child(3) { transition-delay: 0.30s; }
-.filter-sub.is-open .sub-row .filter-btn:nth-child(4) { transition-delay: 0.39s; }
- 
-/* サブのアクティブ: size shift */
-.filter-sub .filter-btn.active {
-  color: var(--black);
-  font-size: 12px;
-  letter-spacing: 0.12em;
-}
- 
-.filter-sub .filter-btn:hover {
-  color: var(--darkgray);
-}
- 
-@media (max-width: 900px) {
-  .filter-btn {
-    font-size: 10px;
-    padding: 0 20px 12px 0;
-  }
-  .filter-sub .filter-btn {
-    font-size: 9px;
-  }
-  .filter-sub .filter-btn.active {
-    font-size: 11px;
-  }
-}
 
 /* =========================
   Projects - Detail
@@ -1168,7 +1100,7 @@ p.memo {
   color: var(--gray);
   opacity: 0.6;
   font-weight: var(--normal);
-  font-family: 'Wix Madefor Text', sans-serif;
+  font-family: 'Manrope', sans-serif;
 }
 
 .radio-group {
