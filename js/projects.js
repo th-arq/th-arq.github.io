@@ -26,8 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const img = item.querySelector('img');
 
     item.style.setProperty('--reveal-delay', `${delay}ms`);
-
-    // ① display:block でグリッドにスペース確保 & clip-path をリセット状態に
     item.style.display = 'block';
     item.classList.remove('is-show', 'is-exit');
 
@@ -36,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
       img.style.transform  = 'scale(1.12)';
     }
 
-    // ② ダブル rAF で paint を確定させてからアニメ開始
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         item.classList.add('is-show');
@@ -47,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
             img.style.transform  = 'scale(1.0)';
           }, 16);
 
-          // reveal 完了後はホバー用 transition に戻す
           setTimeout(() => {
             img.style.transition = '';
             img.style.transform  = '';
@@ -90,18 +86,44 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       items.forEach(item => {
         item.classList.remove('is-exit');
-        item.style.display = 'none';  // グリッドからトルツメ
+        item.style.display = 'none';
       });
       onComplete?.();
     }, EXIT_DURATION);
   };
 
   // ═══════════════════════════════════════════════
-  // 初期化: 全アイテムを hidden 状態に
+  // 初期化
   // ═══════════════════════════════════════════════
   projectItems.forEach(item => {
     item.style.display = 'none';
   });
+
+  // ═══════════════════════════════════════════════
+  // サブナビ開閉 (4B: めくれ + フェード)
+  // ═══════════════════════════════════════════════
+  const openSubNav = () => {
+    if (!subNav) return;
+    const row = subNav.querySelector('.sub-row');
+    if (!row) return;
+
+    // 高さを開く
+    subNav.style.transition = 'height 0.5s cubic-bezier(0.4,0,0.2,1)';
+    subNav.style.height     = (row.scrollHeight + 16) + 'px';
+
+    // 少し遅れてめくれ+フェード発火
+    setTimeout(() => subNav.classList.add('is-open'), 20);
+  };
+
+  const closeSubNav = () => {
+    if (!subNav) return;
+    subNav.classList.remove('is-open');
+
+    setTimeout(() => {
+      subNav.style.transition = 'height 0.4s cubic-bezier(0.4,0,0.2,1)';
+      subNav.style.height     = '0px';
+    }, 20);
+  };
 
   // ═══════════════════════════════════════════════
   // フィルター適用
@@ -148,9 +170,9 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
 
       if (filterValue === 'residential' || SUB_FILTERS.has(filterValue)) {
-        subNav?.classList.add('is-open');
+        openSubNav();
       } else {
-        subNav?.classList.remove('is-open');
+        closeSubNav();
       }
 
       applyFilter(filterValue);
