@@ -699,7 +699,7 @@ body.is-index main {
 /* =========================
   About
 ========================= */
-.about-page h1, .about-page h2, .about-page h3, .about-page p, .affiliations {
+ .about-page h3, .about-page p, .affiliations {
   margin: 0 auto var(--gap-xs) auto;
 }
 
@@ -764,13 +764,6 @@ body.is-index main {
   margin: 0 0 var(--gap-xs) 0;
 }
 
-.summary-p {
-  font-size: var(--font-s);
-  color: var(--darkgray);
-  line-height: 1.9;
-  margin: 0;
-}
-
 .wipe-line {
   display: block;
   overflow: hidden;
@@ -815,19 +808,11 @@ body.is-index main {
 }
 
 .services-card-body {
-  padding: 16px 4px 0;
-}
-
-.services-card-title {
-  margin: 0 0 6px 0;
+  padding: 0.5em 0 1em 0;
 }
 
 .services-card-desc {
   font-size: var(--font-xs);
-  font-weight: var(--normal);
-  color: var(--darkgray);
-  line-height: 1.6;
-  margin: 0;
 }
 
 .services-card:nth-child(1) { transition-delay: 0s; }
@@ -1422,7 +1407,7 @@ p.memo {
 .review-quote {
   font-size: var(--font-s);
   font-weight: var(--normal);
-  color: var(--darkgray);
+  color: var(--black);
   line-height: 1.9;
   margin: 0;
 }
@@ -1461,8 +1446,6 @@ p.memo {
 
 .review-b .review-quote {
   font-size: var(--font-m);
-  color: var(--black);
-  line-height: 1.7;
 }
 
 .review-c {
