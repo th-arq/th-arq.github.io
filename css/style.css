@@ -16,6 +16,7 @@ body {
   font-family: 'Wix Madefor Text', sans-serif;
   font-weight: 300;
   line-height: 1.6;
+  letter-spacing: 0.2em;
   word-break: break-word;
   margin: auto;
   width: 100%;
@@ -29,7 +30,7 @@ body {
   --font-m: 32px;
   --font-n: 20px;
   --font-s: 18px;
-  --font-xs: 16px;
+  --font-xs: 14px;
   --bold: 450;
   --normal: 300;
   --black: #101010;
@@ -883,11 +884,9 @@ body.is-index main {
   border: none;
   cursor: pointer;
   font-family: inherit;
-  font-weight: var(--normal);
-  letter-spacing: 0.2em;
   color: var(--gray);
-  font-size: 11px;
-  padding: 0 28px 14px 0;
+  font-size: var(--font-xs);
+  padding: 0 2em 1em 0;
   position: relative;
   transition: color 0.3s ease;
   text-transform: uppercase;
@@ -934,8 +933,7 @@ body.is-index main {
  
 /* サブのボタンはメインの::afterを上書きして無効化 */
 .filter-sub .filter-btn {
-  font-size: 10px;
-  letter-spacing: 0.14em;
+  font-size: var(--font-xs);
   color: var(--gray);
   padding: 0;
   transform: translateY(110%);
