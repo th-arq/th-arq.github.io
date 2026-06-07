@@ -36,12 +36,14 @@ window.addEventListener("load", () => {
     }
   }, 20);
 
-  setTimeout(() => { targetProgress = 100; }, 3000);
+  // 4秒フォールバック
+  setTimeout(() => { targetProgress = 100; }, 4000);
 
 
   function exitLoading() {
     if (!loading) return;
 
+    // ローディング白地が上へスライド退場
     loading.style.transition = 'transform 0.85s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.4s ease 0.55s';
     loading.style.transform  = 'translateY(-100%)';
     loading.style.opacity    = '0';
@@ -51,14 +53,16 @@ window.addEventListener("load", () => {
       loading.style.transform = '';
     }, 1050);
 
+    // ヘッダー
     setTimeout(() => {
       document.querySelector('.fade-logo')?.classList.add('show');
       document.querySelector('.fade-menu')?.classList.add('show');
-    }, 600);
+    }, 700);
 
+    // ローディング退場後、もう一呼吸おいてからギャラリー起動
     setTimeout(() => {
       initGallery();
-    }, 1200);
+    }, 1600);
   }
 });
 
@@ -67,17 +71,7 @@ function initGallery() {
   const items = Array.from(document.querySelectorAll('.gallery-item'));
   if (!items.length) return;
 
-  // ── 全アイテムの img を reveal 前の状態にリセット ──
-  // CSSの競合を避けるため、JS側で初期スケールを設定する
-  items.forEach(item => {
-    const img = item.querySelector('img');
-    if (img) {
-      // clip-path が開く前の状態: 大きく拡大しておく
-      img.style.transform  = 'scale(1.15)';
-      img.style.transition = 'none'; // まだ transition させない
-    }
-  });
-
+  // IntersectionObserver — フレームインしたら発火
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -93,7 +87,7 @@ function initGallery() {
 
   items.forEach(item => io.observe(item));
 
-  // フォールバック: 登録直後に画面内アイテムを強制チェック
+  // フォールバック: 画面内アイテムを強制チェック
   setTimeout(() => {
     items.forEach(item => {
       if (item.dataset.revealed) return;
@@ -111,31 +105,32 @@ function revealItem(item) {
   item.dataset.revealed = '1';
 
   const img   = item.querySelector('img');
-  const delay = Math.random() * 180; // アイテムごとにほんの少しずらす
+  const delay = Math.random() * 200;
 
   const doReveal = () => {
     setTimeout(() => {
 
-      // ① clip-path: 下から上へ幕が開く (Vamtam: vamtam-grow-bottom と同じ方向)
-      item.style.transition = 'clip-path 1.4s cubic-bezier(0, 0.55, 0.45, 1)';
+      // clip-path: ゆっくり幕が開く
+      item.style.transition = 'clip-path 2.6s cubic-bezier(0.16, 1, 0.3, 1)';
       item.style.clipPath   = 'inset(0 0 0% 0)';
 
+      // ケンバーンズ: clip-path開始から少し遅れてゆっくり引く
       if (img) {
-        // ② ケンバーンズ: clip-path と同時に拡大→等倍へゆっくり縮む
-        //    transition を有効にしてから scale(1) にする
-        img.style.transition = 'transform 1.4s cubic-bezier(0, 0.55, 0.45, 1)';
-        img.style.transform  = 'scale(1)';
-
-        // ③ reveal 完了後: ホバー用の transition に切り替える
-        //    （ホバーで scale(1.06) するため 2s の遅い transition に戻す）
         setTimeout(() => {
-          img.style.transition = 'transform 2s cubic-bezier(0.25, 1, 0.5, 1)';
-        }, 1450);
+          img.style.transition = 'transform 10s cubic-bezier(0.16, 1, 0.3, 1)';
+          img.style.transform  = 'scale(1.0)';
+        }, 400);
+
+        // reveal完了後はホバー用transitionに戻す
+        setTimeout(() => {
+          img.style.transition = 'transform 0.7s cubic-bezier(0.25, 1, 0.5, 1)';
+        }, 11000);
       }
 
     }, delay);
   };
 
+  // 画像ロード済みならすぐ、未ロードなら待ってから発火
   if (!img || (img.complete && img.naturalWidth > 0)) {
     doReveal();
   } else {
