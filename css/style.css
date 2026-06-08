@@ -84,18 +84,15 @@ main.appeared, .fade-logo.show, .fade-menu.show {
   transform: translateY(0);
 }
 
-/* is-index の main は loading退場後すぐ見えている状態にする */
 body.is-index main {
   opacity: 1;
   transform: none;
 }
 
-/* ヘッダーの初期状態 — is-index 以外 */
 body:not(.is-index) #header header {
   opacity: 0;
 }
 
-/* reveal（詳細ページ: image-wrapper, related-item）*/
 .image-wrapper.reveal,
 .related-item.reveal {
   clip-path: inset(0 0 100% 0);
@@ -195,9 +192,9 @@ header {
   z-index: 1000;
   transition: opacity 0.4s ease, background 0.4s ease, backdrop-filter 0.4s ease;
   opacity: 1;
-  overflow: hidden;
+  overflow: visible; /* hidden → visible: sp-nav が header に隠れるのを防ぐ */
 }
- 
+
 .header-sweep {
   position: absolute;
   inset: 0;
@@ -210,37 +207,37 @@ header {
   transform: translateX(-110%);
   pointer-events: none;
   z-index: 1;
+  clip-path: inset(0); /* overflow: hidden の代替 */
 }
- 
+
 .header-sweep.sweep {
   transition: transform 1.1s cubic-bezier(0.25, 1, 0.5, 1);
   transform: translateX(110%);
 }
- 
+
 header.is-scrolled {
   opacity: 0.5;
   background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
- 
+
 header.is-scrolled:hover {
   opacity: 1;
   background-color: rgba(255, 255, 255, 0.97);
 }
- 
+
 .TAG_logo img {
   height: 24px;
   display: block;
 }
- 
+
 .header-right {
   display: flex;
   align-items: center;
   z-index: 1000;
 }
- 
-/* ── メニューリスト ── */
+
 #menu ul {
   display: flex;
   align-items: center;
@@ -249,12 +246,11 @@ header.is-scrolled:hover {
   padding: 0;
   margin: 0;
 }
- 
-/* ── 各liをwrapとして使う（めくれアニメ用） ── */
+
 #menu li {
   overflow: hidden;
 }
- 
+
 #menu a {
   display: block;
   font-size: 11px;
@@ -266,8 +262,7 @@ header.is-scrolled:hover {
   transform: translateY(110%);
   transition: color 0.3s ease, transform 0s;
 }
- 
-/* アンダーライン */
+
 #menu a::after {
   content: '';
   position: absolute;
@@ -280,11 +275,10 @@ header.is-scrolled:hover {
   transform-origin: left;
   transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
- 
+
 #menu a:hover { color: var(--black); }
 #menu a:hover::after { transform: scaleX(1); }
- 
-/* ── .show でめくれ登場 (stagger) ── */
+
 .fade-menu.show #menu li:nth-child(1) a {
   transform: translateY(0);
   transition: color 0.3s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.05s;
@@ -301,8 +295,7 @@ header.is-scrolled:hover {
   transform: translateY(0);
   transition: color 0.3s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.29s;
 }
- 
-/* ── Contact ボタン ── */
+
 .contact-btn {
   font-size: 10px !important;
   letter-spacing: 0.18em !important;
@@ -312,48 +305,45 @@ header.is-scrolled:hover {
   border: 1px solid var(--black);
   transition: background 0.35s ease, color 0.35s ease !important;
 }
- 
+
 .contact-btn::after {
   display: none !important;
 }
- 
+
 .contact-btn:hover {
   background: transparent !important;
   color: var(--black) !important;
 }
- 
-/* ── ホバー時: 他リンクをgray fade ── */
+
 #menu ul:hover a:not(:hover) {
   color: var(--lightgray);
 }
- 
-/* ── ロゴも同じめくれ ── */
+
 .fade-logo {
   overflow: hidden;
 }
- 
+
 .fade-logo img {
   transform: translateY(110%);
   transition: transform 0s;
 }
- 
+
 .fade-logo.show img {
   transform: translateY(0);
   transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0s;
 }
- 
-/* ── fade-menu 自体のopacity/transform は不要になるので無効化 ── */
+
 .fade-menu {
   opacity: 1 !important;
   transform: none !important;
 }
- 
+
 @media (min-width: 901px) {
   .sp-nav, .burger-btn {
     display: none !important;
   }
 }
- 
+
 
 /* =========================
   Header SP
@@ -413,7 +403,7 @@ header.is-scrolled:hover {
     transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
                 opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
                 visibility 0.6s;
-    z-index: 999;
+    z-index: 1001; /* 999 → 1001: header(1000)より前面に */
     overflow-y: auto;
   }
 
@@ -574,7 +564,6 @@ body.is-index main {
   }
 }
 
-/* gallery-item: 最初から隠す。リビールはJSで制御 */
 .gallery-item {
   display: block;
   break-inside: avoid;
@@ -587,7 +576,6 @@ body.is-index main {
 }
 
 .gallery-item img {
-  /* 初期scale/transitionはJS(revealItem)で制御 */
   display: block;
   width: 100%;
   height: auto;
@@ -598,7 +586,6 @@ body.is-index main {
   display: block;
   width: 100%;
   height: auto;
-  /* hover時のscaleはここで定義。初期scale(1.12)はJSで付与 */
   transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -699,7 +686,7 @@ body.is-index main {
 /* =========================
   About
 ========================= */
- .about-page h3, .about-page p, .affiliations {
+.about-page h3, .about-page p, .affiliations {
   margin: 0 auto var(--gap-xs) auto;
 }
 
@@ -867,144 +854,6 @@ body.is-index main {
   pointer-events: none;
 }
 
-
-/* =========================
-  Filter Nav
-========================= */
-.filter-nav {
-  margin: 0 auto var(--gap-s) auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
- 
-/* ── メイン: アンダーライン型 ── */
-.filter-main {
-  display: flex;
-  border-bottom: 0.5px solid var(--lightgray);
-  flex-wrap: wrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.filter-main::-webkit-scrollbar { display: none; }
- 
-.filter-btn {
-  flex-shrink: 0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  font-weight: var(--normal);
-  letter-spacing: 0.2em;
-  color: var(--gray);
-  font-size: 11px;
-  padding: 0 28px 14px 0;
-  position: relative;
-  transition: color 0.3s ease;
-  text-transform: uppercase;
-}
- 
-.filter-btn::after {
-  content: '';
-  position: absolute;
-  bottom: -0.5px;
-  left: 0;
-  right: 28px;
-  height: 1px;
-  background: var(--black);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
- 
-.filter-btn.active {
-  color: var(--black);
-}
- 
-.filter-btn.active::after {
-  transform: scaleX(1);
-}
- 
-.filter-btn:hover {
-  color: var(--black);
-}
- 
-/* ── サブ: 4B めくれ + フェード ── */
-.filter-sub {
-  overflow: hidden;
-  height: 0;
-}
- 
-.filter-sub .sub-row {
-  display: flex;
-  gap: 28px;
-  align-items: baseline;
-  padding-top: 16px;
-  flex-wrap: wrap;
-}
- 
-/* サブのボタンはメインの::afterを上書きして無効化 */
-.filter-sub .filter-btn {
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  color: var(--gray);
-  padding: 0;
-  transform: translateY(110%);
-  opacity: 0;
-  transition:
-    color     0.3s ease,
-    font-size 0.3s ease,
-    letter-spacing 0.3s ease,
-    transform 0s,
-    opacity   0s;
-}
- 
-.filter-sub .filter-btn::after {
-  display: none;
-}
- 
-/* is-open: めくれ + フェード with stagger */
-.filter-sub.is-open .filter-btn {
-  transform: translateY(0);
-  opacity: 1;
-  transition:
-    color          0.3s ease,
-    font-size      0.3s ease,
-    letter-spacing 0.3s ease,
-    transform      0.65s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity        0.4s ease;
-}
- 
-.filter-sub.is-open .sub-row .filter-btn:nth-child(1) { transition-delay: 0.12s; }
-.filter-sub.is-open .sub-row .filter-btn:nth-child(2) { transition-delay: 0.21s; }
-.filter-sub.is-open .sub-row .filter-btn:nth-child(3) { transition-delay: 0.30s; }
-.filter-sub.is-open .sub-row .filter-btn:nth-child(4) { transition-delay: 0.39s; }
- 
-/* サブのアクティブ: size shift */
-.filter-sub .filter-btn.active {
-  color: var(--black);
-  font-size: 12px;
-  letter-spacing: 0.12em;
-}
- 
-.filter-sub .filter-btn:hover {
-  color: var(--darkgray);
-}
- 
-@media (max-width: 900px) {
-  .filter-btn {
-    font-size: 10px;
-    padding: 0 20px 12px 0;
-  }
-  .filter-sub .filter-btn {
-    font-size: 9px;
-  }
-  .filter-sub .filter-btn.active {
-    font-size: 11px;
-  }
-}
-
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -1037,7 +886,144 @@ body.is-index main {
   line-height: 1.5;
 }
 
+@media (max-width: 900px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr); /* 5列 → 2列 */
+  }
+}
 
+
+/* =========================
+  Filter Nav
+========================= */
+.filter-nav {
+  margin: 0 auto var(--gap-s) auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.filter-main {
+  display: flex;
+  border-bottom: 0.5px solid var(--lightgray);
+  flex-wrap: wrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.filter-main::-webkit-scrollbar { display: none; }
+
+.filter-btn {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: var(--normal);
+  letter-spacing: 0.2em;
+  color: var(--gray);
+  font-size: 11px;
+  padding: 0 28px 14px 0;
+  position: relative;
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+}
+
+.filter-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5px;
+  left: 0;
+  right: 28px;
+  height: 1px;
+  background: var(--black);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.filter-btn.active {
+  color: var(--black);
+}
+
+.filter-btn.active::after {
+  transform: scaleX(1);
+}
+
+.filter-btn:hover {
+  color: var(--black);
+}
+
+.filter-sub {
+  overflow: hidden;
+  height: 0;
+}
+
+.filter-sub .sub-row {
+  display: flex;
+  gap: 28px;
+  align-items: baseline;
+  padding-top: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-sub .filter-btn {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--gray);
+  padding: 0;
+  transform: translateY(110%);
+  opacity: 0;
+  transition:
+    color     0.3s ease,
+    font-size 0.3s ease,
+    letter-spacing 0.3s ease,
+    transform 0s,
+    opacity   0s;
+}
+
+.filter-sub .filter-btn::after {
+  display: none;
+}
+
+.filter-sub.is-open .filter-btn {
+  transform: translateY(0);
+  opacity: 1;
+  transition:
+    color          0.3s ease,
+    font-size      0.3s ease,
+    letter-spacing 0.3s ease,
+    transform      0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity        0.4s ease;
+}
+
+.filter-sub.is-open .sub-row .filter-btn:nth-child(1) { transition-delay: 0.12s; }
+.filter-sub.is-open .sub-row .filter-btn:nth-child(2) { transition-delay: 0.21s; }
+.filter-sub.is-open .sub-row .filter-btn:nth-child(3) { transition-delay: 0.30s; }
+.filter-sub.is-open .sub-row .filter-btn:nth-child(4) { transition-delay: 0.39s; }
+
+.filter-sub .filter-btn.active {
+  color: var(--black);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
+
+.filter-sub .filter-btn:hover {
+  color: var(--darkgray);
+}
+
+@media (max-width: 900px) {
+  .filter-btn {
+    font-size: 10px;
+    padding: 0 20px 12px 0;
+  }
+  .filter-sub .filter-btn {
+    font-size: 9px;
+  }
+  .filter-sub .filter-btn.active {
+    font-size: 11px;
+  }
+}
 
 
 /* =========================
