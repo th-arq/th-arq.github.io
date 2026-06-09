@@ -1631,6 +1631,80 @@ p.memo {
   }
 }
 
+/* =========================
+  Before / After Slider
+========================= */
+.ba-slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  cursor: ew-resize;
+  user-select: none;
+  margin-bottom: clamp(24px, 4vw, 40px);
+}
+
+.ba-slider .ba-before,
+.ba-slider .ba-after {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.ba-slider .ba-after {
+  clip-path: inset(0 50% 0 0);
+}
+
+.ba-slider .ba-line {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--white);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.ba-slider .ba-handle {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 36px; height: 36px;
+  background: var(--white);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.ba-slider .ba-handle svg {
+  width: 16px; height: 16px;
+}
+
+.ba-slider .ba-tag {
+  position: absolute;
+  bottom: 12px;
+  font-size: 10px;
+  font-weight: var(--bold);
+  letter-spacing: 0.12em;
+  padding: 3px 9px;
+  pointer-events: none;
+}
+
+.ba-slider .ba-tag.b {
+  left: 12px;
+  background: rgba(0,0,0,0.45);
+  color: var(--white);
+}
+
+.ba-slider .ba-tag.a {
+  right: 12px;
+  background: var(--white);
+  color: var(--black);
+}
+
 
 /* =========================
   Privacy Policy
