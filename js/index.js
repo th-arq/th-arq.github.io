@@ -9,7 +9,6 @@ window.addEventListener("load", () => {
   let progress    = 0;
 
   const onAllLoaded = () => {
-    // 全画像ロード完了 → パーセントを100まで走らせてから退場
     const finish = setInterval(() => {
       if (progress < 100) progress++;
       if (percentEl) percentEl.textContent = progress + '%';
@@ -39,7 +38,6 @@ window.addEventListener("load", () => {
     });
   }
 
-  // 8秒フォールバック（重い画像でも必ず進む）
   setTimeout(() => {
     if (loadedCount < allImages.length) {
       loadedCount = allImages.length;
@@ -65,33 +63,73 @@ window.addEventListener("load", () => {
       document.querySelector('.fade-menu')?.classList.add('show');
     }, 700);
 
-    // 退場後、一呼吸おいてから一斉発火
     setTimeout(() => {
+      // SP時のみDレイアウトに組み替え
+      if (window.innerWidth <= 900) shuffleAndBuildD();
       initGallery();
     }, 1400);
   }
 });
 
 
+/* ----------------------------------------
+  SP用: シャッフル → フル+ペア交互に組み替え
+---------------------------------------- */
+function shuffleAndBuildD() {
+  const grid  = document.getElementById('galleryGrid');
+  if (!grid) return;
+
+  const items = Array.from(grid.querySelectorAll('.gallery-item'));
+
+  // Fisher–Yates シャッフル
+  for (let i = items.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [items[i], items[j]] = [items[j], items[i]];
+  }
+
+  // DOMを空にして再構築
+  grid.innerHTML = '';
+
+  let idx = 0;
+  while (idx < items.length) {
+    // フル幅
+    if (idx < items.length) {
+      const full = items[idx++];
+      full.classList.add('d-full');
+      grid.appendChild(full);
+    }
+    // ペア（2枚）
+    if (idx < items.length) {
+      const pair = document.createElement('div');
+      pair.className = 'd-pair';
+      const a = items[idx++];
+      pair.appendChild(a);
+      if (idx < items.length) {
+        const b = items[idx++];
+        pair.appendChild(b);
+      }
+      grid.appendChild(pair);
+    }
+  }
+}
+
+
+/* ----------------------------------------
+  reveal & ケンバーンズ（変更なし）
+---------------------------------------- */
 function initGallery() {
   const items = Array.from(document.querySelectorAll('.gallery-item'));
   if (!items.length) return;
 
-  // 全画像ロード済みなので、画面内アイテムを一斉にstagger発火
   const cols = getColumns();
 
   items.forEach((item, i) => {
     const col   = i % cols;
     const row   = Math.floor(i / cols);
-    // 列・行ベースの規則的なstagger（ランダムより揃って見える）
     const delay = col * 80 + row * 50;
-
-    setTimeout(() => {
-      revealItem(item);
-    }, delay);
+    setTimeout(() => { revealItem(item); }, delay);
   });
 
-  // スクロール先（画面外）はObserverで発火
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -100,10 +138,7 @@ function initGallery() {
       revealItem(el);
       io.unobserve(el);
     });
-  }, {
-    rootMargin: '0px 0px 0px 0px',
-    threshold: 0,
-  });
+  }, { rootMargin: '0px 0px 0px 0px', threshold: 0 });
 
   items.forEach(item => {
     if (!item.dataset.revealed) io.observe(item);
@@ -117,18 +152,15 @@ function revealItem(item) {
 
   const img = item.querySelector('img');
 
-  // clip-path: ゆっくり幕が開く
   item.style.transition = 'clip-path 2.8s cubic-bezier(0.16, 1, 0.3, 1)';
   item.style.clipPath   = 'inset(0 0 0% 0)';
 
-  // ケンバーンズ: clip-path開始から少し遅れてゆっくり引く
   if (img) {
     setTimeout(() => {
       img.style.transition = 'transform 10s cubic-bezier(0.16, 1, 0.3, 1)';
       img.style.transform  = 'scale(1.0)';
     }, 300);
 
-    // reveal完了後はホバー用transitionに戻す
     setTimeout(() => {
       img.style.transition = 'transform 0.7s cubic-bezier(0.25, 1, 0.5, 1)';
     }, 11000);
@@ -137,7 +169,9 @@ function revealItem(item) {
 
 
 function getColumns() {
-  const grid = document.querySelector('.gallery-grid');
+  // SP時はDレイアウトなので列数計算は不要（stagger用に便宜上1返す）
+  if (window.innerWidth <= 900) return 1;
+  const grid = document.querySelector('.gallery-grid, .gallery-d');
   if (!grid) return 3;
   return parseInt(window.getComputedStyle(grid).columnCount, 10) || 3;
 }
