@@ -22,6 +22,12 @@ window.addEventListener('load', () => {
   // ═══════════════════════════════════════════════
   const isIndex = document.body.classList.contains('is-index');
 
+  const closeMenu = (headerTag) => {
+    headerTag.classList.remove('nav-open');
+    document.body.classList.remove('nav-open');
+    document.body.style.overflow = '';
+  };
+
   const loadParts = (id, path) => {
     fetch(path)
       .then(res => res.text())
@@ -49,6 +55,7 @@ window.addEventListener('load', () => {
             burgerBtn.addEventListener('click', (e) => {
               e.preventDefault();
               headerTag.classList.add('nav-open');
+              document.body.classList.add('nav-open');
               document.body.style.overflow = 'hidden';
             });
           }
@@ -56,10 +63,13 @@ window.addEventListener('load', () => {
           // ✕ボタン: メニューを閉じる
           const closeBtn = el.querySelector('.sp-nav-close');
           if (closeBtn) {
-            closeBtn.addEventListener('click', () => {
-              headerTag.classList.remove('nav-open');
-              document.body.style.overflow = '';
-            });
+            closeBtn.addEventListener('click', () => closeMenu(headerTag));
+          }
+
+          // オーバーレイクリックで閉じる
+          const overlay = document.querySelector('.nav-overlay');
+          if (overlay) {
+            overlay.addEventListener('click', () => closeMenu(headerTag));
           }
 
           if (isIndex) return;
@@ -237,17 +247,15 @@ window.addEventListener('load', () => {
   }
 
 
-// ═══════════════════════════════════════════════
+  // ═══════════════════════════════════════════════
   // 7. Split Layout — content-box アニメーション
   //    h2/h3/h4 → wipe（下からめくれ上げ）
   //    p/ul/iframe → fade-up（ふわっと）
   // ═══════════════════════════════════════════════
-
   const splitContentBox = document.querySelectorAll('.split-layout .content-box');
 
   if (splitContentBox.length) {
 
-    // wipeラップ CSS を注入
     const wipeStyle = document.createElement('style');
     wipeStyle.textContent = `
       .split-layout .content-box .sc-wipe {
@@ -261,7 +269,6 @@ window.addEventListener('load', () => {
     `;
     document.head.appendChild(wipeStyle);
 
-    // h2/h3/h4 → wipeラップを動的生成
     document.querySelectorAll(
       '.split-layout .content-box h2, .split-layout .content-box h3, .split-layout .content-box h4'
     ).forEach(el => {
@@ -275,17 +282,14 @@ window.addEventListener('load', () => {
       el.appendChild(inner);
     });
 
-    // p / ul / iframe → 初期非表示
     document.querySelectorAll(
       '.split-layout .content-box p, .split-layout .content-box ul, .split-layout .content-box iframe'
     ).forEach(el => {
       el.style.cssText += 'opacity: 0; transform: translateY(12px); transition: none;';
     });
 
-    // 演出を起動する関数
     const fireSplitAnims = () => {
 
-      // h2/h3/h4 wipe Observer
       document.querySelectorAll('.split-layout .content-box .sc-wipe').forEach(el => {
         const inner = el.querySelector('.sc-wipe-inner');
         if (!inner) return;
@@ -300,7 +304,6 @@ window.addEventListener('load', () => {
         obs.observe(el);
       });
 
-      // p / ul / iframe fade-up Observer
       document.querySelectorAll(
         '.split-layout .content-box p, .split-layout .content-box ul, .split-layout .content-box iframe'
       ).forEach(el => {
@@ -320,7 +323,6 @@ window.addEventListener('load', () => {
 
     };
 
-    // main.appeared 待ち
     const mainEl = document.querySelector('main');
     if (!mainEl || mainEl.classList.contains('appeared')) {
       fireSplitAnims();
