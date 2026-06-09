@@ -24,12 +24,12 @@ body {
 :root {
   --side-padding: clamp(24px, 6vw, 80px);
   --header-height: 80px;
-  --font-xl: 60px;
-  --font-l: 42px;
-  --font-m: 32px;
-  --font-n: 20px;
-  --font-s: 18px;
-  --font-xs: 14px;
+  --font-xl: 48px;
+  --font-l: 32px;
+  --font-m: 24px;
+  --font-n: 18px;
+  --font-s: 14px;
+  --font-xs: 12px;
   --bold: 400;
   --normal: 300;
   --black: #101010;
@@ -253,7 +253,7 @@ header.is-scrolled:hover {
 
 #menu a {
   display: block;
-  font-size: 11px;
+  font-size: var(--font-xs);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gray);
