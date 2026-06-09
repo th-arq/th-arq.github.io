@@ -11,6 +11,7 @@ window.addEventListener('load', () => {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
+    window.__lenis = lenis;
     const raf = (time) => { lenis.raf(time); requestAnimationFrame(raf); };
     requestAnimationFrame(raf);
   };
@@ -49,7 +50,6 @@ window.addEventListener('load', () => {
             headerTag.classList.toggle('is-scrolled', window.scrollY > 50);
           });
 
-          // バーガーボタン: メニューを開く
           const burgerBtn = el.querySelector('.burger-btn');
           if (burgerBtn) {
             burgerBtn.addEventListener('click', (e) => {
@@ -60,13 +60,11 @@ window.addEventListener('load', () => {
             });
           }
 
-          // ✕ボタン: メニューを閉じる
           const closeBtn = el.querySelector('.sp-nav-close');
           if (closeBtn) {
             closeBtn.addEventListener('click', () => closeMenu(headerTag));
           }
 
-          // オーバーレイクリックで閉じる
           const overlay = document.querySelector('.nav-overlay');
           if (overlay) {
             overlay.addEventListener('click', () => closeMenu(headerTag));
@@ -100,6 +98,7 @@ window.addEventListener('load', () => {
           }, { threshold: 0.5 });
 
           footerObserver.observe(footerEl);
+          initScrollTopBtn();
         }
       });
   };
@@ -109,7 +108,34 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 3. Page Appearance — main ふわっと表示
+  // 3. Scroll Top Button
+  // ═══════════════════════════════════════════════
+  function initScrollTopBtn() {
+    const btn = document.getElementById('scrollTopBtn');
+    if (!btn) return;
+
+    const THRESHOLD = 400;
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > THRESHOLD) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    btn.addEventListener('click', () => {
+      if (window.__lenis) {
+        window.__lenis.scrollTo(0, { duration: 1.4 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
+
+
+  // ═══════════════════════════════════════════════
+  // 4. Page Appearance
   // ═══════════════════════════════════════════════
   if (!isIndex) {
     setTimeout(() => {
@@ -122,7 +148,7 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 4. Split Title — ① 左タイトル 下から上 wipe
+  // 5. Split Title
   // ═══════════════════════════════════════════════
   const titles = document.querySelectorAll('.split-layout .title');
 
@@ -168,7 +194,7 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 5. Split Title — is-active（スクロール連動カラー）
+  // 6. Split Title
   // ═══════════════════════════════════════════════
   const activeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -180,7 +206,7 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 6. Scroll Reveal — clip-path + ケンバーンズ
+  // 7. Scroll Reveal
   // ═══════════════════════════════════════════════
   const isProjectsPage = !!document.querySelector('.projects-grid, .projects-item');
 
@@ -248,9 +274,7 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 7. Split Layout — content-box アニメーション
-  //    h2/h3/h4 → wipe（下からめくれ上げ）
-  //    p/ul/iframe → fade-up（ふわっと）
+  // 8. Split Layout — content-box
   // ═══════════════════════════════════════════════
   const splitContentBox = document.querySelectorAll('.split-layout .content-box');
 
@@ -340,7 +364,7 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 8. FAQ Smooth Accordion
+  // 9. FAQ Smooth Accordion
   // ═══════════════════════════════════════════════
   document.querySelectorAll('.faq-item').forEach(item => {
     const summary = item.querySelector('.faq-question');
@@ -367,7 +391,7 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 9. Contact Form Ajax
+  // 10. Contact Form Ajax
   // ═══════════════════════════════════════════════
   const contactForm = document.querySelector('.contact-form');
   if (contactForm) {
