@@ -2,7 +2,7 @@
 
   if (!document.querySelector('.services-page')) return;
 
-  /* ── border-line CSS 注入 ── */
+
   const injectBorderCSS = () => {
     const style = document.createElement('style');
     style.textContent = `
@@ -40,7 +40,6 @@
   };
 
 
-  /* ── 初期状態セット ── */
   const setInitial = () => {
     document.querySelectorAll('.summary-h3').forEach(el => {
       el.style.opacity    = '0';
@@ -67,10 +66,9 @@
   };
 
 
-  /* ── 演出起動 ── */
   const fire = () => {
 
-    /* ① Summary ブロック */
+    /* Summary blocks */
     const summaryBlocks = [...document.querySelectorAll('.summary-block')];
 
     const summaryObserver = new IntersectionObserver((entries) => {
@@ -105,7 +103,7 @@
     summaryBlocks.forEach(b => summaryObserver.observe(b));
 
 
-    /* ② Services カード — 列ごとに時間差 clip-path */
+    /* Services cards */
     const cards = [...document.querySelectorAll('.services-card')];
 
     const cardObserver = new IntersectionObserver((entries) => {
@@ -146,7 +144,7 @@
     cards.forEach(c => cardObserver.observe(c));
 
 
-    /* ③ Reviews — 下からフェードアップ */
+    /* Reviews */
     const reviewItems = [...document.querySelectorAll('.review-item')];
 
     const reviewObserver = new IntersectionObserver((entries) => {
@@ -164,6 +162,47 @@
     }, { threshold: 0.12 });
 
     reviewItems.forEach(r => reviewObserver.observe(r));
+
+
+    /* ── Before / After Sliders ── */
+    document.querySelectorAll('.ba-slider').forEach(el => {
+      const before = el.dataset.before;
+      const after  = el.dataset.after;
+      if (!before || !after) return;
+
+      el.innerHTML = `
+        <div class="ba-before" style="background-image:url('${before}')"></div>
+        <div class="ba-after"  style="background-image:url('${after}')"></div>
+        <div class="ba-line"></div>
+        <div class="ba-handle">
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 4L2 10L7 16M13 4L18 10L13 16" stroke="#666" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="ba-tag b">BEFORE</span>
+        <span class="ba-tag a">AFTER</span>
+      `;
+
+      const afterEl = el.querySelector('.ba-after');
+      const line    = el.querySelector('.ba-line');
+      const handle  = el.querySelector('.ba-handle');
+      let drag = false;
+
+      function move(clientX) {
+        const rect = el.getBoundingClientRect();
+        const p = Math.min(Math.max((clientX - rect.left) / rect.width * 100, 1), 99);
+        afterEl.style.clipPath = `inset(0 ${100 - p}% 0 0)`;
+        line.style.left = handle.style.left = p + '%';
+      }
+
+      el.addEventListener('mousedown',  e => { drag = true; move(e.clientX); });
+      el.addEventListener('touchstart', e => { drag = true; move(e.touches[0].clientX); }, { passive: true });
+      window.addEventListener('mousemove',  e => { if (drag) move(e.clientX); });
+      window.addEventListener('touchmove',  e => { if (drag) move(e.touches[0].clientX); }, { passive: true });
+      window.addEventListener('mouseup',    () => drag = false);
+      window.addEventListener('touchend',   () => drag = false);
+    });
+
   };
 
 
