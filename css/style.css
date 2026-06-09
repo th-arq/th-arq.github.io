@@ -504,12 +504,6 @@ header.is-scrolled:hover {
     transition: background 0.5s ease;
   }
 
-  body.nav-open .nav-overlay {
-    background: rgba(0, 0, 0, 0.4);
-    pointer-events: auto;
-    z-index: 1;
-  }
-
   header.nav-open::before { display: none; }
   .fade-logo { opacity: 1 !important; transform: none !important; z-index: 1002; }
   #menu { display: none !important; }
@@ -689,6 +683,64 @@ body.is-index main {
 .gallery-grid {
   columns: 3;
   column-gap: clamp(8px, 1.2vw, 18px);
+}
+
+.gallery-d {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.2vw, 18px);
+}
+
+/* PC: 既存の3カラムmasonry風に見せる */
+@media (min-width: 901px) {
+  .gallery-d {
+    columns: 3;
+    column-gap: clamp(8px, 1.2vw, 18px);
+    display: block;
+  }
+
+  .gallery-d .gallery-item {
+    break-inside: avoid;
+    margin-bottom: clamp(8px, 1.2vw, 18px);
+  }
+
+  /* PC時はJS付与クラスを無視してすべてauto */
+  .gallery-d .gallery-item.d-full,
+  .gallery-d .gallery-item.d-pair-item {
+    width: 100%;
+    aspect-ratio: auto;
+  }
+}
+
+/* SP: JSがd-row単位でDOMを組み替え */
+@media (max-width: 900px) {
+  .gallery-d {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(6px, 2vw, 12px);
+  }
+
+  /* フル幅 */
+  .gallery-d .d-full img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+  }
+
+  /* ペア行 */
+  .gallery-d .d-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(6px, 2vw, 12px);
+  }
+
+  .gallery-d .d-pair .gallery-item img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+  }
 }
 
 @media (max-width: 900px) {
