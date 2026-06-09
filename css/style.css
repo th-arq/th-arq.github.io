@@ -1528,8 +1528,7 @@ p.memo {
 .review-item {
   display: grid;
   align-items: center;
-  gap: clamp(32px, 5vw, 72px);
-  padding: clamp(40px, 6vw, 80px) 0;
+  padding: var(--gap-s);
   border-top: 1px solid var(--lightgray);
 }
 
