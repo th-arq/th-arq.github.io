@@ -507,6 +507,7 @@ header.is-scrolled:hover {
   body.nav-open .nav-overlay {
     background: rgba(0, 0, 0, 0.4);
     pointer-events: auto;
+    z-index: 1;
   }
 
   header.nav-open::before { display: none; }
