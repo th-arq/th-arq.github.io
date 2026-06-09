@@ -791,7 +791,7 @@ body.is-index main {
 }
 
 .gallery-item .overlay-text {
-  color: #ffffff;
+  color: var(--white);
   font-family: 'Manrope', sans-serif;
   font-weight: 300;
   font-size: clamp(11px, 1.1vw, 15px);
@@ -1574,10 +1574,8 @@ p.memo {
 
 .review-quote {
   font-size: var(--font-s);
-  font-weight: var(--normal);
   color: var(--black);
   line-height: 1.9;
-  margin: 0;
 }
 
 .review-meta {
