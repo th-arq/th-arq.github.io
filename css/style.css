@@ -807,7 +807,7 @@ body.is-index main {
   overflow: visible !important;
   margin: var(--gap-m) 0 0 0;
   padding: var(--header-height) var(--side-padding);
-  font-size: var(--font-s);
+  font-size: var(--font-n);
 }
 
 .split-section {
