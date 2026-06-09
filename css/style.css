@@ -1104,12 +1104,10 @@ body.is-index main {
   background: none;
   border: none;
   cursor: pointer;
-  font-family: inherit;
-  font-weight: var(--normal);
   letter-spacing: 0.2em;
   color: var(--gray);
-  font-size: var(--font-xs);
-  padding: 0 28px 14px 0;
+  font-size: var(--font-s);
+  padding: 0 2em 0.5em 0;
   position: relative;
   transition: color 0.3s ease;
   text-transform: uppercase;
@@ -1190,8 +1188,6 @@ body.is-index main {
 
 .filter-sub .filter-btn.active {
   color: var(--black);
-  font-size: 12px;
-  letter-spacing: 0.12em;
 }
 
 .filter-sub .filter-btn:hover {
