@@ -674,6 +674,7 @@ body.is-index main {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   height: calc(100vh - var(--header-height));
+  height: calc(100dvh - var(--header-height)); /* モバイルアドレスバー対応 */
   padding: var(--gap-xs) var(--side-padding) var(--gap-m);
 }
 
@@ -787,10 +788,12 @@ body.is-index main {
 /* Right column */
 .index-hero-right {
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: 1fr 22vh;
   gap: 4px;
   padding: 0;
-  height: 100%;
+  /* ヒーローのpaddingぶんを引いた高さ */
+  height: calc(100vh - var(--header-height) - var(--gap-xs) - var(--gap-m));
+  height: calc(100dvh - var(--header-height) - var(--gap-xs) - var(--gap-m));
 }
 
 
@@ -880,7 +883,7 @@ body.is-index main {
   position: relative;
   overflow: hidden;
   border-radius: 2px;
-  aspect-ratio: 1 / 1;
+  height: 22vh;  /* 画面高さ基準で固定 */
   display: block;
   clip-path: inset(0 0 100% 0); /* JS でめくれる */
   will-change: clip-path;
@@ -1016,7 +1019,7 @@ body.is-index main {
   .index-hero {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
-    min-height: auto;
+    height: auto;
     padding: var(--gap-xs) 0 var(--gap-m);
   }
 
@@ -1027,6 +1030,7 @@ body.is-index main {
 
   .index-hero-right {
     grid-template-rows: auto auto;
+    height: auto;
     padding: 0 var(--side-padding);
     gap: 3px;
     order: 2;
@@ -1034,6 +1038,13 @@ body.is-index main {
 
   .index-slider {
     aspect-ratio: 4 / 3;
+    height: auto;
+  }
+
+  /* SP: ic-itemはaspect-ratioに戻す */
+  .ic-item {
+    height: auto;
+    aspect-ratio: 1 / 1;
   }
 
   .index-cats {
