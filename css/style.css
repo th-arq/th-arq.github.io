@@ -674,11 +674,11 @@ body.is-index main {
   display: grid;
   grid-template-columns: 1fr 1.1fr;
   min-height: calc(100vh - var(--header-height));
-  padding: 0 0 0 var(--side-padding);
+  padding: var(--gap-xs) var(--side-padding) var(--gap-m);
 }
 
 .index-hero-left {
-  padding: clamp(36px, 5vw, 64px) var(--gap-s) clamp(36px, 5vw, 64px) 0;
+  padding-right: var(--gap-s);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -693,11 +693,11 @@ body.is-index main {
 
 /* Location badge */
 .index-hero-loc {
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: clamp(16px, 2.5vw, 28px);
+  margin-bottom: clamp(20px, 3vw, 36px);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -718,7 +718,7 @@ body.is-index main {
 
 /* Headline */
 .index-hero-h1 {
-  font-size: clamp(32px, 4.5vw, 60px);
+  font-size: clamp(40px, 5.5vw, 72px);
   font-weight: 300;
   line-height: 1.05;
   letter-spacing: -0.025em;
@@ -743,27 +743,27 @@ body.is-index main {
 
 /* Sub */
 .index-hero-sub {
-  margin-top: clamp(12px, 1.8vw, 20px);
-  font-size: var(--font-s);
+  margin-top: clamp(16px, 2vw, 28px);
+  font-size: var(--font-n);
   font-weight: 300;
   line-height: 2.2;
   color: var(--gray);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   opacity: 0;
   transform: translateY(8px);
 }
 
 /* CTA */
 .index-hero-cta {
-  margin-top: clamp(24px, 3vw, 40px);
+  margin-top: clamp(32px, 4vw, 56px);
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 24px;
   opacity: 0; /* JS でふわっと */
 }
 
 .ihc-main {
-  font-size: 10px;
+  font-size: var(--font-xs);
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--black);
@@ -775,7 +775,7 @@ body.is-index main {
 .ihc-main:hover { opacity: 0.5; }
 
 .ihc-sub {
-  font-size: 10px;
+  font-size: var(--font-xs);
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--gray);
@@ -789,7 +789,7 @@ body.is-index main {
   display: grid;
   grid-template-rows: 1.8fr 1fr;
   gap: 4px;
-  padding: 12px 12px 12px 0;
+  padding: 0;
 }
 
 
@@ -1014,17 +1014,17 @@ body.is-index main {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
     min-height: auto;
-    padding: 0;
+    padding: var(--gap-xs) 0 var(--gap-m);
   }
 
   .index-hero-left {
-    padding: clamp(28px, 8vw, 48px) var(--side-padding);
+    padding: 0 var(--side-padding) var(--gap-s);
     order: 1;
   }
 
   .index-hero-right {
     grid-template-rows: auto auto;
-    padding: 0 var(--side-padding) 0;
+    padding: 0 var(--side-padding);
     gap: 3px;
     order: 2;
   }
