@@ -672,8 +672,8 @@ body.is-index main {
 /* Hero section */
 .index-hero {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  min-height: calc(100vh - var(--header-height));
+  grid-template-columns: 1fr 1.5fr;
+  height: calc(100vh - var(--header-height));
   padding: var(--gap-xs) var(--side-padding) var(--gap-m);
 }
 
@@ -787,9 +787,10 @@ body.is-index main {
 /* Right column */
 .index-hero-right {
   display: grid;
-  grid-template-rows: 1.8fr 1fr;
+  grid-template-rows: 1fr auto;
   gap: 4px;
   padding: 0;
+  height: 100%;
 }
 
 
@@ -800,6 +801,7 @@ body.is-index main {
   position: relative;
   overflow: hidden;
   border-radius: 2px;
+  min-height: 0; /* grid内でshrinkするために必要 */
 }
 
 .is-slide {
@@ -871,6 +873,7 @@ body.is-index main {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 4px;
+  flex-shrink: 0;
 }
 
 .ic-item {
