@@ -694,25 +694,14 @@ body.is-index main {
 
 /* Location badge */
 .index-hero-loc {
-  font-size: var(--font-xs);
+  font-size: var(--font-s);
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--accent);
   display: flex;
   align-items: center;
-  gap: 8px;
   opacity: 0;
   transform: translateY(8px);
-}
-
-.index-hero-loc::before {
-  content: '';
-  display: block;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex-shrink: 0;
 }
 
 /* Headline */
@@ -720,9 +709,8 @@ body.is-index main {
   font-size: clamp(40px, 5.5vw, 72px);
   font-weight: 300;
   line-height: 1.05;
-  letter-spacing: -0.025em;
   color: var(--black);
-  margin: 0;
+  margin: var(--gap-xs) 0;
 }
 
 .ih-line {
@@ -742,10 +730,7 @@ body.is-index main {
 
 /* Sub */
 .index-hero-sub {
-  margin-top: clamp(16px, 2vw, 28px);
-  font-size: var(--font-n);
-  font-weight: 300;
-  line-height: 2.2;
+  font-size: var(--font-s);
   color: var(--gray);
   letter-spacing: 0.08em;
   opacity: 0;
@@ -758,24 +743,21 @@ body.is-index main {
   display: flex;
   align-items: center;
   gap: 24px;
-  opacity: 0; /* JS でふわっと */
+  opacity: 0;
 }
 
 .ihc-main {
-  font-size: var(--font-xs);
-  letter-spacing: 0.22em;
+  font-size: var(--font-n);
   text-transform: uppercase;
   color: var(--black);
   border-bottom: 0.5px solid var(--black);
-  padding-bottom: 2px;
   transition: opacity 0.3s ease;
 }
 
 .ihc-main:hover { opacity: 0.5; }
 
 .ihc-sub {
-  font-size: var(--font-xs);
-  letter-spacing: 0.22em;
+  font-size: var(--font-n);
   text-transform: uppercase;
   color: var(--gray);
   transition: color 0.3s ease;
@@ -957,7 +939,6 @@ body.is-index main {
 }
 
 .it-quote em {
-  font-style: italic;
   color: var(--accent);
 }
 
