@@ -694,15 +694,13 @@ body.is-index main {
 
 /* Location badge */
 .index-hero-loc {
-  font-size: 11px;
+  font-size: var(--font-xs);
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: clamp(20px, 3vw, 36px);
   display: flex;
   align-items: center;
   gap: 8px;
-  /* JS で opacity/transform アニメ */
   opacity: 0;
   transform: translateY(8px);
 }
