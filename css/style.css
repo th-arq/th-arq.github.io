@@ -706,11 +706,11 @@ body.is-index main {
 
 /* Headline */
 .index-hero-h1 {
-  font-size: clamp(40px, 5.5vw, 72px);
+  font-size: clamp(40px, 6vw, 80px);
   font-weight: 300;
   line-height: 1.05;
   color: var(--black);
-  margin: var(--gap-xs) 0;
+  margin: var(--gap-s) 0;
 }
 
 .ih-line {
@@ -720,11 +720,11 @@ body.is-index main {
 
 .ih-line span {
   display: block;
-  transform: translateY(105%); /* JS で 0 へ */
+  transform: translateY(105%);
 }
 
 .index-hero-h1 em {
-  font-style: italic;
+  font-style: normal;
   color: var(--accent);
 }
 
@@ -732,7 +732,6 @@ body.is-index main {
 .index-hero-sub {
   font-size: var(--font-s);
   color: var(--gray);
-  letter-spacing: 0.08em;
   opacity: 0;
   transform: translateY(8px);
 }
@@ -815,8 +814,8 @@ body.is-index main {
   left: 0;
   right: 0;
   z-index: 10;
-  height: 1.5px;
-  background: rgba(255, 255, 255, 0.2);
+  height: 3px;
+  background: rgb(73 72 72 / 20%);
 }
 
 .is-progress-bar {
@@ -828,17 +827,17 @@ body.is-index main {
 /* Dots */
 .is-dots {
   position: absolute;
-  bottom: 12px;
+  bottom: var(--gap-s);
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
   display: flex;
-  gap: 6px;
+  gap: var(--gap-xs);
 }
 
 .isd {
-  width: 4px;
-  height: 4px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.3);
   transition: background 0.4s ease;
@@ -894,17 +893,13 @@ body.is-index main {
 
 .ic-num {
   display: block;
-  font-size: 9px;
-  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
-  margin-bottom: 3px;
+  color: var(--accent);
 }
 
 .ic-name {
   display: block;
-  font-size: clamp(9px, 1vw, 12px);
-  letter-spacing: 0.14em;
+  font-size: var(--font-xs);
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.92);
   font-weight: 400;
@@ -1357,7 +1352,7 @@ body.is-index main {
   letter-spacing: 0.2em;
   color: var(--gray);
   font-size: var(--font-s);
-  padding: 0 2em 0.5em 0;
+  padding: 0 2em var(--gap-xs) 0;
   position: relative;
   transition: color 0.3s ease;
   text-transform: uppercase;
@@ -1395,9 +1390,9 @@ body.is-index main {
 
 .filter-sub .sub-row {
   display: flex;
-  gap: 28px;
+  gap: var(--gap-s);
   align-items: baseline;
-  padding-top: 16px;
+  padding-top: var(--gap-xs);
   flex-wrap: wrap;
 }
 
@@ -1838,7 +1833,7 @@ p.memo {
 
 .review-city {
   font-size: var(--font-xs);
-  color: var(--gray);
+  color: var(--accent);
   letter-spacing: 0.05em;
 }
 
