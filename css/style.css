@@ -1182,15 +1182,6 @@ body.is-index main {
   margin: 0 0 var(--gap-xs) 0;
 }
 
-.wipe-line {
-  display: block;
-  overflow: hidden;
-}
-
-.wipe-inner {
-  display: block;
-}
-
 .services-grid {
   list-style: none;
   padding: 0;
@@ -1278,7 +1269,7 @@ body.is-index main {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--gap-s);
 }
 
