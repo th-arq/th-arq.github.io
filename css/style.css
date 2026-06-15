@@ -1250,15 +1250,6 @@ body.is-index main {
 /* =========================
   Projects
 ========================= */
-.projects-grid.is-breathing {
-  animation: grid-breathe 1.6s ease-in-out infinite;
-}
-
-@keyframes grid-breathe {
-  0%, 100% { opacity: 0.25; }
-  50%       { opacity: 0.6;  }
-}
-
 .projects-item {
   display: none;
   clip-path: inset(0 0 100% 0);
@@ -1837,39 +1828,19 @@ p.memo {
   letter-spacing: 0.05em;
 }
 
-.review-a {
-  grid-template-columns: clamp(100px, 14vw, 180px) 1fr;
-}
-.review-a .review-thumb {
-  aspect-ratio: 1 / 1;
-}
-.review-b {
+.review {
   grid-template-columns: 1fr;
 }
-.review-b .review-quote {
+.review .review-quote {
   font-size: var(--font-m);
 }
-.review-c {
-  grid-template-columns: 1fr clamp(160px, 24vw, 300px);
-}
-.review-c .review-thumb {
-  aspect-ratio: 3 / 4;
-}
+
 
 @media (max-width: 900px) {
-  .review-a,
-  .review-c {
-    grid-template-columns: 1fr;
-  }
-  .review-c .review-thumb {
-    order: -1;
-    aspect-ratio: 4 / 3;
-    width: 60%;
-  }
-  .review-b .review-body {
+  .review .review-body {
     padding: 0;
   }
-  .review-b .review-quote {
+  .review .review-quote {
     font-size: var(--font-n);
   }
 }
