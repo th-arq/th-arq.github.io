@@ -1,6 +1,20 @@
 window.addEventListener('load', () => {
 
   // ═══════════════════════════════════════════════
+  // 0. Utility
+  // ═══════════════════════════════════════════════
+  function waitForAppeared(cb) {
+    const main = document.querySelector('main');
+    if (!main || main.classList.contains('appeared')) { cb(); return; }
+    const obs = new MutationObserver((_, o) => {
+      if (main.classList.contains('appeared')) { o.disconnect(); cb(); }
+    });
+    obs.observe(main, { attributes: true, attributeFilter: ['class'] });
+    setTimeout(() => { obs.disconnect(); cb(); }, 2000);
+  }
+
+
+  // ═══════════════════════════════════════════════
   // 1. Lenis (Smooth Scroll)
   // ═══════════════════════════════════════════════
   const lenisScript = document.createElement('script');
@@ -117,11 +131,7 @@ window.addEventListener('load', () => {
     const THRESHOLD = 400;
 
     window.addEventListener('scroll', () => {
-      if (window.scrollY > THRESHOLD) {
-        btn.classList.add('visible');
-      } else {
-        btn.classList.remove('visible');
-      }
+      btn.classList.toggle('visible', window.scrollY > THRESHOLD);
     }, { passive: true });
 
     btn.addEventListener('click', () => {
@@ -148,7 +158,7 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 5. Split Title
+  // 5. Split Title — Wipe Reveal
   // ═══════════════════════════════════════════════
   const titles = document.querySelectorAll('.split-layout .title');
 
@@ -194,7 +204,7 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 6. Split Title
+  // 6. Split Title — Active State
   // ═══════════════════════════════════════════════
   const activeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -206,7 +216,7 @@ window.addEventListener('load', () => {
 
 
   // ═══════════════════════════════════════════════
-  // 7. Scroll Reveal
+  // 7. Scroll Reveal (.image-wrapper.reveal)
   // ═══════════════════════════════════════════════
   const isProjectsPage = !!document.querySelector('.projects-grid, .projects-item');
 
@@ -256,25 +266,13 @@ window.addEventListener('load', () => {
         setTimeout(checkReveal, 80);
       };
 
-      const mainEl = document.querySelector('main');
-      if (!mainEl || mainEl.classList.contains('appeared')) {
-        startReveal();
-      } else {
-        const obs = new MutationObserver((_, o) => {
-          if (mainEl.classList.contains('appeared')) {
-            o.disconnect();
-            startReveal();
-          }
-        });
-        obs.observe(mainEl, { attributes: true, attributeFilter: ['class'] });
-        setTimeout(() => { obs.disconnect(); startReveal(); }, 2000);
-      }
+      waitForAppeared(startReveal);
     }
   }
 
 
   // ═══════════════════════════════════════════════
-  // 8. Split Layout — content-box
+  // 8. Split Layout — content-box Animations
   // ═══════════════════════════════════════════════
   const splitContentBox = document.querySelectorAll('.split-layout .content-box');
 
@@ -306,9 +304,11 @@ window.addEventListener('load', () => {
       el.appendChild(inner);
     });
 
-    document.querySelectorAll(
+    const fadeEls = document.querySelectorAll(
       '.split-layout .content-box p, .split-layout .content-box ul, .split-layout .content-box iframe'
-    ).forEach(el => {
+    );
+
+    fadeEls.forEach(el => {
       el.style.cssText += 'opacity: 0; transform: translateY(12px); transition: none;';
     });
 
@@ -328,9 +328,7 @@ window.addEventListener('load', () => {
         obs.observe(el);
       });
 
-      document.querySelectorAll(
-        '.split-layout .content-box p, .split-layout .content-box ul, .split-layout .content-box iframe'
-      ).forEach(el => {
+      fadeEls.forEach(el => {
         const obs = new IntersectionObserver(entries => {
           entries.forEach(entry => {
             if (!entry.isIntersecting) return;
@@ -347,19 +345,7 @@ window.addEventListener('load', () => {
 
     };
 
-    const mainEl = document.querySelector('main');
-    if (!mainEl || mainEl.classList.contains('appeared')) {
-      fireSplitAnims();
-    } else {
-      const obs = new MutationObserver((_, o) => {
-        if (mainEl.classList.contains('appeared')) {
-          o.disconnect();
-          fireSplitAnims();
-        }
-      });
-      obs.observe(mainEl, { attributes: true, attributeFilter: ['class'] });
-      setTimeout(() => { obs.disconnect(); fireSplitAnims(); }, 2000);
-    }
+    waitForAppeared(fireSplitAnims);
   }
 
 
