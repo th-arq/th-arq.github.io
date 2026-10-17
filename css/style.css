@@ -1453,7 +1453,6 @@ body.is-index main {
 
 .map-wrap {
   position: relative;
-  border: 1px solid #e6e6e6;
   background: var(--white);
   overflow: hidden;
 }
