@@ -43,6 +43,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const FIT_BOUNDS = [[33.45, -118.65], [34.25, -117.30]];
   const MAX_BOUNDS = [[33.05, -119.40], [34.80, -116.60]];
 
+  // ベースマップの設定
+  //   mode 'vector' : タイル(地図画像)を使わず、GeoJSON から郡とフリーウェイを描く（APIキー不要・見た目を完全に制御できる）
+  //   mode 'tiles'  : CARTO のタイル地図（道路や地形が細かく出る）
+  //   vector モードで counties.geojson が見つからないときは、自動で tiles に切り替わる
+  const BASEMAP = {
+    mode: 'vector',
+    counties: '/data/counties.geojson',
+    freeways: '/data/freeways.geojson',   // 任意。なければフリーウェイなしで表示
+    tileUrl:  'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png'
+  };
+
   // ═══════════════════════════════════════════════
   // Utility: 表示列数を取得
   // ═══════════════════════════════════════════════
@@ -154,35 +165,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
     L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png?key=cb1_4nfg_1_b6d21c81da3e03f1389ec753', {
-      subdomains: 'abcd',
-      maxZoom: 19,
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> ' +
-        '&copy; <a href="https://carto.com/attributions">CARTO</a>'
-    }).addTo(map);
-
     map.fitBounds(FIT_BOUNDS);
 
-    // 郡境界（任意）: /data/counties.geojson があれば細い線で重ねる。なければ何もしない
-    fetch('/data/counties.geojson')
-      .then(res => (res.ok ? res.json() : null))
-      .then(geo => {
-        if (!geo) return;
+    // フリーウェイは郡より手前・ピンより奥
+    map.createPane('freeways');
+    map.getPane('freeways').style.zIndex = 410;
+    map.getPane('freeways').style.pointerEvents = 'none';
+
+    let tilesAdded = false;
+    const addTiles = () => {
+      if (tilesAdded) return;
+      tilesAdded = true;
+      L.tileLayer(BASEMAP.tileUrl, {
+        subdomains: 'abcd',
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> ' +
+          '&copy; <a href="https://carto.com/attributions">CARTO</a>'
+      }).addTo(map);
+    };
+
+    const loadVectorBase = async () => {
+      // 郡（陸地）— LA・オレンジ郡は濃いめ、周辺の郡は薄く破線
+      try {
+        const res = await fetch(BASEMAP.counties);
+        if (!res.ok) throw new Error('counties.geojson not found');
+        const geo = await res.json();
         const MAIN = new Set(['Los Angeles', 'Orange']);
         const isMain = f => MAIN.has(f.properties && f.properties.NAME);
         L.geoJSON(geo, {
           interactive: false,
-          style: f => ({
-            color: '#a5a4a2',
-            weight: isMain(f) ? 1 : 0.8,
-            opacity: isMain(f) ? 0.7 : 0.4,
-            dashArray: isMain(f) ? null : '3 4',
-            fill: false
-          })
+          style: f => isMain(f)
+            ? { fill: true, fillColor: '#e9e9e9', fillOpacity: 1, color: '#a5a4a2', weight: 0.8, opacity: 0.7 }
+            : { fill: true, fillColor: '#f8f8f8', fillOpacity: 1, color: '#a5a4a2', weight: 0.8, opacity: 0.45, dashArray: '3 4' }
         }).addTo(map);
-      })
-      .catch(() => {});
+      } catch (e) {
+        console.warn('[map] counties.geojson を読めなかったのでタイル地図に切り替えます', e);
+        addTiles();
+        return;
+      }
+
+      // フリーウェイ（白線）— 任意
+      try {
+        const res = await fetch(BASEMAP.freeways);
+        if (!res.ok) return;
+        const geo = await res.json();
+        L.geoJSON(geo, {
+          pane: 'freeways',
+          interactive: false,
+          style: { color: '#ffffff', weight: 2.2, opacity: 1, lineCap: 'round', lineJoin: 'round' }
+        }).addTo(map);
+      } catch (e) { /* フリーウェイなしで続行 */ }
+    };
+
+    if (BASEMAP.mode === 'tiles') addTiles();
+    else loadVectorBase();
 
     // 郡名ラベル
     REGION_LABELS.forEach(r => {
