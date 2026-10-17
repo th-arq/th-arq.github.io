@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const mapTitleText = document.getElementById('map-title-text');
   const mapHint   = document.getElementById('map-hint');
   const mapList   = document.getElementById('map-list');
-  const mapBack   = document.getElementById('map-back');
 
   if (!filterButtons.length || !projectItems.length) return;
 
@@ -193,11 +192,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const geo = await res.json();
         const MAIN = new Set(['Los Angeles', 'Orange']);
         const isMain = f => MAIN.has(f.properties && f.properties.NAME);
+        // 陸地の色は LAND を書き換えて調整、線の色はサイトの --white
+        const rootStyle = getComputedStyle(document.documentElement);
+        const LAND = '#dcdcdc';                                                   // 陸地（LA・OC・周辺すべて同じグレー）
+        const LINE = rootStyle.getPropertyValue('--white').trim() || '#ffffff';   // 境界線は白
         L.geoJSON(geo, {
           interactive: false,
-          style: f => isMain(f)
-            ? { fill: true, fillColor: '#e9e9e9', fillOpacity: 1, color: '#a5a4a2', weight: 0.8, opacity: 0.7 }
-            : { fill: true, fillColor: '#f2f2f2', fillOpacity: 1, color: '#a5a4a2', weight: 0.8, opacity: 0.45, dashArray: '3 4' }
+          style: f => ({
+            fill: true,
+            fillColor: LAND,          // LA・OC・周辺エリアすべて同じ色
+            fillOpacity: 1,
+            color: LINE,              // 境界線
+            weight: 0.8,
+            opacity: 1,
+            dashArray: isMain(f) ? null : '3 4'   // 周辺エリアだけ破線
+          })
         }).addTo(map);
       } catch (e) {
         console.warn('[map] counties.geojson を読めなかったのでタイル地図に切り替えます', e);
@@ -233,6 +242,9 @@ document.addEventListener('DOMContentLoaded', () => {
         })
       }).addTo(map);
     });
+
+    // 地図の空いているところをクリックで選択解除
+    map.on('click', () => clearSelection());
 
     // エリアピン
     AREAS.forEach(area => {
@@ -277,7 +289,6 @@ document.addEventListener('DOMContentLoaded', () => {
     mapTitle.classList.remove('is-in');
     mapTitleText.textContent = area.name.toUpperCase();
     mapHint.hidden = true;
-    mapBack.hidden = false;
 
     // 該当プロジェクトを複製してパネルへ
     mapList.innerHTML = '';
@@ -314,10 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mapTitle.hidden = true;
     mapList.innerHTML = '';
     mapHint.hidden = false;
-    mapBack.hidden = true;
   };
-
-  mapBack.addEventListener('click', clearSelection);
 
   // ═══════════════════════════════════════════════
   // マップビュー 表示 / 非表示
