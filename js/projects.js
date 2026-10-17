@@ -30,16 +30,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 郡名ラベル（地図上の文字）
   const REGION_LABELS = [
-    { text: 'LOS ANGELES',   lat: 34.20, lng: -118.10, main: true  },
+    { text: 'LOS ANGELES',   lat: 34.07, lng: -118.05, main: true  },
     { text: 'ORANGE',        lat: 33.80, lng: -117.62, main: true  },
     { text: 'VENTURA',       lat: 34.28, lng: -118.95, main: false },
-    { text: 'SAN BERNARDINO',lat: 34.20, lng: -117.40, main: false },
-    { text: 'RIVERSIDE',     lat: 33.78, lng: -117.30, main: false },
+    { text: 'SAN BERNARDINO',lat: 34.07, lng: -117.50, main: false },
+    { text: 'RIVERSIDE',     lat: 33.80, lng: -117.46, main: false },
     { text: 'SAN DIEGO',     lat: 33.25, lng: -117.25, main: false }
   ];
 
   // 地図の表示範囲（LA・オレンジ郡 + 車で行ける周辺だけ）
-  const FIT_BOUNDS = [[33.45, -118.65], [34.25, -117.30]];
+  const FIT_BOUNDS = [[33.50, -118.45], [34.12, -117.40]];
   const MAX_BOUNDS = [[33.05, -119.40], [34.80, -116.60]];
 
   // ベースマップの設定
