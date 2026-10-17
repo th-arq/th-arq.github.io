@@ -1453,6 +1453,7 @@ body.is-index main {
 
 .map-wrap {
   position: relative;
+  border: 1px solid #e6e6e6;
   background: var(--white);
   overflow: hidden;
 }
@@ -1479,6 +1480,7 @@ body.is-index main {
 
 .map-title span {
   display: block;
+  color: var(--accent);
   font-size: var(--font-m);
   font-weight: var(--normal);
   letter-spacing: 0.12em;
@@ -1491,8 +1493,7 @@ body.is-index main {
 
 .map-hint {
   margin: 0;
-  padding: 40px 0;
-  border-top: 0.5px solid var(--gray);
+  padding: 0;
   font-size: var(--font-xs);
   letter-spacing: 0.2em;
   color: var(--gray);
@@ -1506,23 +1507,6 @@ main .map-view .map-list {
   grid-template-columns: repeat(2, 1fr);
   gap: var(--gap-xs) 16px;
 }
-
-.map-back {
-  margin: 24px 0 0 0;
-  padding: 0 0 3px 0;
-  border: 0;
-  border-bottom: 0.5px solid var(--black);
-  background: none;
-  color: var(--black);
-  font-size: var(--font-xs);
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: opacity 0.3s ease;
-}
-
-.map-back[hidden] { display: none; }
-.map-back:hover { opacity: 0.5; }
 
 /* ── Legend (FREEWAY only) ─────────────── */
 .map-legend {
@@ -1600,14 +1584,13 @@ main .map-view .map-list {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
 }
 
 .map-pin .pin-dot {
   background: var(--black);
-  border: 2px solid var(--white);
   transform: translate(-50%, -50%) scale(1);
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
               background-color 0.35s ease;
