@@ -1,22 +1,56 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   const filterButtons = document.querySelectorAll('.filter-btn');
-  const projectItems  = document.querySelectorAll('.projects-item');
+  const projectItems  = document.querySelectorAll('#projects-grid .projects-item');
   const subNav        = document.getElementById('sub-residential');
-  const projectsGrid  = document.querySelector('.projects-grid');
+  const projectsGrid  = document.getElementById('projects-grid');
+
+  const mapView   = document.getElementById('map-view');
+  const mapTitle  = document.getElementById('map-title');
+  const mapTitleText = document.getElementById('map-title-text');
+  const mapHint   = document.getElementById('map-hint');
+  const mapList   = document.getElementById('map-list');
+  const mapBack   = document.getElementById('map-back');
 
   if (!filterButtons.length || !projectItems.length) return;
 
   const SUB_FILTERS = new Set(['living', 'kitchen', 'bath', 'patio']);
 
   // ═══════════════════════════════════════════════
+  // エリア定義 — HTML の data-area と id を対応させる
+  // 新しいエリアを増やすときはここに1行足すだけ
+  // （該当する data-area を持つプロジェクトがあるエリアだけピンが出る）
+  // ═══════════════════════════════════════════════
+  const AREAS = [
+    { id: 'lwv',         name: 'Laguna Woods', lat: 33.6106, lng: -117.7231 },
+    { id: 'irvine',      name: 'Irvine',       lat: 33.6846, lng: -117.8265 },
+    { id: 'westminster', name: 'Westminster',  lat: 33.7514, lng: -117.9940 },
+    { id: 'gardengrove', name: 'Garden Grove', lat: 33.7743, lng: -117.9380 },
+    { id: 'downey',      name: 'Downey',       lat: 33.9401, lng: -118.1332 }
+  ];
+
+  // 郡名ラベル（地図上の文字）
+  const REGION_LABELS = [
+    { text: 'LOS ANGELES',   lat: 34.20, lng: -118.10, main: true  },
+    { text: 'ORANGE',        lat: 33.80, lng: -117.62, main: true  },
+    { text: 'VENTURA',       lat: 34.28, lng: -118.95, main: false },
+    { text: 'SAN BERNARDINO',lat: 34.20, lng: -117.40, main: false },
+    { text: 'RIVERSIDE',     lat: 33.78, lng: -117.30, main: false },
+    { text: 'SAN DIEGO',     lat: 33.25, lng: -117.25, main: false }
+  ];
+
+  // 地図の表示範囲（LA・オレンジ郡 + 車で行ける周辺だけ）
+  const FIT_BOUNDS = [[33.45, -118.65], [34.25, -117.30]];
+  const MAX_BOUNDS = [[33.05, -119.40], [34.80, -116.60]];
+
+  // ═══════════════════════════════════════════════
   // Utility: 表示列数を取得
   // ═══════════════════════════════════════════════
-  const getColumnCount = () => {
-    if (!projectsGrid) return window.innerWidth <= 900 ? 2 : 5;
-    const style = getComputedStyle(projectsGrid);
-    const cols  = style.gridTemplateColumns.split(' ').length;
-    return cols || (window.innerWidth <= 900 ? 2 : 5);
+  const getColumnCount = (grid = projectsGrid) => {
+    const fallback = window.innerWidth <= 900 ? 2 : 5;
+    if (!grid) return fallback;
+    const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+    return cols || fallback;
   };
 
   // ═══════════════════════════════════════════════
@@ -56,9 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ═══════════════════════════════════════════════
   // 複数アイテムを列・行オフセット付きで reveal
   // ═══════════════════════════════════════════════
-  const revealItems = (items) => {
+  const revealItems = (items, cols = getColumnCount()) => {
     if (!items.length) return;
-    const cols      = getColumnCount();
     const COL_DELAY = 60;
     const ROW_DELAY = 120;
 
@@ -100,6 +133,180 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ═══════════════════════════════════════════════
+  // MAP — Leaflet (CARTO Positron / モノトーン)
+  // ═══════════════════════════════════════════════
+  let map = null;
+  const markers = {};
+
+  const initMap = () => {
+    if (map || typeof L === 'undefined') return;
+
+    map = L.map('map', {
+      zoomControl: false,
+      scrollWheelZoom: false,          // ページスクロール(Lenis)を邪魔しない
+      dragging: !L.Browser.mobile,     // スマホは縦スクロール優先
+      minZoom: 8,
+      maxZoom: 13,
+      zoomSnap: 0.5,
+      maxBounds: MAX_BOUNDS,
+      maxBoundsViscosity: 1
+    });
+
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+      subdomains: 'abcd',
+      maxZoom: 19,
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> ' +
+        '&copy; <a href="https://carto.com/attributions">CARTO</a>'
+    }).addTo(map);
+
+    map.fitBounds(FIT_BOUNDS);
+
+    // 郡境界（任意）: /data/counties.geojson があれば細い線で重ねる。なければ何もしない
+    fetch('/data/counties.geojson')
+      .then(res => (res.ok ? res.json() : null))
+      .then(geo => {
+        if (!geo) return;
+        const MAIN = new Set(['Los Angeles', 'Orange']);
+        const isMain = f => MAIN.has(f.properties && f.properties.NAME);
+        L.geoJSON(geo, {
+          interactive: false,
+          style: f => ({
+            color: '#a5a4a2',
+            weight: isMain(f) ? 1 : 0.8,
+            opacity: isMain(f) ? 0.7 : 0.4,
+            dashArray: isMain(f) ? null : '3 4',
+            fill: false
+          })
+        }).addTo(map);
+      })
+      .catch(() => {});
+
+    // 郡名ラベル
+    REGION_LABELS.forEach(r => {
+      L.marker([r.lat, r.lng], {
+        interactive: false,
+        keyboard: false,
+        icon: L.divIcon({
+          className: 'map-region-label' + (r.main ? '' : ' is-near'),
+          html: `<span>${r.text}</span>`,
+          iconSize: [0, 0]
+        })
+      }).addTo(map);
+    });
+
+    // エリアピン
+    AREAS.forEach(area => {
+      const hasProjects = projectsGrid.querySelector(`[data-area="${area.id}"]`);
+      if (!hasProjects) return;
+
+      const marker = L.marker([area.lat, area.lng], {
+        title: area.name,
+        alt: area.name,
+        keyboard: true,
+        riseOnHover: true,
+        icon: L.divIcon({
+          className: 'map-pin',
+          html: `<span class="pin-ring"></span><span class="pin-dot"></span><span class="pin-name">${area.name}</span>`,
+          iconSize: [28, 28],
+          iconAnchor: [14, 14]
+        })
+      }).addTo(map);
+
+      marker.on('click', () => selectArea(area.id));
+      markers[area.id] = marker;
+    });
+  };
+
+  // ═══════════════════════════════════════════════
+  // エリア選択 / 解除
+  // ═══════════════════════════════════════════════
+  const setActivePin = (id) => {
+    Object.entries(markers).forEach(([key, marker]) => {
+      marker.getElement()?.classList.toggle('is-active', key === id);
+    });
+  };
+
+  const selectArea = (id) => {
+    const area = AREAS.find(a => a.id === id);
+    if (!area) return;
+
+    setActivePin(id);
+
+    // タイトル（エリア名）をワイプで表示
+    mapTitle.hidden = false;
+    mapTitle.classList.remove('is-in');
+    mapTitleText.textContent = area.name.toUpperCase();
+    mapHint.hidden = true;
+    mapBack.hidden = false;
+
+    // 該当プロジェクトを複製してパネルへ
+    mapList.innerHTML = '';
+    const cards = [...projectItems]
+      .filter(item => item.dataset.area === id && item.dataset.level === 'parent')
+      .map(item => {
+        const clone = item.cloneNode(true);
+        clone.removeAttribute('style');
+        clone.classList.remove('is-show', 'is-exit');
+        clone.style.display = 'none';
+        mapList.appendChild(clone);
+        return clone;
+      });
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        mapTitle.classList.add('is-in');
+        revealItems(cards, getColumnCount(mapList));
+      });
+    });
+
+    // スマホ: パネルが地図の下に来るのでスクロールして見せる
+    if (window.innerWidth <= 900) {
+      setTimeout(() => {
+        if (window.__lenis) window.__lenis.scrollTo(mapTitle, { offset: -90, duration: 1.2 });
+        else mapTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 200);
+    }
+  };
+
+  const clearSelection = () => {
+    setActivePin(null);
+    mapTitle.classList.remove('is-in');
+    mapTitle.hidden = true;
+    mapList.innerHTML = '';
+    mapHint.hidden = false;
+    mapBack.hidden = true;
+  };
+
+  mapBack.addEventListener('click', clearSelection);
+
+  // ═══════════════════════════════════════════════
+  // マップビュー 表示 / 非表示
+  // ═══════════════════════════════════════════════
+  const showMapView = () => {
+    // Leaflet が読めなかった場合はサムネイルグリッドにフォールバック
+    if (typeof L === 'undefined') {
+      revealItems([...projectItems].filter(i => i.dataset.level === 'parent'));
+      return;
+    }
+    mapView.hidden = false;
+    initMap();
+    map.invalidateSize();
+    requestAnimationFrame(() => mapView.classList.add('is-show'));
+  };
+
+  const hideMapView = () => {
+    if (mapView.hidden) return;
+    mapView.classList.remove('is-show');
+    clearSelection();
+    setTimeout(() => {
+      if (!mapView.classList.contains('is-show')) mapView.hidden = true;
+    }, EXIT_DURATION);
+  };
+
+  // ═══════════════════════════════════════════════
   // サブナビ開閉 (4B: めくれ + フェード)
   // ═══════════════════════════════════════════════
   const openSubNav = () => {
@@ -127,6 +334,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ═══════════════════════════════════════════════
   // フィルター適用
+  //   All       → マップビュー
+  //   それ以外  → サムネイルグリッド（従来どおり）
   // ═══════════════════════════════════════════════
   let filterTimer = null;
 
@@ -134,24 +343,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const isAll       = filterValue === 'projects-item';
     const isSubFilter = SUB_FILTERS.has(filterValue);
 
+    clearTimeout(filterTimer);
+
+    if (isAll) {
+      hideItems([...projectItems], () => {
+        filterTimer = setTimeout(showMapView, initialLoad ? 800 : 80);
+      });
+      return;
+    }
+
+    hideMapView();
+
     const toShow = [];
     const toHide = [];
 
     projectItems.forEach(item => {
       const level = item.dataset.level;
       let show = false;
-      if (isAll)            show = level === 'parent';
-      else if (isSubFilter) show = item.classList.contains(filterValue);
-      else                  show = level === 'parent' && item.classList.contains(filterValue);
+      if (isSubFilter) show = item.classList.contains(filterValue);
+      else             show = level === 'parent' && item.classList.contains(filterValue);
       show ? toShow.push(item) : toHide.push(item);
     });
-
-    clearTimeout(filterTimer);
 
     hideItems(toHide, () => {
       filterTimer = setTimeout(() => {
         revealItems(toShow);
-      }, initialLoad ? 800 : 80);
+      }, 80);
     });
   };
 
