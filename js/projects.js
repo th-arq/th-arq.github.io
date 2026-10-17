@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
           interactive: false,
           style: f => isMain(f)
             ? { fill: true, fillColor: '#e9e9e9', fillOpacity: 1, color: '#a5a4a2', weight: 0.8, opacity: 0.7 }
-            : { fill: true, fillColor: '#f8f8f8', fillOpacity: 1, color: '#a5a4a2', weight: 0.8, opacity: 0.45, dashArray: '3 4' }
+            : { fill: true, fillColor: '#f2f2f2', fillOpacity: 1, color: '#a5a4a2', weight: 0.8, opacity: 0.45, dashArray: '3 4' }
         }).addTo(map);
       } catch (e) {
         console.warn('[map] counties.geojson を読めなかったのでタイル地図に切り替えます', e);
