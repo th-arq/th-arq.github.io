@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-    L.tileLayer('https://basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}.png?key=cb1_4nfg_1_b6d21c81da3e03f1389ec753', {
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png?key=cb1_4nfg_1_b6d21c81da3e03f1389ec753', {
       subdomains: 'abcd',
       maxZoom: 19,
       attribution:
