@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Projects | TAG Inc.</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -26,14 +27,32 @@
       <button class="filter-btn sub-item" data-filter="kitchen">Kitchen</button>
       <button class="filter-btn sub-item" data-filter="bath">Bathroom</button>
       <button class="filter-btn sub-item" data-filter="patio">Patio</button>
+      <button class="filter-btn sub-item" data-filter="patio">Painting</button>
     </div>
   </div>
 </nav>
 
 
+<!-- ═══════════ Map view (All) ═══════════ -->
+<section class="map-view" id="map-view" hidden>
+  <div class="map-wrap">
+    <div class="map-canvas" id="map" role="region" aria-label="Project map of Los Angeles and Orange counties"></div>
+    <div class="map-legend"><i></i>FREEWAY</div>
+  </div>
 
-<section class="projects-grid">
-    <a href="./012/" class="projects-item" data-level="parent">
+  <aside class="map-panel" aria-live="polite">
+    <div class="map-title" id="map-title" hidden><span id="map-title-text"></span></div>
+    <p class="map-hint" id="map-hint">Select an area on the map to see the projects completed there.</p>
+    <div class="map-list projects-grid" id="map-list"></div>
+  </aside>
+</section>
+
+
+<!-- ═══════════ Thumbnail grid (category filters) ═══════════
+     data-area: id of the pin on the map (see AREAS in projects.js)
+     Only data-level="parent" items appear on the map. -->
+<section class="projects-grid" id="projects-grid">
+    <a href="./012/" class="projects-item residential" data-level="parent" data-area="lwv">
       <article>
         <div class="thumbnail">
           <img src="./012/img/main.webp" alt="AAA" loading="lazy">
@@ -66,7 +85,7 @@
       </article>
     </a>   
 
-     <a href="./013/" class="projects-item residential" data-level="parent">
+     <a href="./013/" class="projects-item residential" data-level="parent" data-area="lwv">
       <article>
         <div class="thumbnail">
           <img src="./013/img/main.webp" alt="AAA" loading="lazy">
@@ -100,7 +119,7 @@
     </a>
 
 
-    <a href="./014/" class="projects-item patio residential" data-level="parent">
+    <a href="./014/" class="projects-item patio residential" data-level="parent" data-area="lwv">
       <article>
         <div class="thumbnail">
           <img src="./014/img/main.webp" alt="AAA" loading="lazy">
@@ -111,7 +130,7 @@
       </article>
     </a>
     
-     <a href="./015/" class="projects-item residential" data-level="parent">
+     <a href="./015/" class="projects-item residential" data-level="parent" data-area="downey">
       <article>
         <div class="thumbnail">
           <img src="./015/img/main.webp" alt="AAA" loading="lazy">
@@ -146,7 +165,7 @@
     
 
     
-     <a href="./016/" class="projects-item bath residential" data-level="parent">
+     <a href="./016/" class="projects-item bath residential" data-level="parent" data-area="lwv">
       <article>
         <div class="thumbnail">
           <img src="./016/img/main.webp" alt="AAA" loading="lazy">
@@ -157,7 +176,7 @@
       </article>
     </a>
     
-     <a href="./017/" class="projects-item bath residential" data-level="parent">
+     <a href="./017/" class="projects-item bath residential" data-level="parent" data-area="irvine">
       <article>
         <div class="thumbnail">
           <img src="./017/img/main.webp" alt="AAA" loading="lazy">
@@ -168,7 +187,7 @@
       </article>
     </a>
     
-     <a href="./018/" class="projects-item residential" data-level="parent">
+     <a href="./018/" class="projects-item residential" data-level="parent" data-area="lwv">
       <article>
         <div class="thumbnail">
           <img src="./018/img/main.webp" alt="AAA" loading="lazy">
@@ -202,7 +221,7 @@
     </a>   
 
 
-    <a href="./001/" class="projects-item residential" data-level="parent">
+    <a href="./001/" class="projects-item residential" data-level="parent" data-area="gardengrove">
       <article>
         <div class="thumbnail">
           <img src="./001/img/main.webp" alt="CAROLLSBURG CONDOMINIUM" loading="lazy">
@@ -237,7 +256,7 @@
 
 
 
-    <a href="./002/" class="projects-item residential" data-level="parent">
+    <a href="./002/" class="projects-item residential" data-level="parent" data-area="irvine">
       <article>
         <div class="thumbnail">
           <img src="./002/img/main.webp" alt="BASEMENT REMODEL" loading="lazy">
@@ -248,7 +267,7 @@
       </article>
     </a>    
 
-    <a href="./003/" class="projects-item residential" data-level="parent">
+    <a href="./003/" class="projects-item residential" data-level="parent" data-area="westminster">
       <article>
         <div class="thumbnail">
           <img src="./003/img/main.webp" alt="NEW HOUSE" loading="lazy">
@@ -259,7 +278,8 @@
       </article>
     </a>   
 
-     <!--<a href="./004/" class="projects-item architectural" data-level="parent">
+     <!-- Architectural projects (moving to a separate page) — kept for reference
+     <a href="./004/" class="projects-item architectural" data-level="parent">
       <article>
         <div class="thumbnail">
           <img src="./004/img/main.webp" alt="U.S. CONSULATE RIO DE JANEIRO" loading="lazy">
@@ -325,7 +345,6 @@
       </article>
     </a>   
     
- 
      <a href="./010/" class="projects-item residential" data-level="parent">
       <article>
         <div class="thumbnail">
@@ -348,13 +367,13 @@
       </article>
     </a>   -->
     
-    </section>
+</section>
 </main>
 
   <div id="footer"></div>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
   <script src="../js/projects.js" defer></script>
   <script src="../js/common.js" defer></script>
 </body>
 </html>
-
