@@ -816,6 +816,7 @@ body.is-index main {
   z-index: 10;
   height: 3px;
   background: rgb(73 72 72 / 20%);
+  opacity: 0; /* 追加: 初期は非表示 */
 }
 
 .is-progress-bar {
@@ -833,6 +834,7 @@ body.is-index main {
   z-index: 10;
   display: flex;
   gap: var(--gap-xs);
+  opacity: 0; /* 追加: 初期は非表示 */
 }
 
 .isd {
