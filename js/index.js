@@ -122,10 +122,18 @@ window.addEventListener('load', () => {
   // ─────────────────────────────────────────
   // スライダー起動
   // ─────────────────────────────────────────
-  function startSlider() {
-    currentIdx = 0;
-    showSlide(0, true);
-    runProgressBar(SLIDE_DURATION, FIRST_DELAY);
+ function startSlider() {
+  currentIdx = 0;
+
+  // 追加: プログレスバーとドットを最初のスライドのめくれに合わせて表示
+  const sliderUI = [document.querySelector('.is-progress-wrap'), dotsWrap];
+  sliderUI.forEach(el => {
+    el.style.transition = 'opacity 0.8s ease';
+    setTimeout(() => { el.style.opacity = '1'; }, FIRST_DELAY + 600);
+  });
+
+  showSlide(0, true);
+  runProgressBar(SLIDE_DURATION, FIRST_DELAY);
 
     // 最初の1周だけ FIRST_DELAY を加算したタイマー
     const firstTimer = setTimeout(() => {
