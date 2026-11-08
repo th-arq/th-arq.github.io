@@ -3,43 +3,6 @@
   if (!document.querySelector('.services-page')) return;
 
 
-  const injectBorderCSS = () => {
-    const style = document.createElement('style');
-    style.textContent = `
-      .services-page .summary-block {
-        border-top: none !important;
-        position: relative;
-      }
-      .services-page .summary-block::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%;
-        height: 1px;
-        background: #e0e0e0;
-        transform: scaleX(var(--line-scaleX, 0));
-        transform-origin: left;
-        transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-      }
-      .services-page .summary-block:last-of-type::after {
-        content: '';
-        position: absolute;
-        bottom: 0; left: 0;
-        width: 100%;
-        height: 1px;
-        background: #e0e0e0;
-        transform: scaleX(var(--line-bottom-scaleX, 0));
-        transform-origin: left;
-        transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.1s;
-      }
-      .services-page .summary-block:last-of-type {
-        border-bottom: none !important;
-      }
-    `;
-    document.head.appendChild(style);
-  };
-
-
   const setInitial = () => {
     document.querySelectorAll('.summary-h3').forEach(el => {
       el.style.opacity    = '0';
@@ -68,7 +31,6 @@
 
   const fire = () => {
 
-    /* Summary blocks */
     const summaryBlocks = [...document.querySelectorAll('.summary-block')];
 
     const summaryObserver = new IntersectionObserver((entries) => {
@@ -208,7 +170,6 @@
 
   /* ── BOOT ── */
   document.addEventListener('DOMContentLoaded', () => {
-    injectBorderCSS();
     setInitial();
 
     const main = document.querySelector('main');
