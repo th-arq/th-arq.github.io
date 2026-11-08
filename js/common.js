@@ -79,11 +79,6 @@ window.addEventListener('load', () => {
             closeBtn.addEventListener('click', () => closeMenu(headerTag));
           }
 
-          const overlay = document.querySelector('.nav-overlay');
-          if (overlay) {
-            overlay.addEventListener('click', () => closeMenu(headerTag));
-          }
-
           if (isIndex) return;
 
           document.addEventListener('page:title-shown', () => {
@@ -277,19 +272,6 @@ window.addEventListener('load', () => {
   const splitContentBox = document.querySelectorAll('.split-layout .content-box');
 
   if (splitContentBox.length) {
-
-    const wipeStyle = document.createElement('style');
-    wipeStyle.textContent = `
-      .split-layout .content-box .sc-wipe {
-        overflow: hidden;
-        display: block;
-      }
-      .split-layout .content-box .sc-wipe-inner {
-        display: block;
-        will-change: transform;
-      }
-    `;
-    document.head.appendChild(wipeStyle);
 
     document.querySelectorAll(
       '.split-layout .content-box h2, .split-layout .content-box h3, .split-layout .content-box h4'
